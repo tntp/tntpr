@@ -1,9 +1,11 @@
 Package: Rtntp
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Data Analysis Tools Customized for TNTP
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Author: Sam Firke [aut, cre], Jake Russ [aut, cre]
+Maintainer: Jake Russ <jake.russ@tntp.org>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
+URL: https://tools.tntp.org/bitbucket/users/jake.russ_tntp.org/repos/rtntp/
+BugReports:
