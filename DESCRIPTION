@@ -10,5 +10,8 @@ Description: An internal TNTP R package that includes functions and templates
 License: What license is it under?
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/users/jake.russ_tntp.org/repos/rtntp/
-BugReports: 
+BugReports:
+Imports:
+  ggplot2,
+  extrafont
 RoxygenNote: 5.0.1
