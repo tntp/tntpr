@@ -4,10 +4,6 @@
 # UPDATED: 2016-06-15
 
 # DESCRIPTION: TNTP ggplot2 theme
-# USAGE:
-# Add "+ scale_color_manual(values = tntp.palette)" to do colors w/ TNTP colors
-# Add  "+ scale_fill_manual(values = tntp.palette)" to do fills w/ TNTP colors
-
 #' @export
 #' @rdname theme_tntp
 theme_tntp <- function(base_size   = 12,
