@@ -12,6 +12,9 @@
 #' @export
 #' @rdname theme_tntp
 #' @examples
+#' library(ggplot2)
+#' library(extrafont)
+#'
 #' p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
 #'      colour=factor(gear))) + facet_wrap(~am)
 #' p
