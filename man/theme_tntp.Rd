@@ -8,21 +8,22 @@ theme_tntp(base_size = 12, base_family = "Segoe UI",
   grid_color = "grey93")
 }
 \arguments{
-\item{base_size}{base font size; set to 12 by default}
+\item{base_size}{base font size}
 
-\item{base_family}{base font family; set to "Segoe UI" by default}
+\item{base_family}{base font family}
 
-\item{grid_color}{color for major gridlines; set to "grey93" by default}
+\item{grid_color}{color for major gridlines}
 }
 \description{
-ggplot2 theme customized for TNTP graphics
+ggplot2 theme customized for TNTP aesthetics
 }
 \examples{
 p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
      colour=factor(gear))) + facet_wrap(~am)
 p
-p + theme_tntp()
 
+# Major gridlines by default
+p + theme_tntp()
 # Without gridlines
 p + theme_tntp(grid_color = "white")
 }
