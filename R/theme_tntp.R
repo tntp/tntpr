@@ -3,9 +3,23 @@
 # DATE: Unknown
 # UPDATED: 2016-06-15
 
-# DESCRIPTION: TNTP ggplot2 theme
+#' TNTP's ggplot2 theme
+#'
+#' ggplot2 theme customized for TNTP graphics
+#' @param base_size base font size; set to 12 by default
+#' @param base_family base font family; set to "Segoe UI" by default
+#' @param grid_color color for major gridlines; set to "grey93" by default
 #' @export
 #' @rdname theme_tntp
+#' @examples
+#' p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
+#'      colour=factor(gear))) + facet_wrap(~am)
+#' p
+#' p + theme_tntp()
+#'
+#' # Without gridlines
+#' p + theme_tntp(grid_color = "white")
+
 theme_tntp <- function(base_size   = 12,
                        base_family = "Segoe UI",
                        grid_color  = "grey93") {
