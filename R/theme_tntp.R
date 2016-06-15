@@ -5,18 +5,19 @@
 
 #' TNTP's ggplot2 theme
 #'
-#' ggplot2 theme customized for TNTP graphics
-#' @param base_size base font size; set to 12 by default
-#' @param base_family base font family; set to "Segoe UI" by default
-#' @param grid_color color for major gridlines; set to "grey93" by default
+#' ggplot2 theme customized for TNTP aesthetics
+#' @param base_size base font size
+#' @param base_family base font family
+#' @param grid_color color for major gridlines
 #' @export
 #' @rdname theme_tntp
 #' @examples
 #' p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
 #'      colour=factor(gear))) + facet_wrap(~am)
 #' p
-#' p + theme_tntp()
 #'
+#' # Major gridlines by default
+#' p + theme_tntp()
 #' # Without gridlines
 #' p + theme_tntp(grid_color = "white")
 
