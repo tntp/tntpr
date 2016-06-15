@@ -18,6 +18,9 @@ theme_tntp(base_size = 12, base_family = "Segoe UI",
 ggplot2 theme customized for TNTP aesthetics
 }
 \examples{
+library(ggplot2)
+library(extrafont)
+
 p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
      colour=factor(gear))) + facet_wrap(~am)
 p
