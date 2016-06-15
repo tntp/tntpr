@@ -1,5 +1,4 @@
 #' @importFrom ggplot2 theme_minimal
-#' @export
 ggplot2::theme_minimal
 
 # Create TNTP color palette
