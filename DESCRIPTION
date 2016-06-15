@@ -2,9 +2,11 @@ Package: Rtntp
 Type: Package
 Title: Data Analysis Tools Customized for TNTP
 Version: 0.1.0
-Author: Sam Firke [aut, cre], Jake Russ [aut, cre]
+Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb]
 Maintainer: Jake Russ <jake.russ@tntp.org>
-Description: More about what it does (maybe more than one line)
+Description: An internal TNTP R package that includes functions and templates
+    customized with TNTP branding. It is intended for this R package to be a
+    one-stop shop for R tools by analysts and other data users at TNTP.
 License: What license is it under?
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/users/jake.russ_tntp.org/repos/rtntp/
