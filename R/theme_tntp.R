@@ -1,9 +1,12 @@
 # TITLE: theme_tntp.R
-# AUTHOR(S): Alex Spurrier
+# AUTHOR(S): Alex Spurrier; Jake Russ
 # DATE: Unknown
-# UPDATED:
+# UPDATED: 2016-06-15
 
 # DESCRIPTION: TNTP ggplot2 theme
+# USAGE:
+# Add "+ scale_color_manual(values = tntp.palette)" to do colors w/ TNTP colors
+# Add  "+ scale_fill_manual(values = tntp.palette)" to do fills w/ TNTP colors
 
 theme_tntp <- list(theme_light() +
                      theme(text = element_text(family = "Segoe UI"),
@@ -12,6 +15,3 @@ theme_tntp <- list(theme_light() +
                            legend.key = element_blank() # remove border from legend boxes
                      )
 )
-
-# add + scale_color_manual(values = tntp.palette) to do colors w/ TNTP colors
-# + scale_fill_manual(values = tntp.palette) to do fills w/ TNTP colors
