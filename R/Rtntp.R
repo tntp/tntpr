@@ -5,4 +5,5 @@
 #' one-stop shop for R tools by analysts and other data users at TNTP.
 #' @docType package
 #' @aliases Rtntp Rtntp-package
+#' #' @importFrom ggplot2 theme_minimal
 NULL
