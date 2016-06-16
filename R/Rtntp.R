@@ -5,5 +5,16 @@
 #' one-stop shop for R tools by analysts and other data users at TNTP.
 #' @docType package
 #' @aliases Rtntp Rtntp-package
-#' #' @importFrom ggplot2 theme_minimal
+#' @importFrom ggplot2 theme_minimal
+NULL
+
+#' Pipe operator
+#'
+#' See \code{\link[magrittr]{\%>\%}} for more details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
 NULL
