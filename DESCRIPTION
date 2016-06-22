@@ -1,4 +1,4 @@
-Package: Rtntp
+Package: tntpr
 Type: Package
 Title: Data Analysis Tools Customized for TNTP
 Version: 0.1.0
@@ -9,8 +9,8 @@ Description: An internal TNTP R package that includes functions and templates
     one-stop shop for R tools by analysts and other data users at TNTP.
 License: What license is it under?
 LazyData: TRUE
-URL: https://tools.tntp.org/bitbucket/users/jake.russ_tntp.org/repos/rtntp/
-BugReports: 
+URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
+BugReports:
 Imports:
     ggplot2,
     extrafont,
