@@ -1,9 +1,4 @@
----
-title: "tntp R package"
-output:
-  html_document:
-    keep_md: true
----
+# tntp R package
 
 ## Issue tracker
 
