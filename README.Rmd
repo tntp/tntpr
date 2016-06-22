@@ -1,0 +1,11 @@
+---
+title: "tntp R package"
+output: html_document
+---
+
+## Issue tracker
+
+Until we get a real issue tracker set up, here's a list of to-dos:
+
++ `compare_top_2()` function, like https://github.com/sfirke/janitor/issues/16
++ a function that creates a ggplot2 bar chart from a summarized counts data frame, like the output of `tabyl()` - this is such a common TNTP chart type
