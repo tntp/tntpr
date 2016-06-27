@@ -130,6 +130,15 @@ $(document).ready(function () {
 <li>TNTP branded R Markdown template</li>
 <li>TNTP branded slide deck template</li>
 </ul>
+<p>Bugs:</p>
+<ul>
+<li>tntp_theme() is not exported properly, I have to call explicitly with <code>tntpr::tntp_theme()</code></li>
+<li>Do we need to account for loading fonts? I was getting the error:</li>
+</ul>
+<blockquote>
+<p>8: In grid.Call.graphics(L_text, as.graphicsAnnot(x<span class="math inline">\(label), x\)</span>x, x$y, : font family not found in Windows font database</p>
+</blockquote>
+<p>Until I ran <code>loadfonts(&quot;win&quot;, quiet = TRUE)</code>.</p>
 </div>
 
 

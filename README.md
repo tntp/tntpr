@@ -12,3 +12,13 @@ Until we get a real issue tracker set up, here's a list of to-dos:
 + full workflow for working with SurveyMonkey data, including bringing the data in via SPSS as type labelled.  Then we need to make use of the label attribute, something like https://github.com/sfirke/janitor/issues/5.
 + TNTP branded R Markdown template
 + TNTP branded slide deck template
+
+Bugs:
+
++ tntp_theme() is not exported properly, I have to call explicitly with `tntpr::tntp_theme()`
++ Do we need to account for loading fonts?  I was getting the error:
+
+>8: In grid.Call.graphics(L_text, as.graphicsAnnot(x$label), x$x, x$y,  :
+>  font family not found in Windows font database
+
+Until I ran `loadfonts("win", quiet = TRUE)`.
