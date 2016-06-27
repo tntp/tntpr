@@ -133,6 +133,7 @@ $(document).ready(function () {
 <p>Bugs:</p>
 <ul>
 <li>tntp_theme() is not exported properly, I have to call explicitly with <code>tntpr::tntp_theme()</code></li>
+<li>When I call tntp_theme() and then try to change a legend title on the next line with <code>labs(size = &quot;number of teachers&quot;)</code>, the legend title is suppressed because of the theme. Annoying, I can comment out the theme and it works but they won’t play nicely together.</li>
 <li>Do we need to account for loading fonts? I was getting the error:</li>
 </ul>
 <blockquote>
