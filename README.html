@@ -129,10 +129,11 @@ $(document).ready(function () {
 <li>full workflow for working with SurveyMonkey data, including bringing the data in via SPSS as type labelled. Then we need to make use of the label attribute, something like <a href="https://github.com/sfirke/janitor/issues/5" class="uri">https://github.com/sfirke/janitor/issues/5</a>.</li>
 <li>TNTP branded R Markdown template</li>
 <li>TNTP branded slide deck template</li>
+<li>Consistent API for functions: should be <code>tntp_x()</code> and <code>tntp_y()</code> or <code>x_tntp()</code> and <code>y_tntp()</code> but not mixed. I (Jake) lean toward <code>x_tntp</code> so the functions will be split alphabetically in the help area, not everything filed together under “T”</li>
 </ul>
 <p>Bugs:</p>
 <ul>
-<li>tntp_theme() is not exported properly, I have to call explicitly with <code>tntpr::tntp_theme()</code></li>
+<li><code>tntp_theme()</code> is not exported properly, I have to call explicitly with <code>tntpr::tntp_theme()</code></li>
 <li>When I call tntp_theme() and then try to change a legend title on the next line with <code>labs(size = &quot;number of teachers&quot;)</code>, the legend title is suppressed because of the theme. Annoying, I can comment out the theme and it works but they won’t play nicely together.</li>
 <li>Do we need to account for loading fonts? I was getting the error:</li>
 </ul>
