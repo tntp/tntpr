@@ -14,7 +14,8 @@ Until we get a real issue tracker set up, here's a list of to-dos:
 + TNTP branded slide deck template
 + Consistent API for functions: should be `tntp_x()` and `tntp_y()` or `x_tntp()` 
 and `y_tntp()` but not mixed. I (Jake) lean toward `x_tntp` so the functions will be 
-split alphabetically in the help area, not everything filed together under "T" 
+split alphabetically in the help area, not everything filed together under "T". *Sam agrees: better autocomplete if it is `x_tntp()`*.
++ Add an education-themed data.frame to the package.  We can use that for illustrative examples, and it can populate the default examples in the R Markdown shell.  As this is a public package, we'll have to be thoughtful about what goes into this.
 
 Bugs:
 

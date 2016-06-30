@@ -129,7 +129,8 @@ $(document).ready(function () {
 <li>full workflow for working with SurveyMonkey data, including bringing the data in via SPSS as type labelled. Then we need to make use of the label attribute, something like <a href="https://github.com/sfirke/janitor/issues/5" class="uri">https://github.com/sfirke/janitor/issues/5</a>.</li>
 <li>TNTP branded R Markdown template</li>
 <li>TNTP branded slide deck template</li>
-<li>Consistent API for functions: should be <code>tntp_x()</code> and <code>tntp_y()</code> or <code>x_tntp()</code> and <code>y_tntp()</code> but not mixed. I (Jake) lean toward <code>x_tntp</code> so the functions will be split alphabetically in the help area, not everything filed together under “T”</li>
+<li>Consistent API for functions: should be <code>tntp_x()</code> and <code>tntp_y()</code> or <code>x_tntp()</code> and <code>y_tntp()</code> but not mixed. I (Jake) lean toward <code>x_tntp</code> so the functions will be split alphabetically in the help area, not everything filed together under “T”. <em>Sam agrees: better autocomplete if it is <code>x_tntp()</code></em>.</li>
+<li>Add an education-themed data.frame to the package. We can use that for illustrative examples, and it can populate the default examples in the R Markdown shell. As this is a public package, we’ll have to be thoughtful about what goes into this.</li>
 </ul>
 <p>Bugs:</p>
 <ul>
