@@ -1,4 +1,4 @@
 library(testthat)
-library(Rtntp)
+library(tntpr)
 
-test_check("Rtntp")
+test_check("tntpr")
