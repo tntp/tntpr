@@ -20,7 +20,7 @@ date_to_sy <- function(date_var, last_day_of_sy){
   if(!(lubridate::is.Date(date_var) & lubridate::is.Date(last_day_of_sy))){stop("`date_var` and `last_day_of_sy` must both be class Date")}
   cutoff_day <- lubridate::day(last_day_of_sy)
   cutoff_month <- lubridate::month(last_day_of_sy)
-  case_when(
+  dplyr::case_when(
     is.na(date_var) ~ as.character(NA),
     lubridate::month(date_var) > cutoff_month ~ paste0(lubridate::year(date_var), " - ", lubridate::year(date_var) + 1), # if past cutoff, SY X - X+1
     lubridate::month(date_var) == cutoff_month & lubridate::day(date_var) > cutoff_day ~ paste0(lubridate::year(date_var), " - ", lubridate::year(date_var) + 1), # same month but greater day so past the cutoff, SY x - X +1

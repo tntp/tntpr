@@ -14,6 +14,8 @@ BugReports:
 Imports:
     ggplot2,
     extrafont,
-    knitr
+    knitr,
+    dplyr,
+    lubridate
 RoxygenNote: 5.0.1
 Suggests: testthat
