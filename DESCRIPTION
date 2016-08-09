@@ -12,7 +12,9 @@ LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
 BugReports:
 Imports:
-    knitr
+    dplyr,
+    knitr,
+    lubridate
 RoxygenNote: 5.0.1
 Suggests:
     testthat
