@@ -12,10 +12,12 @@ LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
 BugReports:
 Imports:
-    ggplot2,
-    extrafont,
     knitr,
     dplyr,
     lubridate
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests:
+    testthat
+Depends:
+    extrafont,
+    ggplot2
