@@ -4,21 +4,21 @@
 #' following nine TNTP colors: dark_blue, medium_blue, light_blue, green, orange,
 #' gold, dark_grey (dark_gray), medium_grey (medium_gray), light_grey
 #' (light_gray).
-#'@rdname tntp_palette
+#'@rdname palette_tntp
 #'@param ... supply quoted color names to include in color palette
 #'@export
 #'@examples
 #'library(ggplot2)
 #'
-#' tntp_pal1 <- tntp_palette("green", "gold", "orange")
-#' tntp_pal2 <- tntp_palette("dark_blue", "medium_blue", "light_blue")
+#' pal1_tntp <- palette_tntp("green", "gold", "orange")
+#' pal2_tntp <- palette_tntp("dark_blue", "medium_blue", "light_blue")
 #'
 #' p <- ggplot(mtcars, aes(wt, mpg))
 #' p <- p + geom_point(aes(colour = factor(cyl)))
 #' p
 #'
 #' # Change colors to created palette
-#' p <- p + scale_color_manual(values = tntp_pal1)
+#' p <- p + scale_color_manual(values = pal1_tntp)
 #' p
 #'
 #' g <- ggplot(mtcars, aes(factor(cyl), mean(mpg)))
@@ -26,12 +26,12 @@
 #' g
 #'
 #' # Change fill to created palette
-#' g <- g + scale_fill_manual(values = tntp_pal2)
+#' g <- g + scale_fill_manual(values = pal2_tntp)
 #' g
-tntp_palette <- function(...) {
+palette_tntp <- function(...) {
 
   # TNTP colors
-  tntp_colors <- c(dark_blue   = "#034772",
+  colors_tntp <- c(dark_blue   = "#034772",
                    medium_blue = "#2888BC",
                    light_blue  = "#73B7CE",
                    green       = "#699D46",
@@ -49,11 +49,11 @@ tntp_palette <- function(...) {
   # Throw an error if supplied color doesn't exist
   supplied_colors <- c(...)
 
-  if(sum(!is.element(supplied_colors, names(tntp_colors))) > 0) {
+  if(sum(!is.element(supplied_colors, names(colors_tntp))) > 0) {
     stop("Supplied colors do not exist in TNTP universe, please check spelling")
   }
 
   # Select the colors from tntp_colors
   color_list <- match.call(expand.dots = TRUE)
-  sapply(color_list[-1], function(col) tntp_colors[[as.character(col)]])
+  sapply(color_list[-1], function(col) colors_tntp[[as.character(col)]])
 }
