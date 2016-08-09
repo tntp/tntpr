@@ -19,11 +19,4 @@ split alphabetically in the help area, not everything filed together under "T". 
 
 Bugs:
 
-+ `tntp_theme()` is not exported properly, I have to call explicitly with `tntpr::tntp_theme()`
-+ When I call tntp_theme() and then try to change a legend title on the next line with `labs(size = "number of teachers")`, the legend title is suppressed because of the theme.  Annoying, I can comment out the theme and it works but they won't play nicely together.
-+ Do we need to account for loading fonts?  I was getting the error:
-
->8: In grid.Call.graphics(L_text, as.graphicsAnnot(x$label), x$x, x$y,  :
->  font family not found in Windows font database
-
-Until I ran `loadfonts("win", quiet = TRUE)`.
++ When I call `tntp_theme()` and then try to change a legend title on the next line with `labs(size = "number of teachers")`, the legend title is suppressed because of the theme.  Annoying, I can comment out the theme and it works but they won't play nicely together.

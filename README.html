@@ -134,14 +134,8 @@ $(document).ready(function () {
 </ul>
 <p>Bugs:</p>
 <ul>
-<li><code>tntp_theme()</code> is not exported properly, I have to call explicitly with <code>tntpr::tntp_theme()</code></li>
-<li>When I call tntp_theme() and then try to change a legend title on the next line with <code>labs(size = &quot;number of teachers&quot;)</code>, the legend title is suppressed because of the theme. Annoying, I can comment out the theme and it works but they won’t play nicely together.</li>
-<li>Do we need to account for loading fonts? I was getting the error:</li>
+<li>When I call <code>tntp_theme()</code> and then try to change a legend title on the next line with <code>labs(size = &quot;number of teachers&quot;)</code>, the legend title is suppressed because of the theme. Annoying, I can comment out the theme and it works but they won’t play nicely together.</li>
 </ul>
-<blockquote>
-<p>8: In grid.Call.graphics(L_text, as.graphicsAnnot(x<span class="math inline">\(label), x\)</span>x, x$y, : font family not found in Windows font database</p>
-</blockquote>
-<p>Until I ran <code>loadfonts(&quot;win&quot;, quiet = TRUE)</code>.</p>
 </div>
 
 
