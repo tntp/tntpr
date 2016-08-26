@@ -14,10 +14,11 @@ BugReports:
 Imports:
     dplyr,
     knitr,
-    lubridate
+    lubridate,
+    scales,
+    testthat
 RoxygenNote: 5.0.1
 Suggests:
-    testthat
 Depends:
     extrafont,
     ggplot2
