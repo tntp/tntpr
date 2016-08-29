@@ -39,7 +39,7 @@ bar_chart_tntp <- function(df = NULL, var = NULL, display = "n", title = NULL, .
 
   # Select a colour for each level of the factor-ed variable
   # Must be less than 9 (because we only have 9 TNTP colors)
-  num_groups <- tmp$var.factor %>% levels() %>% length()
+  num_groups <- plot_data$var.factor %>% levels() %>% length()
 
   testthat::expect_lte(num_groups, 9)
 
@@ -71,7 +71,7 @@ bar_chart_tntp <- function(df = NULL, var = NULL, display = "n", title = NULL, .
 
     # Polish the plot to presentation standards
   bc <- bc +
-    scale_fill_manual(values = colour_pal) +
+    scale_fill_manual(values = tntp_col_pal) +
     ggtitle(title) +
     theme(axis.line.y      = element_blank(),
           axis.line.x      = element_line(color = "grey70",
