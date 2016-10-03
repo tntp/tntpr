@@ -1,9 +1,9 @@
 #' TNTP branded color palettes
 #'
-#' This function creates user defined color palettes using any of the
-#' following nine TNTP colors: dark_blue, medium_blue, light_blue, green, orange,
-#' gold, dark_grey (dark_gray), medium_grey (medium_gray), light_grey
-#' (light_gray).
+#' This function creates user defined color palette combinations for up to
+#' eleven colors. There are nine TNTP approved colors: dark_blue, medium_blue,
+#' light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey
+#' (medium_gray), light_grey (light_gray). White and black are also available.
 #'@rdname palette_tntp
 #'@param ... supply quoted color names to include in color palette
 #'@export
@@ -43,7 +43,9 @@ palette_tntp <- function(...) {
                    medium_grey = "#7D7E81",
                    medium_gray = "#7D7E81",
                    light_grey  = "#C1C2C4",
-                   light_gray  = "#C1C2C4")
+                   light_gray  = "#C1C2C4",
+                   white       = "#FFFFFF",
+                   black       = "#000000")
 
 
   # Throw an error if supplied color doesn't exist

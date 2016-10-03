@@ -10,10 +10,10 @@ palette_tntp(...)
 \item{...}{supply quoted color names to include in color palette}
 }
 \description{
-This function creates user defined color palettes using any of the
-following nine TNTP colors: dark_blue, medium_blue, light_blue, green, orange,
-gold, dark_grey (dark_gray), medium_grey (medium_gray), light_grey
-(light_gray).
+This function creates user defined color palette combinations for up to
+eleven colors. There are nine TNTP approved colors: dark_blue, medium_blue,
+light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey
+(medium_gray), light_grey (light_gray). White and black are also available.
 }
 \examples{
 library(ggplot2)
