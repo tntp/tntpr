@@ -63,7 +63,7 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
   # Create a color palette ----------------------------------------------------
 
   # Check if group_var is supplied
-  if(!exists("group.factor", where = plot_data)){
+  if(!missing(group_var)){
 
     if(missing(group_colors)) {
 
@@ -99,7 +99,7 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
   # Build the N bar chart -----------------------------------------------------
   # Condition on presence of group_var
 
-  if(!exists("group.factor", where = plot_data)) {
+  if(missing(group_var)){
 
     nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
       geom_bar(fill = var_color) +
