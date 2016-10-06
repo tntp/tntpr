@@ -59,7 +59,6 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
       dplyr::mutate(vec.factor   = as.factor(vec),
                     group.factor = as.factor(group.vec))
   }
-
   # Create a color palette ----------------------------------------------------
 
   # Check if group_var is supplied
@@ -93,6 +92,13 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
                                  info = "The number of group_colors must equal
                                  the number of levels supplied to group_var")
 
+      tntp_col_pal <- palette_tntp("dark_blue", "medium_blue", "light_blue",
+                             "orange", "gold", "green", "dark_grey",
+                             "medium_grey", "light_grey", "white",
+                             "black")[group_colors == c("dark_blue", "medium_blue", "light_blue",
+                                                        "orange", "gold", "green", "dark_grey",
+                                                        "medium_grey", "light_grey", "white",
+                                                        "black")] ### <- need to deal w/ warning
     }
   }
 
@@ -109,7 +115,7 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
   } else {
 
     nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
-      geom_bar(aes(fill = group_var)) +
+      geom_bar(aes(fill = group.factor)) +
       geom_text(mapping = aes(label = ..count.., y = (..count..)),
                 stat    = "count",
                 vjust   = -0.8) +
