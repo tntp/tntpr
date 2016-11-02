@@ -1,6 +1,5 @@
 # Tests for date-to-school year function
 
-library(janitor)
 library(dplyr)
 library(lubridate)
 context("date_to_sy")
