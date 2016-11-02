@@ -14,10 +14,11 @@ BugReports:
 Imports:
     dplyr,
     knitr,
-    lubridate,
-    scales,
-    testthat,
     lazyeval
+    lubridate,
+    plyr,
+    scales,
+    testthat
 RoxygenNote: 5.0.1
 Suggests: 
 Depends:
