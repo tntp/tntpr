@@ -10,14 +10,17 @@ Description: An internal TNTP R package that includes functions and templates
 License: What license is it under?
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
-BugReports:
+BugReports: 
 Imports:
     dplyr,
     knitr,
     lubridate
 RoxygenNote: 5.0.1
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Depends:
     extrafont,
     ggplot2
+VignetteBuilder: knitr
