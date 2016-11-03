@@ -44,7 +44,9 @@ This won't check for updates, though.  So for now, consider periodically running
 
 Start your analysis with a good-looking .docx file as output, right off the bat.  Right now we have just a single TNTP template, "Data Memo", but it can be adapted and improved and if we have other common needs (a different set of headings?) those can easily be separate templates.
 
-To access templates once you've installed the tntpr package, go to File -> New File -> R Markdown -> From Template.  You'll see a choice "Data Memo" from the tntpr package.  Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off!  A file `tntp-style-file.docx` will be copied into that directory; leave it there.  That provides the TNTP .docx stylings when you re-knit your R Markdown document.
+To access templates once you've installed the tntpr package, go to File -> New File -> R Markdown -> From Template.  You'll see a choice "Data Memo" from the tntpr package.  Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off!
+
+A file `tntp-style-file.docx` will be copied into that directory; leave it there.  That provides the TNTP .docx stylings when you re-knit your R Markdown document.
 
 ### Chart making
 
