@@ -44,7 +44,7 @@ tableN = local({
 
 <!-- Load all non-knitr packages with pacman -->
 
-```{r load_packages}
+```{r load_packages, include = FALSE}
 
 if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, janitor)
