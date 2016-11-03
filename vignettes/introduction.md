@@ -11,6 +11,7 @@ Installing the package
 This package is not on CRAN, and probably will not ever be. You'll need to install this package from its Bitbucket repository. You can add this to the top of your analysis script:
 
     # install tntpr if you don't already have it, then load it
+    library(devtools) # for install_git()
     if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); library(tntpr)
 
 This won't check for updates, though. So for now, consider periodically running the `install_git(...)` part anyway. Once it's installed, you can load it however you normally load packages, say with `pacman::p_load(tntpr)`.

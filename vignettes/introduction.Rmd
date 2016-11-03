@@ -17,6 +17,7 @@ This package is not on CRAN, and probably will not ever be.  You'll need to inst
 
 ```
 # install tntpr if you don't already have it, then load it
+library(devtools) # for install_git()
 if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); library(tntpr)
 ```
 
