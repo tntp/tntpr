@@ -1,0 +1,55 @@
+Using the tntpr package
+================
+TNTP
+2016-11-03
+
+The `tntpr` package makes data science at TNTP easier and more accurate by supplying tools that are needed for common TNTP analyses. Because this package serves just the TNTP analysis community, functions can be tailored very specifically to our exact use cases.
+
+Installing the package
+----------------------
+
+This package is not on CRAN, and probably will not ever be. You'll need to install this package from its Bitbucket repository. You can add this to the top of your analysis script:
+
+    # install tntpr if you don't already have it, then load it
+    if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); library(tntpr)
+
+This won't check for updates, though. So for now, consider periodically running the `install_git(...)` part anyway. Once it's installed, you can load it however you normally load packages, say with `pacman::p_load(tntpr)`.
+
+### Package highlights
+
+-   TNTP-specific ggplot2 theme and color palette
+-   Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
+-   Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
+
+Usage
+-----
+
+### Chart making
+
+#### TNTP colors
+
+You can access the official TNTP-branded colors using `palette_tntp()`. This will return a vector with hex code for our colors:
+
+``` r
+palette_tntp("dark_blue", "orange", "light_gray")
+```
+
+    ## [1] "#034772" "#EA8936" "#C1C2C4"
+
+#### TNTP theme for ggplot2
+
+Add `+ theme_tntp()` to your ggplot2 calls to format a chart in the common TNTP style. For instance, this will use the Segoe UI font that is standard at TNTP.
+
+``` r
+ggplot(mtcars, aes(x = cyl)) +
+  geom_bar(fill = palette_tntp("dark_blue")) +
+  theme_tntp()
+```
+
+![](introduction_files/figure-markdown_github/chart_making-1.png)
+
+*add examples here of the tntpr charting functions *
+
+### Data management
+
+(show data mgmt stuff here. Include the movement function that Alex and Danielle made)
