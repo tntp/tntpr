@@ -8,9 +8,12 @@
 #'@param group_var unquoted column name for group variable
 #'@param group_colors character vector of group colors
 #'@param title main chart title
+#'@param var_label label for x-axis
 #'@param font font for chart text; Segoe UI by default
 #'@param font_size size for chart text; set to 12 by default
-#'@param var_color color for non-grouped charts; set to light_grey by default
+#'@param var_color color for non-grouped charts; set to dark_blue by default
+#'@param display bar chart type "n" by default; also accepts "pct"
+#'@param digits integer indicating the number of decimal places to be used
 #'@param ... additional arguments
 #'@export
 #'@examples
@@ -31,9 +34,11 @@ bar_chart_tntp <- function(df           = NULL,
                            group_var,
                            group_colors,
                            title        = NULL,
+                           var_label,
                            font         = "Segoe UI",
                            font_size    = 12,
-                           var_color    = palette_tntp("dark_blue"), ...) {
+                           var_color    = palette_tntp("dark_blue"),
+                           ...) {
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
   testthat::expect(exp = is.data.frame(df),
@@ -42,6 +47,8 @@ bar_chart_tntp <- function(df           = NULL,
   # QC: Throw an error if var was not specified  ------------------------------
   testthat::expect(exp = !missing(var),
                    "You must supply a column name to the var argument")
+
+  # QC: Throw an error if
 
   # Create a plot_data object -------------------------------------------------
   # plot_data should contain user specified column and its factor equivalent
@@ -117,8 +124,16 @@ bar_chart_tntp <- function(df           = NULL,
     }
   }
 
+  # Check whether user specified an x axis label ------------------------------
+  if(missing(var_label)) {
+
+    var_label <- deparse(substitute(var))
+
+  }
+
   # Build the N bar chart -----------------------------------------------------
   # Condition on presence of group_var
+
 
   if(missing(group_var)){
 
@@ -145,6 +160,7 @@ bar_chart_tntp <- function(df           = NULL,
   nbc <- nbc +
     scale_y_continuous(expand = c(0, 0.6)) +
     ggtitle(title) +
+    xlab(var_label) +
     theme(axis.line.y      = element_blank(),
           axis.line.x      = element_line(color = "grey70",
                                           size  = 0.20),
@@ -152,7 +168,7 @@ bar_chart_tntp <- function(df           = NULL,
           axis.text.x      = element_text(family = font,
                                           size   = font_size),
           axis.ticks       = element_blank(),
-          axis.title       = element_blank(),
+          axis.title.y     = element_blank(),
 
           legend.key       = element_blank(),
           legend.position  = "bottom",

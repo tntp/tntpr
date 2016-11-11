@@ -5,8 +5,8 @@
 \title{Bar chart with TNTP polish}
 \usage{
 bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
-  font = "Segoe UI", font_size = 12,
-  var_color = palette_tntp("light_grey"), ...)
+  var_label, font = "Segoe UI", font_size = 12,
+  var_color = palette_tntp("dark_blue"), ...)
 }
 \arguments{
 \item{df}{the data.frame to be used in the bar chart}
@@ -19,13 +19,19 @@ bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
 
 \item{title}{main chart title}
 
+\item{var_label}{label for x-axis}
+
 \item{font}{font for chart text; Segoe UI by default}
 
 \item{font_size}{size for chart text; set to 12 by default}
 
-\item{var_color}{color for non-grouped charts; set to light_grey by default}
+\item{var_color}{color for non-grouped charts; set to dark_blue by default}
 
 \item{...}{additional arguments}
+
+\item{display}{bar chart type "n" by default; also accepts "pct"}
+
+\item{digits}{integer indicating the number of decimal places to be used}
 }
 \description{
 Takes a user supplied data frame and turns the designated column into
