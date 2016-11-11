@@ -99,8 +99,8 @@ bar_chart_tntp <- function(df           = NULL,
       tntp_col_pal <- group_colors %>%
         # Switch color name strings to the HEX codes
         plyr::mapvalues(from         = c("dark_blue",   "medium_blue",
-                                         "light_blue",  "orange",
-                                         "gold",        "green",
+                                         "light_blue",  "green",
+                                         "orange",      "gold",
                                          "dark_grey",   "dark_gray",
                                          "medium_grey", "medium_gray",
                                          "light_grey",  "light_gray",
