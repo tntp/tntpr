@@ -1,8 +1,8 @@
-#' N Bar chart with TNTP polish
+#' Bar chart with TNTP polish
 #'
 #' Takes a user supplied data frame and turns the designated column into
-#' an N bar chart.
-#'@rdname n_bar_chart_tntp
+#' an N bar chart (uses position dodge from ggplot2).
+#'@rdname bar_chart_tntp
 #'@param df the data.frame to be used in the bar chart
 #'@param var unquoted column name for desired variable
 #'@param group_var unquoted column name for group variable
@@ -17,23 +17,23 @@
 #'
 #'# An  bar chart by default
 #'mtcars %>%
-#'  n_bar_chart_tntp(var     = cyl,
-#'                   title   = "Number of mtcars by cylinder")
+#'  bar_chart_tntp(var     = cyl,
+#'                 title   = "Number of mtcars by cylinder")
 #'
 #'# With a grouping variable
 #'mtcars %>%
-#'  n_bar_chart_tntp(var          = cyl,
-#'                   group_var    = vs,
-#'                   title        = "Percentage of mtcars by cylinder")
+#'  bar_chart_tntp(var          = cyl,
+#'                 group_var    = vs,
+#'                 title        = "Percentage of mtcars by cylinder")
 
-n_bar_chart_tntp <- function(df           = NULL,
-                             var,
-                             group_var,
-                             group_colors,
-                             title        = NULL,
-                             font         = "Segoe UI",
-                             font_size    = 12,
-                             var_color    = palette_tntp("light_grey"), ...) {
+bar_chart_tntp <- function(df           = NULL,
+                           var,
+                           group_var,
+                           group_colors,
+                           title        = NULL,
+                           font         = "Segoe UI",
+                           font_size    = 12,
+                           var_color    = palette_tntp("dark_blue"), ...) {
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
   testthat::expect(exp = is.data.frame(df),
