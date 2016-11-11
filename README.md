@@ -1,4 +1,5 @@
 # tntp R package
+`r Sys.Date()`  
 
 ## About
 
@@ -14,6 +15,8 @@ Some of the highlights of the package include:
 - TNTP-specific ggplot2 theme and color palette
 - Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
 - Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
+
+`tntpr` is built to work seamlessly with the "tidyverse," a set of packages outlined in the wiki page [Overview of R at TNTP](https://tools.tntp.org/confluence/display/TOPIC/Overview+of+R+at+TNTP).
 
 ## Installing the package
 
