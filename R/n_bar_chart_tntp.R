@@ -26,10 +26,14 @@
 #'                   group_var    = vs,
 #'                   title        = "Percentage of mtcars by cylinder")
 
-n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
-                             title = NULL, font = "Segoe UI", font_size = 12,
-                             var_color = palette_tntp("light_grey"),
-                             ...) {
+n_bar_chart_tntp <- function(df           = NULL,
+                             var,
+                             group_var,
+                             group_colors,
+                             title        = NULL,
+                             font         = "Segoe UI",
+                             font_size    = 12,
+                             var_color    = palette_tntp("light_grey"), ...) {
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
   testthat::expect(exp = is.data.frame(df),
@@ -92,13 +96,24 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
                                  info = "The number of group_colors must equal
                                  the number of levels supplied to group_var")
 
-      tntp_col_pal <- palette_tntp("dark_blue", "medium_blue", "light_blue",
-                             "orange", "gold", "green", "dark_grey",
-                             "medium_grey", "light_grey", "white",
-                             "black")[group_colors == c("dark_blue", "medium_blue", "light_blue",
-                                                        "orange", "gold", "green", "dark_grey",
-                                                        "medium_grey", "light_grey", "white",
-                                                        "black")] ### <- need to deal w/ warning
+      tntp_col_pal <- group_colors %>%
+        # Switch color name strings to the HEX codes
+        plyr::mapvalues(from         = c("dark_blue",   "medium_blue",
+                                         "light_blue",  "orange",
+                                         "gold",        "green",
+                                         "dark_grey",   "dark_gray",
+                                         "medium_grey", "medium_gray",
+                                         "light_grey",  "light_gray",
+                                         "white",       "black"),
+
+                        to           = c("#034772", "#2888BC",
+                                         "#73B7CE", "#699D46",
+                                         "#EA8936", "#F9C347",
+                                         "#58595B", "#58595B",
+                                         "#7D7E81", "#7D7E81",
+                                         "#C1C2C4", "#C1C2C4",
+                                         "#FFFFFF", "#000000"),
+                        warn_missing = FALSE)
     }
   }
 
@@ -109,16 +124,18 @@ n_bar_chart_tntp <- function(df = NULL, var, group_var, group_colors,
 
     nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
       geom_bar(fill = var_color) +
-      geom_text(mapping = aes(label = ..count.., y = (..count..)),
-                stat    = "count",
-                vjust   = -0.8)
+      geom_text(mapping  = aes(label = ..count.., y = (..count..)),
+                stat     = "count",
+                vjust    = -0.8)
   } else {
 
-    nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
-      geom_bar(aes(fill = group.factor)) +
-      geom_text(mapping = aes(label = ..count.., y = (..count..)),
-                stat    = "count",
-                vjust   = -0.8) +
+    nbc <- ggplot(data    = plot_data,
+                  mapping = aes(x = vec.factor, fill = group.factor)) +
+      geom_bar(position = "dodge") +
+      geom_text(mapping  = aes(label = ..count.., y = (..count..)),
+                position = position_dodge(width = 1),
+                stat     = "count",
+                vjust    = -0.8) +
       scale_fill_manual(values = tntp_col_pal)
 
   }
