@@ -14,7 +14,7 @@ BugReports:
 Imports:
     dplyr,
     knitr,
-    lazyeval
+    lazyeval,
     lubridate,
     plyr,
     scales,
