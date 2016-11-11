@@ -11,44 +11,11 @@ output:
 
 <!-- Initializing knitr -->
 ```{r setup,echo=FALSE}
-# Initialize knitr
-library(knitr) 
-
-# set knitr options
-opts_chunk$set(dev = "png", fig.width = 9, fig.height = 5.5, dpi = 300) # Sam uses these sizes in PPT slides but it's not scientific and maybe not ideal for Word  
-opts_chunk$set(echo = FALSE)
-opts_chunk$set(size = "small", background = "white")
-opts_chunk$set(fig.path = "../reports/figures/fig-")
-opts_chunk$set(highlight = TRUE, comment = NA, tidy = FALSE)
-opts_chunk$set(knitr.table.format = "html")
-
-# function for creating sequential figure numbers
-figureN = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste('Figure ', i, '. ', x, sep = '')
-  }
-})
-
-# function for creating sequential table numbers
-tableN = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste('Table ', i, '. ', x, sep = '')
-  }
-})
-
-```
-
-<!-- Load all non-knitr packages with pacman -->
-
-```{r load_packages, include = FALSE}
-
-if (!require("pacman")) install.packages("pacman"); library(pacman)
-p_load(readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, janitor)
-if (!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); p_load(tntpr)
+# Initialize knitr, set options, load packages
+if(!suppressPackageStartupMessages(require("pacman"))) install.packages("pacman"); library(pacman)
+if(!suppressPackageStartupMessages(require("tntpr"))) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
+p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, janitor)
+set_data_memo_formatting() # sets some common knitr chunk options
 ```
 
 <!-- Import data file(s) -->
