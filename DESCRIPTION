@@ -20,7 +20,11 @@ Imports:
     scales,
     testthat
 RoxygenNote: 5.0.1
-Suggests: 
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
 Depends:
     extrafont,
     ggplot2
+VignetteBuilder: knitr

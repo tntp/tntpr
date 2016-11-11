@@ -1,0 +1,81 @@
+---
+title: "Using the tntpr package"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::github_document:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## About
+
+The `tntpr` package makes data science at TNTP easier and more accurate by supplying tools that are needed for common TNTP analyses.  Because this package serves just the TNTP analysis community, functions can be tailored very specifically to our exact use cases.
+
+## Package summary
+
+Some of the highlights of the package include:
+
+- TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report 
+- TNTP-specific ggplot2 theme and color palette
+- Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
+- Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
+
+## Installing the package
+
+This package is not on CRAN, and probably will not ever be.  You'll need to install this package from its Bitbucket repository.  You can add this to the top of your analysis script:
+
+```
+# install tntpr if you don't already have it, then load it
+library(devtools) # for install_git()
+if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
+library(tntpr)
+```
+
+This won't check for updates, though.  So for now, consider periodically running the `install_git(...)` part anyway.  Once it's installed, you can load it however you normally load packages, say with `pacman::p_load(tntpr)`.
+
+
+## Usage
+
+### Reporting templates
+
+Start your analysis with a good-looking .docx file as output, right off the bat.  Right now we have just a single TNTP template, "Data Memo", but it can be adapted and improved and if we have other common needs (a different set of headings?) those can easily be separate templates.
+
+To access templates once you've installed the tntpr package, go to File -> New File -> R Markdown -> From Template.  You'll see a choice "Data Memo" from the tntpr package.  Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off!
+
+A file `tntp-style-file.docx` will be copied into that directory; leave it there.  That provides the TNTP .docx stylings when you re-knit your R Markdown document.
+
+### Chart making
+
+```{r load_packages, include = FALSE}
+library(pacman)
+if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); library(tntpr)
+p_load(ggplot2)
+```
+
+#### TNTP colors
+
+You can access the official TNTP-branded colors using `palette_tntp()`.  This will return a vector with hex code for our colors:
+```{r colors}
+palette_tntp("dark_blue", "orange", "light_gray")
+```
+
+#### TNTP theme for ggplot2
+
+Add `+ theme_tntp()` to your ggplot2 calls to format a chart in the common TNTP style.  For instance, this will use the Segoe UI font that is standard at TNTP.
+
+```{r chart_making}
+ggplot(mtcars, aes(x = cyl)) +
+  geom_bar(fill = palette_tntp("dark_blue")) +
+  theme_tntp()
+```
+
+*add examples here of the tntpr charting functions *
+
+### Data management
+
+(show data mgmt stuff here.  Include the movement function that Alex and Danielle made)
+

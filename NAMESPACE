@@ -2,7 +2,10 @@
 
 export(bar_chart_tntp)
 export(date_to_sy)
+export(figureN)
 export(labelled_to_factors)
 export(palette_tntp)
+export(set_data_memo_formatting)
+export(tableN)
 export(theme_tntp)
 importFrom(ggplot2,theme_minimal)
