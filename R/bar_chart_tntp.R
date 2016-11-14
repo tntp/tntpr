@@ -28,12 +28,13 @@
 #'  bar_chart_tntp(var          = cyl,
 #'                 group_var    = vs,
 #'                 title        = "Percentage of mtcars by cylinder")
-#'                 
+#'
 #' # with colors
 #' bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "light_grey", "dark_blue"))
 bar_chart_tntp <- function(df           = NULL,
                            var,
                            group_var,
+                           display      = "n",
                            group_colors,
                            title        = NULL,
                            var_label,
@@ -140,29 +141,44 @@ bar_chart_tntp <- function(df           = NULL,
   if(missing(group_var)){
 
     nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
-      geom_bar(fill = var_color) +
-      geom_text(mapping  = aes(label = ..count.., y = (..count..)),
+      geom_bar(fill = var_color)
+
+    if(display == "pct"){
+      nbc <- nbc + geom_text(aes(y = (..count..), label = scales::percent((..count..)/sum(..count..))), stat = "count", vjust = -0.8)
+    } else {
+      nbc <- nbc + geom_text(mapping  = aes(label = ..count.., y = (..count..)),
                 stat     = "count",
                 vjust    = -0.8)
+    }
   } else {
 
     nbc <- ggplot(data    = plot_data,
                   mapping = aes(x = vec.factor, fill = group.factor)) +
       geom_bar(position = "dodge") +
-      geom_text(mapping  = aes(label = ..count.., y = (..count..)),
-                position = position_dodge(width = 1),
-                stat     = "count",
-                vjust    = -0.8) +
       scale_fill_manual(values = tntp_col_pal)
 
+    if(display == "pct"){
+      nbc <- nbc + geom_text(aes(y = (..count..),
+                                 label = scales::percent((..count..)/sum(..count..))),
+                             position = position_dodge(width = 1),
+                             stat = "count",
+                             vjust = -0.8)
+    } else {
+      nbc <- nbc + geom_text(mapping  = aes(label = ..count.., y = (..count..)),
+                position = position_dodge(width = 1),
+                stat     = "count",
+                vjust    = -0.8)
+}
+    if(display == "pct"){ # fix the y-axis
+      nbc <- nbc +  scale_y_continuous(labels = percent)
+    }
   }
 
   # Polish the plot to presentation standards ---------------------------------
 
   nbc <- nbc +
     scale_y_continuous(expand = c(0, 0.6)) +
-    ggtitle(title) +
-    xlab(var_label) +
+    labs(title = title, x = var_label) +
     theme(axis.line.y      = element_blank(),
           axis.line.x      = element_line(color = "grey70",
                                           size  = 0.20),
