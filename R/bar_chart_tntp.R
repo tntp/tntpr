@@ -5,8 +5,8 @@
 #'@rdname bar_chart_tntp
 #'@param df the data.frame to be used in the bar chart
 #'@param var unquoted column name for desired variable
-#'@param group_var unquoted column name for group variable
-#'@param group_colors character vector of group colors
+#'@param (optional) group_var unquoted column name for group variable
+#'@param (optional) group_colors character vector of group colors
 #'@param title main chart title
 #'@param var_label label for x-axis
 #'@param font font for chart text; Segoe UI by default
@@ -28,7 +28,9 @@
 #'  bar_chart_tntp(var          = cyl,
 #'                 group_var    = vs,
 #'                 title        = "Percentage of mtcars by cylinder")
-
+#'                 
+#' # with colors
+#' bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "light_grey", "dark_blue"))
 bar_chart_tntp <- function(df           = NULL,
                            var,
                            group_var,

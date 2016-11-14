@@ -6,4 +6,5 @@
 #' @docType package
 #' @aliases tntpr tntpr-package
 #' @importFrom ggplot2 theme_minimal
+#' @importFrom dplyr %>%
 NULL

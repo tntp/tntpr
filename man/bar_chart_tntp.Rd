@@ -13,10 +13,6 @@ bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
 
 \item{var}{unquoted column name for desired variable}
 
-\item{group_var}{unquoted column name for group variable}
-
-\item{group_colors}{character vector of group colors}
-
 \item{title}{main chart title}
 
 \item{var_label}{label for x-axis}
@@ -28,6 +24,10 @@ bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
 \item{var_color}{color for non-grouped charts; set to dark_blue by default}
 
 \item{...}{additional arguments}
+
+\item{(optional)}{group_var unquoted column name for group variable}
+
+\item{(optional)}{group_colors character vector of group colors}
 
 \item{display}{bar chart type "n" by default; also accepts "pct"}
 
@@ -49,5 +49,8 @@ mtcars \%>\%
  bar_chart_tntp(var          = cyl,
                 group_var    = vs,
                 title        = "Percentage of mtcars by cylinder")
+                
+# with colors
+bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "light_grey", "dark_blue"))
 }
 
