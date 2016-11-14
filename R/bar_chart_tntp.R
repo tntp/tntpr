@@ -6,13 +6,13 @@
 #'@param df the data.frame to be used in the bar chart
 #'@param var unquoted column name for desired variable
 #'@param (optional) group_var unquoted column name for group variable
+#'@param display bar chart type "n" by default; also accepts "pct"
 #'@param (optional) group_colors character vector of group colors
 #'@param title main chart title
 #'@param var_label label for x-axis
 #'@param font font for chart text; Segoe UI by default
 #'@param font_size size for chart text; set to 12 by default
 #'@param var_color color for non-grouped charts; set to dark_blue by default
-#'@param display bar chart type "n" by default; also accepts "pct"
 #'@param digits integer indicating the number of decimal places to be used
 #'@param ... additional arguments
 #'@export
@@ -30,7 +30,7 @@
 #'                 title        = "Percentage of mtcars by cylinder")
 #'
 #' # with colors
-#' bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "light_grey", "dark_blue"))
+#' bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
 bar_chart_tntp <- function(df           = NULL,
                            var,
                            group_var,
@@ -40,8 +40,8 @@ bar_chart_tntp <- function(df           = NULL,
                            var_label,
                            font         = "Segoe UI",
                            font_size    = 12,
-                           var_color    = palette_tntp("dark_blue"),
-                           ...) {
+                           var_color    = palette_tntp("medium_blue")
+                           ){
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
   testthat::expect(exp = is.data.frame(df),
@@ -61,17 +61,22 @@ bar_chart_tntp <- function(df           = NULL,
 
     plot_data <- df %>%
       dplyr::select_(.dots = list(vec = lazyeval::lazy(var))) %>%
-      dplyr::as_data_frame() %>%
-      dplyr::mutate(vec.factor = as.factor(vec))
+      dplyr::mutate(vec.factor = as.factor(vec)) %>%
+      dplyr::group_by(vec.factor) %>%
+      dplyr::tally() %>%
+      dplyr::mutate(perc = n / sum(n))
 
   } else {
 
     plot_data <- df %>%
       dplyr::select_(.dots = list(vec       = lazyeval::lazy(var),
                                   group.vec = lazyeval::lazy(group_var))) %>%
-      dplyr::as_data_frame() %>%
       dplyr::mutate(vec.factor   = as.factor(vec),
-                    group.factor = as.factor(group.vec))
+                    group.factor = as.factor(group.vec)) %>%
+      dplyr::group_by(vec.factor, group.factor) %>%
+      dplyr::tally() %>%
+      dplyr::mutate(perc = n / sum(n))
+
   }
   # Create a color palette ----------------------------------------------------
 
@@ -137,40 +142,31 @@ bar_chart_tntp <- function(df           = NULL,
   # Build the N bar chart -----------------------------------------------------
   # Condition on presence of group_var
 
+    if(missing(group_var)){
 
-  if(missing(group_var)){
-
-    nbc <- ggplot(data = plot_data, aes(x = vec.factor)) +
-      geom_bar(fill = var_color)
+    nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
+      geom_bar(fill = var_color, stat = "identity")
 
     if(display == "pct"){
-      nbc <- nbc + geom_text(aes(y = (..count..), label = scales::percent((..count..)/sum(..count..))), stat = "count", vjust = -0.8)
+      nbc <- nbc + geom_text(aes(label = scales::percent(perc), vjust = -0.8))
     } else {
-      nbc <- nbc + geom_text(mapping  = aes(label = ..count.., y = (..count..)),
-                stat     = "count",
+      nbc <- nbc + geom_text(mapping  = aes(label = n),
                 vjust    = -0.8)
     }
   } else {
-
     nbc <- ggplot(data    = plot_data,
-                  mapping = aes(x = vec.factor, fill = group.factor)) +
-      geom_bar(position = "dodge") +
+                  mapping = aes(x = vec.factor, y = n, fill = group.factor)) +
+      geom_bar(position = "dodge", stat = "identity") +
       scale_fill_manual(values = tntp_col_pal)
 
     if(display == "pct"){
-      nbc <- nbc + geom_text(aes(y = (..count..),
-                                 label = scales::percent((..count..)/sum(..count..))),
+      nbc <- nbc + geom_text(aes(label = scales::percent(perc)),
                              position = position_dodge(width = 1),
-                             stat = "count",
                              vjust = -0.8)
     } else {
-      nbc <- nbc + geom_text(mapping  = aes(label = ..count.., y = (..count..)),
+      nbc <- nbc + geom_text(aes(label = n),
                 position = position_dodge(width = 1),
-                stat     = "count",
                 vjust    = -0.8)
-}
-    if(display == "pct"){ # fix the y-axis
-      nbc <- nbc +  scale_y_continuous(labels = percent)
     }
   }
 

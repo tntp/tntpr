@@ -4,14 +4,16 @@
 \alias{bar_chart_tntp}
 \title{Bar chart with TNTP polish}
 \usage{
-bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
-  var_label, font = "Segoe UI", font_size = 12,
-  var_color = palette_tntp("dark_blue"), ...)
+bar_chart_tntp(df = NULL, var, group_var, display = "n", group_colors,
+  title = NULL, var_label, font = "Segoe UI", font_size = 12,
+  var_color = palette_tntp("medium_blue"))
 }
 \arguments{
 \item{df}{the data.frame to be used in the bar chart}
 
 \item{var}{unquoted column name for desired variable}
+
+\item{display}{bar chart type "n" by default; also accepts "pct"}
 
 \item{title}{main chart title}
 
@@ -23,15 +25,13 @@ bar_chart_tntp(df = NULL, var, group_var, group_colors, title = NULL,
 
 \item{var_color}{color for non-grouped charts; set to dark_blue by default}
 
-\item{...}{additional arguments}
-
 \item{(optional)}{group_var unquoted column name for group variable}
 
 \item{(optional)}{group_colors character vector of group colors}
 
-\item{display}{bar chart type "n" by default; also accepts "pct"}
-
 \item{digits}{integer indicating the number of decimal places to be used}
+
+\item{...}{additional arguments}
 }
 \description{
 Takes a user supplied data frame and turns the designated column into
@@ -49,8 +49,8 @@ mtcars \%>\%
  bar_chart_tntp(var          = cyl,
                 group_var    = vs,
                 title        = "Percentage of mtcars by cylinder")
-                
+
 # with colors
-bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "light_grey", "dark_blue"))
+bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
 }
 
