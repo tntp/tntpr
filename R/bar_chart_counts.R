@@ -26,10 +26,11 @@
 #'mtcars %>%
 #'  bar_chart_counts(var          = cyl,
 #'                 group_var    = vs,
-#'                 title        = "Percentage of mtcars by cylinder")
+#'                 label        = "pct",
+#'                 title        = "Percentage of V vs. Straight engines by # of cylinders")
 #'
 #' # with colors
-#' bar_chart_counts(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), label = "pct")
+#' bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
 bar_chart_counts <- function(df         = NULL,
                            var,
                            group_var,

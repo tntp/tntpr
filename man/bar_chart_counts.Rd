@@ -4,28 +4,28 @@
 \alias{bar_chart_counts}
 \title{Bar chart of counts with TNTP polish}
 \usage{
-bar_chart_counts(df = NULL, var, group_var, display = "n", group_colors,
-  title = NULL, var_label, var_color = palette_tntp("medium_blue"),
-  digits = 1, font = "Segoe UI", font_size = 12)
+bar_chart_counts(df = NULL, var, group_var, label = "n",
+  var_color = palette_tntp("medium_blue"), group_colors, title = NULL,
+  var_label, digits = 1, font = "Segoe UI", font_size = 12)
 }
 \arguments{
 \item{df}{the data.frame to be used in the bar chart}
 
-\item{var}{unquoted column name for desired variable}
+\item{var}{unquoted column name for variable to count}
 
-\item{group_var}{(optional) unquoted column name for group variable}
+\item{group_var}{(optional) unquoted column name for group variable.  If this is specified, you get a 2-variable clustered bar chart.  If left blank, a single variable bar chart.}
 
-\item{display}{bar chart type "n" by default; also accepts "pct"}
+\item{label}{should labels show the count or the percentage?}
 
-\item{group_colors}{(optional) character vector of group colors}
+\item{var_color}{color for non-grouped charts; set to medium_blue by default}
+
+\item{group_colors}{character vector of group colors, if a specific palette is desired}
 
 \item{title}{main chart title}
 
 \item{var_label}{label for x-axis}
 
-\item{var_color}{color for non-grouped charts; set to dark_blue by default}
-
-\item{digits}{integer indicating the number of decimal places to be used}
+\item{digits}{integer indicating the number of decimal places to be used in percentages}
 
 \item{font}{font for chart text; Segoe UI by default}
 
@@ -46,9 +46,10 @@ mtcars \%>\%
 mtcars \%>\%
  bar_chart_counts(var          = cyl,
                 group_var    = vs,
-                title        = "Percentage of mtcars by cylinder")
+                label        = "pct",
+                title        = "Percentage of V vs. Straight engines by # of cylinders")
 
 # with colors
-bar_chart_counts(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
+bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
 }
 
