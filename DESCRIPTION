@@ -18,7 +18,8 @@ Imports:
     lubridate,
     plyr,
     scales,
-    testthat
+    testthat,
+    formattable
 RoxygenNote: 5.0.1
 Suggests:
     testthat,

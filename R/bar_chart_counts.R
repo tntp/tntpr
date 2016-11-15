@@ -1,46 +1,46 @@
-#' Bar chart with TNTP polish
+#' Bar chart of counts with TNTP polish
 #'
 #' Takes a user supplied data frame and turns the designated column into
 #' an N bar chart (uses position dodge from ggplot2).
-#'@rdname bar_chart_tntp
+#'@rdname bar_chart_counts
 #'@param df the data.frame to be used in the bar chart
 #'@param var unquoted column name for desired variable
-#'@param (optional) group_var unquoted column name for group variable
+#'@param group_var (optional) unquoted column name for group variable
 #'@param display bar chart type "n" by default; also accepts "pct"
-#'@param (optional) group_colors character vector of group colors
+#'@param group_colors (optional) character vector of group colors
 #'@param title main chart title
 #'@param var_label label for x-axis
-#'@param font font for chart text; Segoe UI by default
-#'@param font_size size for chart text; set to 12 by default
 #'@param var_color color for non-grouped charts; set to dark_blue by default
 #'@param digits integer indicating the number of decimal places to be used
-#'@param ... additional arguments
+#'@param font font for chart text; Segoe UI by default
+#'@param font_size size for chart text; set to 12 by default
 #'@export
 #'@examples
 #'
 #'# An  bar chart by default
 #'mtcars %>%
-#'  bar_chart_tntp(var     = cyl,
+#'  bar_chart_counts(var     = cyl,
 #'                 title   = "Number of mtcars by cylinder")
 #'
 #'# With a grouping variable
 #'mtcars %>%
-#'  bar_chart_tntp(var          = cyl,
+#'  bar_chart_counts(var          = cyl,
 #'                 group_var    = vs,
 #'                 title        = "Percentage of mtcars by cylinder")
 #'
 #' # with colors
-#' bar_chart_tntp(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
-bar_chart_tntp <- function(df           = NULL,
+#' bar_chart_counts(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
+bar_chart_counts <- function(df           = NULL,
                            var,
                            group_var,
                            display      = "n",
                            group_colors,
                            title        = NULL,
                            var_label,
+                           var_color    = palette_tntp("medium_blue"),
+                           digits       = 1,
                            font         = "Segoe UI",
-                           font_size    = 12,
-                           var_color    = palette_tntp("medium_blue")
+                           font_size    = 12
                            ){
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
@@ -78,6 +78,7 @@ bar_chart_tntp <- function(df           = NULL,
       dplyr::mutate(perc = n / sum(n))
 
   }
+
   # Create a color palette ----------------------------------------------------
 
   # Check if group_var is supplied
@@ -148,7 +149,7 @@ bar_chart_tntp <- function(df           = NULL,
       geom_bar(fill = var_color, stat = "identity")
 
     if(display == "pct"){
-      nbc <- nbc + geom_text(aes(label = scales::percent(perc), vjust = -0.8))
+      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits), vjust = -0.8))
     } else {
       nbc <- nbc + geom_text(mapping  = aes(label = n),
                 vjust    = -0.8)
@@ -160,7 +161,7 @@ bar_chart_tntp <- function(df           = NULL,
       scale_fill_manual(values = tntp_col_pal)
 
     if(display == "pct"){
-      nbc <- nbc + geom_text(aes(label = scales::percent(perc)),
+      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 1),
                              vjust = -0.8)
     } else {

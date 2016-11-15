@@ -7,4 +7,6 @@
 #' @aliases tntpr tntpr-package
 #' @importFrom ggplot2 theme_minimal
 #' @importFrom dplyr %>%
+#' @importFrom formattable percent
+
 NULL
