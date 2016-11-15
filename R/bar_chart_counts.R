@@ -4,14 +4,14 @@
 #' an N bar chart (uses position dodge from ggplot2).
 #'@rdname bar_chart_counts
 #'@param df the data.frame to be used in the bar chart
-#'@param var unquoted column name for desired variable
-#'@param group_var (optional) unquoted column name for group variable
-#'@param display bar chart type "n" by default; also accepts "pct"
-#'@param group_colors (optional) character vector of group colors
+#'@param var unquoted column name for variable to count
+#'@param group_var (optional) unquoted column name for group variable.  If this is specified, you get a 2-variable clustered bar chart.  If left blank, a single variable bar chart.
+#'@param label should labels show the count or the percentage?
+#'@param var_color color for non-grouped charts; set to medium_blue by default
+#'@param group_colors character vector of group colors, if a specific palette is desired
 #'@param title main chart title
 #'@param var_label label for x-axis
-#'@param var_color color for non-grouped charts; set to dark_blue by default
-#'@param digits integer indicating the number of decimal places to be used
+#'@param digits integer indicating the number of decimal places to be used in percentages
 #'@param font font for chart text; Segoe UI by default
 #'@param font_size size for chart text; set to 12 by default
 #'@export
@@ -29,15 +29,15 @@
 #'                 title        = "Percentage of mtcars by cylinder")
 #'
 #' # with colors
-#' bar_chart_counts(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), display = "pct")
-bar_chart_counts <- function(df           = NULL,
+#' bar_chart_counts(mtcars, am, cyl, group_colors = palette_tntp("orange", "green", "dark_blue"), label = "pct")
+bar_chart_counts <- function(df         = NULL,
                            var,
                            group_var,
-                           display      = "n",
+                           label        = "n",
+                           var_color    = palette_tntp("medium_blue"),
                            group_colors,
                            title        = NULL,
                            var_label,
-                           var_color    = palette_tntp("medium_blue"),
                            digits       = 1,
                            font         = "Segoe UI",
                            font_size    = 12
@@ -75,7 +75,10 @@ bar_chart_counts <- function(df           = NULL,
                     group.factor = as.factor(group.vec)) %>%
       dplyr::group_by(vec.factor, group.factor) %>%
       dplyr::tally() %>%
-      dplyr::mutate(perc = n / sum(n))
+      dplyr::group_by(vec.factor) %>%
+      dplyr::mutate(perc = n / sum(n)) %>%
+      dplyr::ungroup() %>%
+      tidyr::complete(vec.factor, group.factor, fill = list(n = NA, perc = NA))  
 
   }
 
@@ -107,29 +110,13 @@ bar_chart_counts <- function(df           = NULL,
       # not equal the number of group_colors
       num_group_var <- plot_data$group.factor %>% levels() %>% length()
       num_group_col <- group_colors %>% length()
-
+      
       testthat::expect_identical(num_group_var, num_group_col,
                                  info = "The number of group_colors must equal
                                  the number of levels supplied to group_var")
-
-      tntp_col_pal <- group_colors %>%
-        # Switch color name strings to the HEX codes
-        plyr::mapvalues(from         = c("dark_blue",   "medium_blue",
-                                         "light_blue",  "green",
-                                         "orange",      "gold",
-                                         "dark_grey",   "dark_gray",
-                                         "medium_grey", "medium_gray",
-                                         "light_grey",  "light_gray",
-                                         "white",       "black"),
-
-                        to           = c("#034772", "#2888BC",
-                                         "#73B7CE", "#699D46",
-                                         "#EA8936", "#F9C347",
-                                         "#58595B", "#58595B",
-                                         "#7D7E81", "#7D7E81",
-                                         "#C1C2C4", "#C1C2C4",
-                                         "#FFFFFF", "#000000"),
-                        warn_missing = FALSE)
+      # Switch color name strings to the HEX codes
+      tntp_col_pal <- swap_colors(group_colors)
+      
     }
   }
 
@@ -146,9 +133,9 @@ bar_chart_counts <- function(df           = NULL,
     if(missing(group_var)){
 
     nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
-      geom_bar(fill = var_color, stat = "identity")
+      geom_bar(fill = swap_colors(var_color), stat = "identity")
 
-    if(display == "pct"){
+    if(label == "pct"){
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits), vjust = -0.8))
     } else {
       nbc <- nbc + geom_text(mapping  = aes(label = n),
@@ -157,17 +144,19 @@ bar_chart_counts <- function(df           = NULL,
   } else {
     nbc <- ggplot(data    = plot_data,
                   mapping = aes(x = vec.factor, y = n, fill = group.factor)) +
-      geom_bar(position = "dodge", stat = "identity") +
+      geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
       scale_fill_manual(values = tntp_col_pal)
 
-    if(display == "pct"){
+    if(label == "pct"){
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 1),
-                             vjust = -0.8)
+                             vjust = -0.8,
+                             na.rm = TRUE) 
     } else {
       nbc <- nbc + geom_text(aes(label = n),
                 position = position_dodge(width = 1),
-                vjust    = -0.8)
+                vjust    = -0.8,
+                na.rm = TRUE)
     }
   }
 
@@ -199,4 +188,26 @@ bar_chart_counts <- function(df           = NULL,
                                           face   = "bold",
                                           size   = font_size))
     nbc
+}
+
+# function to swap in custom TNTP colors
+
+swap_colors <- function(x){
+  plyr::mapvalues(x,
+                  from         = c("dark_blue",   "medium_blue",
+                                   "light_blue",  "green",
+                                   "orange",      "gold",
+                                   "dark_grey",   "dark_gray",
+                                   "medium_grey", "medium_gray",
+                                   "light_grey",  "light_gray",
+                                   "white",       "black"),
+                  
+                  to           = c("#034772", "#2888BC",
+                                   "#73B7CE", "#699D46",
+                                   "#EA8936", "#F9C347",
+                                   "#58595B", "#58595B",
+                                   "#7D7E81", "#7D7E81",
+                                   "#C1C2C4", "#C1C2C4",
+                                   "#FFFFFF", "#000000"),
+                  warn_missing = FALSE)
 }
