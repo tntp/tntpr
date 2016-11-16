@@ -5,8 +5,8 @@
 \title{Bar chart of counts with TNTP polish}
 \usage{
 bar_chart_counts(df = NULL, var, group_var, label = "n",
-  var_color = palette_tntp("medium_blue"), group_colors, title = NULL,
-  var_label, digits = 1, font = "Segoe UI", font_size = 12)
+  var_color = "medium_blue", group_colors, title = NULL, var_label,
+  digits = 1, font = "Segoe UI", font_size = 12)
 }
 \arguments{
 \item{df}{the data.frame to be used in the bar chart}
@@ -37,19 +37,24 @@ an N bar chart (uses position dodge from ggplot2).
 }
 \examples{
 
-# An  bar chart by default
+# An N bar chart by default
 mtcars \%>\%
  bar_chart_counts(var     = cyl,
-                title   = "Number of mtcars by cylinder")
+                  title   = "Number of mtcars by cylinder")
 
-# With a grouping variable
+# Use a grouping variable
 mtcars \%>\%
  bar_chart_counts(var          = cyl,
-                group_var    = vs,
-                label        = "pct",
-                title        = "Percentage of V vs. Straight engines by # of cylinders")
+                  group_var    = vs,
+                  label        = "pct",
+                  title        = "Percentage of V vs. Straight engines by # of cylinders")
 
-# with colors
-bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
+# Change default color
+#'mtcars \%>\%
+ bar_chart_counts(var       = cyl,
+                  var_color = "orange"
+                  title     = "Number of mtcars by cylinder")
+# Specify color by group
+ bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
 }
 
