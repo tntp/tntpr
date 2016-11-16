@@ -8,5 +8,4 @@
 #' @importFrom ggplot2 theme_minimal
 #' @importFrom magrittr %>%
 #' @importFrom formattable percent
-#' @export
 NULL
