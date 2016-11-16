@@ -16,6 +16,7 @@ Imports:
     knitr,
     lazyeval,
     lubridate,
+    magrittr,
     plyr,
     scales,
     testthat,
