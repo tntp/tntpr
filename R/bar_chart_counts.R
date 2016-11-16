@@ -17,25 +17,30 @@
 #'@export
 #'@examples
 #'
-#'# An  bar chart by default
+#'# An N bar chart by default
 #'mtcars %>%
 #'  bar_chart_counts(var     = cyl,
-#'                 title   = "Number of mtcars by cylinder")
+#'                   title   = "Number of mtcars by cylinder")
 #'
-#'# With a grouping variable
+#'# Use a grouping variable
 #'mtcars %>%
 #'  bar_chart_counts(var          = cyl,
-#'                 group_var    = vs,
-#'                 label        = "pct",
-#'                 title        = "Percentage of V vs. Straight engines by # of cylinders")
+#'                   group_var    = vs,
+#'                   label        = "pct",
+#'                   title        = "Percentage of V vs. Straight engines by # of cylinders")
 #'
-#' # with colors
-#' bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
+#'# Change default color
+#'#'mtcars %>%
+#'  bar_chart_counts(var       = cyl,
+#'                   var_color = "orange"
+#'                   title     = "Number of mtcars by cylinder")
+#'# Specify color by group
+#'  bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
 bar_chart_counts <- function(df         = NULL,
                            var,
                            group_var,
                            label        = "n",
-                           var_color    = palette_tntp("medium_blue"),
+                           var_color    = "medium_blue",
                            group_colors,
                            title        = NULL,
                            var_label,
@@ -79,7 +84,7 @@ bar_chart_counts <- function(df         = NULL,
       dplyr::group_by(vec.factor) %>%
       dplyr::mutate(perc = n / sum(n)) %>%
       dplyr::ungroup() %>%
-      tidyr::complete(vec.factor, group.factor, fill = list(n = NA, perc = NA))  
+      tidyr::complete(vec.factor, group.factor, fill = list(n = NA, perc = NA))
 
   }
 
@@ -111,13 +116,13 @@ bar_chart_counts <- function(df         = NULL,
       # not equal the number of group_colors
       num_group_var <- plot_data$group.factor %>% levels() %>% length()
       num_group_col <- group_colors %>% length()
-      
+
       testthat::expect_identical(num_group_var, num_group_col,
                                  info = "The number of group_colors must equal
                                  the number of levels supplied to group_var")
       # Switch color name strings to the HEX codes
       tntp_col_pal <- swap_colors(group_colors)
-      
+
     }
   }
 
@@ -152,7 +157,7 @@ bar_chart_counts <- function(df         = NULL,
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 1),
                              vjust = -0.8,
-                             na.rm = TRUE) 
+                             na.rm = TRUE)
     } else {
       nbc <- nbc + geom_text(aes(label = n),
                 position = position_dodge(width = 1),
@@ -202,7 +207,7 @@ swap_colors <- function(x){
                                    "medium_grey", "medium_gray",
                                    "light_grey",  "light_gray",
                                    "white",       "black"),
-                  
+
                   to           = c("#034772", "#2888BC",
                                    "#73B7CE", "#699D46",
                                    "#EA8936", "#F9C347",
