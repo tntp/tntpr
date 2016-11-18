@@ -1,6 +1,6 @@
 #' Fake student data from the Wisconsin State Dept. of Ed
 #'
-#' A generated data set containing data on 1200 imaginary individual K-12 students in Wisconsin.  They are nested within 6 schools in 3 districts.  In adapting this from the source, Sam switched the school and district variables (there had been multiple districts per school) and made other minor changes.
+#' A generated data set containing data on 1200 imaginary individual K-12 students in Wisconsin.  They are nested within 6 schools in 3 districts.  In adapting this from the source, Sam switched the school and district variables (there had been multiple districts per school) and made other minor changes, including dropping columns that I didn't understand or that didn't seem relevant (e.g., variables like "luck" that were used to calculate the reading and math scores).
 #'
 #' @format A data frame with 2700 rows and 26 variables:
 #' \describe{
@@ -25,5 +25,5 @@
 #'   \item{race}{factor: student's single-category race}
 #'   ...
 #' }
-#' @source \url{https://github.com/jknowles/r_tutorial_ed/}, posted under a Creative Commons license.
+#' @source \url{https://github.com/jknowles/r_tutorial_ed/}, posted under a Creative Commons license. The script used to generate the data set is here, although not very well documented: \url{https://github.com/jknowles/r_tutorial_ed/blob/master/data/simulate_data.R}
 "wisc"
