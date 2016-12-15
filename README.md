@@ -1,22 +1,38 @@
 # tntp R package
+`r Sys.Date()`  
 
-[Blog post from Airbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d#.6xtwqtk4m) on their internal R package, inspiration 
-for long-run agenda
+## About
 
-## Issue tracker
+The `tntpr` package makes data science at TNTP easier and more accurate by supplying tools that are needed for common TNTP analyses.  Because this package serves just the TNTP analysis community, functions can be tailored very specifically to our exact use cases.
 
-Until we get a real issue tracker set up, here's a list of to-dos:
+To get a sense of the possibilities for an internal TNTP package, consider this [blog post from Airbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d#.6xtwqtk4m) on their internal R package, "Rbnb".
 
-+ `compare_top_2()` function, like https://github.com/sfirke/janitor/issues/16
-+ a function that creates a ggplot2 bar chart from a summarized counts data frame, like the output of `tabyl()` - this is such a common TNTP chart type
-+ full workflow for working with SurveyMonkey data, including bringing the data in via SPSS as type labelled.  Then we need to make use of the label attribute, something like https://github.com/sfirke/janitor/issues/5.
-+ TNTP branded R Markdown template
-+ TNTP branded slide deck template
-+ Consistent API for functions: should be `tntp_x()` and `tntp_y()` or `x_tntp()` 
-and `y_tntp()` but not mixed. I (Jake) lean toward `x_tntp` so the functions will be 
-split alphabetically in the help area, not everything filed together under "T". *Sam agrees: better autocomplete if it is `x_tntp()`*.
-+ Add an education-themed data.frame to the package.  We can use that for illustrative examples, and it can populate the default examples in the R Markdown shell.  As this is a public package, we'll have to be thoughtful about what goes into this.
+## Package summary
 
-Bugs:
+Some of the highlights of the package include:
 
-+ When I call `tntp_theme()` and then try to change a legend title on the next line with `labs(size = "number of teachers")`, the legend title is suppressed because of the theme.  Annoying, I can comment out the theme and it works but they won't play nicely together.
+- TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report 
+- TNTP-specific ggplot2 theme and color palette
+- Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
+- Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
+
+`tntpr` is built to work seamlessly with the "tidyverse," a set of packages outlined in the wiki page [Overview of R at TNTP](https://tools.tntp.org/confluence/display/TOPIC/Overview+of+R+at+TNTP).
+
+## Installing the package
+
+This package is not on CRAN, and probably will not ever be.  You'll need to install this package from its Bitbucket repository.  You can add this to the top of your analysis script:
+
+```
+# install tntpr if you don't already have it, then load it
+library(devtools) # for install_git()
+if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
+library(tntpr)
+```
+
+This won't check for updates, though.  So for now, consider periodically running the `install_git(...)` part anyway.  Once it's installed, you can load it however you normally load packages, say with `pacman::p_load(tntpr)`.
+
+## Using the package
+
+See the [vignette](https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/browse/vignettes/introduction.md) for demonstrations of how to use these tntpr functions.
+
+
