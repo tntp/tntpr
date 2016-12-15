@@ -14,7 +14,7 @@ output:
 # Initialize knitr, set options, load packages
 if(!suppressPackageStartupMessages(require("pacman"))) install.packages("pacman"); library(pacman)
 if(!suppressPackageStartupMessages(require("tntpr"))) { p_load(devtools); install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git") }
-p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, scales, janitor)
+p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, scales, janitor, tidyr)
 set_data_memo_formatting() # sets some common knitr chunk options
 ```
 
