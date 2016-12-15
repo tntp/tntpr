@@ -6,12 +6,12 @@
 #'@param df the data.frame to be used in the bar chart
 #'@param var unquoted column name for variable to count
 #'@param group_var (optional) unquoted column name for group variable.  If this is specified, you get a 2-variable clustered bar chart.  If left blank, a single variable bar chart.
-#'@param label should labels show the count or the percentage?
-#'@param var_color color for non-grouped charts; set to medium_blue by default
+#'@param labels should labels show the count (\code{"n"}) or the percentage (\code{"pct"})?
+#'@param var_color color for non-grouped charts; set to medium_blue by default. For both this and \code{group_colors}, strings will be tried in \code{palette_tntp} automatically.  So \code{c("orange", "dark_blue")} will get you the official TNTP colors, while \code{c("orange", "blue")} will get you TNTP orange but generic blue.
 #'@param group_colors character vector of group colors, if a specific palette is desired
 #'@param title main chart title
 #'@param var_label label for x-axis
-#'@param digits integer indicating the number of decimal places to be used in percentages
+#'@param digits integer indicating the number of decimal places to be used in percentages. In truncating, ties are rounded up, like in MS Excel, i.e., 10.5 and 11.5 become 11 and 12.  This is *not* base R's default behavior.
 #'@param font font for chart text; Segoe UI by default
 #'@param font_size size for chart text; set to 12 by default
 #'@export
@@ -26,7 +26,7 @@
 #'mtcars %>%
 #'  bar_chart_counts(var          = cyl,
 #'                   group_var    = vs,
-#'                   label        = "pct",
+#'                   labels        = "pct",
 #'                   title        = "Percentage of V vs. Straight engines by # of cylinders")
 #'
 #'# Change default color
@@ -35,11 +35,11 @@
 #'                   var_color = "orange"
 #'                   title     = "Number of mtcars by cylinder")
 #'# Specify color by group
-#'  bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
-bar_chart_counts <- function(df         = NULL,
+#'  bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), labels = "pct")
+bar_chart_counts <- function(df,
                            var,
                            group_var,
-                           label        = "n",
+                           labels        = "n",
                            var_color    = "medium_blue",
                            group_colors,
                            title        = NULL,
@@ -57,7 +57,6 @@ bar_chart_counts <- function(df         = NULL,
   testthat::expect(exp = !missing(var),
                    "You must supply a column name to the var argument")
 
-  # QC: Throw an error if
 
   # Create a plot_data object -------------------------------------------------
   # plot_data should contain user specified column and its factor equivalent
@@ -141,11 +140,16 @@ bar_chart_counts <- function(df         = NULL,
     nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
       geom_bar(fill = swap_colors(var_color), stat = "identity")
 
-    if(label == "pct"){
-      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits), vjust = -0.8))
+    if(labels == "pct"){
+      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
+                             vjust = -0.8,
+                             family = font,
+                             size = font_size * 0.35) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
     } else {
       nbc <- nbc + geom_text(mapping  = aes(label = n),
-                vjust    = -0.8)
+                vjust    = -0.8,
+                family = font,
+                size = font_size * 0.35)
     }
   } else {
     nbc <- ggplot(data    = plot_data,
@@ -153,16 +157,20 @@ bar_chart_counts <- function(df         = NULL,
       geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
       scale_fill_manual(values = tntp_col_pal)
 
-    if(label == "pct"){
+    if(labels == "pct"){
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 1),
                              vjust = -0.8,
-                             na.rm = TRUE)
+                             na.rm = TRUE,
+                             family = font,
+                             size = font_size * 0.35)
     } else {
       nbc <- nbc + geom_text(aes(label = n),
                 position = position_dodge(width = 1),
                 vjust    = -0.8,
-                na.rm = TRUE)
+                na.rm = TRUE,
+                family = font,
+                size = font_size * 0.35)
     }
   }
 
@@ -178,6 +186,8 @@ bar_chart_counts <- function(df         = NULL,
           axis.text.x      = element_text(family = font,
                                           size   = font_size),
           axis.ticks       = element_blank(),
+          axis.title.x     = element_text(family = font,
+                                          size   = font_size),
           axis.title.y     = element_blank(),
 
           legend.key       = element_blank(),

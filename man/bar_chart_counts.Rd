@@ -4,7 +4,7 @@
 \alias{bar_chart_counts}
 \title{Bar chart of counts with TNTP polish}
 \usage{
-bar_chart_counts(df = NULL, var, group_var, label = "n",
+bar_chart_counts(df, var, group_var, labels = "n",
   var_color = "medium_blue", group_colors, title = NULL, var_label,
   digits = 1, font = "Segoe UI", font_size = 12)
 }
@@ -15,9 +15,9 @@ bar_chart_counts(df = NULL, var, group_var, label = "n",
 
 \item{group_var}{(optional) unquoted column name for group variable.  If this is specified, you get a 2-variable clustered bar chart.  If left blank, a single variable bar chart.}
 
-\item{label}{should labels show the count or the percentage?}
+\item{labels}{should labels show the count (\code{"n"}) or the percentage (\code{"pct"})?}
 
-\item{var_color}{color for non-grouped charts; set to medium_blue by default}
+\item{var_color}{color for non-grouped charts; set to medium_blue by default. For both this and \code{group_colors}, strings will be tried in \code{palette_tntp} automatically.  So \code{c("orange", "dark_blue")} will get you the official TNTP colors, while \code{c("orange", "blue")} will get you TNTP orange but generic blue.}
 
 \item{group_colors}{character vector of group colors, if a specific palette is desired}
 
@@ -25,7 +25,7 @@ bar_chart_counts(df = NULL, var, group_var, label = "n",
 
 \item{var_label}{label for x-axis}
 
-\item{digits}{integer indicating the number of decimal places to be used in percentages}
+\item{digits}{integer indicating the number of decimal places to be used in percentages. In truncating, ties are rounded up, like in MS Excel, i.e., 10.5 and 11.5 become 11 and 12.  This is *not* base R's default behavior.}
 
 \item{font}{font for chart text; Segoe UI by default}
 
@@ -46,7 +46,7 @@ mtcars \%>\%
 mtcars \%>\%
  bar_chart_counts(var          = cyl,
                   group_var    = vs,
-                  label        = "pct",
+                  labels        = "pct",
                   title        = "Percentage of V vs. Straight engines by # of cylinders")
 
 # Change default color
@@ -55,6 +55,6 @@ mtcars \%>\%
                   var_color = "orange"
                   title     = "Number of mtcars by cylinder")
 # Specify color by group
- bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), label = "pct")
+ bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), labels = "pct")
 }
 
