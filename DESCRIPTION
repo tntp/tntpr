@@ -14,7 +14,13 @@ BugReports:
 Imports:
     dplyr,
     knitr,
-    lubridate
+    lazyeval,
+    lubridate,
+    magrittr,
+    plyr,
+    scales,
+    testthat,
+    formattable
 RoxygenNote: 5.0.1
 Suggests:
     testthat,
