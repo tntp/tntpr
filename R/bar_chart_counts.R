@@ -184,8 +184,12 @@ bar_chart_counts <- function(df,
 
   # Polish the plot to presentation standards ---------------------------------
 
+  max_height <- if_else(labels == "pct", # so labels don't get cropped, set the y scale 5% higher than the highest bar
+                        max(plot_data$perc, na.rm = TRUE) * 1.05,
+                        max(plot_data$n, na.rm = TRUE) * 1.05)
   nbc <- nbc +
-    scale_y_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0), # do people mind there being no whitespace at the bottom?  There's none in Excel
+                       limits = c(0, max_height)) +
     labs(title = title, x = var_label) +
     theme(axis.line.y      = element_blank(),
           axis.line.x      = element_line(color = "grey70",
