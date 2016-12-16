@@ -152,12 +152,14 @@ bar_chart_counts <- function(df,
                 size = font_size * 0.35)
     }
   } else {
-    nbc <- ggplot(data    = plot_data,
-                  mapping = aes(x = vec.factor, y = n, fill = group.factor)) +
-      geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
-      scale_fill_manual(values = tntp_col_pal)
-
+    
     if(labels == "pct"){
+      nbc <- ggplot(data    = plot_data,
+                    mapping = aes(x = vec.factor, y = perc, fill = group.factor)) +
+        geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
+        scale_fill_manual(values = tntp_col_pal)
+      
+      
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 1),
                              vjust = -0.8,
@@ -165,19 +167,25 @@ bar_chart_counts <- function(df,
                              family = font,
                              size = font_size * 0.35)
     } else {
+      nbc <- ggplot(data    = plot_data,
+                    mapping = aes(x = vec.factor, y = n, fill = group.factor)) +
+        geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
+        scale_fill_manual(values = tntp_col_pal)
+      
+      
       nbc <- nbc + geom_text(aes(label = n),
-                position = position_dodge(width = 1),
-                vjust    = -0.8,
-                na.rm = TRUE,
-                family = font,
-                size = font_size * 0.35)
+                             position = position_dodge(width = 1),
+                             vjust    = -0.8,
+                             na.rm = TRUE,
+                             family = font,
+                             size = font_size * 0.35)
     }
   }
 
   # Polish the plot to presentation standards ---------------------------------
 
   nbc <- nbc +
-    scale_y_continuous(expand = c(0, 0.6)) +
+    scale_y_continuous(expand = c(0, 0)) +
     labs(title = title, x = var_label) +
     theme(axis.line.y      = element_blank(),
           axis.line.x      = element_line(color = "grey70",
