@@ -136,20 +136,24 @@ bar_chart_counts <- function(df,
   # Condition on presence of group_var
 
     if(missing(group_var)){
-
-    nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
-      geom_bar(fill = swap_colors(var_color), stat = "identity")
+    
 
     if(labels == "pct"){
-      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
-                             vjust = -0.8,
-                             family = font,
-                             size = font_size * 0.35) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
+      
+      nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = perc)) +
+        geom_bar(fill = swap_colors(var_color), stat = "identity") +
+        geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
+                  vjust = -0.8,
+                  family = font,
+                  size = font_size * 0.35) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
     } else {
-      nbc <- nbc + geom_text(mapping  = aes(label = n),
-                vjust    = -0.8,
-                family = font,
-                size = font_size * 0.35)
+      
+      nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
+        geom_bar(fill = swap_colors(var_color), stat = "identity") +
+        geom_text(mapping  = aes(label = n),
+                  vjust    = -0.8,
+                  family = font,
+                  size = font_size * 0.35)
     }
   } else {
     
@@ -184,7 +188,8 @@ bar_chart_counts <- function(df,
 
   # Polish the plot to presentation standards ---------------------------------
 
-  max_height <- if_else(labels == "pct", # so labels don't get cropped, set the y scale 5% higher than the highest bar
+  # so labels don't get cropped, set the y scale 5% higher than the highest bar
+  max_height <- if_else(labels == "pct",
                         max(plot_data$perc, na.rm = TRUE) * 1.05,
                         max(plot_data$n, na.rm = TRUE) * 1.05)
   nbc <- nbc +
