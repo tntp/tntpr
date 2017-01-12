@@ -165,7 +165,7 @@ bar_chart_counts <- function(df,
       
       
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
-                             position = position_dodge(width = 1),
+                             position = position_dodge(width = 0.9),
                              vjust = -0.8,
                              na.rm = TRUE,
                              family = font,
@@ -178,7 +178,7 @@ bar_chart_counts <- function(df,
       
       
       nbc <- nbc + geom_text(aes(label = n),
-                             position = position_dodge(width = 1),
+                             position = position_dodge(width = 0.9),
                              vjust    = -0.8,
                              na.rm = TRUE,
                              family = font,
@@ -189,7 +189,7 @@ bar_chart_counts <- function(df,
   # Polish the plot to presentation standards ---------------------------------
 
   # so labels don't get cropped, set the y scale 5% higher than the highest bar
-  max_height <- if_else(labels == "pct",
+  max_height <- dplyr::if_else(labels == "pct",
                         max(plot_data$perc, na.rm = TRUE) * 1.05,
                         max(plot_data$n, na.rm = TRUE) * 1.05)
   nbc <- nbc +
