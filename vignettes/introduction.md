@@ -71,7 +71,7 @@ ggplot(mtcars, aes(x = cyl)) +
   theme_tntp()
 ```
 
-![](introduction_files/figure-markdown_github/theme_tntp-1.png)
+<img src="introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
 
 ### Chart building
 
@@ -85,7 +85,7 @@ Here are examples with the built-in `wisc` data set (of fake Wisconsin test data
 bar_chart_counts(wisc, proflvl, var_label = "Proficiency Level")
 ```
 
-![](introduction_files/figure-markdown_github/chart_functions-1.png)
+<img src="introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
 
 ``` r
 bar_chart_counts(wisc,
@@ -93,11 +93,11 @@ bar_chart_counts(wisc,
                  proflvl,
                  var_label = "Race",
                  labels = "pct",
-                 title = "Distribution of Proficiency Levels by Student Race") +
-  theme(plot.margin=unit(c(0,0,0,0),"cm"))
+                 title = "Distribution of Proficiency Levels by Student Race",
+                 font_size = 9)
 ```
 
-![](introduction_files/figure-markdown_github/chart_functions-2.png)
+<img src="introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
 
 The function has lots of customization options, see `?bar_chart_continuous` for more.
 
@@ -105,21 +105,27 @@ We hope to add a similar function for showing means.
 
 ### Data management
 
-The function `date_to_SY` cuts continuous dates, like hire dates, into discrete school years, at a specified cut-off date. For instance, here are some hire dates, split into their school year hiring seasons based on a September 1st cut-off:
+#### Functions already in tntpr
+
+`date_to_SY`: cuts continuous dates, like hire dates, into discrete school years, at a specified cut-off date. For instance, here are some hire dates, split into their school year hiring seasons based on a September 1st cut-off:
 
 ``` r
-hire_dates <- c(as.Date("2015-08-31"), as.Date("2015-10-20"), as.Date("2016-08-08"), as.Date("2016-08-31"), as.Date("2016-09-15"))
+hire_dates <- c(as.Date("2015-08-31"), as.Date("2015-10-20"), as.Date("2016-08-08"),
+                as.Date("2016-08-31"), as.Date("2016-09-15"))
 date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn't matter
 ```
 
     ## [1] "2014 - 2015" "2015 - 2016" "2015 - 2016" "2015 - 2016" "2016 - 2017"
+
+#### Possible upcoming additions
 
 We can incorporate other functions that have been written but not yet standardized for the package. E.g., converting survey responses to top-2 agree:
 
 ``` r
 convert_to_top_2_agree <- function(x, custom_vals = NULL){
   if(is.null(custom_vals)){
-    custom_vals <- c("strongly agree", "agree", "highly satisfied", "extremely satisfied", "satisfied", "very confident", "confident")
+    custom_vals <- c("strongly agree", "agree", "highly satisfied", "extremely satisfied",
+                     "satisfied", "very confident", "confident")
     x <- tolower(x)
   }
   if_else(is.na(x), as.character(NA),
@@ -177,3 +183,7 @@ yearly_movement <- function(first_year, second_year){
   )
 }
 ```
+
+Save yourself a lot of scratching your head with nested `ifelse()` statements!
+
+*These data wrangling functions have not yet been incorporated into tntpr, but easily could be - as could functions that handle any recurring data cleaning task we face.*
