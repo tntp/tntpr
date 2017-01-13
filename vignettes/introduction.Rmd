@@ -96,7 +96,7 @@ bar_chart_counts(wisc,
                  var_label = "Race",
                  labels = "pct",
                  title = "Distribution of Proficiency Levels by Student Race",
-                 font_size = 9)
+                 digits = 0)
 ```
 
 The function has lots of customization options, see `?bar_chart_continuous` for more.

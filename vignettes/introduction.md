@@ -94,7 +94,7 @@ bar_chart_counts(wisc,
                  var_label = "Race",
                  labels = "pct",
                  title = "Distribution of Proficiency Levels by Student Race",
-                 font_size = 9)
+                 digits = 0)
 ```
 
 <img src="introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
