@@ -13,13 +13,7 @@ vignette: >
 
 ```{r setup,echo=FALSE, include = FALSE}
 knitr::opts_chunk$set(error = TRUE)
-# Initialize knitr, set options, load packages
-if(!suppressPackageStartupMessages(require("pacman"))) install.packages("pacman"); library(pacman)
-if(!suppressPackageStartupMessages(require("tntpr"))) { p_load(devtools); install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git") }
-p_load(magrittr, dplyr, tidyr, readr, readxl, stringr, janitor, ggplot2, knitr, tntpr)
-
-opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, 
-        dpi = 300)
+# knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
 ```
 
 ## About
@@ -64,7 +58,7 @@ A file `tntp-style-file.docx` will be copied into that directory; leave it there
 ```{r load_packages, include = FALSE}
 library(pacman)
 if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git"); library(tntpr)
-p_load(ggplot2, dplyr, janitor)
+p_load(ggplot2, dplyr, janitor, knitr)
 ```
 
 #### TNTP colors
