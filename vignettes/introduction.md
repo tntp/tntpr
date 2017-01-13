@@ -1,13 +1,14 @@
 Using the tntpr package
 ================
-2016-11-03
+2017-01-12
 
 -   [About](#about)
 -   [Package summary](#package-summary)
 -   [Installing the package](#installing-the-package)
 -   [Usage](#usage)
     -   [Reporting templates](#reporting-templates)
-    -   [Chart making](#chart-making)
+    -   [Chart styles](#chart-styles)
+    -   [Chart building](#chart-building)
     -   [Data management](#data-management)
 
 About
@@ -22,8 +23,8 @@ Some of the highlights of the package include:
 
 -   TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report
 -   TNTP-specific ggplot2 theme and color palette
--   Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
--   Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
+-   Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of the distribution of one variable, grouped by a second)
+-   Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date), and a built-in fake student achievement dataset to play with called `wisc`.
 
 Installing the package
 ----------------------
@@ -44,9 +45,11 @@ Usage
 
 Start your analysis with a good-looking .docx file as output, right off the bat. Right now we have just a single TNTP template, "Data Memo", but it can be adapted and improved and if we have other common needs (a different set of headings?) those can easily be separate templates.
 
-To access templates once you've installed the tntpr package, go to File -&gt; New File -&gt; R Markdown -&gt; From Template. You'll see a choice "Data Memo" from the tntpr package. Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off! A file `tntp-style-file.docx` will be copied into that directory; leave it there. That provides the TNTP .docx stylings when you re-knit your R Markdown document.
+**To access templates once you've installed the tntpr package:** go to `File` -&gt; `New File` -&gt; `R Markdown` -&gt; `From Template`. You'll see a choice "Data Memo" from the tntpr package. Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off!
 
-### Chart making
+A file `tntp-style-file.docx` will be copied into that directory; leave it there. That provides the TNTP .docx stylings when you re-knit your R Markdown document.
+
+### Chart styles
 
 #### TNTP colors
 
@@ -68,10 +71,109 @@ ggplot(mtcars, aes(x = cyl)) +
   theme_tntp()
 ```
 
-![](introduction_files/figure-markdown_github/chart_making-1.png)
+![](introduction_files/figure-markdown_github/theme_tntp-1.png)
 
-*add examples here of the tntpr charting functions *
+### Chart building
+
+#### Custom charting functions
+
+So far there's the function `bar_chart_counts`, for making the ubiquitous TNTP-style bar chart of a distribution. It automates some tedious aspects of chart-making that R is slow at, like text labels showing %s. These charts are deck-ready, faster than Excel.
+
+Here are examples with the built-in `wisc` data set (of fake Wisconsin test data):
+
+``` r
+bar_chart_counts(wisc, proflvl, var_label = "Proficiency Level")
+```
+
+![](introduction_files/figure-markdown_github/chart_functions-1.png)
+
+``` r
+bar_chart_counts(wisc,
+                 race,
+                 proflvl,
+                 var_label = "Race",
+                 labels = "pct",
+                 title = "Distribution of Proficiency Levels by Student Race") +
+  theme(plot.margin=unit(c(0,0,0,0),"cm"))
+```
+
+![](introduction_files/figure-markdown_github/chart_functions-2.png)
+
+The function has lots of customization options, see `?bar_chart_continuous` for more.
+
+We hope to add a similar function for showing means.
 
 ### Data management
 
-(show data mgmt stuff here. Include the movement function that Alex and Danielle made)
+The function `date_to_SY` cuts continuous dates, like hire dates, into discrete school years, at a specified cut-off date. For instance, here are some hire dates, split into their school year hiring seasons based on a September 1st cut-off:
+
+``` r
+hire_dates <- c(as.Date("2015-08-31"), as.Date("2015-10-20"), as.Date("2016-08-08"), as.Date("2016-08-31"), as.Date("2016-09-15"))
+date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn't matter
+```
+
+    ## [1] "2014 - 2015" "2015 - 2016" "2015 - 2016" "2015 - 2016" "2016 - 2017"
+
+We can incorporate other functions that have been written but not yet standardized for the package. E.g., converting survey responses to top-2 agree:
+
+``` r
+convert_to_top_2_agree <- function(x, custom_vals = NULL){
+  if(is.null(custom_vals)){
+    custom_vals <- c("strongly agree", "agree", "highly satisfied", "extremely satisfied", "satisfied", "very confident", "confident")
+    x <- tolower(x)
+  }
+  if_else(is.na(x), as.character(NA),
+          if_else(x %in% custom_vals, "Top-2 Agree", "Not in Top-2"))
+}
+
+convert_to_top_2_agree(c("Strongly agree", "Agree", "Somewhat agree", NA, NA, "Strongly disagree")) %>%
+  tabyl
+```
+
+    ##              . n   percent valid_percent
+    ## 1 Not in Top-2 2 0.3333333           0.5
+    ## 2  Top-2 Agree 2 0.3333333           0.5
+    ## 3         <NA> 2 0.3333333            NA
+
+Or functions to discern teacher movement when comparison rosters and studying retention and transfer patterns. This can be simple:
+
+``` r
+# Write function to determine whether someone left the location the next year
+left_campus <- function(first_year, second_year){
+  if_else(is.na(first_year), NA,
+         if_else(is.na(second_year), TRUE,
+                if_else(first_year != second_year, TRUE, FALSE)))
+}
+```
+
+Or complex:
+
+``` r
+# From Noble St. contract, July 2016, Danielle Proulx
+# Formula for detailing yearly movement
+yearly_movement <- function(first_year, second_year){
+  case_when(
+    is.na(first_year) & is.na(second_year) ~ "Not Present",
+    is.na(first_year) & second_year == "Teacher" ~ "Joined as Teacher",
+    is.na(first_year) & second_year == "Leader" ~ "Joined as Leader",
+    is.na(first_year) & second_year == "Other" ~ "Joined as Other"
+    ,
+    first_year == "Teacher" & is.na(second_year) ~ "Teacher Left",
+    first_year == "Leader" & is.na(second_year) ~ "Leader Left",
+    first_year == "Other" & is.na(second_year) ~ "Other Left",
+    
+    first_year == "Teacher" & second_year == "Teacher" ~ "Remained Teacher",
+    first_year == "Teacher" & second_year == "Leader" ~ "Teacher became Leader",
+    first_year == "Teacher" & second_year == "Other" ~ "Teacher became Other",
+    
+    first_year == "Leader" & second_year == "Leader" ~ "Remained Leader",
+    first_year == "Leader" & second_year == "Teacher" ~ "Leader became Teacher",
+    first_year == "Leader" & second_year == "Other" ~ "Leader became Other",
+   
+    first_year == "Other" & second_year == "Teacher" ~ "Other became Teacher",
+    first_year == "Other" & second_year == "Leader" ~ "Other became Leader",
+    first_year == "Other" & second_year == "Other" ~ "Remained Other",
+    TRUE ~ "bad formula!!!"
+  )
+}
+```
