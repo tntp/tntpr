@@ -190,8 +190,8 @@ bar_chart_counts <- function(df,
 
   # so labels don't get cropped, set the y scale 5% higher than the highest bar
   max_height <- dplyr::if_else(labels == "pct",
-                        max(plot_data$perc, na.rm = TRUE) * 1.05,
-                        max(plot_data$n, na.rm = TRUE) * 1.05)
+                        max(plot_data$perc, na.rm = TRUE) * 1.1,
+                        max(plot_data$n, na.rm = TRUE) * 1.1)
   nbc <- nbc +
     scale_y_continuous(expand = c(0, 0), # do people mind there being no whitespace at the bottom?  There's none in Excel
                        limits = c(0, max_height)) +
