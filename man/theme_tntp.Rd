@@ -5,7 +5,7 @@
 \title{TNTP's ggplot2 theme}
 \usage{
 theme_tntp(show_legend_title = TRUE, base_size = 12,
-  base_family = "Segoe UI", grid_color = "grey93")
+  base_family = "Segoe UI", grid_color = "grey93", title_align = "center")
 }
 \arguments{
 \item{show_legend_title}{logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.}
@@ -15,6 +15,8 @@ theme_tntp(show_legend_title = TRUE, base_size = 12,
 \item{base_family}{base font family}
 
 \item{grid_color}{color for major gridlines}
+
+\item{title_align}{Alignment of main title, defaults to "center;" also accepts "left" or "right"}
 }
 \description{
 ggplot2 theme customized for TNTP aesthetics
@@ -31,5 +33,7 @@ p
 p + theme_tntp()
 # Without gridlines
 p + theme_tntp(grid_color = "white")
+# Use left alignment for title
+p + theme_tntp(title_align = "left")
 }
 
