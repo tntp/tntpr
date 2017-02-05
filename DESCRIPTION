@@ -14,6 +14,7 @@ BugReports:
 Imports:
     dplyr,
     knitr,
+    tidyr,
     lazyeval,
     lubridate,
     magrittr,
