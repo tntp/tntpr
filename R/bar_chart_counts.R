@@ -17,6 +17,7 @@
 #'@export
 #'@examples
 #'
+#'library(dplyr) # for %>% pipe
 #'# An N bar chart by default
 #'mtcars %>%
 #'  bar_chart_counts(var     = cyl,

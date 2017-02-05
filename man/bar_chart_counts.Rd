@@ -37,6 +37,7 @@ an N bar chart (uses position dodge from ggplot2).
 }
 \examples{
 
+library(dplyr) # for \%>\% pipe
 # An N bar chart by default
 mtcars \%>\%
  bar_chart_counts(var     = cyl,
