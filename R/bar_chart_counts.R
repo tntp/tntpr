@@ -31,9 +31,9 @@
 #'                   title        = "Percentage of V vs. Straight engines by # of cylinders")
 #'
 #'# Change default color
-#'#'mtcars %>%
+#'mtcars %>%
 #'  bar_chart_counts(var       = cyl,
-#'                   var_color = "orange"
+#'                   var_color = "orange",
 #'                   title     = "Number of mtcars by cylinder")
 #'# Specify color by group
 #'  bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), labels = "pct")
