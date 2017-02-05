@@ -21,7 +21,8 @@ Imports:
     plyr,
     scales,
     testthat,
-    formattable
+    formattable,
+    janitor
 RoxygenNote: 5.0.1
 Suggests:
     testthat,
