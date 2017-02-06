@@ -35,4 +35,8 @@ This won't check for updates, though.  So for now, consider periodically running
 
 See the [vignette](https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/browse/vignettes/introduction.md) for demonstrations of how to use these tntpr functions.
 
+## Feature Requests and Bug Reports
 
+Please tell us what data problems you’re repeatedly encountering and need help 
+with, and what bugs you find while working with the `tntpr` package. We’re 
+[tracking these issues on the wiki.](https://tools.tntp.org/confluence/display/TOPIC/tntpr+R+package)
