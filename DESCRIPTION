@@ -7,10 +7,10 @@ Maintainer: Jake Russ <jake.russ@tntp.org>
 Description: An internal TNTP R package that includes functions and templates
     customized with TNTP branding. It is intended for this R package to be a
     one-stop shop for R tools by analysts and other data users at TNTP.
-License: What license is it under?
+License: CC BY-NC-SA 3.0
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
-BugReports: 
+BugReports:
 Imports:
     dplyr,
     knitr,
@@ -20,14 +20,13 @@ Imports:
     magrittr,
     plyr,
     scales,
-    testthat,
     formattable,
     janitor
 RoxygenNote: 5.0.1
 Suggests:
     testthat,
-    knitr,
-    rmarkdown
+    rmarkdown,
+    pacman
 Depends:
     extrafont,
     ggplot2
