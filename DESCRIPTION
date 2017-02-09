@@ -21,14 +21,14 @@ Imports:
     plyr,
     scales,
     formattable,
-    janitor
+    janitor,
+    extrafont,
+    Rttf2pt1,
+    ggplot2
 RoxygenNote: 5.0.1
 Suggests:
     testthat,
     rmarkdown,
     pacman
 Depends:
-    extrafont,
-    Rttf2pt1,
-    ggplot2
 VignetteBuilder: knitr
