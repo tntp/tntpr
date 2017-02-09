@@ -29,5 +29,6 @@ Suggests:
     pacman
 Depends:
     extrafont,
+    Rttf2pt1,
     ggplot2
 VignetteBuilder: knitr
