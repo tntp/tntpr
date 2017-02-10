@@ -24,11 +24,10 @@ Imports:
     janitor,
     extrafont,
     ggplot2,
-    testthat
-RoxygenNote: 5.0.1
-Suggests:
     testthat,
     rmarkdown,
     pacman
+RoxygenNote: 5.0.1
+Suggests:
 Depends:
 VignetteBuilder: knitr
