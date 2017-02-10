@@ -23,8 +23,8 @@ Imports:
     formattable,
     janitor,
     extrafont,
-    Rttf2pt1,
-    ggplot2
+    ggplot2,
+    testthat
 RoxygenNote: 5.0.1
 Suggests:
     testthat,
