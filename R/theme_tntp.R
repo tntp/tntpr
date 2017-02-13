@@ -12,10 +12,13 @@
 #' @param grid_color color for major gridlines
 #' @param title_align alignment of main title, defaults to "center"; also accepts "left" or "right"
 #' @param title_color color of title text
+#' @param title_size size of title text
 #' @param subtitle_align alignment of sub-title, defaults to "center"; also accepts "left" or "right"
 #' @param subtitle_color color of subtitle text
+#' @param subtitle_size size of subtitle text
 #' @param caption_align alignment of caption, defaults to "right"; also accepts "left" or "center"
 #' @param caption_color color of caption text
+#' @param title_size size of caption text
 #' @export
 #' @rdname theme_tntp
 #' @examples
