@@ -5,7 +5,10 @@
 \title{TNTP's ggplot2 theme}
 \usage{
 theme_tntp(show_legend_title = TRUE, base_size = 12,
-  base_family = "Segoe UI", grid_color = "grey93", title_align = "center")
+  base_family = "Segoe UI", grid_color = "grey93", title_align = "center",
+  title_color = "black", title_size = 12, subtitle_align = "center",
+  subtitle_color = "black", subtitle_size = 12, caption_align = "right",
+  caption_color = "black", caption_size = 12)
 }
 \arguments{
 \item{show_legend_title}{logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.}
@@ -16,7 +19,23 @@ theme_tntp(show_legend_title = TRUE, base_size = 12,
 
 \item{grid_color}{color for major gridlines}
 
-\item{title_align}{Alignment of main title, defaults to "center;" also accepts "left" or "right"}
+\item{title_align}{alignment of main title, defaults to "center"; also accepts "left" or "right"}
+
+\item{title_color}{color of title text}
+
+\item{title_size}{size of title text}
+
+\item{subtitle_align}{alignment of sub-title, defaults to "center"; also accepts "left" or "right"}
+
+\item{subtitle_color}{color of subtitle text}
+
+\item{subtitle_size}{size of subtitle text}
+
+\item{caption_align}{alignment of caption, defaults to "right"; also accepts "left" or "center"}
+
+\item{caption_color}{color of caption text}
+
+\item{title_size}{size of caption text}
 }
 \description{
 ggplot2 theme customized for TNTP aesthetics
@@ -35,5 +54,25 @@ p + theme_tntp()
 p + theme_tntp(grid_color = "white")
 # Use left alignment for title
 p + theme_tntp(title_align = "left")
+# Text positions and colors
+ggplot(mtcars, aes(mpg, wt)) +
+geom_point() +
+ labs(x        = "Fuel effiiency (mpg)",
+      y        = "Weight (tons)",
+      title    = "Main ggplot2 title",
+      subtitle = "Subtitle for demo plot",
+      caption  = "Brought to you by tntpr") +
+ theme_tntp(base_size      = 12,
+            base_family    = "Segoe UI",
+            title_align    = "left",
+            title_color    = "red",
+            title_size     = 12,
+            subtitle_align = "center",
+            subtitle_color = "blue",
+            subtitle_size  = 10,
+            caption_align  = "right",
+            caption_color  = "darkolivegreen4",
+            caption_size   = 8,
+            grid_color     = "gold")
 }
 
