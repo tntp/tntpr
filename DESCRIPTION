@@ -13,21 +13,21 @@ URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
 BugReports:
 Imports:
     dplyr,
+    formattable,
+    janitor,
     knitr,
-    tidyr,
     lazyeval,
     lubridate,
     magrittr,
+    pacman,
     plyr,
-    scales,
-    formattable,
-    janitor,
-    extrafont,
-    ggplot2,
-    testthat,
     rmarkdown,
-    pacman
+    scales,
+    testthat,
+    tidyr,
 RoxygenNote: 5.0.1
 Suggests:
 Depends:
+    extrafont,
+    ggplot2
 VignetteBuilder: knitr
