@@ -1,6 +1,6 @@
 ---
 title: "tntp R package"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   html_document:
     keep_md: true

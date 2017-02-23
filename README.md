@@ -1,5 +1,5 @@
 # tntp R package
-`r Sys.Date()`  
+`r format(Sys.time(),  '%B %d, %Y')`  
 
 ## About
 
