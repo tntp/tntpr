@@ -1,5 +1,6 @@
 # tntp R package
-`r format(Sys.time(), '%B %d, %Y')`  
+
+February 27, 2017
 
 ## About
 

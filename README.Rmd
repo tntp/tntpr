@@ -1,10 +1,11 @@
 ---
 title: "tntp R package"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   html_document:
     keep_md: true
 ---
+
+`r format(Sys.time(), '%B %d, %Y')`
 
 ## About
 
