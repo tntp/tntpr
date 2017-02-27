@@ -1,10 +1,16 @@
 Using the tntpr package
 ================
-2017-01-12
+2017-02-27
 
 -   [About](#about)
 -   [Package summary](#package-summary)
 -   [Installing the package](#installing-the-package)
+    -   [Temporary workaround for installation bug in devtools 1.12](#temporary-workaround-for-installation-bug-in-devtools-1.12)
+    -   [Update your R to the latest version (3.3.2), by running this set of commands in RStudio:](#update-your-r-to-the-latest-version-3.3.2-by-running-this-set-of-commands-in-rstudio)
+    -   [Install the latest RTools:](#install-the-latest-rtools)
+    -   [Revert to an older, functional version of the devtools package:](#revert-to-an-older-functional-version-of-the-devtools-package)
+    -   [Restart R, then confirm that you have devtools 1.11.1 loaded:](#restart-r-then-confirm-that-you-have-devtools-1.11.1-loaded)
+    -   [Install workflow once devtools is repaired](#install-workflow-once-devtools-is-repaired)
 -   [Usage](#usage)
     -   [Reporting templates](#reporting-templates)
     -   [Chart styles](#chart-styles)
@@ -29,7 +35,36 @@ Some of the highlights of the package include:
 Installing the package
 ----------------------
 
-This package is not on CRAN, and probably will not ever be. You'll need to install this package from its Bitbucket repository. You can add this to the top of your analysis script:
+This package is not on CRAN, and probably will not ever be. You'll need to install this package from its Bitbucket repository via `devtools`.
+
+### Temporary workaround for installation bug in devtools 1.12
+
+### Update your R to the latest version (3.3.2), by running this set of commands in RStudio:
+
+    install.packages("installr")
+    library(installr)
+    updater()
+
+### Install the latest RTools:
+
+Visit <https://cran.r-project.org/bin/windows/Rtools/> and install the top file, Rtools34.exe.
+
+### Revert to an older, functional version of the devtools package:
+
+    install.packages("devtools")
+    devtools::install_version("devtools", version = "1.11.1", repos = "http://cran.us.r-project.org")
+
+### Restart R, then confirm that you have devtools 1.11.1 loaded:
+
+    library(devtools)
+    session_info()
+    # devtools should have version 1.11.1 next to it.  If so, proceed with:
+    devtools::install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
+    library(tntpr)
+
+### Install workflow once devtools is repaired
+
+You can add this to the top of your analysis script:
 
     # install tntpr if you don't already have it, then load it
     library(devtools) # for install_git()
@@ -71,7 +106,7 @@ ggplot(mtcars, aes(x = cyl)) +
   theme_tntp()
 ```
 
-<img src="introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
+<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
 
 ### Chart building
 
@@ -85,19 +120,19 @@ Here are examples with the built-in `wisc` data set (of fake Wisconsin test data
 bar_chart_counts(wisc, proflvl, var_label = "Proficiency Level")
 ```
 
-<img src="introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
+<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
 
 ``` r
 bar_chart_counts(wisc,
                  race,
                  proflvl,
                  var_label = "Race",
-                 labels = "pct",
-                 title = "Distribution of Proficiency Levels by Student Race",
-                 digits = 0)
+                 labels    = "pct",
+                 title     = "Distribution of Proficiency Levels by Student Race",
+                 digits    = 0)
 ```
 
-<img src="introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
+<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
 
 The function has lots of customization options, see `?bar_chart_continuous` for more.
 
