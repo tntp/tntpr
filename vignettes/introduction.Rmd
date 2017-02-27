@@ -3,7 +3,7 @@ title: "Using the tntpr package"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::github_document:
-    toc: true
+    toc: true 
     toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
