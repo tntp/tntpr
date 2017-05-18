@@ -1,7 +1,7 @@
 Package: tntpr
 Type: Package
 Title: Data Analysis Tools Customized for TNTP
-Version: 0.1.0
+Version: 0.1.1
 Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb]
 Maintainer: Jake Russ <jake.russ@tntp.org>
 Description: An internal TNTP R package that includes functions and templates
@@ -10,7 +10,6 @@ Description: An internal TNTP R package that includes functions and templates
 License: CC BY-NC-SA 3.0
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
-BugReports:
 Imports:
     dplyr,
     formattable,
@@ -24,7 +23,7 @@ Imports:
     rmarkdown,
     scales,
     testthat,
-    tidyr,
+    tidyr
 RoxygenNote: 6.0.1
 Suggests:
 Depends:
