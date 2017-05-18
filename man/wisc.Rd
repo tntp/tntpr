@@ -37,4 +37,3 @@ wisc
 A generated data set containing data on 1200 imaginary individual K-12 students in Wisconsin.  They are nested within 6 schools in 3 districts.  In adapting this from the source, Sam switched the school and district variables (there had been multiple districts per school) and made other minor changes, including dropping columns that I didn't understand or that didn't seem relevant (e.g., variables like "luck" that were used to calculate the reading and math scores).
 }
 \keyword{datasets}
-

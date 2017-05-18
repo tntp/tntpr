@@ -37,4 +37,3 @@ g
 g <- g + scale_fill_manual(values = pal2_tntp)
 g
 }
-

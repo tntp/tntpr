@@ -15,4 +15,3 @@ Create sequential table numbers
 \examples{
 # not run, in RMarkdown doc: `r tableN("Distribution of cars by cylinder count")`
 }
-

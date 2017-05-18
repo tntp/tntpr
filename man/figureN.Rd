@@ -16,4 +16,3 @@ Create sequential figure numbers
 # not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
 
 }
-

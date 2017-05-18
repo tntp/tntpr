@@ -4,10 +4,10 @@
 \name{tntpr}
 \alias{tntpr}
 \alias{tntpr-package}
+\alias{tntpr-package}
 \title{Data Analysis Tools Customized for TNTP}
 \description{
 An internal TNTP R package that includes functions and templates
 customized with TNTP branding. It is intended for this R package to be a
 one-stop shop for R tools by analysts and other data users at TNTP.
 }
-

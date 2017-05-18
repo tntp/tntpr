@@ -22,4 +22,3 @@ date_to_sy(as.Date("2014-05-05"), as.Date("2000-07-01"))
 date_to_sy(as.Date("2014-07-05"), as.Date("2000-07-01"))
 
 }
-

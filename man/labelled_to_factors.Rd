@@ -19,4 +19,3 @@ Takes a data.frame, checks for columns that are class \code{labelled} from the \
 # not run
 # haven::read_spss(filepath) \%>\% labelled_to_factor()
 }
-

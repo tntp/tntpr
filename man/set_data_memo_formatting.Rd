@@ -17,4 +17,3 @@ moved here to keep the actual memo template cleaner and easier to use
 # not run: set_data_memo_formatting()
 
 }
-

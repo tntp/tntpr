@@ -75,4 +75,3 @@ geom_point() +
             caption_size   = 8,
             grid_color     = "gold")
 }
-
