@@ -1,20 +1,20 @@
 recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
-
-  # QC: Throw an error if x is not specified  ---------------------------------
+  
+  # QC: Throw an error if x is not specified
   testthat::expect(exp = !missing(x),
                    "Supplying a vector to the x argument is required")
-
-  # QC: Throw an error if top_2_values is not character vector ----------------
+  
+  # QC: Throw an error if top_2_values is not character vector 
   testthat::expect(exp = is.character(top_2_values),
                    "You must supply a character vector to the top_2_values argument")
-
+  
   x           <- tolower(x)
   top2_values <- tolower(top_2_values)
-
+  
   dplyr::if_else(condition = is.na(x),
                  true      = NA_character_,
                  false     = if_else(condition = x %in% top2_values,
-                                     true      = "Top-2 Agree",
+                                     true      = "Top-2",
                                      false     =  "Not in Top-2"))
 }
 
@@ -39,6 +39,10 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #' library(dplyr) # for the %>% pipe
 #' x %>%
 #'   treat_check_alls(q1_1:q1_3)
+#'   
+#' # You can use any of the dplyr::select() helpers to identify the columns:
+#' x %>%
+#'   treat_check_alls(contains("q1"))
 #'
 # returns the data frame with the treated col range mutated to be the original value, "did not select" or "did not answer question"
 treat_check_alls <- function(dat, ...){
@@ -95,16 +99,20 @@ treat_check_alls <- function(dat, ...){
 #'   treat_check_alls(q1_1:q1_3) %>%
 #'   tabulate_check_all(q1_1:q1_3)
 #'
+#' # You can use any of the dplyr::select() helpers to identify the columns:
+#' x %>%
+#'   treat_check_alls(contains("q1")) %>%
+#'   tabulate_check_all(contains("q1))
+
 
 # Conveniently the same format as a janitor::tabyl() so can use its helpers when they are developed
 tabulate_check_all <- function(dat, ...){
 
   cols_of_interest <- dat %>% select(...) %>% as.data.frame()
-  responded <- (rowSums(!is.na(cols_of_interest)) > 0)
 
   bind_rows(
     lapply(
-      cols_of_interest, count_single_col
+      X = cols_of_interest, FUN = count_single_col
     )
   )
 
