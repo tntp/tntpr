@@ -1,6 +1,6 @@
 Using the tntpr package
 ================
-2017-02-27
+2017-05-23
 
 -   [About](#about)
 -   [Package summary](#package-summary)
@@ -106,7 +106,7 @@ ggplot(mtcars, aes(x = cyl)) +
   theme_tntp()
 ```
 
-<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
+<img src="introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
 
 ### Chart building
 
@@ -120,7 +120,7 @@ Here are examples with the built-in `wisc` data set (of fake Wisconsin test data
 bar_chart_counts(wisc, proflvl, var_label = "Proficiency Level")
 ```
 
-<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
+<img src="introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
 
 ``` r
 bar_chart_counts(wisc,
@@ -132,7 +132,7 @@ bar_chart_counts(wisc,
                  digits    = 0)
 ```
 
-<img src="/Users/jake/Desktop/introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
+<img src="introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
 
 The function has lots of customization options, see `?bar_chart_continuous` for more.
 
