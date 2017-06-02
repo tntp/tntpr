@@ -12,7 +12,8 @@
 #' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to Top-2 and Not in Top-2.
 #' @export
 #' @examples
-#' agreement <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
+#' agreement <- c("Strongly agree", "Agree", "Somewhat agree",
+#'   "Somewhat disagree", "Strongly disagree", "Frogs", NA)
 #' recode_top_2(agreement) # default values of "strongly agree" and "agree" are used for recoding
 #' recode_top_2(agreement, "frogs")
 #'

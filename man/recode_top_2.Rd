@@ -23,7 +23,8 @@ You don't *have* to specify two top levels; you can specify one, three, bottom l
 #'
 }
 \examples{
-agreement <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
+agreement <- c("Strongly agree", "Agree", "Somewhat agree",
+  "Somewhat disagree", "Strongly disagree", "Frogs", NA)
 recode_top_2(agreement) # default values of "strongly agree" and "agree" are used for recoding
 recode_top_2(agreement, "frogs")
 
