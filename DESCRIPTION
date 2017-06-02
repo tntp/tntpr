@@ -10,6 +10,10 @@ Description: An internal TNTP R package that includes functions and templates
 License: CC BY-NC-SA 3.0
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
+Depends:
+    extrafont,
+    ggplot2,
+    R (>= 2.10)
 Imports:
     dplyr,
     formattable,
@@ -26,7 +30,4 @@ Imports:
     tidyr
 RoxygenNote: 6.0.1
 Suggests:
-Depends:
-    extrafont,
-    ggplot2
 VignetteBuilder: knitr
