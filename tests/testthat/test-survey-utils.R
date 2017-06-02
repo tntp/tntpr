@@ -15,11 +15,11 @@ x <- data.frame( # 4th person didn't respond at all
 
 library(dplyr) # for the %>% pipe
 treated_x <- x %>%
-  treat_check_all(q1_1:q1_4)
+  check_all_recode(q1_1:q1_4)
 
 tabulated_x <- x %>%
-  treat_check_all(q1_1:q1_4) %>%
-  tabulate_check_all(q1_1:q1_4)
+  check_all_recode(q1_1:q1_4) %>%
+  check_all_count(q1_1:q1_4)
 
 test_that("treatment performs as expected", {
   expect_equal(treated_x, data_frame(
@@ -42,12 +42,12 @@ test_that("tabulation performs as expected", {
 
 
 test_that("select helpers work", {
-  expect_equal(x %>% treat_check_all(q1_1:q1_4) %>% tabulate_check_all(q1_1:q1_4),
-               x %>% treat_check_all(contains("q1")) %>% tabulate_check_all(contains("q1")))
+  expect_equal(x %>% check_all_recode(q1_1:q1_4) %>% check_all_count(q1_1:q1_4),
+               x %>% check_all_recode(contains("q1")) %>% check_all_count(contains("q1")))
 })
 
 test_that("bad inputs are caught", {
-expect_error(treat_check_all(contains("not_there")),
+expect_error(check_all_recode(contains("not_there")),
              "no columns selected; check your variable name specification")
   }
 )

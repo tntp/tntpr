@@ -47,7 +47,7 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #'
 #' This function takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and updates the columns in the data.frame to contain one of three values: the original value if the choice was selected; "did not select" if the respondent chose another option but not this one; or NA if the respondent skipped the question (i.e., they did not select any of the choices) and thus their response is truly missing.
 #'
-#' \code{treat_check_all()} prepares the data.frame for a call to its sister function \code{tabulate_check_all()}.
+#' \code{check_all_recode()} prepares the data.frame for a call to its sister function \code{check_all_count()}.
 #'
 #' @param dat a data.frame with survey data
 #' @param ... unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.
@@ -62,13 +62,13 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #' )
 #' library(dplyr) # for the %>% pipe
 #' x %>%
-#'   treat_check_all(q1_1:q1_3)
+#'   check_all_recode(q1_1:q1_3)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
 #' x %>%
-#'   treat_check_all(contains("q1"))
+#'   check_all_recode(contains("q1"))
 #'
-treat_check_all <- function(dat, ...){
+check_all_recode <- function(dat, ...){
   dat <- dplyr::as_data_frame(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
   original_order <- names(dat)
 
@@ -100,7 +100,7 @@ treat_check_all <- function(dat, ...){
 #' @title Tabulate a range of check-all-that-apply response columns in a single table.
 #'
 #' @description
-#' This function is to be run on columns treated with \code{treat_check_all()}.
+#' This function is to be run on columns treated with \code{check_all_recode()}.
 #'
 #' Takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and tabulates the results.  People who did not select any choices  (i.e., they did not answer the question) are omitted from the denominator.  For this to make sense, the question's choices should be MECE, or there should be an NA option.
 #'
@@ -117,19 +117,19 @@ treat_check_all <- function(dat, ...){
 #' )
 #' library(dplyr) # for the %>% pipe
 #' x %>%
-#'   treat_check_all(q1_1:q1_3) %>%
-#'   tabulate_check_all(q1_1:q1_3)
+#'   check_all_recode(q1_1:q1_3) %>%
+#'   check_all_count(q1_1:q1_3)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
 #' x %>%
-#'   treat_check_all(contains("q1")) %>%
-#'   tabulate_check_all(contains("q1"))
+#'   check_all_recode(contains("q1")) %>%
+#'   check_all_count(contains("q1"))
 
 
 # Conveniently the same format as a janitor::tabyl() so can use its helpers when they are developed
-tabulate_check_all <- function(dat, ...){
+check_all_count <- function(dat, ...){
   if(nrow(dat) == 0){stop("input data.frame \"dat\" has zero rows")}
-  if(sum(dat == "did not select", na.rm = TRUE) == 0){warning("there are no values of \"did not select\" in these columns.  Either you need to first call treat_check_all(), or every respondent selected every possible answer.")}
+  if(sum(dat == "did not select", na.rm = TRUE) == 0){warning("there are no values of \"did not select\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")}
   cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
 
   result <- dplyr::bind_rows(
@@ -142,10 +142,10 @@ tabulate_check_all <- function(dat, ...){
 }
 
 # Helper function that returns a single row data.frame for a check-all-that-apply question
-# Assumes column is first treated with treat_check_all()
+# Assumes column is first treated with check_all_recode()
 count_single_col <- function(vec){
   text <- unique(vec[!is.na(vec) & ! vec %in% "did not select"])
-  if(length(text) > 1){ stop("there must only be one value besides NA and \"did not select\"; run treat_check_all() before calling this function")}
+  if(length(text) > 1){ stop("there must only be one value besides NA and \"did not select\"; run check_all_recode() before calling this function")}
   if(length(text) == 0){ text <- "an unselected option"}
   actuals <- vec[!is.na(vec)]
   n_selected <- sum(actuals != "did not select")
