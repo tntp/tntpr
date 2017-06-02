@@ -26,6 +26,7 @@ set_data_memo_formatting <- function(){
 #' @description
 #' Create sequential figure numbers
 #'
+#' @param x character string description of the figure
 #' @return nothing
 #' @export
 #' @examples
@@ -46,6 +47,8 @@ figureN <- local({
 #'
 #' @description
 #' Create sequential table numbers
+#'
+#' @param x character string description of the figure
 #'
 #' @return nothing
 #' @export
