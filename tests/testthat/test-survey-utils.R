@@ -53,8 +53,9 @@ expect_error(treat_check_all(contains("not_there")),
 )
 
 
+vec <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
+
 test_that("recode produces intended result", {
-  vec <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
   expect_equal(recode_top_2(vec), factor(c("Top-2", "Top-2", rep("Not in Top-2", 4), NA), levels = c("Top-2", "Not in Top-2", NA)))
   expect_equal(recode_top_2(vec, "frogs"), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
   expect_equal(recode_top_2(vec, c("unrelated term", "frogs")), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
