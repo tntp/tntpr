@@ -15,7 +15,7 @@ tabulate_check_all(dat, ...)
 Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)
 }
 \description{
-This function is to be run on columns treated with \code{treat_check_alls()}.
+This function is to be run on columns treated with \code{treat_check_all()}.
 
 Takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and tabulates the results.  People who did not select any choices  (i.e., they did not answer the question) are omitted from the denominator.  For this to make sense, the question's choices should be MECE, or there should be an NA option.
 }
@@ -28,7 +28,11 @@ x <- data.frame( # 4th person didn't respond at all
 )
 library(dplyr) # for the \%>\% pipe
 x \%>\%
-  treat_check_alls(q1_1:q1_3) \%>\%
+  treat_check_all(q1_1:q1_3) \%>\%
   tabulate_check_all(q1_1:q1_3)
 
+# You can use any of the dplyr::select() helpers to identify the columns:
+x \%>\%
+  treat_check_all(contains("q1")) \%>\%
+  tabulate_check_all(contains("q1"))
 }
