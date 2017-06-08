@@ -46,13 +46,13 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #' @description
 #' Some survey software returns check-all-that-apply response columns where missing values could indicate either that the respondent skipped the question entirely, or that they did not select that particular answer choice.  To count the responses properly, the cases where a respondent did not check any of choices - i.e., they skipped the question - should not be counted in the denominator (assuming that the choices were completely exhaustive, or that there was an NA option).
 #'
-#' This function takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and updates the columns in the data.frame to contain one of three values: the original value if the choice was selected; "did not select" if the respondent chose another option but not this one; or NA if the respondent skipped the question (i.e., they did not select any of the choices) and thus their response is truly missing.
+#' This function takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and updates the columns in the data.frame to contain one of three values: 1 if the choice was selected; 0 if the respondent chose another option but not this one; or NA if the respondent skipped the question (i.e., they did not select any of the choices) and thus their response is truly missing.
 #'
 #' \code{check_all_recode()} prepares the data.frame for a call to its sister function \code{check_all_count()}.
 #'
 #' @param dat a data.frame with survey data
 #' @param ... unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.
-#' @return Returns the original data.frame with the selected column range updated.
+#' @return Returns the original data.frame with the specified column range updated.
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
@@ -81,12 +81,13 @@ check_all_recode <- function(dat, ...){
   fac_index <- unlist(lapply(cols_of_interest, is.factor))
   cols_of_interest[fac_index] <- lapply(cols_of_interest[fac_index], as.character)
 
-  # update columns of interest to be NA if responded == FALSE, otherwise checked
-  # with numerics, can easily average them, etc. - but is character clearer?
+  # update columns of interest to be NA if responded == FALSE, otherwise turned checked/blank into 1/0
   cols_of_interest[!responded, ] <- NA_character_
-  # cols_of_interest[responded, ][!is.na(cols_of_interest[responded, ])] <- 1
-  cols_of_interest[responded, ][is.na(cols_of_interest[responded, ])] <- "did not select"
+  cols_of_interest[responded, ][!is.na(cols_of_interest[responded, ])] <- 1
+  cols_of_interest[responded, ][is.na(cols_of_interest[responded, ])] <- 0
 
+  # convert columns to numeric
+  cols_of_interest <- lapply(cols_of_interest, as.numeric)
 
   # rejoin back to main df, reorder
   dat <- dplyr::bind_cols(
