@@ -20,7 +20,7 @@ set_data_memo_formatting() # sets some common knitr chunk options
 
 <!-- Import data file(s) -->
 
-```{r import_data}
+```{r import_data, include = FALSE}
 
 # Import cleaned data file(s)
 # Note: Use a common subdirectory structure
