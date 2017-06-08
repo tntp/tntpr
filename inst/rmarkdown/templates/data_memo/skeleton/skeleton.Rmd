@@ -35,17 +35,6 @@ set_data_memo_formatting() # sets some common knitr chunk options
 
 <!------------------------ Executive Summary ------------------------>
 ##### Page Break
-# Large Text Heading
-<br/> <!--  The <br/> tag is a way to introduce vertical spacing -->
-
-Text of the report
-
-* Key finding 1
-
-* Key finding 2
-
-* Key finding 3
-
 
 Section Heading
 =======================
@@ -55,6 +44,15 @@ Text...
 Subheading
 --------------------------------------------------------
 
+Text of the report
+
+* Key finding 1
+
+* Key finding 2
+
+
+<br/> <!--  The <br/> tag is a way to introduce vertical spacing -->
+
 <!-- Use inline R and the function tableN to create a table caption.-->
 `r tableN("Distribution of cars by cylinder count")`
 
@@ -62,6 +60,7 @@ Subheading
 
 mtcars %>%
   tabyl(cyl) %>%
+  mutate(percent = scales::percent(percent)) %>%
   kable(col.names = c("Cylinders", "Count", "Percent"), 
         align     = c("l", "c", "r"), 
         digits    = 2)
