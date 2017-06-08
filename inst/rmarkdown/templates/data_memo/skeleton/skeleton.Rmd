@@ -35,16 +35,10 @@ set_data_memo_formatting() # sets some common knitr chunk options
 
 <!------------------------ Executive Summary ------------------------>
 ##### Page Break
-# Executive Summary
+# Large Text Heading
 <br/> <!--  The <br/> tag is a way to introduce vertical spacing -->
 
-This report is really empty. Please give me some better text here.
-
-
-<!-------------------------- Key Findings --------------------------->
-##### Page Break
-## Key Findings
-<br/>
+Text of the report
 
 * Key finding 1
 
@@ -52,20 +46,7 @@ This report is really empty. Please give me some better text here.
 
 * Key finding 3
 
-<!------------------------- Recommendations ------------------------->
-##### Page Break
-## Recommendations
-<br/>
 
-* Recommendation 1
-
-* Recommendation 2
-
-* Recommendation 3
-
-
-##### Page Break
-<!-- An alternative way of handling section headings -->
 Section Heading
 =======================
 
@@ -73,9 +54,6 @@ Text...
 
 Subheading
 --------------------------------------------------------
-
-More explanatory text...
-<br/>
 
 <!-- Use inline R and the function tableN to create a table caption.-->
 `r tableN("Distribution of cars by cylinder count")`
@@ -91,23 +69,6 @@ mtcars %>%
 ```
 
 <br/>
-
-Here's a crosstab showing distribution of engine cylinder by number of carburetors:
-<br/>
-
-`r tableN("Crosstab of cars by cylinder count")`
-
-```{r cross_tab, include=TRUE, echo=FALSE}
-
-mtcars %>%
-  crosstab(carb, cyl) %>%
-  adorn_crosstab(denom = "row", digits = 1, rounding = "half up") %>%
-  kable(col.names = c("Carburetors", "4 cylinders", "6 cylinders", "8 cylinders"),
-        align     = "lrrr")
-
-```
-
-##### Page Break
 
 Here's that same data, visualized:
 <br/>
