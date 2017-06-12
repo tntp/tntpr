@@ -79,7 +79,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
   if(ncol(cols_of_interest) == 0){ stop("no columns selected; check your variable name specification") }
   responded <- (rowSums(!is.na(cols_of_interest)) > 0)
 
-  # set label attribute
+  # capture label attribute - will need to assign them later, so they aren't lost during the interim lines of code
   labels_of_interest <- check_all_q_text_to_label(cols_of_interest)
 
   # convert factors to characters so that values can be updated
@@ -96,7 +96,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
   # restore labels
   if(set_labels){ labelled::var_label(cols_of_interest) <- labels_of_interest }
 
-  # rejoin back to main df, reorder
+  # rejoin modified columns back to main df
   dat <- cbind(
     dat[, setdiff(names(dat), names(cols_of_interest))], # dat needs to be a tibble or else a single col not part of the check-all range will come back as a vector
     cols_of_interest
@@ -114,7 +114,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
 #' Takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and tabulates the results.  People who did not select any choices  (i.e., they did not answer the question) are omitted from the denominator.  For this to make sense, the question's choices should be MECE, or there should be an NA option.
 #'
 #' @param dat a data.frame with survey data
-#' @param ... unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.
+#' @param ... unquoted column names containing the range of the answer choices.  Can be specified individually, as a range, i.e., \code{q1_1:q1_5}, or using other helper functions from \code{dplyr::select()}.
 #' @return Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)
 #' @export
 #' @examples
@@ -182,7 +182,7 @@ check_all_q_text_to_label <- function(dat){
   for(i in seq_along(dat)){
     if(!is.null(unlist(labelled::var_label(dat[i])))){ warning("column already has a label attribute, overwriting with check-all option text")}
     q_text <- unique(dat[[i]][!is.na(dat[[i]])])
-    if(length(q_text) > 1){ stop("column has multiple text values besides NA; not sure which is the question text.  Is this a check-all-that-apply column?") }
+    if(length(q_text) > 1){ stop("column has multiple values besides NA; not sure which is the question text.  Is this a check-all-that-apply column?") }
     if(length(q_text) == 0){ q_text <- NA_character_ } # in case a column was all NAs
     var_label(dat[i]) <- as.character(q_text)
   }

@@ -9,7 +9,7 @@ check_all_count(dat, ...)
 \arguments{
 \item{dat}{a data.frame with survey data}
 
-\item{...}{unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.}
+\item{...}{unquoted column names containing the range of the answer choices.  Can be specified individually, as a range, i.e., \code{q1_1:q1_5}, or using other helper functions from \code{dplyr::select()}.}
 }
 \value{
 Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)

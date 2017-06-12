@@ -1,6 +1,8 @@
 # Tests for survey analysis functions
 
+library(testthat)
 library(janitor)
+library(labelled)
 library(dplyr)
 context("survey utilities")
 
@@ -13,7 +15,6 @@ x <- data.frame( # 4th person didn't respond at all
   q1_4 = c(NA, NA, NA, NA) # no one selected this choice
 )
 
-library(dplyr) # for the %>% pipe
 treated_x <- x %>%
   check_all_recode(q1_1:q1_4)
 
@@ -21,14 +22,19 @@ tabulated_x <- x %>%
   check_all_recode(q1_1:q1_4) %>%
   check_all_count(q1_1:q1_4)
 
-test_that("treatment performs as expected", {
-  expect_equal(treated_x, data_frame(
+test_that("treatment performs as expected, including setting labels", {
+  approx <- data.frame(
     unrelated = 1:4,
-    q1_1 = c("a", "a", "did not select", NA),
-    q1_2 = c("b", "b", "did not select", NA),
-    q1_3 = c("did not select", "did not select", "c", NA),
-    q1_4 = c(rep("did not select", 3), NA)
-  ))
+    q1_1 = c(1, 1, 0, NA),
+    q1_2 = c(1, 1, 0, NA),
+    q1_3 = c(0, 0, 1, NA),
+    q1_4 = c(rep(0, 3), NA),
+    stringsAsFactors = FALSE
+  )
+  var_label(approx) <- list(unrelated = NULL, q1_1 = "a", q1_2 = "b", q1_3 = "c", q1_4 = NA_character_) # need to add variable labels to match the result of treatment
+
+expect_equal(treated_x,  approx)
+
 })
 
 test_that("tabulation performs as expected", {
@@ -47,7 +53,7 @@ test_that("select helpers work", {
 })
 
 test_that("bad inputs are caught", {
-expect_error(check_all_recode(contains("not_there")),
+expect_error(check_all_recode(x, contains("not_there")),
              "no columns selected; check your variable name specification")
   }
 )
@@ -74,4 +80,30 @@ test_that("recode produces correct warning and result when nothing is found to r
   )
   expect_warning(recode_top_2(vec, c("totally", "not in the vector")), "no instances of \"totally\", \"not in the vector\" found in x")
 })
+
 # TODO, if/when we use the label attribute to capture survey question text: check that column attributes are retained?
+
+
+
+test_that("label attributes are skipped when set_labels = FALSE", {
+  no_labels <- x %>% check_all_recode(contains("q1"), set_labels = FALSE)
+  expect_equal(var_label(no_labels),
+               list(unrelated = NULL, q1_1 = NULL, q1_2 = NULL, q1_3 = NULL, q1_4 = NULL))
+
+  expect_equal(no_labels %>% check_all_count(contains("q1")),
+               data.frame(
+                 response = c("q1_1", "q1_2", "q1_3", "q1_4"),
+                 n = c(2, 2, 1, 0),
+                 percent = c(2/3, 2/3, 1/3, 0),
+                 stringsAsFactors = FALSE
+               ))
+})
+
+
+test_that("bad inputs are error correctly", {
+  expect_error(check_all_count(mtcars, cyl:carb),
+               "input vectors should only have values of 0, 1, and NA")
+  expect_error(mtcars %>% check_all_recode(cyl:carb),
+                "column has multiple values besides NA")
+
+})

@@ -27,7 +27,8 @@ Imports:
     rmarkdown,
     scales,
     testthat,
-    tidyr
+    tidyr,
+    labelled
 RoxygenNote: 6.0.1
 Suggests:
 VignetteBuilder: knitr
