@@ -184,7 +184,7 @@ check_all_q_text_to_label <- function(dat){
     q_text <- unique(dat[[i]][!is.na(dat[[i]])])
     if(length(q_text) > 1){ stop("column has multiple values besides NA; not sure which is the question text.  Is this a check-all-that-apply column?") }
     if(length(q_text) == 0){ q_text <- NA_character_ } # in case a column was all NAs
-    var_label(dat[i]) <- as.character(q_text)
+    labelled::var_label(dat[i]) <- as.character(q_text)
   }
   labelled::var_label(dat)
 }
