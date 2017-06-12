@@ -48,11 +48,14 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #'
 #' This function takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and updates the columns in the data.frame to contain one of three values: 1 if the choice was selected; 0 if the respondent chose another option but not this one; or NA if the respondent skipped the question (i.e., they did not select any of the choices) and thus their response is truly missing.
 #'
-#' \code{check_all_recode()} prepares the data.frame for a call to its sister function \code{check_all_count()}.
+#' It also takes the single text values in each column and adds them as a \code{label} attribute to each data.frame columns.
+#'
+#' \code{check_all_recode()} prepares the data.frame for a call to its sister function \code{check_all_count()}.  The label attribute is accessed by this function.
 #'
 #' @param dat a data.frame with survey data
 #' @param ... unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.
-#' @return Returns the original data.frame with the specified column range updated.
+#' @param set_labels should the label attribute of the columns be over-written with the column text?  Allow this to be TRUE unless there are currently label attributes you don't wish to overwrite.
+#' @return Returns the original data.frame with the specified column range updated, and with label attributes on the questions.
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
@@ -69,13 +72,15 @@ recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
 #' x %>%
 #'   check_all_recode(contains("q1"))
 #'
-check_all_recode <- function(dat, ...){
+check_all_recode <- function(dat, ..., set_labels = TRUE){
   dat <- dplyr::as_data_frame(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
   original_order <- names(dat)
-
   cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
   if(ncol(cols_of_interest) == 0){ stop("no columns selected; check your variable name specification") }
   responded <- (rowSums(!is.na(cols_of_interest)) > 0)
+
+  # set label attribute
+  labels_of_interest <- check_all_q_text_to_label(cols_of_interest)
 
   # convert factors to characters so that values can be updated
   fac_index <- unlist(lapply(cols_of_interest, is.factor))
@@ -85,12 +90,14 @@ check_all_recode <- function(dat, ...){
   cols_of_interest[!responded, ] <- NA_character_
   cols_of_interest[responded, ][!is.na(cols_of_interest[responded, ])] <- 1
   cols_of_interest[responded, ][is.na(cols_of_interest[responded, ])] <- 0
-
   # convert columns to numeric
-  cols_of_interest <- lapply(cols_of_interest, as.numeric)
+  cols_of_interest <- lapply(cols_of_interest, as.numeric) %>% dplyr::as_data_frame()
+
+  # restore labels
+  if(set_labels){ labelled::var_label(cols_of_interest) <- labels_of_interest }
 
   # rejoin back to main df, reorder
-  dat <- dplyr::bind_cols(
+  dat <- cbind(
     dat[, setdiff(names(dat), names(cols_of_interest))], # dat needs to be a tibble or else a single col not part of the check-all range will come back as a vector
     cols_of_interest
   )
@@ -131,32 +138,53 @@ check_all_recode <- function(dat, ...){
 # Conveniently the same format as a janitor::tabyl() so can use its helpers when they are developed
 check_all_count <- function(dat, ...){
   if(nrow(dat) == 0){stop("input data.frame \"dat\" has zero rows")}
-  if(sum(dat == "did not select", na.rm = TRUE) == 0){warning("there are no values of \"did not select\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")}
-  cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
+  if(sum(dat == 0, na.rm = TRUE) == 0){warning("there are no values of \"0\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")}
 
+  cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
   result <- dplyr::bind_rows(
     lapply(
       X = cols_of_interest, FUN = count_single_col
     )
   )
-  result$response[result$response == "an unselected option"] <- names(cols_of_interest)[result$response == "an unselected option"] # replace the useless "an unselected option" with the slightly better input column name - at least that's unique.
+
+  # set first column of result (option name). Ideally this is stored in a label attribute.  This checks for that presence, if it doesn't exist, it uses the variable name.
+  var_labels <- unlist(labelled::var_label(dat))
+  ifelse(is.null(var_labels), # if no variable labels were set for some reason, say set_labels = FALSE
+         result$response <- names(cols_of_interest),
+         result$response <- ifelse(is.na(var_labels), names(cols_of_interest), var_labels)
+  )
+
+
   result
 }
 
 # Helper function that returns a single row data.frame for a check-all-that-apply question
 # Assumes column is first treated with check_all_recode()
 count_single_col <- function(vec){
-  text <- unique(vec[!is.na(vec) & ! vec %in% "did not select"])
-  if(length(text) > 1){ stop("there must only be one value besides NA and \"did not select\"; run check_all_recode() before calling this function")}
-  if(length(text) == 0){ text <- "an unselected option"}
+  var_name <- deparse(substitute(vec))
+
+  if(!is.numeric(vec)){ stop("column is not of type numeric, run check_all_recode() before calling this function") }
+  if(sum(! vec %in% c(0, 1, NA)) > 0){ stop("input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function")}
+
   actuals <- vec[!is.na(vec)]
-  n_selected <- sum(actuals != "did not select")
+  n_selected <- sum(actuals)
   perc <- n_selected / length(actuals)
   data.frame(
-    response = text,
+    response = var_name,
     n = n_selected,
     percent = perc,
     stringsAsFactors = FALSE
   )
 }
 
+# function called by check_all_recode; grabs question text and adds it as column attributes, for use in check_all_count.  Returns list of variable labels.
+check_all_q_text_to_label <- function(dat){
+  for(i in seq_along(dat)){
+    if(!is.null(unlist(labelled::var_label(dat[i])))){ warning("column already has a label attribute, overwriting with check-all option text")}
+    q_text <- unique(dat[[i]][!is.na(dat[[i]])])
+    if(length(q_text) > 1){ stop("column has multiple text values besides NA; not sure which is the question text.  Is this a check-all-that-apply column?") }
+    if(length(q_text) == 0){ q_text <- NA_character_ } # in case a column was all NAs
+    var_label(dat[i]) <- as.character(q_text)
+  }
+  labelled::var_label(dat)
+}
