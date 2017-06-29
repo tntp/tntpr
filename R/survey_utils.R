@@ -1,44 +1,52 @@
-#' @title Recode a variable into "Top-2" or "Not in Top-2".
+#' @title Recode a variable into binary groups, e.g., "Top-2" and "Not in Top-2".
 #'
 #' @description
-#' Recodes a character variable into a binary result: "Top-2" if the value matches any of the supplied character strings in the \code{top_2_values} vector, "Not in Top-2" if not.  NA remains NA.
+#' Recodes a character variable into a binary result, a two-level factor.  All values matching of the supplied character strings in the \code{to_match} vector are coded into the first level of the factor; all other values are coded into the other level.  \code{NA} remains \code{NA}.  The default factor labels are "Selected"  and "Not selected" but these can be overridden.
 #'
 #' This recoding is not case-sensitive; if you specify "agree" as a top-2 value, "Agree" will be counted as Top-2, and vice versa.
 #'
-#' You don't *have* to specify two top levels; you can specify one, three, bottom levels, etc.
-#'#'
 #' @param x the character or factor vector to be recoded
-#' @param top_2_values a character vector with the strings that should be considered "Top-2".  Defaults to "strongly agree" and "agree" but can be overwritten.
-#' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to Top-2 and Not in Top-2.
+#' @param to_match a character vector with the strings that should be put in the first level of the factor.  Defaults to "strongly agree" and "agree" but can be overwritten.
+#' @param label_matches what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"
+#' @param label_unmatched what should be the factor label of values that don't match the strings specified in \code{to_match}?  Defaults to "Not selected".
+#' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.
 #' @export
 #' @examples
 #' agreement <- c("Strongly agree", "Agree", "Somewhat agree",
 #'   "Somewhat disagree", "Strongly disagree", "Frogs", NA)
-#' recode_top_2(agreement) # default values of "strongly agree" and "agree" are used for recoding
-#' recode_top_2(agreement, "frogs")
+#'
+#' recode_to_binary(agreement) # default values of "strongly agree" and "agree" are used for recoding
+#' recode_to_binary(agreement,
+#'                  label_matched = "Top-2 Agree",
+#'                  label_unmatched = "Not in Top-2") # custom labels of factor levels
+#' recode_to_binary(agreement, "frogs")
+#' recode_to_binary(agreement,
+#'                  "frogs",
+#'                  "FROGS!!!",
+#'                  "not frogs") # custom matching values & labels of factor levels
 #'
 
 #' freq <- c("always", "often", "sometimes", "never")
-#' recode_top_2(freq, "always")
+#' recode_to_binary(freq, "always", "always", "less than always")
 
-recode_top_2 <- function(x, top_2_values = c("strongly agree", "agree")){
+recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_matched = "Selected", label_unmatched = "Not selected"){
 
-  # QC: Throw an error if top_2_values is not character vector
-  testthat::expect(exp = is.character(top_2_values),
-                   "You must supply a character vector to the top_2_values argument")
+  # QC: Throw an error if to_match is not character vector
+  testthat::expect(exp = is.character(to_match),
+                   "You must supply a character vector to the to_match argument")
 
   x           <- tolower(x)
-  top2_values <- tolower(top_2_values)
+  top2_values <- tolower(to_match)
 
-  if(sum(x %in% top2_values, na.rm = TRUE) == 0){ warning(paste0("no instances of ", paste(paste0("\"", top_2_values, "\""), collapse = ", "), " found in x")) }
+  if(sum(x %in% top2_values, na.rm = TRUE) == 0){ warning(paste0("no instances of ", paste(paste0("\"", to_match, "\""), collapse = ", "), " found in x")) }
 
   result <- dplyr::case_when(
     is.na(x) ~ NA_character_,
-    x %in% top2_values ~ "Top-2",
-    ! x %in% top2_values ~ "Not in Top-2"
+    x %in% top2_values ~ label_matched,
+    ! x %in% top2_values ~ label_unmatched
     )
 
-  factor(result, levels = c("Top-2", "Not in Top-2", NA))
+  factor(result, levels = c(label_matched, label_unmatched, NA))
 }
 
 #' @title Process a range of check-all-that-apply response columns for correct tabulation.

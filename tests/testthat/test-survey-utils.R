@@ -62,23 +62,27 @@ expect_error(check_all_recode(x, contains("not_there")),
 vec <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
 vec_fac <- factor(vec, levels = vec)
 
+test_that("recode default parameters are correct", {
+  expect_equal(recode_to_binary(vec), factor(c("Selected", "Selected", rep("Not selected", 4), NA), levels = c("Selected", "Not selected", NA)))
+})
+
 test_that("recode produces intended result", {
-  expect_equal(recode_top_2(vec), factor(c("Top-2", "Top-2", rep("Not in Top-2", 4), NA), levels = c("Top-2", "Not in Top-2", NA)))
-  expect_equal(recode_top_2(vec, "frogs"), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
-  expect_equal(recode_top_2(vec, c("unrelated term", "frogs")), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
+  expect_equal(recode_to_binary(vec, label_matched = "Top-2", label_unmatched = "Not in Top-2"), factor(c("Top-2", "Top-2", rep("Not in Top-2", 4), NA), levels = c("Top-2", "Not in Top-2", NA)))
+  expect_equal(recode_to_binary(vec, "frogs", label_matched = "Top-2", label_unmatched = "Not in Top-2"), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
+  expect_equal(recode_to_binary(vec, c("unrelated term", "frogs"), label_matched = "Top-2", label_unmatched = "Not in Top-2"), factor(c(rep("Not in Top-2", 5), "Top-2", NA), levels = c("Top-2", "Not in Top-2", NA)))
 })
 
 test_that("same result on factor and character", {
-  expect_equal(recode_top_2(vec), recode_top_2(vec_fac))
+  expect_equal(recode_to_binary(vec), recode_to_binary(vec_fac))
 })
 
 test_that("recode produces correct warning and result when nothing is found to recode", {
   expect_equal(suppressWarnings(
-    recode_top_2(vec, "not in the vector")
+    recode_to_binary(vec, "not in the vector", label_matched = "Top-2", label_unmatched = "Not in Top-2")
     ),
     factor(c(rep("Not in Top-2", 6), NA), levels = c("Top-2", "Not in Top-2", NA))
   )
-  expect_warning(recode_top_2(vec, c("totally", "not in the vector")), "no instances of \"totally\", \"not in the vector\" found in x")
+  expect_warning(recode_to_binary(vec, c("totally", "not in the vector")), "no instances of \"totally\", \"not in the vector\" found in x")
 })
 
 # TODO, if/when we use the label attribute to capture survey question text: check that column attributes are retained?
