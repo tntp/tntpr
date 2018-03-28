@@ -12,12 +12,12 @@
 #'
 set_data_memo_formatting <- function(){
   # set knitr options
-  opts_chunk$set(dev = "png", fig.width = 6, fig.height = 3.667, dpi = 300) # Sam uses 9" (H) x 5.5" (W) for PPT insertions but trying smaller here for Word
-  opts_chunk$set(echo = FALSE)
-  opts_chunk$set(size = "small", background = "white")
-  opts_chunk$set(fig.path = "figures/fig-")
-  opts_chunk$set(highlight = TRUE, comment = NA, tidy = FALSE)
-  opts_chunk$set(knitr.table.format = "html")
+  knitr::opts_chunk$set(dev = "png", fig.width = 6, fig.height = 3.667, dpi = 300) # Sam uses 9" (H) x 5.5" (W) for PPT insertions but trying smaller here for Word
+  knitr::opts_chunk$set(echo = FALSE)
+  knitr::opts_chunk$set(size = "small", background = "white")
+  knitr::opts_chunk$set(fig.path = "figures/fig-")
+  knitr::opts_chunk$set(highlight = TRUE, comment = NA, tidy = FALSE)
+  knitr::opts_chunk$set(knitr.table.format = "html")
 }
 
 #' @title Create sequential figure numbers

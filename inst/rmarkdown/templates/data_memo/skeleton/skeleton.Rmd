@@ -14,7 +14,7 @@ output:
 # Initialize knitr, set options, load packages
 if(!suppressPackageStartupMessages(require("pacman"))) install.packages("pacman"); library(pacman)
 if(!suppressPackageStartupMessages(require("tntpr"))) { p_load(devtools); install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git") }
-p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, scales, janitor, tidyr)
+p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, scales, janitor, tidyr, here)
 set_data_memo_formatting() # sets some common knitr chunk options
 ```
 
@@ -25,7 +25,7 @@ set_data_memo_formatting() # sets some common knitr chunk options
 # Import cleaned data file(s)
 # Note: Use a common subdirectory structure
 # Uncomment next line and change path to cleaned data file(s)
-# read_csv("data/clean/my-file.csv")
+# read_csv(here("data/clean/my-file.csv"))
 
 ```
 
@@ -54,14 +54,14 @@ Text of the report
 <br/> <!--  The <br/> tag is a way to introduce vertical spacing -->
 
 <!-- Use inline R and the function tableN to create a table caption.-->
-`r tableN("Distribution of cars by cylinder count")`
+`r tableN("Distribution of students by grade")`
 
 ```{r print_results_1, include=TRUE, echo=FALSE}
 
-mtcars %>%
-  tabyl(cyl) %>%
+wisc %>%
+  tabyl(grade) %>%
   mutate(percent = scales::percent(percent)) %>%
-  kable(col.names = c("Cylinders", "Count", "Percent"), 
+  kable(col.names = c("Grade", "Count", "Percent"), 
         align     = c("l", "c", "r"), 
         digits    = 2)
 
@@ -69,18 +69,25 @@ mtcars %>%
 
 <br/>
 
-Here's that same data, visualized:
+Here's how proficiency changed over time for different grades:
 <br/>
 
-```{r print_results_2, include=TRUE, echo = FALSE, message = TRUE, fig.cap=figureN("Carburetors vs. Engine Size in Older Vehicles")}
+```{r print_results_2, include=TRUE, echo = FALSE, message = TRUE, fig.cap=figureN("Change in student proficiency")}
 
-ggplot(mtcars, aes(x = carb, y = cyl)) +
-  geom_jitter(color = palette_tntp("medium_blue"), height = 0.8, width = 0.4) +
-  geom_smooth(method = "lm", se = TRUE) +
+prof_by_grade_by_time <- wisc %>%
+  mutate(grade = as.factor(grade)) %>%
+  group_by(grade, year) %>%
+  summarise(pct_prof = sum(proflvl %in% c("proficient", "advanced")) / sum(!is.na(proflvl)))
+  
+ggplot(prof_by_grade_by_time, aes(x = year, y = pct_prof, fill = grade)) +
+  geom_bar(stat = "identity") +
+  facet_grid(grade ~ .) +
   theme_tntp() +
-  labs(x     = "Number of carburetors", 
-       y     = "Engine cylinders", 
-       title = "Carburetors vs. Engine Size in Older Vehicles")
+  scale_fill_manual(values = palette_tntp("dark_blue", "medium_blue", "light_blue", "green", "gold", "medium_gray")) +
+  labs(x     = "Year", 
+       y     = "Percent Proficient", 
+       title = "Student Proficiency Levels by Grade over Time") +
+  scale_y_continuous(labels = scales::percent)
 
 ```
 
