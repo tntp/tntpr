@@ -6,6 +6,9 @@
 \usage{
 tableN(x)
 }
+\arguments{
+\item{x}{character string description of the figure}
+}
 \value{
 nothing
 }
