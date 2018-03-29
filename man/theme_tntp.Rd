@@ -35,7 +35,7 @@ theme_tntp(show_legend_title = TRUE, base_size = 12,
 
 \item{caption_color}{color of caption text}
 
-\item{title_size}{size of caption text}
+\item{caption_size}{size of caption text}
 }
 \description{
 ggplot2 theme customized for TNTP aesthetics

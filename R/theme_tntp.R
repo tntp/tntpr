@@ -18,7 +18,7 @@
 #' @param subtitle_size size of subtitle text
 #' @param caption_align alignment of caption, defaults to "right"; also accepts "left" or "center"
 #' @param caption_color color of caption text
-#' @param title_size size of caption text
+#' @param caption_size size of caption text
 #' @export
 #' @rdname theme_tntp
 #' @examples
