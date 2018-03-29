@@ -51,12 +51,10 @@ bar_chart_counts <- function(df,
                            ){
 
   # QC: Throw an error if object supplied to df is not a data.frame -----------
-  testthat::expect(exp = is.data.frame(df),
-                   "You must supply a data.frame to the df argument")
+  if(!is.data.frame(df)){ stop ("You must supply a data.frame to the df argument")}
 
   # QC: Throw an error if var was not specified  ------------------------------
-  testthat::expect(exp = !missing(var),
-                   "You must supply a column name to the var argument")
+  if(missing(var)){ stop("You must supply a column name to the var argument")}
 
 
   # Create a plot_data object -------------------------------------------------
@@ -102,8 +100,7 @@ bar_chart_counts <- function(df,
       # be less than or equal to 11 (because we only have 11 TNTP colors)
       num_groups <- plot_data$group.factor %>% levels() %>% length()
 
-      testthat::expect_lte(num_groups, 11,
-                           "The maximum number of levels allowed in group_var is 11")
+      if(num_groups > 11){ stop("The maximum number of levels allowed in group_var is 11")}
 
       tntp_col_pal <- palette_tntp("dark_blue", "medium_blue", "light_blue",
                                    "orange", "gold", "green", "dark_grey",
@@ -117,9 +114,8 @@ bar_chart_counts <- function(df,
       num_group_var <- plot_data$group.factor %>% levels() %>% length()
       num_group_col <- group_colors %>% length()
 
-      testthat::expect_identical(num_group_var, num_group_col,
-                                 info = "The number of group_colors must equal
-                                 the number of levels supplied to group_var")
+      if(num_group_var != num_group_col) { stop("The number of group_colors must equal
+                                 the number of levels supplied to group_var")}
       # Switch color name strings to the HEX codes
       tntp_col_pal <- swap_colors(group_colors)
 
@@ -137,10 +133,10 @@ bar_chart_counts <- function(df,
   # Condition on presence of group_var
 
     if(missing(group_var)){
-    
+
 
     if(labels == "pct"){
-      
+
       nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = perc)) +
         geom_bar(fill = swap_colors(var_color), stat = "identity") +
         geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
@@ -148,7 +144,7 @@ bar_chart_counts <- function(df,
                   family = font,
                   size = font_size * 0.35) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
     } else {
-      
+
       nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = n)) +
         geom_bar(fill = swap_colors(var_color), stat = "identity") +
         geom_text(mapping  = aes(label = n),
@@ -157,14 +153,14 @@ bar_chart_counts <- function(df,
                   size = font_size * 0.35)
     }
   } else {
-    
+
     if(labels == "pct"){
       nbc <- ggplot(data    = plot_data,
                     mapping = aes(x = vec.factor, y = perc, fill = group.factor)) +
         geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
         scale_fill_manual(values = tntp_col_pal)
-      
-      
+
+
       nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 0.9),
                              vjust = -0.8,
@@ -176,8 +172,8 @@ bar_chart_counts <- function(df,
                     mapping = aes(x = vec.factor, y = n, fill = group.factor)) +
         geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
         scale_fill_manual(values = tntp_col_pal)
-      
-      
+
+
       nbc <- nbc + geom_text(aes(label = n),
                              position = position_dodge(width = 0.9),
                              vjust    = -0.8,
