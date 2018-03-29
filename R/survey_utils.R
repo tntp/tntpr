@@ -31,9 +31,7 @@
 
 recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_matched = "Selected", label_unmatched = "Not selected"){
 
-  # QC: Throw an error if to_match is not character vector
-  testthat::expect(exp = is.character(to_match),
-                   "You must supply a character vector to the to_match argument")
+  if(!is.character(to_match)){ stop ("You must supply a character or factor vector to the to_match argument") }
 
   x           <- tolower(x)
   top2_values <- tolower(to_match)
@@ -44,7 +42,7 @@ recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_m
     is.na(x) ~ NA_character_,
     x %in% top2_values ~ label_matched,
     ! x %in% top2_values ~ label_unmatched
-    )
+  )
 
   factor(result, levels = c(label_matched, label_unmatched, NA))
 }
