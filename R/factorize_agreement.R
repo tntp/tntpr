@@ -18,7 +18,7 @@
 factorize_agreement <- function(x, lvls){
   x <- tools::toTitleCase(x)
   x[x == "NA"] <- NA
-  if(missing(lvls)){ lvls <- c("Strongly Disagree", "Disagree", "Somewhat disagree", "Somewhat Agree",
+  if(missing(lvls)){ lvls <- c("Strongly Disagree", "Disagree", "Somewhat Disagree", "Somewhat Agree",
                               "Agree", "Strongly Agree") }
   x <- factor(x, levels = lvls)
   x
@@ -56,7 +56,7 @@ prop_agreement <- function(vec){
 factorize_agreement_df <- function(dat, lvls, cutoff = 1){
   # TODO: Throw warning with values that don't fit the paradigm
   # TODO: Should these levels go the other way?
-  if(missing(lvls)){ lvls <- c("Strongly Disagree", "Disagree", "Somewhat disagree", "Somewhat Agree",
+  if(missing(lvls)){ lvls <- c("Strongly Disagree", "Disagree", "Somewhat Disagree", "Somewhat Agree",
                                "Agree", "Strongly Agree") }
 
   dat %>%
