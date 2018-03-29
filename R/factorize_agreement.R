@@ -4,9 +4,9 @@
 #' Title
 #'
 #' @param x the vector to factorize
-#' @param lvls (optional) the levels, in order, of the resulting factor
+#' @param lvls (optional) the levels, in order, of the resulting factor.  These shoudl be provided as title case (see ?tools::toTitleCase).
 #'
-#' @return the vector, now as an ordered factor.  Currently the export will always return lowercase.
+#' @return the vector, now as an ordered factor.  Currently the export will always return title case.
 #' @export
 #'
 #' @examples
@@ -16,8 +16,8 @@
 #' y <- factorize_agreement(x)
 #' janitor::tabyl(y) # ordered correctly, shows missing levels
 factorize_agreement <- function(x, lvls){
-  x <- tolower(x)
-  if(missing(lvls)){ lvls <- c("strongly agree", "agree", "somewhat agree", "somewhat disagree", "disagree", "strongly disagree") }
+  x <- tools::toTitleCase(x)
+  if(missing(lvls)){ lvls <- c("Strongly Agree", "Agree", "Somewhat Agree", "Somewhat disagree", "Disagree", "Strongly Disagree") }
   x <- factor(x, levels = lvls)
   x
 }

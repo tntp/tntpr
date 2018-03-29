@@ -9,10 +9,10 @@ factorize_agreement(x, lvls)
 \arguments{
 \item{x}{the vector to factorize}
 
-\item{lvls}{(optional) the levels, in order, of the resulting factor}
+\item{lvls}{(optional) the levels, in order, of the resulting factor.  These shoudl be provided as title case (see ?tools::toTitleCase).}
 }
 \value{
-the vector, now as an ordered factor.  Currently the export will always return lowercase.
+the vector, now as an ordered factor.  Currently the export will always return title case.
 }
 \description{
 Title
