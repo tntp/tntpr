@@ -47,6 +47,20 @@ recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_m
   factor(result, levels = c(label_matched, label_unmatched, NA))
 }
 
+# How does that ^^^^ function compare to this stub from elsewhere?
+convert_to_top_2_agree <- function(x, custom_vals = NULL){
+  if(is.null(custom_vals)){
+    custom_vals <- c("strongly agree", "agree", "highly satisfied",
+                     "extremely satisfied", "satisfied", "very confident",
+                     "confident", "all", "most", "yes")
+    x <- tolower(x)
+  }
+  if_else(is.na(x), as.character(NA),
+          if_else(x %in% custom_vals, "Top-2 Agree", "Not in Top-2"))
+}
+
+
+
 #' @title Process a range of check-all-that-apply response columns for correct tabulation.
 #'
 #' @description
