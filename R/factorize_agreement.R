@@ -60,5 +60,6 @@ factorize_agreement_df <- function(dat, lvls, cutoff = 1){
                                "Agree", "Strongly Agree") }
 
   dat %>%
-    dplyr::mutate_if( ~ prop_agreement(.x) >= cutoff, ~ factorize_agreement(., lvls))
+    dplyr::mutate_if( ~ prop_agreement(.x) >= cutoff, ~ factorize_agreement(., lvls)) %>%
+    tibble::as_tibble()
 }
