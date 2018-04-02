@@ -31,6 +31,7 @@ Some of the highlights of the package include:
 
 - TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report 
 - TNTP-specific ggplot2 theme and color palette
+- Survey analysis tools
 - Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of the distribution of one variable, grouped by a second)
 - Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date), and a built-in fake student achievement dataset to play with called `wisc`.
 
@@ -110,6 +111,40 @@ return a vector with hex code for our colors:
 ```{r colors}
 palette_tntp("dark_blue", "orange", "light_gray")
 ```
+
+### Survey tools
+
+These functions are for working with data as it's exported from SurveyMonkey in XLS or CSV format.
+
+Recode check-all-that-apply questions, then tabulate them.  **As of April 2018, this won't include in the denominator those who checked only "other" and left everything else blank!**
+```{r survey}
+x <- data.frame( # 4th person didn't respond at all
+  unrelated = 1:4,
+  q1_1 = c("a", "a", "a", NA),
+  q1_2 = c("b", "b", NA, NA),
+  q1_3 = c(NA, NA, "c", NA)
+)
+library(dplyr) # for the %>% pipe
+x %>%
+  check_all_recode(q1_1:q1_3) %>%
+  check_all_count(q1_1:q1_3)
+```
+
+You can use any of the `dplyr::select()` helpers to identify the columns:
+```{r check_all_selects}
+x %>%
+  check_all_recode(contains("q1")) %>%
+  check_all_count(contains("q1"))
+```
+
+Convert a vector to a yes/no binary with `recode_to_binary`:
+``` {r recode_to_binary}
+x <- c("strongly agree", "agree", "somewhat disagree", "strongly disagree")
+recode_to_binary(x, label_matched = "Top-2", label_unmatched = "Not Top-2")
+```
+
+*This is a little clunky and can probably be improved.*
+
 
 #### TNTP theme for ggplot2
 

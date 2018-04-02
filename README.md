@@ -1,6 +1,11 @@
-# tntp R package
+---
+title: "tntp R package"
+output:
+  html_document:
+    keep_md: true
+---
 
-February 27, 2017
+April 02, 2018
 
 ## About
 
@@ -14,6 +19,7 @@ Some of the highlights of the package include:
 
 - TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report 
 - TNTP-specific ggplot2 theme and color palette
+- Survey analysis tools
 - Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of means on variable 1 grouped by variable 2)
 - Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date)
 
