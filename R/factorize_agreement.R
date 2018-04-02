@@ -4,7 +4,7 @@
 #' Title
 #'
 #' @param x the vector to factorize
-#' @param lvls (optional) the levels, in order, of the resulting factor.  These shoudl be provided as title case (see ?tools::toTitleCase).
+#' @param lvls (optional) the levels, in order, of the resulting factor.  These should be provided as title case (see ?tools::toTitleCase).
 #'
 #' @return the vector, now as an ordered factor.  Currently the export will always return title case.
 #' @export
