@@ -1,18 +1,6 @@
 -   [About](#about)
 -   [Package summary](#package-summary)
 -   [Installing the package](#installing-the-package)
-    -   [Temporary workaround for installation bug in devtools
-        1.12](#temporary-workaround-for-installation-bug-in-devtools-1.12)
-    -   [Update your R to the latest version (3.3.2), by running this
-        set of commands in
-        RStudio:](#update-your-r-to-the-latest-version-3.3.2-by-running-this-set-of-commands-in-rstudio)
-    -   [Install the latest RTools:](#install-the-latest-rtools)
-    -   [Revert to an older, functional version of the devtools
-        package:](#revert-to-an-older-functional-version-of-the-devtools-package)
-    -   [Restart R, then confirm that you have devtools 1.11.1
-        loaded:](#restart-r-then-confirm-that-you-have-devtools-1.11.1-loaded)
-    -   [Install workflow once devtools is
-        repaired](#install-workflow-once-devtools-is-repaired)
 -   [Usage](#usage)
     -   [Reporting templates](#reporting-templates)
     -   [Chart styles](#chart-styles)
@@ -50,35 +38,9 @@ Installing the package
 This package is not on CRAN, and probably will not ever be. You’ll need
 to install this package from its Bitbucket repository via `devtools`.
 
-### Temporary workaround for installation bug in devtools 1.12
+Install that package first with `install.packages("devtools")`.
 
-### Update your R to the latest version (3.3.2), by running this set of commands in RStudio:
-
-    install.packages("installr")
-    library(installr)
-    updater()
-
-### Install the latest RTools:
-
-Visit <https://cran.r-project.org/bin/windows/Rtools/> and install the
-top file, Rtools34.exe.
-
-### Revert to an older, functional version of the devtools package:
-
-    install.packages("devtools")
-    devtools::install_version("devtools", version = "1.11.1", repos = "http://cran.us.r-project.org")
-
-### Restart R, then confirm that you have devtools 1.11.1 loaded:
-
-    library(devtools)
-    session_info()
-    # devtools should have version 1.11.1 next to it.  If so, proceed with:
-    devtools::install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
-    library(tntpr)
-
-### Install workflow once devtools is repaired
-
-You can add this to the top of your analysis script:
+Then you can add this to the top of your analysis script:
 
     # install tntpr if you don't already have it, then load it
     library(devtools) # for install_git()
@@ -89,6 +51,9 @@ This won’t check for updates, though. So for now, consider periodically
 running the `install_git(...)` part anyway. Once it’s installed, you can
 load it however you normally load packages, say with
 `pacman::p_load(tntpr)`.
+
+In the past, versions of devtools have had trouble installing from our
+Bitbucket repo. Ping Sam if you’re having trouble with the above.
 
 Usage
 -----
