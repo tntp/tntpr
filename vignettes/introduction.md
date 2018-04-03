@@ -1,41 +1,34 @@
 Using the tntpr package
 ================
-2017-05-23
+2018-04-03
 
--   [About](#about)
--   [Package summary](#package-summary)
--   [Installing the package](#installing-the-package)
-    -   [Temporary workaround for installation bug in devtools 1.12](#temporary-workaround-for-installation-bug-in-devtools-1.12)
-    -   [Update your R to the latest version (3.3.2), by running this set of commands in RStudio:](#update-your-r-to-the-latest-version-3.3.2-by-running-this-set-of-commands-in-rstudio)
-    -   [Install the latest RTools:](#install-the-latest-rtools)
-    -   [Revert to an older, functional version of the devtools package:](#revert-to-an-older-functional-version-of-the-devtools-package)
-    -   [Restart R, then confirm that you have devtools 1.11.1 loaded:](#restart-r-then-confirm-that-you-have-devtools-1.11.1-loaded)
-    -   [Install workflow once devtools is repaired](#install-workflow-once-devtools-is-repaired)
--   [Usage](#usage)
-    -   [Reporting templates](#reporting-templates)
-    -   [Chart styles](#chart-styles)
-    -   [Chart building](#chart-building)
-    -   [Data management](#data-management)
+## About
 
-About
------
+The `tntpr` package makes data science at TNTP easier and more accurate
+by supplying tools that are needed for common TNTP analyses. Because
+this package serves just the TNTP analysis community, functions can be
+tailored very specifically to our exact use cases.
 
-The `tntpr` package makes data science at TNTP easier and more accurate by supplying tools that are needed for common TNTP analyses. Because this package serves just the TNTP analysis community, functions can be tailored very specifically to our exact use cases.
-
-Package summary
----------------
+## Package summary
 
 Some of the highlights of the package include:
 
--   TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report
--   TNTP-specific ggplot2 theme and color palette
--   Wrappers for quickly making typical TNTP-style charts (e.g., bar chart of the distribution of one variable, grouped by a second)
--   Education-specific data management functions (e.g., `date_to_SY()` to convert continuous hire dates into school years using a specified cutoff date), and a built-in fake student achievement dataset to play with called `wisc`.
+  - TNTP-themed RMarkdown templates, for starting a new analysis with a
+    shell that can already generate a TNTP-themed .docx report
+  - TNTP-specific ggplot2 theme and color palette
+  - Survey analysis tools
+  - Wrappers for quickly making typical TNTP-style charts (e.g., bar
+    chart of the distribution of one variable, grouped by a second)
+  - Education-specific data management functions (e.g., `date_to_SY()`
+    to convert continuous hire dates into school years using a specified
+    cutoff date), and a built-in fake student achievement dataset to
+    play with called `wisc`.
 
-Installing the package
-----------------------
+## Installing the package
 
-This package is not on CRAN, and probably will not ever be. You'll need to install this package from its Bitbucket repository via `devtools`.
+This package is not on CRAN, and probably will not ever be. You’ll need
+to install this package from its Bitbucket repository via
+`devtools`.
 
 ### Temporary workaround for installation bug in devtools 1.12
 
@@ -47,7 +40,8 @@ This package is not on CRAN, and probably will not ever be. You'll need to insta
 
 ### Install the latest RTools:
 
-Visit <https://cran.r-project.org/bin/windows/Rtools/> and install the top file, Rtools34.exe.
+Visit <https://cran.r-project.org/bin/windows/Rtools/> and install the
+top file, Rtools34.exe.
 
 ### Revert to an older, functional version of the devtools package:
 
@@ -71,24 +65,36 @@ You can add this to the top of your analysis script:
     if(!require("tntpr")) install_git("https://tools.tntp.org/bitbucket/scm/ct/tntpr.git")
     library(tntpr)
 
-This won't check for updates, though. So for now, consider periodically running the `install_git(...)` part anyway. Once it's installed, you can load it however you normally load packages, say with `pacman::p_load(tntpr)`.
+This won’t check for updates, though. So for now, consider periodically
+running the `install_git(...)` part anyway. Once it’s installed, you can
+load it however you normally load packages, say with
+`pacman::p_load(tntpr)`.
 
-Usage
------
+## Usage
 
 ### Reporting templates
 
-Start your analysis with a good-looking .docx file as output, right off the bat. Right now we have just a single TNTP template, "Data Memo", but it can be adapted and improved and if we have other common needs (a different set of headings?) those can easily be separate templates.
+Start your analysis with a good-looking .docx file as output, right off
+the bat. Right now we have just a single TNTP template, “Data Memo”, but
+it can be adapted and improved and if we have other common needs (a
+different set of headings?) those can easily be separate templates.
 
-**To access templates once you've installed the tntpr package:** go to `File` -&gt; `New File` -&gt; `R Markdown` -&gt; `From Template`. You'll see a choice "Data Memo" from the tntpr package. Just specify the document's file name and the directory you want it in (ideally a Bitbucket repository) and you're off!
+**To access templates once you’ve installed the tntpr package:** go to
+`File` -\> `New File` -\> `R Markdown` -\> `From Template`. You’ll see a
+choice “Data Memo” from the tntpr package. Just specify the document’s
+file name and the directory you want it in (ideally a Bitbucket
+repository) and you’re off\!
 
-A file `tntp-style-file.docx` will be copied into that directory; leave it there. That provides the TNTP .docx stylings when you re-knit your R Markdown document.
+A file `tntp-style-file.docx` will be copied into that directory; leave
+it there. That provides the TNTP .docx stylings when you re-knit your R
+Markdown document.
 
 ### Chart styles
 
 #### TNTP colors
 
-You can access the official TNTP-branded colors using `palette_tntp()`. This will return a vector with hex code for our colors:
+You can access the official TNTP-branded colors using `palette_tntp()`.
+This will return a vector with hex code for our colors:
 
 ``` r
 palette_tntp("dark_blue", "orange", "light_gray")
@@ -96,9 +102,65 @@ palette_tntp("dark_blue", "orange", "light_gray")
 
     ## [1] "#034772" "#EA8936" "#C1C2C4"
 
+### Survey tools
+
+These functions are for working with data as it’s exported from
+SurveyMonkey in XLS or CSV format.
+
+Recode check-all-that-apply questions, then tabulate them. **As of April
+2018, this won’t include in the denominator those who checked only
+“other” and left everything else blank\!**
+
+``` r
+x <- data.frame( # 4th person didn't respond at all
+  unrelated = 1:4,
+  q1_1 = c("a", "a", "a", NA),
+  q1_2 = c("b", "b", NA, NA),
+  q1_3 = c(NA, NA, "c", NA)
+)
+library(dplyr) # for the %>% pipe
+x %>%
+  check_all_recode(q1_1:q1_3) %>%
+  check_all_count(q1_1:q1_3)
+```
+
+    ##   response n   percent
+    ## 1        a 3 1.0000000
+    ## 2        b 2 0.6666667
+    ## 3        c 1 0.3333333
+
+You can use any of the `dplyr::select()` helpers to identify the
+columns:
+
+``` r
+x %>%
+  check_all_recode(contains("q1")) %>%
+  check_all_count(contains("q1"))
+```
+
+    ##   response n   percent
+    ## 1        a 3 1.0000000
+    ## 2        b 2 0.6666667
+    ## 3        c 1 0.3333333
+
+Convert a vector to a yes/no binary with
+`recode_to_binary`:
+
+``` r
+x <- c("strongly agree", "agree", "somewhat disagree", "strongly disagree")
+recode_to_binary(x, label_matched = "Top-2", label_unmatched = "Not Top-2")
+```
+
+    ## [1] Top-2     Top-2     Not Top-2 Not Top-2
+    ## Levels: Top-2 Not Top-2
+
+*This is a little clunky and can probably be improved.*
+
 #### TNTP theme for ggplot2
 
-Add `+ theme_tntp()` to your ggplot2 calls to format a chart in the common TNTP style. For instance, this will use the Segoe UI font that is standard at TNTP.
+Add `+ theme_tntp()` to your ggplot2 calls to format a chart in the
+common TNTP style. For instance, this will use the Segoe UI font that is
+standard at TNTP.
 
 ``` r
 ggplot(mtcars, aes(x = cyl)) +
@@ -106,21 +168,26 @@ ggplot(mtcars, aes(x = cyl)) +
   theme_tntp()
 ```
 
-<img src="introduction_files/figure-markdown_github/theme_tntp-1.png" width="750px" />
+<img src="introduction_files/figure-gfm/theme_tntp-1.png" width="750px" />
 
 ### Chart building
 
 #### Custom charting functions
 
-So far there's the function `bar_chart_counts`, for making the ubiquitous TNTP-style bar chart of a distribution. It automates some tedious aspects of chart-making that R is slow at, like text labels showing %s. These charts are deck-ready, faster than Excel.
+So far there’s the function `bar_chart_counts`, for making the
+ubiquitous TNTP-style bar chart of a distribution. It automates some
+tedious aspects of chart-making that R is slow at, like text labels
+showing %s. These charts are deck-ready, faster than Excel.
 
-Here are examples with the built-in `wisc` data set (of fake Wisconsin test data):
+Here are examples with the built-in `wisc` data set (of fake Wisconsin
+test
+data):
 
 ``` r
 bar_chart_counts(wisc, proflvl, var_label = "Proficiency Level")
 ```
 
-<img src="introduction_files/figure-markdown_github/chart_functions-1.png" width="750px" />
+<img src="introduction_files/figure-gfm/chart_functions-1.png" width="750px" />
 
 ``` r
 bar_chart_counts(wisc,
@@ -132,9 +199,10 @@ bar_chart_counts(wisc,
                  digits    = 0)
 ```
 
-<img src="introduction_files/figure-markdown_github/chart_functions-2.png" width="750px" />
+<img src="introduction_files/figure-gfm/chart_functions-2.png" width="750px" />
 
-The function has lots of customization options, see `?bar_chart_continuous` for more.
+The function has lots of customization options, see
+`?bar_chart_continuous` for more.
 
 We hope to add a similar function for showing means.
 
@@ -142,7 +210,11 @@ We hope to add a similar function for showing means.
 
 #### Functions already in tntpr
 
-`date_to_SY`: cuts continuous dates, like hire dates, into discrete school years, at a specified cut-off date. For instance, here are some hire dates, split into their school year hiring seasons based on a September 1st cut-off:
+`date_to_SY`: cuts continuous dates, like hire dates, into discrete
+school years, at a specified cut-off date. For instance, here are some
+hire dates, split into their school year hiring seasons based on a
+September 1st
+cut-off:
 
 ``` r
 hire_dates <- c(as.Date("2015-08-31"), as.Date("2015-10-20"), as.Date("2016-08-08"),
@@ -154,7 +226,9 @@ date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn'
 
 #### Possible upcoming additions
 
-We can incorporate other functions that have been written but not yet standardized for the package. E.g., converting survey responses to top-2 agree:
+We can incorporate other functions that have been written but not yet
+standardized for the package. E.g., converting survey responses to top-2
+agree:
 
 ``` r
 convert_to_top_2_agree <- function(x, custom_vals = NULL){
@@ -171,12 +245,14 @@ convert_to_top_2_agree(c("Strongly agree", "Agree", "Somewhat agree", NA, NA, "S
   tabyl
 ```
 
-    ##              . n   percent valid_percent
-    ## 1 Not in Top-2 2 0.3333333           0.5
-    ## 2  Top-2 Agree 2 0.3333333           0.5
-    ## 3         <NA> 2 0.3333333            NA
+    ##             . n   percent valid_percent
+    ##  Not in Top-2 2 0.3333333           0.5
+    ##   Top-2 Agree 2 0.3333333           0.5
+    ##          <NA> 2 0.3333333            NA
 
-Or functions to discern teacher movement when comparison rosters and studying retention and transfer patterns. This can be simple:
+Or functions to discern teacher movement when comparison rosters and
+studying retention and transfer patterns. This can be
+simple:
 
 ``` r
 # Write function to determine whether someone left the location the next year
@@ -219,6 +295,9 @@ yearly_movement <- function(first_year, second_year){
 }
 ```
 
-Save yourself a lot of scratching your head with nested `ifelse()` statements!
+Save yourself a lot of scratching your head with nested `ifelse()`
+statements\!
 
-*These data wrangling functions have not yet been incorporated into tntpr, but easily could be - as could functions that handle any recurring data cleaning task we face.*
+*These data wrangling functions have not yet been incorporated into
+tntpr, but easily could be - as could functions that handle any
+recurring data cleaning task we face.*
