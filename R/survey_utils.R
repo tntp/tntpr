@@ -70,6 +70,8 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL){
 #'
 #' It also takes the single text values in each column and adds them as a \code{label} attribute to each data.frame columns.
 #'
+#' This function accomodates an open-response column, to get the correct denominator when some respondents have skipped all check variables but written something in.  This passing over of the offered choices is an implicit rejection of them, not a "missing."  Such a text variable will throw a warning - which may be okay - and will then be recoded into a binary 1/0 variable indicating a response.  Such a text variable will be assigned the label "Other".
+#'
 #' \code{check_all_recode()} prepares the data.frame for a call to its sister function \code{check_all_count()}.  The label attribute is accessed by this function.
 #'
 #' @param dat a data.frame with survey data
@@ -79,14 +81,15 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL){
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
-#'   unrelated = 1:4,
-#'   q1_1 = c("a", "a", "a", NA),
-#'   q1_2 = c("b", "b", NA, NA),
-#'   q1_3 = c(NA, NA, "c", NA)
+#'   unrelated = 1:5,
+#'   q1_1 = c("a", "a", "a", NA, NA),
+#'   q1_2 = c("b", "b", NA, NA, NA),
+#'   q1_3 = c(NA, NA, "c", NA, NA),
+#'   q1_other = c(NA, "something else", NA, NA, "not any of these")
 #' )
 #' library(dplyr) # for the %>% pipe
 #' x %>%
-#'   check_all_recode(q1_1:q1_3)
+#'   check_all_recode(q1_1:q1_other)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
 #' x %>%
@@ -133,21 +136,24 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
 #'
 #' Takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and tabulates the results.  People who did not select any choices  (i.e., they did not answer the question) are omitted from the denominator.  For this to make sense, the question's choices should be MECE, or there should be an NA option.
 #'
+#' This works with an "Other" open-response text field, which will be recoded to a binary variable with \code{check_all_recode}.
+#'
 #' @param dat a data.frame with survey data
 #' @param ... unquoted column names containing the range of the answer choices.  Can be specified individually, as a range, i.e., \code{q1_1:q1_5}, or using other helper functions from \code{dplyr::select()}.
 #' @return Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
-#'   unrelated = 1:4,
-#'   q1_1 = c("a", "a", "a", NA),
-#'   q1_2 = c("b", "b", NA, NA),
-#'   q1_3 = c(NA, NA, "c", NA)
+#'   unrelated = 1:5,
+#'   q1_1 = c("a", "a", "a", NA, NA),
+#'   q1_2 = c("b", "b", NA, NA, NA),
+#'   q1_3 = c(NA, NA, "c", NA, NA),
+#'   q1_other = c(NA, "something else", NA, NA, "not any of these")
 #' )
 #' library(dplyr) # for the %>% pipe
 #' x %>%
-#'   check_all_recode(q1_1:q1_3) %>%
-#'   check_all_count(q1_1:q1_3)
+#'   check_all_recode(q1_1:q1_other) %>%
+#'   check_all_count(q1_1:q1_other)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
 #' x %>%

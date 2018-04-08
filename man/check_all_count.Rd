@@ -18,18 +18,21 @@ Returns a data.frame with the tabulated results (n and % of question respondents
 This function is to be run on columns treated with \code{check_all_recode()}.
 
 Takes a data.frame and range of columns containing all answer choices to a check-all-that-apply question and tabulates the results.  People who did not select any choices  (i.e., they did not answer the question) are omitted from the denominator.  For this to make sense, the question's choices should be MECE, or there should be an NA option.
+
+This works with an "Other" open-response text field, which will be recoded to a binary variable with \code{check_all_recode}.
 }
 \examples{
 x <- data.frame( # 4th person didn't respond at all
-  unrelated = 1:4,
-  q1_1 = c("a", "a", "a", NA),
-  q1_2 = c("b", "b", NA, NA),
-  q1_3 = c(NA, NA, "c", NA)
+  unrelated = 1:5,
+  q1_1 = c("a", "a", "a", NA, NA),
+  q1_2 = c("b", "b", NA, NA, NA),
+  q1_3 = c(NA, NA, "c", NA, NA),
+  q1_other = c(NA, "something else", NA, NA, "not any of these")
 )
 library(dplyr) # for the \%>\% pipe
 x \%>\%
-  check_all_recode(q1_1:q1_3) \%>\%
-  check_all_count(q1_1:q1_3)
+  check_all_recode(q1_1:q1_other) \%>\%
+  check_all_count(q1_1:q1_other)
 
 # You can use any of the dplyr::select() helpers to identify the columns:
 x \%>\%
