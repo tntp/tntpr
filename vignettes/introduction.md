@@ -91,25 +91,29 @@ This will return a vector with hex code for our colors:
 These functions are for working with data as it’s exported from
 SurveyMonkey in XLS or CSV format.
 
-Recode check-all-that-apply questions, then tabulate them. **As of April
-2018, this won’t include in the denominator those who checked only
-“other” and left everything else blank!**
+Recode check-all-that-apply questions, then tabulate them.
 
     x <- data.frame( # 4th person didn't respond at all
-      unrelated = 1:4,
-      q1_1 = c("a", "a", "a", NA),
-      q1_2 = c("b", "b", NA, NA),
-      q1_3 = c(NA, NA, "c", NA)
+      unrelated = 1:5,
+      q1_1 = c("a", "a", "a", NA, NA),
+      q1_2 = c("b", "b", NA, NA, NA),
+      q1_3 = c(NA, NA, "c", NA, NA),
+      q1_other = c(NA, "something else", NA, NA, "nope it's a different thing")
     )
     library(dplyr) # for the %>% pipe
     x %>%
-      check_all_recode(q1_1:q1_3) %>%
-      check_all_count(q1_1:q1_3)
+      check_all_recode(q1_1:q1_other) %>%
+      check_all_count(q1_1:q1_other)
 
-    ##   response n   percent
-    ## 1        a 3 1.0000000
-    ## 2        b 2 0.6666667
-    ## 3        c 1 0.3333333
+    ## Warning in check_all_q_text_to_label(cols_of_interest): column 4 has
+    ## multiple values besides NA; not sure which is the question text. Guessing
+    ## this an "Other (please specify)" column.
+
+    ##   response n percent
+    ## 1        a 3    0.75
+    ## 2        b 2    0.50
+    ## 3        c 1    0.25
+    ## 4    Other 2    0.50
 
 You can use any of the `dplyr::select()` helpers to identify the
 columns:
@@ -118,10 +122,15 @@ columns:
       check_all_recode(contains("q1")) %>%
       check_all_count(contains("q1"))
 
-    ##   response n   percent
-    ## 1        a 3 1.0000000
-    ## 2        b 2 0.6666667
-    ## 3        c 1 0.3333333
+    ## Warning in check_all_q_text_to_label(cols_of_interest): column 4 has
+    ## multiple values besides NA; not sure which is the question text. Guessing
+    ## this an "Other (please specify)" column.
+
+    ##   response n percent
+    ## 1        a 3    0.75
+    ## 2        b 2    0.50
+    ## 3        c 1    0.25
+    ## 4    Other 2    0.50
 
 Convert a vector to a yes/no binary with `recode_to_binary`:
 
