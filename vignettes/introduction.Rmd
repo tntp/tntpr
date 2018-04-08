@@ -92,18 +92,19 @@ palette_tntp("dark_blue", "orange", "light_gray")
 
 These functions are for working with data as it's exported from SurveyMonkey in XLS or CSV format.
 
-Recode check-all-that-apply questions, then tabulate them.  **As of April 2018, this won't include in the denominator those who checked only "other" and left everything else blank!**
+Recode check-all-that-apply questions, then tabulate them.
 ```{r survey}
 x <- data.frame( # 4th person didn't respond at all
-  unrelated = 1:4,
-  q1_1 = c("a", "a", "a", NA),
-  q1_2 = c("b", "b", NA, NA),
-  q1_3 = c(NA, NA, "c", NA)
+  unrelated = 1:5,
+  q1_1 = c("a", "a", "a", NA, NA),
+  q1_2 = c("b", "b", NA, NA, NA),
+  q1_3 = c(NA, NA, "c", NA, NA),
+  q1_other = c(NA, "something else", NA, NA, "nope it's a different thing")
 )
 library(dplyr) # for the %>% pipe
 x %>%
-  check_all_recode(q1_1:q1_3) %>%
-  check_all_count(q1_1:q1_3)
+  check_all_recode(q1_1:q1_other) %>%
+  check_all_count(q1_1:q1_other)
 ```
 
 You can use any of the `dplyr::select()` helpers to identify the columns:
