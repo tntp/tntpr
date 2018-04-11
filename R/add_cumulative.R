@@ -10,7 +10,7 @@ add_cumulative <- function(df, colname, dir = "down"){
     stop("\"colname\" not specified and default columns valid_percent and percent are not present in data.frame df")
   }
 
-  target <- pull(df, !! colname)
+  target <- dplyr::pull(df, !! colname)
 
   if(dir == "up"){
     target <- rev(target)
@@ -21,6 +21,8 @@ add_cumulative <- function(df, colname, dir = "down"){
   }
   df
 }
+
+# Examples
 
 library(dplyr)
 mtcars %>%
