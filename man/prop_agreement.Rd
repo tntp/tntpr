@@ -2,16 +2,18 @@
 % Please edit documentation in R/factorize_agreement.R
 \name{prop_agreement}
 \alias{prop_agreement}
-\title{Calculate the percent of non-missing values in a character vector containing the term "agree."  This is a helper function for factorize_agreement_df().}
+\title{Calculate the percent of non-missing values in a character vector containing the values of interest.  This is a helper function for factorize_df().}
 \usage{
-prop_agreement(vec)
+prop_agreement(vec, valid_strings)
 }
 \arguments{
 \item{vec}{character vector.}
+
+\item{valid_strings}{the values that the variable can possibly take on.}
 }
 \value{
 numeric proportion between 0 and 1.
 }
 \description{
-Calculate the percent of non-missing values in a character vector containing the term "agree."  This is a helper function for factorize_agreement_df().
+Calculate the percent of non-missing values in a character vector containing the values of interest.  This is a helper function for factorize_df().
 }
