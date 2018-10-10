@@ -12,24 +12,24 @@
 #' @examples
 #' library(janitor)
 #' mtcars %>%
-#'   add_cumulative(mpg)
+#'   adorn_cumulative(mpg)
 #'
 #' mtcars %>%
 #'   tabyl(cyl) %>%
-#'   add_cumulative()
+#'   adorn_cumulative()
 #'
 #' # Vector with an NA
 #' x <- c(0, 1, 2, 3, 3, 3, NA)
 #'
 #' x %>%
 #'   tabyl() %>%
-#'   add_cumulative()
+#'   adorn_cumulative()
 #'
 #' x %>%
 #'   tabyl() %>%
-#'   add_cumulative(dir = "up")
+#'   adorn_cumulative(dir = "up")
 
-add_cumulative <- function(dat, colname, dir = "down"){
+adorn_cumulative <- function(dat, colname, dir = "down"){
 
   if(!missing(colname)){
     colname <- rlang::enquo(colname)
