@@ -33,7 +33,8 @@ with this function.
 \examples{
 # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 # and a new project analysis subfolder is needed within that repo:
-setup_subdirectory("ela_access",
-"Equitable Access to Grade-Level ELA",
-"Dustin Pashouwer and Sam Firke")
+## not run
+# setup_subdirectory("ela_access",
+# "Equitable Access to Grade-Level ELA",
+# "Dustin Pashouwer and Sam Firke")
 }

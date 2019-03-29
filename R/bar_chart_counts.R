@@ -141,7 +141,7 @@ bar_chart_counts <- function(df,
 
       nbc <- ggplot(data = plot_data, aes(x = vec.factor, y = perc)) +
         geom_bar(fill = swap_colors(var_color), stat = "identity") +
-        geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
+        geom_text(aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
                   vjust = -0.8,
                   family = font,
                   size = font_size * 0.35) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
@@ -163,7 +163,7 @@ bar_chart_counts <- function(df,
         scale_fill_manual(values = tntp_col_pal)
 
 
-      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor:::round_half_up(perc, digits + 2), digits = digits)),
+      nbc <- nbc + geom_text(aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
                              position = position_dodge(width = 0.9),
                              vjust = -0.8,
                              na.rm = TRUE,

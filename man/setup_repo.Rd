@@ -30,7 +30,8 @@ used to create a README.Md file.
 \examples{
 # After the user has created a repository "Anywhere City" and set their working
 # directory to that folder:
-setup_repo("ela_access",
-"Access to Grade-Level ELA Content",
-"Dustin Pashouwer and Sam Firke")
+## not run
+# setup_repo("ela_access",
+# "Access to Grade-Level ELA Content",
+# "Dustin Pashouwer and Sam Firke")
 }

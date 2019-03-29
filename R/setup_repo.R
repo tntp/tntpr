@@ -21,9 +21,10 @@
 #' @examples
 #' # After the user has created a repository "Anywhere City" and set their working
 #' # directory to that folder:
-#' setup_repo("ela_access",
-#' "Access to Grade-Level ELA Content",
-#' "Dustin Pashouwer and Sam Firke")
+#' ## not run
+#' # setup_repo("ela_access",
+#' # "Access to Grade-Level ELA Content",
+#' # "Dustin Pashouwer and Sam Firke")
 setup_repo <- function(subfolder, proj_name, analyst_name){
   if(missing(subfolder)){
     stop("Specify the subfolder name of the project within this repo you'll be working on")
@@ -91,9 +92,10 @@ setup_repo <- function(subfolder, proj_name, analyst_name){
 #' @examples
 #' # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 #' # and a new project analysis subfolder is needed within that repo:
-#' setup_subdirectory("ela_access",
-#' "Equitable Access to Grade-Level ELA",
-#' "Dustin Pashouwer and Sam Firke")
+#' ## not run
+#' # setup_subdirectory("ela_access",
+#' # "Equitable Access to Grade-Level ELA",
+#' # "Dustin Pashouwer and Sam Firke")
 
 setup_subdirectory <- function(subfolder, proj_name, analyst_name){
   if(missing(proj_name)){
