@@ -1,4 +1,6 @@
-February 18, 2019 [![Travis-CI Build
+Last generated March 29, 2019
+
+[![Travis-CI Build
 Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
 
 About

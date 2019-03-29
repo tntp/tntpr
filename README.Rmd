@@ -3,7 +3,7 @@ title: "tntp R package"
 output: md_document
 ---
 
-`r format(Sys.time(), '%B %d, %Y')`
+Last generated `r format(Sys.time(), '%B %d, %Y')`
 
 [![Travis-CI Build Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
 
