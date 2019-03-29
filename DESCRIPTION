@@ -1,9 +1,39 @@
-Package: Rtntp
+Package: tntpr
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Data Analysis Tools Customized for TNTP
+Version: 0.1.1
+Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb], Dustin Pashouwer [ctb], Kate Mullan [ctb]
+Maintainer: Jake Russ <jake.russ@tntp.org>
+Description: An internal TNTP R package that includes functions and templates
+    customized with TNTP branding. It is intended for this R package to be a
+    one-stop shop for R tools by analysts and other data users at TNTP.
+License: CC BY-NC-SA 3.0
 LazyData: TRUE
+URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
+Depends:
+    extrafont,
+    ggplot2,
+    R (>= 2.10)
+Imports:
+    dplyr,
+    formattable,
+    janitor,
+    knitr,
+    lazyeval,
+    lubridate,
+    magrittr,
+    pacman,
+    plyr,
+    purrr,
+    rmarkdown,
+    scales,
+    testthat,
+    tidyr,
+    labelled,
+    usethis, 
+    ggplot2,
+    extrafont,
+    scales
+RoxygenNote: 6.1.1
+Suggests:
+VignetteBuilder: knitr
