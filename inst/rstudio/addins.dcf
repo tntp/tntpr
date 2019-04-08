@@ -1,0 +1,4 @@
+Name: TNTP R Script Header
+Description: Add a standate TNTP header template.
+Binding: header_tntp
+Interactive: false

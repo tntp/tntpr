@@ -30,10 +30,10 @@ Imports:
     testthat,
     tidyr,
     labelled,
-    usethis, 
+    usethis,
     ggplot2,
     extrafont,
-    scales
+    scales,
+    rstudioapi
 RoxygenNote: 6.1.1
-Suggests:
 VignetteBuilder: knitr
