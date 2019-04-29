@@ -11,8 +11,8 @@ header_tntp <- function() {
 
 # Load packages - first pacman, installing if necessary, then others
 if (!require(\"pacman\")) install.packages(\"pacman\"); library(pacman)
-p_load(here, readxl, tidyverse, janitor) # add more here as needed
-if (!suppressPackageStartupMessages(require(\"tntpr\"))) {p_load(devtools); devtools::install_github(\"tntpr/tntpr\")}
+pacman::p_load(here, readxl, tidyverse, janitor) # add more here as needed
+if (!suppressPackageStartupMessages(require(\"tntpr\"))) {pacman::p_load(devtools); devtools::install_github(\"tntpr/tntpr\")}; pacman::p_load(tntpr)
 
 # Load data
 
