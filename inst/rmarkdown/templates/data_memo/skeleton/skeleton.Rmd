@@ -12,9 +12,9 @@ output:
 <!-- Initializing knitr -->
 ```{r setup,echo=FALSE}
 # Initialize knitr, set options, load packages
-if(!suppressPackageStartupMessages(require("pacman"))) install.packages("pacman"); library(pacman)
-if(!suppressPackageStartupMessages(require("tntpr"))) { p_load(devtools); devtools::install_github("tntp/tntpr") }
-p_load(knitr, tntpr, readr, readxl, dplyr, magrittr, ggplot2, stringr, devtools, scales, janitor, tidyr, here)
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+pacman::p_load(here, readxl, tidyverse, janitor) # add more here as needed
+if (!suppressPackageStartupMessages(require("tntpr"))) {pacman::p_load(devtools); devtools::install_github("tntp/tntpr")}; pacman::p_load(tntpr)
 set_data_memo_formatting() # sets some common knitr chunk options
 ```
 
