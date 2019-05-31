@@ -249,6 +249,18 @@ hire_dates <- c(as.Date("2015-08-31"), as.Date("2015-10-20"), as.Date("2016-08-0
 date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn't matter in this argument
 ```
 
+`factorize_df`: examines each column in a data.frame; when it finds a column composed solely of the values provided to the \code{lvls} argument it updates them to be factor variables, with levels in the order provided.
+
+```{r}
+rec_levels <- c("Screen Out", "Recommend with Reservations", "Recommend without Hesitation", "Recommend", "Highly Recommend")
+
+ratings <- tibble(id = 1:100, 
+                  first_rating = sample(rec_levels, 100, replace = TRUE), 
+                  second_rating = sample(rec_levels, 100, replace = TRUE))
+ratings %>% 
+  factorize_df(lvls = c("Screen Out", "Recommend with Reservations", "Recommend without Hesitation", "Recommend", "Highly Recommend"))
+```
+
 #### Possible upcoming additions
 
 We can incorporate other functions that have been written but not yet standardized for the package.  E.g., converting survey responses to top-2 agree:
