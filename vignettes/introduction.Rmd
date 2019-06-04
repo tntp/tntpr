@@ -252,13 +252,17 @@ date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn'
 `factorize_df`: examines each column in a data.frame; when it finds a column composed solely of the values provided to the \code{lvls} argument it updates them to be factor variables, with levels in the order provided.
 
 ```{r}
-rec_levels <- c("Screen Out", "Recommend with Reservations", "Recommend without Hesitation", "Recommend", "Highly Recommend")
+rec_levels <- c("Screen Out", "Recommend with Reservations", "Recommend", "Recommend without Hesitation", "Highly Recommend")
 
 ratings <- tibble(id = 1:100, 
                   first_rating = sample(rec_levels, 100, replace = TRUE), 
                   second_rating = sample(rec_levels, 100, replace = TRUE))
-ratings %>% 
-  factorize_df(lvls = c("Screen Out", "Recommend with Reservations", "Recommend without Hesitation", "Recommend", "Highly Recommend"))
+ratings <- ratings %>% 
+  factorize_df(lvls = c("Screen Out", "Recommend with Reservations", "Recommend", "Recommend without Hesitation", "Highly Recommend"))
+
+ratings$first_rating %>% is.factor()
+ratings$first_rating %>% levels()
+
 ```
 
 #### Possible upcoming additions

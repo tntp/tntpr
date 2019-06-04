@@ -1,6 +1,19 @@
 Using the tntpr package
 ================
-2019-03-28
+2019-06-04
+
+  - [About](#about)
+  - [Package summary](#package-summary)
+  - [Installing the package](#installing-the-package)
+  - [Usage](#usage)
+      - [Reporting templates](#reporting-templates)
+      - [Setting up repositories and
+        subfolders](#setting-up-repositories-and-subfolders)
+      - [TNTP colors](#tntp-colors)
+      - [TNTP themes for ggplot2](#tntp-themes-for-ggplot2)
+      - [Chart building](#chart-building)
+      - [Survey tools](#survey-tools)
+      - [Data management](#data-management)
 
 ## About
 
@@ -304,6 +317,39 @@ date_to_sy(hire_dates, last_day_of_sy = as.Date("2000-09-01")) # the year doesn'
 ```
 
     ## [1] "2014 - 2015" "2015 - 2016" "2015 - 2016" "2015 - 2016" "2016 - 2017"
+
+`factorize_df`: examines each column in a data.frame; when it finds a
+column composed solely of the values provided to the  argument it
+updates them to be factor variables, with levels in the order
+provided.
+
+``` r
+rec_levels <- c("Screen Out", "Recommend with Reservations", "Recommend", "Recommend without Hesitation", "Highly Recommend")
+
+ratings <- tibble(id = 1:100, 
+                  first_rating = sample(rec_levels, 100, replace = TRUE), 
+                  second_rating = sample(rec_levels, 100, replace = TRUE))
+ratings <- ratings %>% 
+  factorize_df(lvls = c("Screen Out", "Recommend with Reservations", "Recommend", "Recommend without Hesitation", "Highly Recommend"))
+```
+
+    ## Transformed these columns: 
+    ##  *  first_rating, 
+    ## *  second_rating
+
+``` r
+ratings$first_rating %>% is.factor()
+```
+
+    ## [1] TRUE
+
+``` r
+ratings$first_rating %>% levels()
+```
+
+    ## [1] "Screen Out"                   "Recommend with Reservations" 
+    ## [3] "Recommend"                    "Recommend without Hesitation"
+    ## [5] "Highly Recommend"
 
 #### Possible upcoming additions
 
