@@ -1,0 +1,63 @@
+---
+title: "Using tntpr data cleaning functions"
+date: '`r Sys.Date()`'
+output:
+  github_document:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup,echo=FALSE, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(out.width='750px', dpi = 300)
+knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
+knitr::opts_chunk$set(fig.path = "introduction_files/")
+```
+
+```{r load_packages, include = FALSE}
+library(pacman)
+if(!require("tntpr")) install_github("tntp/tntpr"); library(tntpr)
+p_load(tidyverse, janitor)
+```
+
+Common Scenerio
+
+Imagine receiving the `wisc_dirtied` dataset from a district. While the actual `wisc` dataset has nicely formatted data types, this version does not. Notice that all the the variables are either numeric or characters.
+
+```{r, echo=FALSE, include=FALSE}
+wisc_dirtied <- wisc %>% 
+  select(student_id, grade, district, school, year, attday, readSS, mathSS, proflvl, race) %>% 
+  mutate_at(vars(grade, district, school, year, proflvl, race), as.character)
+```
+
+```{r}
+wisc_dirtied %>% 
+  glimpse()
+```
+
+One of the first steps in the data cleaning process is to "factorize" the dataset. R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Usually this one of the most manual, error-prone parts of the data-cleaning process.
+
+Below is a workflow I use that might be helpful for others. I use a couple functions that may be new to you.
+
+
+- `factorize_df`: examines each column in a data.frame; when it finds a column composed solely of the values provided to the \code{lvls} argument it updates them to be factor variables, with levels in the order provided.
+
+
+
+Step 1: Identify which variables are factors.This part is 
+
+```{r}
+
+wisc_all_character_data_types %>% 
+  map(unique) %>% 
+  map(length)
+
+```
+
+
+
