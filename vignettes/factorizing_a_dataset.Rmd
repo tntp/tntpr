@@ -2,7 +2,7 @@
 title: "Factorizing a survey dataset"
 date: '`r Sys.Date()`'
 output:
-  github_document:
+  html_document:
     toc: true
     toc_depth: 3
 vignette: >
@@ -136,7 +136,6 @@ survey_dat$q8 %>% unique()
 survey_dat <- survey_dat %>% 
   factorize_df(lvls = c("No", "Yes"))
 ```
-
 
 ### Step 3: Check if factorizing worked like you intended.
 
