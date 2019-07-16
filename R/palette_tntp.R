@@ -86,18 +86,38 @@ colors_tntp <- c(# classic colors
                  default_11 = "#557326",
                  default_12 = "#717478",
 
-                 # likert colors
+                 # likert orange to blue
                  likert_1 = "#ea8835",
                  likert_2 = "#ffc72f",
                  likert_3 = "#ffe9ac",
                  likert_4 = "#e6e7e7",
                  likert_5 = "#cdedf7",
                  likert_6 = "#81d2eb",
-                 likert_7 = "#00a4c7")
+                 likert_7 = "#00a4c7",
+
+                 # likert orange to green
+                 likert_orange_to_green_1 = "#c36414",
+                 likert_orange_to_green_2 = "#ea8835",
+                 likert_orange_to_green_3 = "#f7cfae",
+                 likert_orange_to_green_4 = "#e6e7e7",
+                 likert_orange_to_green_5 = "#d2e6b2",
+                 likert_orange_to_green_6 = "#8ebf3f",
+                 likert_orange_to_green_7 = "#6a8f2f")
 
 colors_tntp_classic <- colors_tntp[1:14]
 colors_tntp_default <- colors_tntp[15:26]
 colors_tntp_likert <- colors_tntp[27:33]
+colors_tntp_likert_orange_to_green <- colors_tntp[34:40]
+
+
+palette_names <- c("default",
+                   "likert_4pt",
+                   "likert_5pt",
+                   "likert_6pt",
+                   "colors_tntp_old",
+                   "likert_orange_to_green_4pt",
+                   "likert_orange_to_green_5pt",
+                   "likert_orange_to_green_6pt")
 
 #' scale_palette_tntp
 #'
@@ -105,13 +125,15 @@ colors_tntp_likert <- colors_tntp[27:33]
 #'
 #' @export
 #'
-palette_tntp_scales <- function (palette = c("default", "likert_4pt", "likert_5pt",
-                                    "likert_6pt", "colors_tntp_classic"))
+palette_tntp_scales <- function (palette = palette_names)
 {
   default <- colors_tntp_default
   likert_4pt <- colors_tntp_likert[rev(c(1, 2, 6, 7))]
   likert_5pt <- colors_tntp_likert[rev(c(1, 2, 4, 6, 7))]
   likert_6pt <- colors_tntp_likert[rev(c(1, 2, 3, 5, 6, 7))]
+  likert_orange_to_green_4pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 6, 7))]
+  likert_orange_to_green_5pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 4, 6, 7))]
+  likert_orange_to_green_6pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 3, 5, 6, 7))]
   colors_tntp_classic <- colors_tntp_classic
 
   switch(match.arg(palette),
@@ -119,6 +141,9 @@ palette_tntp_scales <- function (palette = c("default", "likert_4pt", "likert_5p
          likert_4pt = likert_4pt,
          likert_5pt = likert_5pt,
          likert_6pt = likert_6pt,
+         likert_orange_to_green_4pt = likert_orange_to_green_4pt,
+         likert_orange_to_green_5pt = likert_orange_to_green_5pt,
+         likert_orange_to_green_6pt = likert_orange_to_green_6pt,
          colors_tntp_classic = colors_tntp_classic)
 }
 
@@ -132,8 +157,9 @@ palette_tntp_scales <- function (palette = c("default", "likert_4pt", "likert_5p
 #'
 #' @export
 #'
-scale_colour_tntp <- function (palette = c("default", "likert_4pt", "likert_5pt",
-                                         "likert_6pt", "colors_tntp_old"), ...)
+scale_colour_tntp <- function (palette = palette_names,
+                               drop = FALSE,
+                               ...)
 {
   palette <- match.arg(palette)
   discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
@@ -153,9 +179,11 @@ scale_color_tntp <- scale_colour_tntp
 #'
 #' @export
 #'
-scale_fill_tntp <- function (palette = c("default", "likert_4pt", "likert_5pt",
-                                         "likert_6pt", "colors_tntp_old"), drop = FALSE, ...)
+scale_fill_tntp <- function (palette = palette_names,
+                             drop = FALSE,
+                             ...)
 {
   palette <- match.arg(palette)
   discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }
+
