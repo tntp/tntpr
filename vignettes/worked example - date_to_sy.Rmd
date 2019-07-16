@@ -1,13 +1,13 @@
 ---
-title: 'Worked Example: `tntpr::date_to_sy`'
-output:
-  word_document:
-    toc: no
-  html_document:
-    keep_md: yes
-    toc: no
-vignette: |
-  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+title: "Worked Example: `tntpr::date_to_sy`"
+date: "`r Sys.Date()`"
+output: 
+  github_document:
+    toc: true
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Your Vignette Title}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup,echo=FALSE, include = FALSE}
