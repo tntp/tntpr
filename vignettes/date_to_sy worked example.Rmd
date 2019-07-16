@@ -1,11 +1,10 @@
 ---
-title: "`tntpr::date_to_sy` Worked Example"
+title: "Worked Example: `tntpr::date_to_sy`"
 output:
-  html_document:
-    toc: true
-    toc_depth: 3
+  github_document:
+    toc: false
 vignette: >
-  %\VignetteIndexEntry{Introduction}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +14,6 @@ library(knitr)
 knitr::opts_chunk$set(error = TRUE)
 knitr::opts_chunk$set(out.width='750px', dpi = 300)
 knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
-knitr::opts_chunk$set(fig.path = "introduction_files/")
 ```
 
 ```{r load_packages, include = FALSE}
@@ -39,7 +37,9 @@ appl_dat
 
 ```
 
-You can do this easily by using the `tntpr::date_to_sy` function; the two arguements the `date_var` and `last_day_of_sy`.
+Historically, I would have used a long, error-prone `case_when` mutation, but the `tntpr::date_to_sy` function is much easier.
+
+The function takes two arguements, `date_var` and `last_day_of_sy` (year doesn't matter) and returns a character string with the school year in the form '(year) - (year)'. 
 
 ```{r}
 appl_dat %>% 
