@@ -90,7 +90,7 @@ Aha! These do indeed look like factors.
 
 Here a lot of people would `mutate` their dataset with a series of factor(., levels = c(...)) mutations. This works, but let's use `factorize_df` to help us do this faster with less typing.
 
-First, let's see what the levels of `q1` are.
+First, let's see what the "levels" of `q1` are.
 
 ```{r}
 survey_dat$q1 %>% unique()
@@ -110,7 +110,7 @@ survey_dat %>%
 ```
 
 Okay, that doesn't look too impressive but notice that the function: 
-  a) seached each column in the dataset and tested whether the unique values that were a subset of the values in the lvls arguement, 
+  a) searched each column in the dataset and tested whether the unique values that were a subset of the values in the lvls arguement, 
   b) identified `q1`, `q2`, and `q3` as having fitting that criteria, and
   c) transformed those and only those three columns to factors with the appropriate levels
 
