@@ -4,8 +4,7 @@
 \alias{scale_fill_tntp}
 \title{scale_fill_tntp}
 \usage{
-scale_fill_tntp(palette = c("default", "likert_4pt", "likert_5pt",
-  "likert_6pt", "colors_tntp_old"), drop = FALSE, ...)
+scale_fill_tntp(palette = palette_names, drop = FALSE, ...)
 }
 \arguments{
 \item{palette}{One of: "default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_old"}

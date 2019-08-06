@@ -4,8 +4,7 @@
 \alias{palette_tntp_scales}
 \title{scale_palette_tntp}
 \usage{
-palette_tntp_scales(palette = c("default", "likert_4pt", "likert_5pt",
-  "likert_6pt", "colors_tntp_classic"))
+palette_tntp_scales(palette = palette_names)
 }
 \arguments{
 \item{palette}{}

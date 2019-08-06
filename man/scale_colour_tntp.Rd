@@ -5,11 +5,9 @@
 \alias{scale_color_tntp}
 \title{scale_colour_tntp/scale_color_tntp}
 \usage{
-scale_colour_tntp(palette = c("default", "likert_4pt", "likert_5pt",
-  "likert_6pt", "colors_tntp_old"), ...)
+scale_colour_tntp(palette = palette_names, drop = FALSE, ...)
 
-scale_color_tntp(palette = c("default", "likert_4pt", "likert_5pt",
-  "likert_6pt", "colors_tntp_old"), ...)
+scale_color_tntp(palette = palette_names, drop = FALSE, ...)
 }
 \arguments{
 \item{palette}{character string describing the desired palette}
