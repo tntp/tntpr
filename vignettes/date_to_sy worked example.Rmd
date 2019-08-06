@@ -1,13 +1,15 @@
 ---
 title: 'Worked Example: `tntpr::date_to_sy`'
 output:
-  word_document:
-    toc: no
   html_document:
     keep_md: yes
     toc: no
+  word_document:
+    toc: no
 vignette: |
-  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Vignette Title} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup,echo=FALSE, include = FALSE}

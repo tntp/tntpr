@@ -3,7 +3,8 @@ title: "Creating TNTP-style ggplot2 Graphs"
 date: "Generated `r Sys.Date()`"
 output:
   github_document:
-    toc: false
+    toc: true
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
