@@ -2,9 +2,8 @@
 title: "Using the tntpr package"
 date: '`r Sys.Date()`'
 output:
-  github_document:
-    toc: true
-    toc_depth: 3
+  html_document:
+    toc: TRUE
 vignette: >
   %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,7 +12,7 @@ vignette: >
 
 ```{r setup,echo=FALSE, include = FALSE}
 library(knitr)
-knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(error = TRUE, warning = FALSE)
 knitr::opts_chunk$set(out.width='750px', dpi = 300)
 knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
 knitr::opts_chunk$set(fig.path = "introduction_files/")

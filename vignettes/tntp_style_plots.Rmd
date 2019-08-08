@@ -2,11 +2,9 @@
 title: "Creating TNTP-style ggplot2 Graphs"
 date: "Generated `r Sys.Date()`"
 output:
-  github_document:
-    toc: true
-    toc_depth: 3
+  github_document
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Creating TNTP-style ggplot2 Graphs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,7 +41,7 @@ survey_question <- data.frame(question = c(rep("To what extent do you \nagree wi
 
 tntpr now has two ggplot2 themes; the classic `theme_tntp()`, and the updated `theme_tntp_2018()`.
 
-```{r theme_tntp, echo=FALSE}
+```{r theme_tntp, echo=FALSE, warning=FALSE}
 
 ex_plot_default <- performance_data %>%
   ggplot(aes(factor(teacher_experience))) +
@@ -76,15 +74,15 @@ ex_plot_theme_tntp_2018 <- performance_data %>%
 
 ```
 
-```{r, echo=FALSE, fig.width=7}
+```{r, echo=FALSE, warning=FALSE, fig.width=7}
 ex_plot_default
 ```
 
-```{r, echo=FALSE, fig.width=7}
+```{r, echo=FALSE, warning=FALSE, fig.width=7}
 ex_plot_theme_tntp
 ```
 
-```{r, echo=FALSE, fig.width=7}
+```{r, echo=FALSE, warning=FALSE, fig.width=7}
 ex_plot_theme_tntp_2018
 ```
 
@@ -122,7 +120,7 @@ palette_tntp("dark_blue")
 
 ... but now you have a larger selection of colors.
 
-```{r, fig.height= 12, fig.width=5, echo = FALSE}
+```{r, fig.height= 12, fig.width=5, warning=FALSE, echo = FALSE}
 # A one-off function to plot color palettes, see code above if curious
 plot_color_palette(tntpr::colors_tntp, title = "palette_tntp colors")
 ```
@@ -133,17 +131,19 @@ The `palette_tntp_scales()` function provides access to 5 TNTP color scales:
 
 -- `"likert_4pt"`,`"likert_5pt"`, `"likert_6pt"`,and 
 
+-- `"likert_orange_to_green_4pt"`, `"likert_orange_to_green_5pt"`, `"likert_orange_to_green_6pt"`
+
 -- `colors_tntp_classic` (original `palette_tntp` colors from when this package was created years ago).
 
 
-```{r, fig.height= 12, fig.width=7, echo = FALSE}
+```{r, fig.height= 12, fig.width=7, warning=FALSE, echo = FALSE}
 
-palettes <- c("default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_classic")
+palettes <- c("default", "likert_4pt", "likert_5pt", "likert_6pt", "likert_orange_to_green_4pt", "likert_orange_to_green_5pt", "likert_orange_to_green_6pt")
 
 palette_plots <- map(palettes, palette_tntp_scales) %>% 
   map2(palettes, plot_color_palette)
 
-palette_plots[[1]] + (palette_plots[[2]] + palette_plots[[3]] + palette_plots[[4]]) + palette_plots[[5]] + plot_layout(ncol = 1)
+palette_plots[[1]] + (palette_plots[[2]] + palette_plots[[3]] + palette_plots[[4]]) + palette_plots[[5]] + palette_plots[[6]] + palette_plots[[7]] + plot_layout(ncol = 1)
 
 ```
 
@@ -151,7 +151,7 @@ palette_plots[[1]] + (palette_plots[[2]] + palette_plots[[3]] + palette_plots[[4
 
 Supply TNTP-palette scales for filling and coloring.
 
-```{r, fig.width=7, fig.length=5, echo=TRUE}
+```{r, fig.width=7, fig.length=5, warning=FALSE, echo=TRUE}
 performance_data %>%
   ggplot(aes(factor(teacher_experience), fill = factor(y1_performance_quartile))) +
     geom_bar(position = position_fill()) +
@@ -165,7 +165,7 @@ performance_data %>%
   scale_fill_tntp()
 ```
 
-```{r, fig.width=7, fig.length=5, echo=TRUE}
+```{r, fig.width=7, fig.length=5, warning=FALSE, echo=TRUE}
 performance_data %>% 
   ggplot(aes(x = y1_teacher_performance, y = y2_teacher_performance, color = factor(teacher_experience))) + 
     geom_point(size = 2) + 
@@ -181,7 +181,7 @@ performance_data %>%
 
 
 You can specify which color palette you want to use.
-```{r, fig.width=7, fig.length=5, echo = TRUE}
+```{r, fig.width=7, fig.length=5, warning=FALSE, echo = TRUE}
 survey_question %>%
   ggplot(aes(factor(question), fill = factor(answer))) +
   geom_bar(position = position_fill()) +

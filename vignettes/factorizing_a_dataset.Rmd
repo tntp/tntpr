@@ -2,10 +2,9 @@
 title: "Factorizing a survey dataset"
 date: '`r Sys.Date()`'
 output:
-  github_document:
-    toc: false
+  github_document
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Factorizing a survey dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
