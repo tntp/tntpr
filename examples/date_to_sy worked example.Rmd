@@ -2,11 +2,12 @@
 title: 'Worked Example: `tntpr::date_to_sy`'
 output:
   github_document
-vignette: >
-  %\VignetteIndexEntry{Worked Example for date_to_sy function}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
+
+<!-- vignette: > -->
+<!--   %\VignetteIndexEntry{Worked Example for date_to_sy function} -->
+<!--   %\VignetteEngine{knitr::rmarkdown} -->
+<!--   %\VignetteEncoding{UTF-8} -->
 
 ```{r setup,echo=FALSE, include = FALSE}
 library(knitr)

@@ -41,38 +41,3 @@ theme_tntp(show_legend_title = TRUE, base_size = 12,
 \description{
 ggplot2 theme customized for TNTP aesthetics
 }
-\examples{
-library(ggplot2)
-library(extrafont)
-
-p <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
-     colour=factor(gear))) + facet_wrap(~am)
-p
-
-# Major gridlines by default
-p + theme_tntp()
-# Without gridlines
-p + theme_tntp(grid_color = "white")
-# Use left alignment for title
-p + theme_tntp(title_align = "left")
-# Text positions and colors
-ggplot(mtcars, aes(mpg, wt)) +
-geom_point() +
- labs(x        = "Fuel effiiency (mpg)",
-      y        = "Weight (tons)",
-      title    = "Main ggplot2 title",
-      subtitle = "Subtitle for demo plot",
-      caption  = "Brought to you by tntpr") +
- theme_tntp(base_size      = 12,
-            base_family    = "Segoe UI",
-            title_align    = "left",
-            title_color    = "red",
-            title_size     = 12,
-            subtitle_align = "center",
-            subtitle_color = "blue",
-            subtitle_size  = 10,
-            caption_align  = "right",
-            caption_color  = "darkolivegreen4",
-            caption_size   = 8,
-            grid_color     = "gold")
-}

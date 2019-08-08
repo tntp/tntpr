@@ -3,11 +3,12 @@ title: "Factorizing a survey dataset"
 date: '`r Sys.Date()`'
 output:
   github_document
-vignette: >
-  %\VignetteIndexEntry{Factorizing a survey dataset}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
+
+<!-- vignette: > -->
+<!--   %\VignetteIndexEntry{Factorizing a survey dataset} -->
+<!--   %\VignetteEngine{knitr::rmarkdown} -->
+<!--   %\VignetteEncoding{UTF-8} -->
 
 ```{r setup,echo=FALSE, include = FALSE}
 library(knitr)
