@@ -6,6 +6,7 @@
 header_tntp <- function() {
   rstudioapi::insertText("# TITLE: [enter]
 # AUTHOR(S): [enter]
+# DATE: [enter]
 
 # DESCRIPTION: [enter a few comments about what this script does]
 
