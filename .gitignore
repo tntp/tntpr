@@ -6,3 +6,6 @@
 inst/doc
 doc
 Meta
+
+# But not these vignettes
+!doc/introduction.md
