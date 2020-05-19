@@ -11,12 +11,9 @@ License: CC BY-NC-SA 3.0
 LazyData: TRUE
 URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
 Depends:
-    extrafont,
-    ggplot2,
     R (>= 2.10)
 Imports:
     dplyr,
-    formattable,
     janitor,
     knitr,
     lazyeval,
@@ -29,13 +26,11 @@ Imports:
     scales,
     testthat,
     tidyr,
-    labelled,
     usethis,
     ggplot2,
-    extrafont,
     scales,
     rstudioapi,
-    ggrepel,
-    patchwork
+    formattable, 
+    labelled
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
