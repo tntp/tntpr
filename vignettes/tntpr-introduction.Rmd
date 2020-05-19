@@ -1,33 +1,23 @@
 ---
 title: "tntpr Introduction"
-output:
-  github_document:
-    toc: true
-    toc_depth: 3
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{introduction}
+  %\VignetteIndexEntry{tntpr Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup,echo=FALSE, include = FALSE}
-library(knitr)
-knitr::opts_chunk$set(error = TRUE, warning = FALSE)
-knitr::opts_chunk$set(out.width='750px', dpi = 300)
-knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
-knitr::opts_chunk$set(fig.path = "introduction_files/")
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
-
-```{r, include=FALSE}
-# install tntpr if you don't already have it, then load it
-library(devtools) # for install_github()
-if(!require("tntpr")) install_github("tntp/tntpr")
+```{r setup, include=FALSE}
 library(tntpr)
 library(tidyverse)
-library(patchwork)
 ```
-
 
 ## About
 
@@ -123,7 +113,7 @@ palette_tntp_scales(palette = "likert_5pt")
 
 You can use these scale palettes as fill or color aesthetics in ggplot with `scale_fill_tntp` and `scale_color_tntp`.
 
-```{r scale_fill_tntp}
+```{r scale_fill_tntp, fig.width=7, fig.align='center'}
 
 data.frame(question = "To what extent do you agree...", 
            response = c(rep("Strongly disagree", 3), 
