@@ -1,4 +1,4 @@
-Last generated March 29, 2019
+Last generated May 22, 2020
 
 [![Travis-CI Build
 Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
@@ -54,7 +54,7 @@ Using the package
 -----------------
 
 See the
-[vignette](https://github.com/tntp/tntpr/blob/master/vignettes/introduction.md)
+[vignette](https://github.com/tntp/tntpr/blob/master/vignettes/tntpr-introduction.md)
 for demonstrations of how to use these tntpr functions.
 
 Feature Requests and Bug Reports
