@@ -1,6 +1,6 @@
 ---
 title: "tntpr Introduction"
-output: rmarkdown::html_vignette
+output: rmarkdown::github_document
 vignette: >
   %\VignetteIndexEntry{tntpr Introduction}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,0 +1,153 @@
+tntpr Introduction
+================
+
+## About
+
+The `tntpr` package makes data science at TNTP easier and more accurate
+by supplying tools that are needed for common TNTP analyses.
+
+## Package summary
+
+Some of the highlights of the package include:
+
+  - A TNTP-themed RMarkdown template, for starting a new analysis with a
+    shell that can already generate a TNTP-themed .docx report
+  - Functions for initializing a new repository or project folder with
+    TNTP-standard directories and documentation
+  - TNTP-specific ggplot2 themes and color palettes
+  - Survey analysis tools
+  - Wrappers for quickly making typical TNTP-style charts (e.g., bar
+    chart of the distribution of one variable, grouped by a second)
+  - Education-specific data management functions (e.g., `date_to_SY()`
+    to convert continuous hire dates into school years using a specified
+    cutoff date), and a built-in fake student achievement dataset to
+    play with called `wisc`.
+
+## Installing the package
+
+This package is not on CRAN, and probably will not ever be. You’ll need
+to install this package from its GitHub repository. You can add this to
+the top of your analysis script:
+
+    # install tntpr if you don't already have it, then load it
+    library(devtools) # for install_github()
+    if(!require("tntpr")) install_github("tntp/tntpr")
+    library(tntpr)
+
+Once installed, you can update the package with `update_tntpr()`.
+
+## Usage
+
+### Reporting templates
+
+Start your analysis with a good-looking .docx file as output, right off
+the bat. Right now we have just a single TNTP template, “Data Memo”, but
+it can be adapted and improved and if we have other common needs (a
+different set of headings?) those can easily be separate templates.
+
+**To access templates once you’ve installed the tntpr package:** go to
+`File` -\> `New File` -\> `R Markdown` -\> `From Template`. You’ll see a
+choice “Data Memo” from the tntpr package. Just specify the document’s
+file name and the directory you want it in (probably a subfolder of a
+Bitbucket repository) and you’re off\!
+
+A file `tntp-style-file.docx` will be copied into that directory; leave
+it there. That provides the TNTP .docx stylings when you re-knit your R
+Markdown document.
+
+### Setting up repositories and subfolders
+
+This saves time getting started with a new analysis and encourages use
+of common file storage conventions and documentation that make work more
+browsable and transparent.
+
+**Directory conventions**
+
+TNTP’s Bitbucket directory structure is a single repository per client
+or region, with subdirectories in the repository corresponding to
+specific analysis projects. For example:
+
+>   - \<City \#1\>
+>       - <City abbreviation> \<Project \#1 name\>
+>       - <City abbreviation> \<Project \#2 name\>
+>       - <City abbreviation> \<Project \#3 name\>
+>   - \<City or Region \#2\>
+>       - …
+
+**Usage**
+
+After creating a new, empty repo in Bitbucket and cloning it, run
+`setup_repo` to initialize it. This will create a subfolder as well, in
+which you’ll conduct an analysis project.
+
+If the repository already exists, and you just want to begin a new
+analysis project, create the new subdirectory with `setup_subdirectory`.
+
+Both functions take the same arguments, used to setup the project
+subfolder and its README:  
+\- *subfolder*: what the name of the subdirectory should be, e.g.,
+“xyz\_instructional\_audit”  
+\- *proj\_name*: the full name of the analysis project, e.g., “XYZ
+Public Schools Equity Study”. Appears in the README.  
+\- *analyst\_name*: the analyst(s) working on this project. Appears in
+the README.
+
+`setup_repo` will also add a `.Rproj` RProject file, `.gitignore` file,
+and create a README.Md file for the main repository.
+
+### TNTP colors
+
+You can access the official TNTP-branded colors using `palette_tntp()`.
+This will return a vector with hex code for our colors:
+
+``` r
+palette_tntp("dark_blue", "orange", "light_gray")
+#> [1] "#034772" "#EA8936" "#C1C2C4"
+```
+
+Or you can select a specific TNTP palette (`"default"`,
+`"colors_tntp_classic"`, `"likert_4pt"`, `"likert_5pt"`, or
+`"likert_6pt"`) with `palette_tntp_scales` and return a vector with hex
+codes for that TNTP palette.
+
+``` r
+palette_tntp_scales(palette = "likert_5pt")
+#>  likert_7  likert_6  likert_4  likert_2  likert_1 
+#> "#00a4c7" "#81d2eb" "#e6e7e7" "#ffc72f" "#ea8835"
+```
+
+You can use these scale palettes as fill or color aesthetics in ggplot
+with `scale_fill_tntp` and `scale_color_tntp`.
+
+``` r
+
+data.frame(question = "To what extent do you agree...", 
+           response = c(rep("Strongly disagree", 3), 
+                        rep("Disagree", 4), 
+                        rep("Somewhat disagree", 3), 
+                        rep("Somewhat agree", 4),  
+                        rep("Agree", 10), 
+                        rep("Strongly agree", 2))) %>% 
+  mutate(response = response %>% factor(levels = rev(c("Strongly disagree", 
+                                                   "Disagree", 
+                                                   "Somewhat disagree", 
+                                                   "Somewhat agree",
+                                                   "Agree", 
+                                                   "Strongly agree")))) %>% 
+  ggplot(aes(question, fill = response)) + 
+    geom_bar(position = position_fill()) + 
+    theme_tntp_2018(axis_text = "Y", grid = FALSE) + 
+    labs(x = NULL, y = NULL, 
+         fill = "Response") + 
+    coord_flip() + 
+    scale_fill_tntp(palette = "likert_6pt")
+#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
+
+#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
+
+#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
+
+#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
+```
+
+<img src="tntpr-introduction_files/figure-gfm/scale_fill_tntp-1.png" style="display: block; margin: auto;" />
