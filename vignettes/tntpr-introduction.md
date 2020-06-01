@@ -141,13 +141,6 @@ data.frame(question = "To what extent do you agree...",
          fill = "Response") + 
     coord_flip() + 
     scale_fill_tntp(palette = "likert_6pt")
-#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
-
-#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
-
-#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
-
-#> Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font family not found in Windows font database
 ```
 
 <img src="tntpr-introduction_files/figure-gfm/scale_fill_tntp-1.png" style="display: block; margin: auto;" />
