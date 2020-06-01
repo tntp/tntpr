@@ -113,7 +113,7 @@ palette_tntp_scales(palette = "likert_5pt")
 
 You can use these scale palettes as fill or color aesthetics in ggplot with `scale_fill_tntp` and `scale_color_tntp`.
 
-```{r scale_fill_tntp, fig.width=7, fig.align='center'}
+```{r scale_fill_tntp, fig.width=7, fig.align='center', warning=FALSE}
 
 data.frame(question = "To what extent do you agree...", 
            response = c(rep("Strongly disagree", 3), 
