@@ -3,7 +3,7 @@ Type: Package
 Title: Data Analysis Tools Customized for TNTP
 Version: 0.1.1
 Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb], Dustin Pashouwer [ctb], Kate Mullan [ctb]
-Maintainer: Jake Russ <jake.russ@tntp.org>
+Maintainer: Dustin Pashouwer <dustin.pashouwer@tntp.org>
 Description: An internal TNTP R package that includes functions and templates
     customized with TNTP branding. It is intended for this R package to be a
     one-stop shop for R tools by analysts and other data users at TNTP.
@@ -31,6 +31,7 @@ Imports:
     scales,
     rstudioapi,
     formattable, 
-    labelled
+    labelled,
+    extrafont
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
