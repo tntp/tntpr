@@ -6,9 +6,16 @@
 \usage{
 show_tntp_colors(palette = "all")
 }
+\arguments{
+\item{palette}{Default is 'all' tntp colors, but can also select a specific
+palette by passing either 'likert' or 'likert_orange_to_green}
+}
 \value{
 
 }
 \description{
-Show TNTP color palette
+A quick and dirty way to show tntp colors in a plot.
+}
+\examples{
+show_tntp_colors(palette = "likert")
 }

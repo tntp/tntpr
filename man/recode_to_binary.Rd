@@ -4,8 +4,12 @@
 \alias{recode_to_binary}
 \title{Recode a variable into binary groups, e.g., "Top-2" and "Not in Top-2".}
 \usage{
-recode_to_binary(x, to_match = c("strongly agree", "agree"),
-  label_matched = "Selected", label_unmatched = "Not selected")
+recode_to_binary(
+  x,
+  to_match = c("strongly agree", "agree"),
+  label_matched = "Selected",
+  label_unmatched = "Not selected"
+)
 }
 \arguments{
 \item{x}{the character or factor vector to be recoded}
