@@ -186,10 +186,37 @@ update_geom_font_defaults <- function(family="Segoe UI", face="plain", size=3.5,
   update_geom_defaults("label", list(family=family, face=face, size=size, color=color))
 }
 
+#' Import Segoe UI Condensed font for use in charts
+#'
+#' There is an option `tntpr.loadfonts` which -- if set to `TRUE` -- will
+#' call `extrafont::loadfonts()` to register non-core fonts with R PDF & PostScript
+#' devices. If you are running under Windows, the package calls the same function
+#' to register non-core fonts with the Windows graphics device.
+#'
+#' @md
+#' @note This will take care of ensuring PDF/PostScript usage. The location of the
+#'   font directory is displayed after the base import is complete. It is highly
+#'   recommended that you install them on your system the same way you would any
+#'   other font you wish to use in other programs.
+#' @export
+import_segoe_ui <- function() {
+
+  segoe_font_dir <- system.file("fonts", "segoe-ui", package="tntpr")
+
+  suppressWarnings(suppressMessages(extrafont::font_import(segoe_font_dir, prompt=FALSE)))
+
+  message(
+    sprintf(
+      "You will likely need to install these fonts on your system as well.\n\nYou can find them in [%s]",
+      segoe_font_dir)
+  )
+
+}
+
 #' @rdname SegoeUI
 #' @md
 #' @title Segoe UI font name R variable aliases
 #' @description `font_an` == "`Segoe UI`"
 #' @format length 1 character vector
 #' @export
-font_an <- "Segoe UI"
+font_se <- "Segoe UI"
