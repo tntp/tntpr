@@ -21,8 +21,8 @@
   }
 
   fnt <- extrafont::fonttable()
-  if (!any(grepl("Arial[ ]Narrow|Roboto[ ]Condensed", fnt$FamilyName))) {
-    packageStartupMessage("NOTE: Segue fonts are required to use this theme.")
+  if (!any(grepl("Segoe", fnt$FamilyName))) {
+    packageStartupMessage("NOTE: Segoe fonts are required to use this theme.")
     packageStartupMessage("      Please use tntpr::import_segoe_ui() to install Segoe UI")
   } # nocov end
 
