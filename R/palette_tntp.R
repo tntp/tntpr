@@ -175,7 +175,19 @@ scale_color_tntp <- scale_colour_tntp
 #' scale_fill_tntp
 #'
 #' @param palette One of: "default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_old"
-#' @param ...
+#' @param ... additional arguments passed to ggplot2::discrete_scale()
+#' @examples
+#' library(ggplot2)
+#' library(dplyr)
+#'
+#' x <- mtcars %>%
+#'   count(cyl, am) %>%
+#'   mutate(am = as.factor(am))
+#'
+#' ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
+#'   geom_col() +
+#'   scale_fill_tntp()
+
 #'
 #' @export
 #'
