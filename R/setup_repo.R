@@ -113,7 +113,7 @@ setup_subdirectory <- function(subfolder, proj_name, analyst_name){
   }
   if(!any(grepl(".gitignore", existing_files))){
     to_ignore <- c(
-      ".Rhistory", ".RData", ".Rproj.user" # set RStudio to not store .Rhistory
+      ".Rhistory", ".RData", ".Rproj.user", "~$*" # set RStudio to not store .Rhistory
       # and .RData ... but just in case someone didn't
     )
     usethis::use_git_ignore(ignores = to_ignore)
