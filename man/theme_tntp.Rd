@@ -4,12 +4,21 @@
 \alias{theme_tntp}
 \title{TNTP's ggplot2 theme}
 \usage{
-theme_tntp(show_legend_title = TRUE, base_size = 12,
-  base_family = "Segoe UI", grid_color = "grey93",
-  title_align = "center", title_color = "black", title_size = 12,
-  subtitle_align = "center", subtitle_color = "black",
-  subtitle_size = 12, caption_align = "right",
-  caption_color = "black", caption_size = 12)
+theme_tntp(
+  show_legend_title = TRUE,
+  base_size = 12,
+  base_family = "Segoe UI",
+  grid_color = "grey93",
+  title_align = "center",
+  title_color = "black",
+  title_size = 12,
+  subtitle_align = "center",
+  subtitle_color = "black",
+  subtitle_size = 12,
+  caption_align = "right",
+  caption_color = "black",
+  caption_size = 12
+)
 }
 \arguments{
 \item{show_legend_title}{logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.}

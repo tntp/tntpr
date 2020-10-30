@@ -4,9 +4,19 @@
 \alias{bar_chart_counts}
 \title{Bar chart of counts with TNTP polish}
 \usage{
-bar_chart_counts(df, var, group_var, labels = "n",
-  var_color = "medium_blue", group_colors, title = NULL, var_label,
-  digits = 1, font = "Segoe UI", font_size = 12)
+bar_chart_counts(
+  df,
+  var,
+  group_var,
+  labels = "n",
+  var_color = "medium_blue",
+  group_colors,
+  title = NULL,
+  var_label,
+  digits = 1,
+  font = "Segoe UI",
+  font_size = 12
+)
 }
 \arguments{
 \item{df}{the data.frame to be used in the bar chart}

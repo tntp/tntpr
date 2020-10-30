@@ -30,8 +30,10 @@ Imports:
     ggplot2,
     scales,
     rstudioapi,
-    formattable, 
+    formattable,
     labelled,
-    extrafont
-RoxygenNote: 6.1.1
+    extrafont,
+    grDevices,
+    tibble
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

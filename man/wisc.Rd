@@ -4,7 +4,8 @@
 \name{wisc}
 \alias{wisc}
 \title{Fake student data from the Wisconsin State Dept. of Ed}
-\format{A data frame with 2700 rows and 26 variables:
+\format{
+A data frame with 2700 rows and 26 variables:
 \describe{
   \item{student_id}{numeric: student's unique ID #}
   \item{grade}{numeric: grade level}
@@ -26,7 +27,8 @@
   \item{proflvl}{factor: student's proficiency level}
   \item{race}{factor: student's single-category race}
   ...
-}}
+}
+}
 \source{
 \url{https://github.com/jknowles/r_tutorial_ed/}, posted under a Creative Commons license. The script used to generate the data set is here, although not very well documented: \url{https://github.com/jknowles/r_tutorial_ed/blob/master/data/simulate_data.R}
 }
