@@ -14,10 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, include=FALSE}
-library(tntpr)
-library(tidyverse)
-```
+# ```{r setup, include=FALSE}
+# library(tntpr)
+# library(tidyverse)
+# ```
 
 ## About
 
@@ -44,6 +44,17 @@ This package is not on CRAN, and probably will not ever be.  You'll need to inst
 library(devtools) # for install_github()
 if(!require("tntpr")) install_github("tntp/tntpr")
 library(tntpr)
+```
+
+```{r, include = FALSE}
+# install tntpr if you don't already have it, then load it
+library(devtools) # for install_github()
+if(!require("tntpr")) install_github("tntp/tntpr")
+library(tntpr)
+library(magrittr)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
 ```
 
 Once installed, you can update the package with `update_tntpr()`.
