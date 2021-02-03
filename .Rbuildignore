@@ -5,3 +5,4 @@ README.Rmd       # An Rmarkdown file used to generate README.md
 README.html
 ^doc$
 ^Meta$
+^LICENSE\.md$

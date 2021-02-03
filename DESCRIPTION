@@ -7,33 +7,31 @@ Maintainer: Dustin Pashouwer <dustin.pashouwer@tntp.org>
 Description: An internal TNTP R package that includes functions and templates
     customized with TNTP branding. It is intended for this R package to be a
     one-stop shop for R tools by analysts and other data users at TNTP.
-License: CC BY-NC-SA 3.0
-LazyData: TRUE
-URL: https://tools.tntp.org/bitbucket/projects/CT/repos/tntpr/
+License: CC BY 4.0
+URL: https://github.com/tntp/tntpr
 Depends:
-    R (>= 2.10)
-Imports:
-    dplyr,
-    janitor,
-    knitr,
-    lazyeval,
-    lubridate,
-    magrittr,
-    pacman,
-    plyr,
-    purrr,
-    rmarkdown,
-    scales,
-    testthat,
-    tidyr,
-    usethis,
-    ggplot2,
-    scales,
+    R (>= 3.2)
+Imports: 
+    dplyr (>= 0.8.3),
+    forcats (>= 0.4.0),
+    ggplot2 (>= 3.2.1),
+    lubridate (>= 1.7.4),
+    magrittr (>= 1.5),
+    purrr (>= 0.3.3),
+    stringr (>= 1.4.0),
+    tibble (>= 2.1.3),
+    tidyr (>= 1.0.0),
     rstudioapi,
-    formattable,
-    labelled,
-    extrafont,
     grDevices,
-    tibble
+    xopen,
+    formattable,
+    janitor
+Suggests: 
+    rmarkdown,
+    testthat,
+    knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 7.1.1
-VignetteBuilder: knitr

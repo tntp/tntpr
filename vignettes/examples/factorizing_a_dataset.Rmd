@@ -1,0 +1,157 @@
+---
+title: "Factorizing a survey dataset"
+date: '`r Sys.Date()`'
+output:
+  github_document
+---
+
+<!-- vignette: > -->
+<!--   %\VignetteIndexEntry{Factorizing a survey dataset} -->
+<!--   %\VignetteEngine{knitr::rmarkdown} -->
+<!--   %\VignetteEncoding{UTF-8} -->
+
+```{r setup,echo=FALSE, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(out.width='750px', dpi = 300)
+knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
+knitr::opts_chunk$set(fig.path = "introduction_files/")
+```
+
+```{r load_packages, include = FALSE}
+library(pacman)
+if(!require("tntpr")) install_github("tntp/tntpr"); library(tntpr)
+p_load(tidyverse, janitor, praise)
+```
+
+```{r example_data, echo=FALSE, include=FALSE}
+qtype_1 <- c("Strongly Disagree", "Disagree", "Somewhat disagree", "Somewhat agree", "Agree", "Strongly agree")
+qtype_2 <- c("Strongly Disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree")
+qtype_3 <- c("No", "Yes")
+
+survey_dat <- tibble(response_id = 1:100, 
+                     years_of_experience = round(runif(100) * 10, digits = 0), 
+                     q1 = sample(qtype_1, 100, replace = TRUE), 
+                     q2 = sample(qtype_1 %>% str_remove("Strongly disagree"), 100, replace = TRUE), 
+                     q3 = sample(qtype_1, 100, replace = TRUE), 
+                     q4 = replicate(100, praise()), 
+                     q5 = sample(qtype_2, 100, replace = TRUE), 
+                     q6 = sample(qtype_2, 100, replace = TRUE), 
+                     q7 = replicate(100, praise("${Exclamation}! ${EXCLAMATION}!-${EXCLAMATION}! This is just ${adjective}!")),
+                     q8 = sample(qtype_3, 100, replace = TRUE),
+                     q9 = sample(qtype_3, 100, replace = TRUE))
+
+```
+
+## Worked Example
+
+Imagine you conduct a survey and are about to analyze the data. One of the first steps in the data cleaning process is to "factorize" the dataset. R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Usually this is one of the most manual, error-prone parts of the data-cleaning process.
+
+Below is a workflow I use that might be helpful for others. I use a couple functions that may be new to you.
+
+- `glimpse`: This function makes it possible to see every column in a data frame. It shows columns run down the page and data runs across.
+
+- `map`: The purrr version of the apply functions. Transforms the input by applying a function to each element and returning a vector the same length as the input. In this example, I use the map function with a data frame as an arguement. In this case, the inputs are the variable vectors and map applies the function across these variable vectors.
+
+- `factorize_df`: examines each column in a data.frame; when it finds a column composed solely of the values provided to the `lvls` argument it updates them to be factor variables, with levels in the order provided.
+
+### Step 1: Identify which variables should be factors.
+
+Admittedly, this part usually takes some knowledge of the dataset and/or exploratory perusing of the dataset. Let's first use `glimpse` to take a look at the dataset.
+
+```{r}
+survey_dat %>% 
+  glimpse()
+```
+
+First thing I notice is all the question variables are character vectors. Since I know some of the questions where multiple-choice questions, it's likely some of these should be converted to factors.
+
+One thing you could try is seeing how many unique values each variable has. 
+
+```{r}
+survey_dat %>% 
+  map(unique) %>% 
+  map(length)
+```
+
+Here I notice `response_id`, `q4`, and `q7` have 50+ unique values and should likely not be transformed to factors. Knowing the dataset, I think `response_id` should probably be a character data type but will not do that in this example.  Finally, since each `q1`, `q2`, `q3`, `q5`, `q6`, `q8`, and `q9` are "variables that have a fixed and known set of possible values" they are likely candidates to be factors.
+
+Next, I'll see what the unique values are for these variables.
+
+```{r}
+survey_dat %>% 
+  select(q1, q2, q3, q5, q6, q8, q9) %>% 
+  map(unique)
+```
+
+Aha! These do indeed look like factors.
+
+### Step 2: Transform to factors with appropriate level ordering.
+
+Here a lot of people would `mutate` their dataset with a series of factor(., levels = c(...)) mutations. This works, but let's use `factorize_df` to help us do this faster with less typing.
+
+First, let's see what the "levels" of `q1` are.
+
+```{r}
+survey_dat$q1 %>% unique()
+```
+
+Okay, looks like a 6-pt likert agreement scale. Let's pass these levels through the `factorize_df` function (in order) as the lvls arguement.
+
+```{r}
+survey_dat <- survey_dat %>% 
+  factorize_df(lvls = c("Strongly Disagree", "Disagree", "Somewhat disagree", "Somewhat agree", "Agree", "Strongly agree"))
+
+survey_dat %>% 
+  glimpse()
+
+survey_dat %>% 
+  map(levels)
+```
+
+Okay, that doesn't look too impressive but notice that the function: 
+  a) searched each column in the dataset and tested whether the unique values that were a subset of the values in the lvls arguement, 
+  b) identified `q1`, `q2`, and `q3` as having fitting that criteria, and
+  c) transformed those and only those three columns to factors with the appropriate levels
+
+Next I can move onto the next factor `q5`.
+
+```{r}
+survey_dat$q5 %>% unique()
+```
+
+```{r}
+survey_dat <- survey_dat %>% 
+  factorize_df(lvls = c("Strongly Disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))
+```
+
+And finally `q8`.
+
+```{r}
+survey_dat$q8 %>% unique()
+```
+
+```{r}
+survey_dat <- survey_dat %>% 
+  factorize_df(lvls = c("No", "Yes"))
+```
+
+### Step 3: Check if factorizing worked like you intended.
+
+Okay we said we needed to change `q1`, `q2`, `q3`, `q5`, `q6`, `q8`, and `q9` to factors. Let's verify this worked.
+
+```{r}
+survey_dat %>% 
+  select(q1, q2, q3, q5, q6, q8, q9) %>% 
+  map(is.factor)
+```
+
+They're all factors...
+
+```{r}
+survey_dat %>% 
+  select(q1, q2, q3, q5, q6, q8, q9) %>% 
+  map(levels)
+```
+
+... with the correct levels and level order. And voila, a 'factorized' dataset.
