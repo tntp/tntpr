@@ -25,7 +25,8 @@ Imports:
     grDevices,
     xopen,
     formattable,
-    janitor
+    janitor,
+    devtools
 Suggests: 
     rmarkdown,
     testthat,

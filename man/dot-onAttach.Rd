@@ -2,7 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{.onAttach}
 \alias{.onAttach}
-\title{Loadfonts when the package loads}
+\title{Title}
 \usage{
 .onAttach(libname, pkgname)
 }
@@ -13,5 +13,5 @@
 
 }
 \description{
-Loadfonts when the package loads
+Title
 }

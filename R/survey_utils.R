@@ -7,7 +7,7 @@
 #'
 #' @param x the character or factor vector to be recoded
 #' @param to_match a character vector with the strings that should be put in the first level of the factor.  Defaults to "strongly agree" and "agree" but can be overwritten.
-#' @param label_matches what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"
+#' @param label_matched what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"
 #' @param label_unmatched what should be the factor label of values that don't match the strings specified in \code{to_match}?  Defaults to "Not selected".
 #' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.
 #' @export
@@ -28,7 +28,6 @@
 
 #' freq <- c("always", "often", "sometimes", "never")
 #' recode_to_binary(freq, "always", "always", "less than always")
-
 recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_matched = "Selected", label_unmatched = "Not selected"){
 
   if(!is.character(to_match)){ stop ("You must supply a character or factor vector to the to_match argument") }

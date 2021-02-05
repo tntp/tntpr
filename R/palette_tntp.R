@@ -104,12 +104,56 @@ colors_tntp <- c(# classic colors
                  likert_orange_to_green_6 = "#8ebf3f",
                  likert_orange_to_green_7 = "#6a8f2f")
 
+
+
+#' Classic pallette
+#'
+#' @examples
+#' \dontrun{
+#'  colors_tntp_classic
+#' }
+#' @export
+"colors_tntp_classic"
 colors_tntp_classic <- colors_tntp[1:14]
+
+#' Default pallette
+#'
+#' @examples
+#' \dontrun{
+#'  colors_tntp_default
+#' }
+#' @export
+"colors_tntp_default"
 colors_tntp_default <- colors_tntp[15:26]
+
+#' Likert pallette
+#'
+#' @examples
+#' \dontrun{
+#'  colors_tntp_likert
+#' }
+#' @export
+"colors_tntp_likert"
 colors_tntp_likert <- colors_tntp[27:33]
+
+#' Likert orange to green pallette
+#'
+#' @examples
+#' \dontrun{
+#'  colors_tntp_likert_orange_to_green
+#' }
+#' @export
+"colors_tntp_likert_orange_to_green"
 colors_tntp_likert_orange_to_green <- colors_tntp[34:40]
 
-
+#' Pallette names
+#'
+#' @examples
+#' \dontrun{
+#'  palette_names
+#' }
+#' @export
+"palette_names"
 palette_names <- c("default",
                    "likert_4pt",
                    "likert_5pt",
@@ -121,7 +165,7 @@ palette_names <- c("default",
 
 #' scale_palette_tntp
 #'
-#' @param palette
+#' @param palette the palette
 #'
 #' @export
 #'
@@ -167,14 +211,15 @@ scale_colour_tntp <- function (palette = palette_names,
 
 #' @rdname scale_colour_tntp
 #' @aliases scale_colour_tntp
+#' @param drop drop
+#' @param ... other arguments to pass through to ggplot2::discrete_scale()
 #' @export
-
-
 scale_color_tntp <- scale_colour_tntp
 
 #' scale_fill_tntp
 #'
 #' @param palette One of: "default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_old"
+#' @param drop drop
 #' @param ... additional arguments passed to ggplot2::discrete_scale()
 #' @examples
 #' library(ggplot2)
