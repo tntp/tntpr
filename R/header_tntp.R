@@ -13,7 +13,7 @@ header_tntp <- function() {
 # Load packages - first pacman, installing if necessary, then others
 if (!require(\"pacman\")) install.packages(\"pacman\"); library(pacman)
 pacman::p_load(here, readxl, tidyverse, janitor) # add more here as needed
-pacman::p_laod_gh(tntp/tntpr, amaier/reviewr, adamMaier/tntpmetrics)
+pacman::p_load_gh(\"tntp/tntpr\", \"amaier/reviewr\", \"adamMaier/tntpmetrics\")
 
 # Load data
 
