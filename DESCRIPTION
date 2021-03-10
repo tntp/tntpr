@@ -27,7 +27,8 @@ Imports:
     formattable,
     janitor,
     devtools,
-    extrafont
+    extrafont,
+    labelled
 Suggests: 
     rmarkdown,
     testthat,
