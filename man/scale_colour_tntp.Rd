@@ -12,6 +12,8 @@ scale_color_tntp(palette = palette_names, drop = FALSE, ...)
 \arguments{
 \item{palette}{character string describing the desired palette}
 
+\item{drop}{drop}
+
 \item{...}{other arguments to pass through to ggplot2::discrete_scale()}
 }
 \description{

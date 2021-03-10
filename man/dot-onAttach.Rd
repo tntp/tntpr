@@ -7,7 +7,9 @@
 .onAttach(libname, pkgname)
 }
 \arguments{
-\item{pkgname}{}
+\item{libname}{library name}
+
+\item{pkgname}{package name}
 }
 \value{
 

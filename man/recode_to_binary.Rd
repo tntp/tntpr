@@ -16,9 +16,9 @@ recode_to_binary(
 
 \item{to_match}{a character vector with the strings that should be put in the first level of the factor.  Defaults to "strongly agree" and "agree" but can be overwritten.}
 
-\item{label_unmatched}{what should be the factor label of values that don't match the strings specified in \code{to_match}?  Defaults to "Not selected".}
+\item{label_matched}{what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"}
 
-\item{label_matches}{what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"}
+\item{label_unmatched}{what should be the factor label of values that don't match the strings specified in \code{to_match}?  Defaults to "Not selected".}
 }
 \value{
 a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.

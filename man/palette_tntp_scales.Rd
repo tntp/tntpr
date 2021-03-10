@@ -7,7 +7,7 @@
 palette_tntp_scales(palette = palette_names)
 }
 \arguments{
-\item{palette}{}
+\item{palette}{the palette}
 }
 \description{
 scale_palette_tntp
