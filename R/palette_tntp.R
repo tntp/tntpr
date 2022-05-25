@@ -56,15 +56,15 @@ palette_tntp <- function(...) {
 #' @export
 "colors_tntp"
 colors_tntp <- c(# classic colors
-                 dark_blue   = "#034772",
-                 medium_blue = "#2888BC",
-                 light_blue  = "#73B7CE",
-                 green       = "#699D46",
-                 orange      = "#EA8936",
-                 gold        = "#F9C347",
+                 dark_blue   = "#00355F",
+                 medium_blue = "#00A4C7",
+                 light_blue  = "#81D2EB",
+                 green       = "#8EBF3E",
+                 orange      = "#EA8835",
+                 gold        = "#FFC723",
                  # Support alternative spellings
-                 dark_grey   = "#58595B",
-                 dark_gray   = "#58595B",
+                 dark_grey   = "#404041",
+                 dark_gray   = "#404041",
                  medium_grey = "#7D7E81",
                  medium_gray = "#7D7E81",
                  light_grey  = "#C1C2C4",
@@ -73,18 +73,19 @@ colors_tntp <- c(# classic colors
                  black       = "#000000",
 
                  # default palette
-                 default_1 = "#00a4c7",
-                 default_2 = "#ffc72f",
-                 default_3 = "#81d2eb",
-                 default_4 = "#ea8835",
-                 default_5 = "#8ebf3f",
-                 default_6 = "#c0c2c4",
-                 default_7 = "#006277",
-                 default_8 = "#1e97bc",
-                 default_9 = "#b58400",
-                 default_10 = "#9c5010",
-                 default_11 = "#557326",
-                 default_12 = "#717478",
+                 default_1 = "#00A4C7", # medium_blue
+                 default_2 = "#FFC723", # gold
+                 default_3 = "#81D2EB", # light_blue
+                 default_4 = "#7D7E81", # medium_grey,
+                 default_5 = "#EA8835", # orange
+                 default_6 = "#8EBF3E", # green
+                 default_7 = "#C1C2C4", # light_grey
+                 default_8 = "#006277", # turquoise (not in brand guide)
+                 default_9 = "#1e97bc", # darker medium blue (not in brand guide)
+                 default_10 = "#b58400", # rust (not in brand guide)
+                 default_11 = "#9c5010", # dark rust (not in brand guide)
+                 default_12 = "#557326", # dark green (not in brand guide)
+
 
                  # likert orange to blue
                  likert_1 = "#ea8835",
@@ -243,4 +244,3 @@ scale_fill_tntp <- function (palette = palette_names,
   palette <- match.arg(palette)
   discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }
-
