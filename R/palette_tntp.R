@@ -81,29 +81,29 @@ colors_tntp <- c(# classic colors
                  default_6 = "#8EBF3E", # green
                  default_7 = "#C1C2C4", # light_grey
                  default_8 = "#006277", # turquoise (not in brand guide)
-                 default_9 = "#1e97bc", # darker medium blue (not in brand guide)
-                 default_10 = "#b58400", # rust (not in brand guide)
-                 default_11 = "#9c5010", # dark rust (not in brand guide)
+                 default_9 = "#1E97BC", # darker medium blue (not in brand guide)
+                 default_10 = "#B58400", # rust (not in brand guide)
+                 default_11 = "#9C5010", # dark rust (not in brand guide)
                  default_12 = "#557326", # dark green (not in brand guide)
 
 
                  # likert orange to blue
-                 likert_1 = "#ea8835",
-                 likert_2 = "#ffc72f",
-                 likert_3 = "#ffe9ac",
-                 likert_4 = "#e6e7e7",
-                 likert_5 = "#cdedf7",
-                 likert_6 = "#81d2eb",
-                 likert_7 = "#00a4c7",
+                 likert_1 = "#EA8835",
+                 likert_2 = "#FFC72F",
+                 likert_3 = "#FFE9AC",
+                 likert_4 = "#E6E7E7",
+                 likert_5 = "#CDEDF7",
+                 likert_6 = "#81D2EB",
+                 likert_7 = "#00A4C7",
 
                  # likert orange to green
-                 likert_orange_to_green_1 = "#c36414",
-                 likert_orange_to_green_2 = "#ea8835",
-                 likert_orange_to_green_3 = "#f7cfae",
-                 likert_orange_to_green_4 = "#e6e7e7",
-                 likert_orange_to_green_5 = "#d2e6b2",
-                 likert_orange_to_green_6 = "#8ebf3f",
-                 likert_orange_to_green_7 = "#6a8f2f")
+                 likert_orange_to_green_1 = "#C36414",
+                 likert_orange_to_green_2 = "#EA8835",
+                 likert_orange_to_green_3 = "#F7CFAE",
+                 likert_orange_to_green_4 = "#E6E7E7",
+                 likert_orange_to_green_5 = "#D2E6B2",
+                 likert_orange_to_green_6 = "#8EBF3F",
+                 likert_orange_to_green_7 = "#6A8F2F")
 
 
 
