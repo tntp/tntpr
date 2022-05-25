@@ -80,11 +80,11 @@ colors_tntp <- c(# classic colors
                  default_5 = "#EA8835", # orange
                  default_6 = "#8EBF3E", # green
                  default_7 = "#C1C2C4", # light_grey
-                 default_8 = "#006277", # turquoise (not in brand guide)
-                 default_9 = "#1E97BC", # darker medium blue (not in brand guide)
-                 default_10 = "#B58400", # rust (not in brand guide)
-                 default_11 = "#9C5010", # dark rust (not in brand guide)
-                 default_12 = "#557326", # dark green (not in brand guide)
+                 # default_8 = "#006277", # turquoise (not in brand guide)
+                 # default_9 = "#1E97BC", # darker medium blue (not in brand guide)
+                 # default_10 = "#B58400", # rust (not in brand guide)
+                 # default_11 = "#9C5010", # dark rust (not in brand guide)
+                 # default_12 = "#557326", # dark green (not in brand guide)
 
 
                  # likert orange to blue
