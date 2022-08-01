@@ -33,7 +33,6 @@ palette_tntp <- function(...) {
   # TNTP colors
   colors_tntp
 
-
   # Throw an error if supplied color doesn't exist
   supplied_colors <- c(...)
 
@@ -55,77 +54,81 @@ palette_tntp <- function(...) {
 #' }
 #' @export
 "colors_tntp"
-colors_tntp <- c(# classic colors
+colors_tntp <- c(# TNTPPalette
                  dark_blue   = "#00355F",
                  medium_blue = "#00A4C7",
                  light_blue  = "#81D2EB",
-                 green       = "#8EBF3E",
-                 orange      = "#EA8835",
-                 gold        = "#FFC723",
-                 # Support alternative spellings
                  dark_grey   = "#404041",
-                 dark_gray   = "#404041",
+                 dark_gray   = "#404041", # Support alternative spellings
                  medium_grey = "#7D7E81",
-                 medium_gray = "#7D7E81",
+                 medium_gray = "#7D7E81", # Support alternative spellings
                  light_grey  = "#C1C2C4",
-                 light_gray  = "#C1C2C4",
+                 light_gray  = "#C1C2C4", # Support alternative spellings
+                 orange      = "#EA8835",
+                 green       = "#8EBF3E",
+                 gold        = "#FFC723",
+
                  white       = "#FFFFFF",
                  black       = "#000000",
 
-                 # default palette
-                 default_1 = "#00A4C7", # medium_blue
-                 default_2 = "#FFC723", # gold
-                 default_3 = "#81D2EB", # light_blue
-                 default_4 = "#7D7E81", # medium_grey,
-                 default_5 = "#EA8835", # orange
-                 default_6 = "#8EBF3E", # green
-                 default_7 = "#C1C2C4", # light_grey
-                 # default_8 = "#006277", # turquoise (not in brand guide)
-                 # default_9 = "#1E97BC", # darker medium blue (not in brand guide)
-                 # default_10 = "#B58400", # rust (not in brand guide)
-                 # default_11 = "#9C5010", # dark rust (not in brand guide)
-                 # default_12 = "#557326", # dark green (not in brand guide)
+                 # TNTPPaletteExtended
+                 blue_5 = "#00486B",
+                 blue_4 = "#007699",
+                 blue_3 = "#00A4C7",
+                 blue_2 = "#2DD1F4",
+                 blue_1 = "#AEFFFF",
+
+                 orange_5 = "#8E2C00",
+                 orange_4 = "#BC5A07",
+                 orange_3 = "#EA8835",
+                 orange_2 = "#FFB562",
+                 orange_1 = "#FFE390",
+
+                 green_5 = "#326300",
+                 green_4 = "#609110",
+                 green_3 = "#8EBF3E",
+                 green_2 = "#BBEC6B",
+                 green_1 = "#E9FF99",
+
+                 gold_5 = "#A36B00",
+                 gold_4 = "#D19900",
+                 gold_3 = "#FFC72E",
+                 gold_2 = "#FFF45B",
+                 gold_1 = "#FFFF89"
+
+                 )
 
 
-                 # likert orange to blue
-                 likert_1 = "#EA8835",
-                 likert_2 = "#FFC72F",
-                 likert_3 = "#FFE9AC",
-                 likert_4 = "#E6E7E7",
-                 likert_5 = "#CDEDF7",
-                 likert_6 = "#81D2EB",
-                 likert_7 = "#00A4C7",
-
-                 # likert orange to green
-                 likert_orange_to_green_1 = "#C36414",
-                 likert_orange_to_green_2 = "#EA8835",
-                 likert_orange_to_green_3 = "#F7CFAE",
-                 likert_orange_to_green_4 = "#E6E7E7",
-                 likert_orange_to_green_5 = "#D2E6B2",
-                 likert_orange_to_green_6 = "#8EBF3F",
-                 likert_orange_to_green_7 = "#6A8F2F")
-
-
-
-#' Classic pallette
+#' TNTP pallette
 #'
 #' @examples
 #' \dontrun{
-#'  colors_tntp_classic
+#'  colors_tntp_palette
 #' }
 #' @export
-"colors_tntp_classic"
-colors_tntp_classic <- colors_tntp[1:14]
+"colors_tntp_palette"
+colors_tntp_palette <-
+  c(
+    colors_tntp["medium_blue"],
+    colors_tntp["light_blue"],
+    colors_tntp["gold"],
+    colors_tntp["green"],
+    colors_tntp["orange"],
+    colors_tntp["light_grey"],
 
-#' Default pallette
-#'
-#' @examples
-#' \dontrun{
-#'  colors_tntp_default
-#' }
-#' @export
-"colors_tntp_default"
-colors_tntp_default <- colors_tntp[15:26]
+    colors_tntp["dark_blue"],
+    colors_tntp["medium_grey"],
+    colors_tntp["gold_2"],
+    colors_tntp["green_2"],
+    colors_tntp["orange_2"],
+
+    colors_tntp["blue_1"],
+    colors_tntp["dark_grey"],
+    colors_tntp["gold_2"],
+    colors_tntp["green_4"],
+    colors_tntp["orange_4"]
+
+  )
 
 #' Likert pallette
 #'
@@ -135,7 +138,16 @@ colors_tntp_default <- colors_tntp[15:26]
 #' }
 #' @export
 "colors_tntp_likert"
-colors_tntp_likert <- colors_tntp[27:33]
+colors_tntp_likert <-
+  c(
+    colors_tntp["orange_4"],
+    colors_tntp["orange"],
+    colors_tntp["orange_2"],
+    colors_tntp["light_grey"],
+    colors_tntp["light_blue"],
+    colors_tntp["medium_blue"],
+    colors_tntp["dark_blue"]
+  )
 
 #' Likert orange to green pallette
 #'
@@ -145,7 +157,16 @@ colors_tntp_likert <- colors_tntp[27:33]
 #' }
 #' @export
 "colors_tntp_likert_orange_to_green"
-colors_tntp_likert_orange_to_green <- colors_tntp[34:40]
+colors_tntp_likert_orange_to_green <-
+  c(
+    colors_tntp["orange_4"],
+    colors_tntp["orange"],
+    colors_tntp["orange_2"],
+    colors_tntp["light_grey"],
+    colors_tntp["green_2"],
+    colors_tntp["green"],
+    colors_tntp["green_4"]
+  )
 
 #' Pallette names
 #'
@@ -155,11 +176,10 @@ colors_tntp_likert_orange_to_green <- colors_tntp[34:40]
 #' }
 #' @export
 "palette_names"
-palette_names <- c("default",
+palette_names <- c("tntp_palette",
                    "likert_4pt",
                    "likert_5pt",
                    "likert_6pt",
-                   "colors_tntp_old",
                    "likert_orange_to_green_4pt",
                    "likert_orange_to_green_5pt",
                    "likert_orange_to_green_6pt")
@@ -172,24 +192,22 @@ palette_names <- c("default",
 #'
 palette_tntp_scales <- function (palette = palette_names)
 {
-  default <- colors_tntp_default
+  tntp_palette <- colors_tntp_palette
   likert_4pt <- colors_tntp_likert[rev(c(1, 2, 6, 7))]
   likert_5pt <- colors_tntp_likert[rev(c(1, 2, 4, 6, 7))]
   likert_6pt <- colors_tntp_likert[rev(c(1, 2, 3, 5, 6, 7))]
   likert_orange_to_green_4pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 6, 7))]
   likert_orange_to_green_5pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 4, 6, 7))]
   likert_orange_to_green_6pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 3, 5, 6, 7))]
-  colors_tntp_classic <- colors_tntp_classic
 
   switch(match.arg(palette),
-         default = default,
+         tntp_palette = tntp_palette,
          likert_4pt = likert_4pt,
          likert_5pt = likert_5pt,
          likert_6pt = likert_6pt,
          likert_orange_to_green_4pt = likert_orange_to_green_4pt,
          likert_orange_to_green_5pt = likert_orange_to_green_5pt,
-         likert_orange_to_green_6pt = likert_orange_to_green_6pt,
-         colors_tntp_classic = colors_tntp_classic)
+         likert_orange_to_green_6pt = likert_orange_to_green_6pt)
 }
 
 

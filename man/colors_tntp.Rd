@@ -5,7 +5,7 @@
 \alias{colors_tntp}
 \title{TNTP colors}
 \format{
-An object of class \code{character} of length 40.
+An object of class \code{character} of length 34.
 }
 \usage{
 colors_tntp
