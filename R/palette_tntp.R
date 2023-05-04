@@ -87,8 +87,8 @@ colors_tntp <- c(# TNTPPalette
                  green_5 = "#326300",
                  green_4 = "#609110",
                  green_3 = "#8EBF3E",
-                 green_2 = "#BBEC6B",
-                 green_1 = "#E9FF99",
+                 green_2 = "#BBD98B",
+                 green_1 = "#D1E5B1",
 
                  gold_5 = "#A36B00",
                  gold_4 = "#D19900",
@@ -127,7 +127,6 @@ colors_tntp_palette <-
     colors_tntp["gold_2"],
     colors_tntp["green_4"],
     colors_tntp["orange_4"]
-
   )
 
 #' Likert pallette
@@ -141,7 +140,7 @@ colors_tntp_palette <-
 colors_tntp_likert <-
   c(
     colors_tntp["orange_4"],
-    colors_tntp["orange"],
+    colors_tntp["orange_3"],
     colors_tntp["orange_2"],
     colors_tntp["light_grey"],
     colors_tntp["light_blue"],
@@ -159,13 +158,13 @@ colors_tntp_likert <-
 "colors_tntp_likert_orange_to_green"
 colors_tntp_likert_orange_to_green <-
   c(
-    colors_tntp["orange_4"],
-    colors_tntp["orange"],
-    colors_tntp["orange_2"],
+    colors_tntp["orange_5"],
+    colors_tntp["orange_3"],
+    colors_tntp["orange_1"],
     colors_tntp["light_grey"],
-    colors_tntp["green_2"],
-    colors_tntp["green"],
-    colors_tntp["green_4"]
+    colors_tntp["green_1"],
+    colors_tntp["green_3"],
+    colors_tntp["green_5"]
   )
 
 #' Pallette names
