@@ -5,7 +5,7 @@
 #' @export
 
 tntp_style <- function() {
-  font <- "Helvetica"
+  font <- "Segoe UI"
 
   ggplot2::theme(
 
