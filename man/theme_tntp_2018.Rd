@@ -49,6 +49,8 @@ theme_tntp_2018(
 
 \item{caption_family, caption_face, caption_size, caption_margin}{plot caption family, face, size and margin}
 
+\item{axis_text}{add x or y axes text? \code{X}, \code{Y}}
+
 \item{axis_text_size}{font size of axis text}
 
 \item{axis_title_family, axis_title_face, axis_title_size}{axis title font family, face and size}

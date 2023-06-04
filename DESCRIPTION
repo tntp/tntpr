@@ -13,7 +13,6 @@ Depends:
     R (>= 3.2)
 Imports: 
     dplyr (>= 0.8.3),
-    forcats (>= 0.4.0),
     ggplot2 (>= 3.2.1),
     lubridate (>= 1.7.4),
     magrittr (>= 1.5),
@@ -23,12 +22,17 @@ Imports:
     tidyr (>= 1.0.0),
     rstudioapi,
     grDevices,
-    xopen,
     formattable,
     janitor,
     devtools,
     extrafont,
-    labelled
+    labelled,
+    ggpubr,
+    lazyeval,
+    plyr,
+    png,
+    scales,
+    grid
 Suggests: 
     rmarkdown,
     testthat,
@@ -37,4 +41,4 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

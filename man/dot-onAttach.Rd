@@ -11,9 +11,6 @@
 
 \item{pkgname}{package name}
 }
-\value{
-
-}
 \description{
 Title
 }

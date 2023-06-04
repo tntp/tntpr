@@ -33,6 +33,7 @@
 #' @param plot_margin plot margin (specify with [ggplot2::margin()])
 #' @param grid_col,axis_col grid & axis colors; both default to `#cccccc`
 #' @param grid panel grid (`TRUE`, `FALSE`, or a combination of `X`, `x`, `Y`, `y`)
+#' @param axis_text add x or y axes text? `X`, `Y`
 #' @param axis_text_size font size of axis text
 #' @param axis add x or y axes? `TRUE`, `FALSE`, "`xy`"
 #' @param ticks ticks if `TRUE` add ticks
