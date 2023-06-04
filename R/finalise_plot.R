@@ -44,7 +44,7 @@ finalise_plot <- function(plot_name,
                           save_filepath=file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
                           width_pixels=640,
                           height_pixels=450,
-                          logo_image_path = fpath(system.file("img", "placeholder.png", package = 'tntpr'))) {
+                          logo_image_path = file.path(system.file("img", "placeholder.png", package = 'tntpr'))) {
 
   footer <- create_footer(source_name, logo_image_path)
 
