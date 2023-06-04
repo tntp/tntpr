@@ -10,3 +10,5 @@ Meta
 # But not these vignettes
 !doc/introduction.md
 doc
+/doc/
+/Meta/
