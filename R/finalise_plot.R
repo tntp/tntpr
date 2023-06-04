@@ -24,10 +24,10 @@ create_footer <- function (source_name, logo_image_path) {
 
 }
 
-#' Arrange alignment and save BBC ggplot chart
+#' Arrange alignment and save TNTP ggplot chart
 #'
-#' Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
-#' It will left align your title, subtitle and source, add the BBC blocks at the bottom right and save it to your specified location.
+#' Running this function will save your plot with the best practice guidelines..
+#' It will left align your title, subtitle and source, add the TNTP blocks at the bottom right and save it to your specified location.
 #' @param plot_name The variable name of the plot you have created that you want to format and save
 #' @param source_name The text you want to come after the text 'Source:' in the bottom left hand side of your side
 #' @param save_filepath Exact filepath that you want the plot to be saved to
