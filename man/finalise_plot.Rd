@@ -2,7 +2,7 @@
 % Please edit documentation in R/finalise_plot.R
 \name{finalise_plot}
 \alias{finalise_plot}
-\title{Arrange alignment and save BBC ggplot chart}
+\title{Arrange alignment and save TNTP ggplot chart}
 \usage{
 finalise_plot(
   plot_name,
@@ -10,7 +10,8 @@ finalise_plot(
   save_filepath = file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
   width_pixels = 640,
   height_pixels = 450,
-  logo_image_path = file.path(system.file("data", package = "tntpr"), "placeholder.png")
+  logo_image_path = file.path(system.file("inst/img", package = "tntpr"),
+    "placeholder.png")
 )
 }
 \arguments{
@@ -31,7 +32,7 @@ which needs to be a PNG file - defaults to BBC blocks image that sits within the
 (Invisibly) an updated ggplot object.
 }
 \description{
-Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
-It will left align your title, subtitle and source, add the BBC blocks at the bottom right and save it to your specified location.
+Running this function will save your plot with the best practice guidelines..
+It will left align your title, subtitle and source, add the TNTP blocks at the bottom right and save it to your specified location.
 }
 \keyword{finalise_plot}
