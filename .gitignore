@@ -4,11 +4,5 @@
 .Ruserdata
 .DS_Store
 inst/doc
-doc/*
 Meta
-
-# But not these vignettes
-!doc/introduction.md
-doc
-/doc/
 /Meta/
