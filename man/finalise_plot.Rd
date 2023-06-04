@@ -10,7 +10,7 @@ finalise_plot(
   save_filepath = file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
   width_pixels = 640,
   height_pixels = 450,
-  logo_image_path = file.path(system.file("data", package = "tntpr"), "placeholder.png")
+  logo_image_path = file.path(system.file("placeholder.png", package = "tntpr"))
 )
 }
 \arguments{
