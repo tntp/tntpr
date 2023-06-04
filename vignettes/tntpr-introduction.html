@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>tntpr Introduction</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">tntpr Introduction</h1>
+
+
+
+<div id="about" class="section level2">
+<h2>About</h2>
+<p>The <code>tntpr</code> package makes data science at TNTP easier and
+more accurate by supplying tools that are needed for common TNTP
+analyses.</p>
+</div>
+<div id="package-summary" class="section level2">
+<h2>Package summary</h2>
+<p>Some of the highlights of the package include:</p>
+<ul>
+<li>A TNTP-themed RMarkdown template, for starting a new analysis with a
+shell that can already generate a TNTP-themed .docx report</li>
+<li>Functions for initializing a new repository or project folder with
+TNTP-standard directories and documentation</li>
+<li>TNTP-specific ggplot2 themes and color palettes</li>
+<li>Survey analysis tools</li>
+<li>Wrappers for quickly making typical TNTP-style charts (e.g., bar
+chart of the distribution of one variable, grouped by a second)</li>
+<li>Education-specific data management functions (e.g.,
+<code>date_to_SY()</code> to convert continuous hire dates into school
+years using a specified cutoff date), and a built-in fake student
+achievement dataset to play with called <code>wisc</code>.</li>
+</ul>
+</div>
+<div id="installing-the-package" class="section level2">
+<h2>Installing the package</h2>
+<p>This package is not on CRAN, and probably will not ever be. You’ll
+need to install this package from its GitHub repository. You can add
+this to the top of your analysis script:</p>
+<p>Once installed, you can update the package with
+<code>update_tntpr()</code>.</p>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<div id="reporting-templates" class="section level3">
+<h3>Reporting templates</h3>
+<p>Start your analysis with a good-looking .docx file as output, right
+off the bat. Right now we have just a single TNTP template, “Data Memo”,
+but it can be adapted and improved and if we have other common needs (a
+different set of headings?) those can easily be separate templates.</p>
+<p><strong>To access templates once you’ve installed the tntpr
+package:</strong> go to <code>File</code> -&gt; <code>New File</code>
+-&gt; <code>R Markdown</code> -&gt; <code>From Template</code>. You’ll
+see a choice “Data Memo” from the tntpr package. Just specify the
+document’s file name and the directory you want it in (probably a
+subfolder of a Bitbucket repository) and you’re off!</p>
+<p>A file <code>tntp-style-file.docx</code> will be copied into that
+directory; leave it there. That provides the TNTP .docx stylings when
+you re-knit your R Markdown document.</p>
+</div>
+<div id="setting-up-repositories-and-subfolders" class="section level3">
+<h3>Setting up repositories and subfolders</h3>
+<p>This saves time getting started with a new analysis and encourages
+use of common file storage conventions and documentation that make work
+more browsable and transparent.</p>
+<p><strong>Directory conventions</strong></p>
+<p>TNTP’s Bitbucket directory structure is a single repository per
+client or region, with subdirectories in the repository corresponding to
+specific analysis projects. For example:</p>
+<blockquote>
+<ul>
+<li>&lt;City #1&gt;
+<ul>
+<li><City abbreviation> &lt;Project #1 name&gt;</li>
+<li><City abbreviation> &lt;Project #2 name&gt;</li>
+<li><City abbreviation> &lt;Project #3 name&gt;</li>
+</ul></li>
+<li>&lt;City or Region #2&gt;
+<ul>
+<li>…</li>
+</ul></li>
+</ul>
+</blockquote>
+<p><strong>Usage</strong></p>
+<p>After creating a new, empty repo in Bitbucket and cloning it, run
+<code>setup_repo</code> to initialize it. This will create a subfolder
+as well, in which you’ll conduct an analysis project.</p>
+<p>If the repository already exists, and you just want to begin a new
+analysis project, create the new subdirectory with
+<code>setup_subdirectory</code>.</p>
+<p>Both functions take the same arguments, used to setup the project
+subfolder and its README:<br />
+- <em>subfolder</em>: what the name of the subdirectory should be, e.g.,
+“xyz_instructional_audit”<br />
+- <em>proj_name</em>: the full name of the analysis project, e.g., “XYZ
+Public Schools Equity Study”. Appears in the README.<br />
+- <em>analyst_name</em>: the analyst(s) working on this project. Appears
+in the README.</p>
+<p><code>setup_repo</code> will also add a <code>.Rproj</code> RProject
+file, <code>.gitignore</code> file, and create a README.Md file for the
+main repository.</p>
+</div>
+<div id="tntp-colors" class="section level3">
+<h3>TNTP colors</h3>
+<p>You can access the official TNTP-branded colors using
+<code>palette_tntp()</code>. This will return a vector with hex code for
+our colors:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette_tntp</span>(<span class="st">&quot;dark_blue&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;light_gray&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;#00355F&quot; &quot;#EA8835&quot; &quot;#C1C2C4&quot;</span></span></code></pre></div>
+<p>Or you can select a specific TNTP palette (<code>&quot;default&quot;</code>,
+<code>&quot;colors_tntp_classic&quot;</code>, <code>&quot;likert_4pt&quot;</code>,
+<code>&quot;likert_5pt&quot;</code>, or <code>&quot;likert_6pt&quot;</code>) with
+<code>palette_tntp_scales</code> and return a vector with hex codes for
+that TNTP palette.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette_tntp_scales</span>(<span class="at">palette =</span> <span class="st">&quot;likert_5pt&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dark_blue medium_blue  light_grey    orange_3    orange_4 </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &quot;#00355F&quot;   &quot;#00A4C7&quot;   &quot;#C1C2C4&quot;   &quot;#EA8835&quot;   &quot;#BC5A07&quot;</span></span></code></pre></div>
+<p>You can use these scale palettes as fill or color aesthetics in
+ggplot with <code>scale_fill_tntp</code> and
+<code>scale_color_tntp</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">question =</span> <span class="st">&quot;To what extent do you agree...&quot;</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">response =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Strongly disagree&quot;</span>, <span class="dv">3</span>), </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">&quot;Disagree&quot;</span>, <span class="dv">4</span>), </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">&quot;Somewhat disagree&quot;</span>, <span class="dv">3</span>), </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">&quot;Somewhat agree&quot;</span>, <span class="dv">4</span>),  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">&quot;Agree&quot;</span>, <span class="dv">10</span>), </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">&quot;Strongly agree&quot;</span>, <span class="dv">2</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">response =</span> response <span class="sc">%&gt;%</span> <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">&quot;Strongly disagree&quot;</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;Disagree&quot;</span>, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;Somewhat disagree&quot;</span>, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;Somewhat agree&quot;</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;Agree&quot;</span>, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;Strongly agree&quot;</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(question, <span class="at">fill =</span> response)) <span class="sc">+</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_fill</span>()) <span class="sc">+</span> </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_tntp_2018</span>(<span class="at">axis_text =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">grid =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">&quot;Response&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_tntp</span>(<span class="at">palette =</span> <span class="st">&quot;likert_6pt&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
