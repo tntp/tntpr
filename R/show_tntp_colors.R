@@ -5,7 +5,6 @@
 #' @param palette Default is 'all' tntp colors, but can also select a specific
 #' palette by passing either 'likert' or 'likert_orange_to_green
 #'
-#' @return
 #' @export
 #'
 #' @examples show_tntp_colors(palette = "likert")

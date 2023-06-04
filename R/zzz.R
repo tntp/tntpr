@@ -3,10 +3,7 @@
 #' @param libname library name
 #' @param pkgname package name
 #'
-#' @return
 #' @export
-#'
-#' @examples
 .onAttach <- function(libname, pkgname) {
 
   # adapted from hrbrthemes

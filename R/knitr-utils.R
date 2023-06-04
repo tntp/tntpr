@@ -1,6 +1,5 @@
 #' @title Set the formatting options for a TNTP Data Memo
 #'
-#'
 #' @description
 #' internal function that calls standard formatting options for the Data Memo RMarkdown template
 #' moved here to keep the actual memo template cleaner and easier to use
@@ -22,7 +21,6 @@ set_data_memo_formatting <- function(){
 
 #' @title Create sequential figure numbers
 #'
-#'
 #' @description
 #' Create sequential figure numbers
 #'
@@ -43,7 +41,6 @@ figureN <- local({
 
 
 #' @title Create sequential table numbers
-#'
 #'
 #' @description
 #' Create sequential table numbers

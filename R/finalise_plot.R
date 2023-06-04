@@ -40,19 +40,23 @@ create_footer <- function (source_name, logo_image_path) {
 #'
 #' @export
 finalise_plot <- function(plot_name,
-                          source_name,
+                          source_name = NA,
                           save_filepath=file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
                           width_pixels=640,
                           height_pixels=450,
                           logo_image_path = file.path(system.file("img", "placeholder.png", package = 'tntpr'))) {
 
-  footer <- create_footer(source_name, logo_image_path)
+  if(!is.na(source_name)){
+    footer <- create_footer(source_name, logo_image_path)
 
-  #Draw your left-aligned grid
-  plot_left_aligned <- left_align(plot_name, c("subtitle", "title", "caption"))
-  plot_grid <- ggpubr::ggarrange(plot_left_aligned, footer,
-                                 ncol = 1, nrow = 2,
-                                 heights = c(1, 0.045/(height_pixels/450)))
+    #Draw your left-aligned grid with footer
+    plot_left_aligned <- left_align(plot_name, c("subtitle", "title", "caption"))
+    plot_grid <- ggpubr::ggarrange(plot_left_aligned, footer,
+                                   ncol = 1, nrow = 2,
+                                   heights = c(1, 0.045/(height_pixels/450)))
+
+  } else plot_grid <- left_align(plot_name, c("subtitle", "title", "caption"))
+
   ## print(paste("Saving to", save_filepath))
   save_plot(plot_grid, width_pixels, height_pixels, save_filepath)
   ## Return (invisibly) a copy of the graph. Can be assigned to a

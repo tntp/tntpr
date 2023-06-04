@@ -6,7 +6,7 @@
 \usage{
 finalise_plot(
   plot_name,
-  source_name,
+  source_name = NA,
   save_filepath = file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
   width_pixels = 640,
   height_pixels = 450,

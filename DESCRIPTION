@@ -36,7 +36,8 @@ Imports:
 Suggests: 
     rmarkdown,
     testthat,
-    knitr
+    knitr, 
+    usethis
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
