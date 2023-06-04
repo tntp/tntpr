@@ -1,23 +1,29 @@
 ---
-title: "Creating TNTP-style ggplot2 Graphs"
-date: "Generated `r Sys.Date()`"
+title: "tntp-style-plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Creating TNTP-style ggplot2 Graphs}
+  %\VignetteIndexEntry{tntp-style-plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r load_packages, include = FALSE}
-# Load packages - first pacman, installing if necessary, then others
-if (!require("pacman")) install.packages("pacman"); library(pacman)
-p_load(devtools, tidyverse)
-if (!require("patchwork")) devtools::install_github("thomasp85/patchwork")
-if (!require("tntpr")) devtools::install_github("tntpr/tntpr"); library(tntpr)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
-```{r setup, include = FALSE}
-p_load(knitr)
+```{r setup, include=FALSE}
+library(tntpr)
+
+# Load packages - first pacman, installing if necessary, then others
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(devtools, tidyverse, knitr)
+if (!require("patchwork")) devtools::install_github("thomasp85/patchwork")
+```
+
+```{r knitr_options, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 knitr::opts_chunk$set(error = TRUE)
 knitr::opts_chunk$set(out.width='750px', dpi = 300)
@@ -192,4 +198,3 @@ survey_question %>%
   theme_tntp_2018() + 
   scale_fill_tntp(palette = "likert_5pt")
 ```
-

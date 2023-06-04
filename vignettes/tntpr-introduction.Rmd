@@ -1,8 +1,8 @@
 ---
-title: "tntpr Introduction"
+title: "tntpr-introduction"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tntpr Introduction}
+  %\VignetteIndexEntry{tntpr-introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(tntpr)
 library(tidyverse)
 ```
- 
+
 ## About
 
 The `tntpr` package makes data science at TNTP easier and more accurate by 
