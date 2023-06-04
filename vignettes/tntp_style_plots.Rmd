@@ -1,14 +1,12 @@
 ---
 title: "Creating TNTP-style ggplot2 Graphs"
 date: "Generated `r Sys.Date()`"
-output:
-  github_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating TNTP-style ggplot2 Graphs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- vignette: > -->
-<!--   %\VignetteIndexEntry{Creating TNTP-style ggplot2 Graphs} -->
-<!--   %\VignetteEngine{knitr::rmarkdown} -->
-<!--   %\VignetteEncoding{UTF-8} -->
 
 ```{r load_packages, include = FALSE}
 # Load packages - first pacman, installing if necessary, then others

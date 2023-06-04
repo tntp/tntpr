@@ -1,6 +1,6 @@
 ---
 title: "tntpr Introduction"
-output: rmarkdown::github_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{tntpr Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,10 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ```{r setup, include=FALSE}
-# library(tntpr)
-# library(tidyverse)
-# ```
+```{r setup, include=FALSE}
+library(tntpr)
+library(tidyverse)
+```
  
 ## About
 
