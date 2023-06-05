@@ -1,6 +1,6 @@
 ---
 title: "tntp-style-plots"
-output: rmarkdown::md_document
+output: github_document
 vignette: >
   %\VignetteIndexEntry{tntp-style-plots}
   %\VignetteEngine{knitr::rmarkdown}
