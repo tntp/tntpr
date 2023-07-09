@@ -6,9 +6,9 @@
 #' @export
 #' @return Returns a data.frame.
 #'
-show_in_excel <- function (.data, fileEncoding = "UTF-8")
+show_in_excel <- function (.data)
 {
   tmp <- paste0(tempfile(), ".csv")
-  readr::write_excel_csv(.data, tmp, fileEncoding = fileEncoding)
+  readr::write_excel_csv(.data, tmp)
   fs::file_show(path = tmp)
 }
