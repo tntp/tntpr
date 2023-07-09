@@ -9,6 +9,6 @@
 show_in_excel <- function (.data, fileEncoding = "UTF-8")
 {
   tmp <- paste0(tempfile(), ".csv")
-  write.csv(.data, tmp, fileEncoding = fileEncoding)
+  readr::write_excel_csv(.data, tmp, fileEncoding = fileEncoding)
   fs::file_show(path = tmp)
 }

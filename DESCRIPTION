@@ -33,7 +33,8 @@ Imports:
     png,
     scales,
     grid,
-    fs
+    fs,
+    readr
 Suggests: 
     rmarkdown,
     testthat,
