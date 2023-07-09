@@ -7,12 +7,11 @@
 show_in_excel(.data)
 }
 \arguments{
-\item{.data}{}
+\item{.data}{Dataframe}
+}
+\value{
+Returns a data.frame.
 }
 \description{
 Write datatable to temp excel file and open it.
-}
-\examples{
-library(tntpr)
-mtcars \%>\% show_in_excel()
 }
