@@ -8,6 +8,6 @@
 show_in_excel <- function (.data)
 {
   tmp <- paste0(tempfile(), ".csv")
-  write.csv(.data, tmp, fileEncoding = "UTF-8")
+  write.csv(.data, tmp, fileEncoding = "UTF-8", quote = FALSE)
   fs::file_show(path = tmp)
 }
