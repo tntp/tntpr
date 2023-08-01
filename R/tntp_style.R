@@ -48,6 +48,16 @@ tntp_style <- function(font = "Segoe UI",
          "    - grid = 'Yy' will display major and minor y grid-lines.")
   }
 
+  # Check that specified font is available for use
+  if(!font %in% names(windowsFonts())) {
+    warning("Font '", font, "' is not registered in the font table. Using standard 'sans' font instead.\n\n",
+            "Troubleshooting:\n",
+            " - Run extrafont::loadfonts() to register non-core fonts (needs to be done once each session).\n",
+            " - If you've never imported your fonts before, run extrafont::font_import() first, then once\n",
+            "   it's completed, run extrafont::loadfonts()")
+    font <- 'sans'
+  }
+
   # Convert text position to a numeric value to supply
   title_h_just    <- switch(title_align,    left = 0, center = 0.5, right = 1)
   caption_h_just  <- switch(caption_align,  left = 0, center = 0.5, right = 1)
