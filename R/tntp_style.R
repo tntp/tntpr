@@ -1,9 +1,10 @@
 # Changes from BBC Style:
 # - added options for title presence (legend, axis)
 # - added options for title / legend / caption alignment (and defaults)
-# - added caption and axis title styling (originally empty)
-# - added "update_geom_default" for geom_text family
-# -
+# - added options for grid lines
+# - added options for font
+# - added caption and legend/axis title styling (originally empty)
+# - adjusted facet-title styling
 
 # Unresolved:
 # - font management (2018)?
@@ -22,6 +23,7 @@
 tntp_style <- function(font = "Segoe UI",
                        show_legend_title = FALSE,
                        show_axis_titles  = FALSE,
+                       grid              = FALSE,
                        title_align       = "left",
                        legend_align      = "left",
                        caption_align     = "right") {
@@ -31,28 +33,41 @@ tntp_style <- function(font = "Segoe UI",
   legend_align   <- match.arg(legend_align,   c("center", "left", "right"))
   caption_align  <- match.arg(caption_align,  c("center", "left", "right"))
 
+  # Check axis title and grid parameters
+  if(!is.logical(show_axis_titles) && !show_axis_titles %in% c('x', 'y', 'xy')) {
+    stop("Invalid value for show_axis_titles.\n",
+         " - To show both titles, set to TRUE.\n",
+         " - To hide both titles, set to FALSE.\n",
+         " - To show just x or y set to 'x' or 'y'.")
+  }
+  if(!is.logical(grid) && !grepl('^[xXyY]+$', grid)) {
+    stop("Invalid value for grid.\n",
+         " - To show all grid-lines, set to TRUE.\n",
+         " - To show some grid-lines, set to a string combination of X, x, Y, and y:\n",
+         "    - grid = 'XY' will display major x and y grid-lines,\n",
+         "    - grid = 'Yy' will display major and minor y grid-lines.")
+  }
+
   # Convert text position to a numeric value to supply
   title_h_just    <- switch(title_align,    left = 0, center = 0.5, right = 1)
   caption_h_just  <- switch(caption_align,  left = 0, center = 0.5, right = 1)
 
   # Update font family and color for geom_text() and geom_label()
-  ggplot2::update_geom_defaults("text", list(family = font,
-                                    color = "#222222"))
-  ggplot2::update_geom_defaults("label", list(family = font,
-                                     color = "#222222"))
+  # ggplot2::update_geom_defaults("text", list(family = font,
+  #                                   color = "#222222"))
+  # ggplot2::update_geom_defaults("label", list(family = font,
+  #                                    color = "#222222"))
 
+  # Create base theme
   result <- ggplot2::theme(
 
-    #Text format:
-    #This sets the font, size, type and colour of text for the chart's title
+    # Style title, subtitle, and caption. Includes a margin above and below the subtitle
     plot.title = ggplot2::element_text(family = font,
                                        hjust = title_h_just,
                                        size = 28,
                                        face = "bold",
                                        color = "#222222"),
 
-    #This sets the font, size, type and colour of text for the chart's subtitle,
-    #as well as setting a margin between the title and the subtitle
     plot.subtitle = ggplot2::element_text(family = font,
                                           hjust = title_h_just,
                                           size = 22,
@@ -65,11 +80,7 @@ tntp_style <- function(font = "Segoe UI",
                                          face = "italic",
                                          color = "#7D7E81"),
 
-    #Legend format
-    #This sets the position and alignment of the legend, removes a title and
-    #background for it and sets the requirements for any text within the legend.
-    #The legend may often need some more manual tweaking when it comes to its
-    #exact position based on the plot coordinates.
+    # Style legend, including alignment
     legend.position = "top",
     legend.justification = legend_align,
     legend.direction = "horizontal",
@@ -77,17 +88,13 @@ tntp_style <- function(font = "Segoe UI",
     legend.background = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
     legend.title = ggplot2::element_text(family = font,
-                                         size = 20,
+                                         size = 18,
                                          color = "#222222"),
     legend.text = ggplot2::element_text(family = font,
                                         size = 18,
                                         color = "#222222"),
 
-    #Axis format
-    #This sets the text font, size and colour for the axis test, as well as setting
-    #the margins and removes lines and ticks. In some cases, axis lines and axis
-    #ticks are things we would want to have in the chart - the cookbook shows
-    #examples of how to do so.
+    # Style axes. Includes a margin on x axis text, no ticks or lines
     axis.title = ggplot2::element_text(family = font,
                                        size = 18,
                                        color = "#222222"),
@@ -98,35 +105,47 @@ tntp_style <- function(font = "Segoe UI",
     axis.ticks = ggplot2::element_blank(),
     axis.line = ggplot2::element_blank(),
 
-    #Grid lines
-    #This removes all minor gridlines and adds major y gridlines. In many cases
-    #you will want to change this to remove y gridlines and add x gridlines. The
-    #cookbook shows you examples for doing so
-    panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major.y = ggplot2::element_line(color = "#cbcbcb"),
-    panel.grid.major.x = ggplot2::element_blank(),
+    # Style major and minor grid-lines. Grid lines will later be removed if indicated in grid
+    panel.grid.minor = ggplot2::element_line(color = "#cbcbcb", linewidth = 0.5),
+    panel.grid.major = ggplot2::element_line(color = "#cbcbcb", linewidth = 1),
 
-    #Blank background
-    #This sets the panel background as blank, removing the standard grey ggplot
-    #background colour from the plot
+    # Style background to blank (gray in standard ggplot2)
     panel.background = ggplot2::element_blank(),
 
-    #Strip background
-    #This sets the panel background for facet-wrapped plots to
-    #white, removing the standard grey ggplot background colour and sets the title
-    #size of the facet-wrap title to font size 22)
+    # Style facet background & title
     strip.background = ggplot2::element_rect(fill = "white"),
-    strip.text = ggplot2::element_text(size = 22, hjust = 0)
+    strip.text = ggplot2::element_text(family = font,
+                                       hjust = title_h_just,
+                                       size = 22,
+                                       color = "#222222")
   )
 
+  # Toggle for legend title
   if(!show_legend_title) {
-    result <- result + theme(legend.title = ggplot2::element_blank())
+    result <- result + ggplot2::theme(legend.title = ggplot2::element_blank())
   }
 
-  if(!show_axis_titles) {
-    result <- result + theme(axis.title = ggplot2::element_blank())
+  # Toggle for axis titles
+  if(show_axis_titles == FALSE) {
+    result <- result + ggplot2::theme(axis.title = ggplot2::element_blank())
+  } else if(show_axis_titles == 'x') {
+    result <- result + ggplot2::theme(axis.title.y = ggplot2::element_blank())
+  } else if(show_axis_titles == 'y') {
+    result <- result + ggplot2::theme(axis.title.x = ggplot2::element_blank())
   }
 
+  # Toggle for grid lines
+  if(grid == FALSE) {
+    result <- result + ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                                      panel.grid.minor = ggplot2::element_blank())
+  } else if(is.character(grid)) {
+    if(!grepl('X', grid)) result <- result + ggplot2::theme(panel.grid.major.x = ggplot2::element_blank())
+    if(!grepl('x', grid)) result <- result + ggplot2::theme(panel.grid.minor.x = ggplot2::element_blank())
+    if(!grepl('Y', grid)) result <- result + ggplot2::theme(panel.grid.major.y = ggplot2::element_blank())
+    if(!grepl('y', grid)) result <- result + ggplot2::theme(panel.grid.minor.y = ggplot2::element_blank())
+  }
+
+  # Return completed theme
   result
 
 }
@@ -135,8 +154,9 @@ tntp_style <- function(font = "Segoe UI",
 library(ggplot2)
 library(dplyr)
 
+
 # Scatterplot
-ggplot(mpg, aes(displ, hwy, color = class)) +
+ggplot(mpg, aes(displ, hwy, color = drv)) +
   geom_point(size = 3) +
   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
        title = "Seminal ggplot2 scatterplot example",
@@ -146,7 +166,9 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
   tntp_style(show_axis_titles = TRUE,
              show_legend_title = TRUE,
-             legend_align = "center")
+             legend_align = "center",
+             grid = 'Y') +
+  facet_wrap(~class)
 
 # Bar Chart
 count(mpg, class) |>
@@ -160,3 +182,4 @@ count(mpg, class) |>
   tntp_style()
 
 ggsave("test3.svg", width = 9, height = 6)
+
