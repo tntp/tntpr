@@ -29,32 +29,34 @@ tntp_style <- function(font = "Segoe UI",
                        caption_align     = "right") {
 
   # Check alignment positions for plot title, legend, and caption
-  title_align    <- match.arg(title_align,    c("center", "left", "right"))
-  legend_align   <- match.arg(legend_align,   c("center", "left", "right"))
-  caption_align  <- match.arg(caption_align,  c("center", "left", "right"))
+  title_align    <- rlang::arg_match(title_align,    c("center", "left", "right"))
+  legend_align   <- rlang::arg_match(legend_align,   c("center", "left", "right"))
+  caption_align  <- rlang::arg_match(caption_align,  c("center", "left", "right"))
 
+  # Check legend title parameter
+  if(!is.logical(show_legend_title)) {
+    cli::cli_abort(c("Invalid value {.val {show_legend_title}} for {.var show_legend_title}",
+                     "i" = "Value should be set to TRUE or FALSE"))
+  }
   # Check axis title and grid parameters
   if(!is.logical(show_axis_titles) && !show_axis_titles %in% c('x', 'y', 'xy')) {
-    stop("Invalid value for show_axis_titles.\n",
-         " - To show both titles, set to TRUE.\n",
-         " - To hide both titles, set to FALSE.\n",
-         " - To show just x or y set to 'x' or 'y'.")
+    cli::cli_abort(c("Invalid value {.val {show_axis_titles}} for {.var show_axis_titles}",
+                     "i" = "To show both titles, set to TRUE.",
+                     "i" = "To hide both titles, set to FALSE.",
+                     "i" = "To show just x or y set to 'x' or 'y'."))
   }
   if(!is.logical(grid) && !grepl('^[xXyY]+$', grid)) {
-    stop("Invalid value for grid.\n",
-         " - To show all grid-lines, set to TRUE.\n",
-         " - To show some grid-lines, set to a string combination of X, x, Y, and y:\n",
-         "    - grid = 'XY' will display major x and y grid-lines,\n",
-         "    - grid = 'Yy' will display major and minor y grid-lines.")
+    cli::cli_abort(c("Invalid value {.val {grid}} for {.var grid}",
+                     "i" = "To show all grid-lines, set to TRUE",
+                     "i" = "To show some grid-lines set to a string combination of X, x, Y, and y, where capital letters represent major grid-lines and lowercase letters represent minor grid-lines."))
   }
 
   # Check that specified font is available for use
   if(!font %in% names(windowsFonts())) {
-    warning("Font '", font, "' is not registered in the font table. Using standard 'sans' font instead.\n\n",
-            "Troubleshooting:\n",
-            " - Run extrafont::loadfonts() to register non-core fonts (needs to be done once each session).\n",
-            " - If you've never imported your fonts before, run extrafont::font_import() first, then once\n",
-            "   it's completed, run extrafont::loadfonts()")
+    cli::cli_warn(c("x" = "Font {.val {font}} is not registered in the font table.",
+                    "v" = "Using standard {.val sans} font instead",
+                    "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
+                    "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"))
     font <- 'sans'
   }
 
@@ -166,7 +168,7 @@ library(dplyr)
 
 
 # Scatterplot
-ggplot(mpg, aes(displ, hwy, color = drv)) +
+ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point(size = 3) +
   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
        title = "Seminal ggplot2 scatterplot example",
@@ -177,8 +179,8 @@ ggplot(mpg, aes(displ, hwy, color = drv)) +
   tntp_style(show_axis_titles = TRUE,
              show_legend_title = TRUE,
              legend_align = "center",
-             grid = 'Y') +
-  facet_wrap(~class)
+             grid = 'Yy') +
+  facet_wrap(~drv)
 
 # Bar Chart
 count(mpg, class) |>
