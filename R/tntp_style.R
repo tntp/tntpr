@@ -229,38 +229,38 @@ tntp_style <- function(font              = "Segoe UI",
 
 }
 
-# Tests / examples
-library(ggplot2)
-library(dplyr)
-
-
-# Scatterplot
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point(size = 3) +
-  labs(x = "Engine Displacement", y = "MPG", color = "Class:",
-       title = "Seminal ggplot2 scatterplot example",
-       subtitle = "A plot that is only useful for demonstration purposes",
-       caption = "Brought to you by the letter 'g'") +
-  scale_y_continuous(limits = c(0, 50)) +
-  geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
-  tntp_style(show_axis_titles = TRUE,
-             show_legend_title = TRUE,
-             legend_align = "center",
-             grid = 'Yy',
-             base_size = 15,
-             text_color = tntpr::palette_tntp("dark_blue")) +
-  facet_wrap(~drv)
-
-# Bar Chart
-count(mpg, class) |>
-  ggplot(aes(class, n)) +
-  geom_col() +
-  geom_text(aes(label = n), nudge_y = 3) +
-  labs(x = "", y = "",
-       title = "Seminal ggplot2 bar chart example",
-       subtitle = "A plot that is only useful for demonstration purposes",
-       caption = "Brought to you by the letter 'g'") +
-  tntp_style()
-
-ggsave("test3.svg", width = 9, height = 6)
+# # Tests / examples
+# library(ggplot2)
+# library(dplyr)
+#
+#
+# # Scatterplot
+# ggplot(mpg, aes(displ, hwy, color = class)) +
+#   geom_point(size = 3) +
+#   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
+#        title = "Seminal ggplot2 scatterplot example",
+#        subtitle = "A plot that is only useful for demonstration purposes",
+#        caption = "Brought to you by the letter 'g'") +
+#   scale_y_continuous(limits = c(0, 50)) +
+#   geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
+#   tntp_style(show_axis_titles = TRUE,
+#              show_legend_title = TRUE,
+#              legend_align = "center",
+#              grid = 'Yy',
+#              base_size = 15,
+#              text_color = tntpr::palette_tntp("dark_blue")) +
+#   facet_wrap(~drv)
+#
+# # Bar Chart
+# count(mpg, class) |>
+#   ggplot(aes(class, n)) +
+#   geom_col() +
+#   geom_text(aes(label = n), nudge_y = 3) +
+#   labs(x = "", y = "",
+#        title = "Seminal ggplot2 bar chart example",
+#        subtitle = "A plot that is only useful for demonstration purposes",
+#        caption = "Brought to you by the letter 'g'") +
+#   tntp_style()
+#
+# ggsave("test3.svg", width = 9, height = 6)
 
