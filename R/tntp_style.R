@@ -10,7 +10,16 @@
 # - font management (2018)?
 
 # Questions:
-# - axis title formatting? (alignment? size?)
+# - do we add all the parameters with proper defaults? OR use + theme()
+#   - Include "most used" parameters, don't include others.
+#   - Add base_size to scale all text sizes
+# - function name: keep as tntp_style() or match tntp_theme_xxxx() or theme_tntp()
+
+# Next steps - get to polished draft stage, then get feedback from folks.
+# - We start using / testing. Think through questions above
+# - Sam adds / drafts documentation
+# - Finalize next meeting, then roll out to data team.
+
 
 
 
@@ -20,13 +29,71 @@
 #' @keywords tntp_style
 #' @export
 
-tntp_style <- function(font = "Segoe UI",
+tntp_style <- function(font              = "Segoe UI",
+                       base_size         = 28,
+                       text_color        = "#222222",
+                       caption_color     = "#7D7E81",
                        show_legend_title = FALSE,
                        show_axis_titles  = FALSE,
                        grid              = FALSE,
+                       grid_color        = "#CBCBCB",
                        title_align       = "left",
                        legend_align      = "left",
                        caption_align     = "right") {
+
+  # Minimum text size to display
+  min_size         <- 6
+
+  # Recommended minimum base size
+  recommended_base <- 15
+
+  # Check base_size
+  if(!is.numeric(base_size) | base_size <= 0) {
+    cli::cli_abort(c("Invalid value {.val {base_size}} for {.var base_size}",
+                     "i" = "{.var base_size} represents the size of the title text. All other text sizes will scale automatically",
+                     "i" = "Recommended minimum size is {.val {recommended_base}}"))
+  } else if(base_size < recommended_base) {
+    cli::cli_warn(c("Values for {.var base_size} below {.val {recommended_base}} are not recommended.",
+                  "i" = "Current value is {.val {base_size}}"))
+  }
+
+  # Scale other graph features to base_size
+  title_size      <- base_size
+  subtitle_size   <- base_size * 0.8
+  caption_size    <- base_size * 0.4
+  axis_title_size <- base_size * 0.6
+
+  if(title_size      < min_size) title_size      <- min_size
+  if(subtitle_size   < min_size) subtitle_size   <- min_size
+  if(caption_size    < min_size) caption_size    <- min_size
+  if(axis_title_size < min_size) axis_title_size <- min_size
+
+  facet_size  <- caption_size
+  legend_size <- axis_title_size
+
+  subtitle_margin  <- base_size * 0.3
+  axis_text_margin <- base_size * 0.15
+
+  # Validate color inputs
+  is_color <- function(x) {
+    res <- try(col2rgb(x), silent = TRUE)
+    return(!"try-error" %in% class(res))
+  }
+  if(!is_color(text_color)) {
+    cli::cli_warn(c("Invalid {.var text_color} {.val {text_color}}.",
+                    "i" = "Using default value of {.val #222222}"))
+    text_color <- "#222222"
+  }
+  if(!is_color(grid_color)) {
+    cli::cli_warn(c("Invalid {.var grid_color} {.val {grid_color}}.",
+                    "i" = "Using default value of {.val #CBCBCB}"))
+    grid_color <- "#CBCBCB"
+  }
+  if(!is_color(caption_color)) {
+    cli::cli_warn(c("Invalid {.var caption_color} {.val {caption_color}}.",
+                    "i" = "Using default value of {.val #7D7E81}"))
+    text_color <- "#7D7E81"
+  }
 
   # Check alignment positions for plot title, legend, and caption
   title_align    <- rlang::arg_match(title_align,    c("center", "left", "right"))
@@ -75,22 +142,22 @@ tntp_style <- function(font = "Segoe UI",
 
     # Style title, subtitle, and caption. Includes a margin above and below the subtitle
     plot.title = ggplot2::element_text(family = font,
-                                       hjust = title_h_just,
-                                       size = 28,
-                                       face = "bold",
-                                       color = "#222222"),
+                                       hjust  = title_h_just,
+                                       size   = title_size,
+                                       face   = "bold",
+                                       color  = text_color),
 
     plot.subtitle = ggplot2::element_text(family = font,
-                                          hjust = title_h_just,
-                                          size = 22,
-                                          color = "#222222",
-                                          margin = ggplot2::margin(9,0,9,0)),
+                                          hjust  = title_h_just,
+                                          size   = subtitle_size,
+                                          color  = text_color,
+                                          margin = ggplot2::margin(subtitle_margin, 0, subtitle_margin, 0)),
 
     plot.caption = ggplot2::element_text(family = font,
-                                         hjust = caption_h_just,
-                                         size = 12,
-                                         face = "italic",
-                                         color = "#7D7E81"),
+                                         hjust  = caption_h_just,
+                                         size   = caption_size,
+                                         face   = "italic",
+                                         color  = caption_color),
 
     # Style legend, including alignment
     legend.position = "top",
@@ -100,26 +167,26 @@ tntp_style <- function(font = "Segoe UI",
     legend.background = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
     legend.title = ggplot2::element_text(family = font,
-                                         size = 18,
-                                         color = "#222222"),
+                                         size   = legend_size,
+                                         color  = text_color),
     legend.text = ggplot2::element_text(family = font,
-                                        size = 18,
-                                        color = "#222222"),
+                                        size   = legend_size,
+                                        color  = text_color),
 
     # Style axes. Includes a margin on x axis text, no ticks or lines
     axis.title = ggplot2::element_text(family = font,
-                                       size = 18,
-                                       color = "#222222"),
+                                       size = axis_title_size,
+                                       color = text_color),
     axis.text = ggplot2::element_text(family = font,
-                                      size = 18,
-                                      color = "#222222"),
-    axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
+                                      size = axis_title_size,
+                                      color = text_color),
+    axis.text.x = ggplot2::element_text(margin = ggplot2::margin(axis_text_margin, b = 2 * axis_text_margin)),
     axis.ticks = ggplot2::element_blank(),
     axis.line = ggplot2::element_blank(),
 
     # Style major and minor grid-lines. Grid lines will later be removed if indicated in grid
-    panel.grid.minor = ggplot2::element_line(color = "#cbcbcb", linewidth = 0.5),
-    panel.grid.major = ggplot2::element_line(color = "#cbcbcb", linewidth = 1),
+    panel.grid.minor = ggplot2::element_line(color = grid_color, linewidth = 0.5),
+    panel.grid.major = ggplot2::element_line(color = grid_color, linewidth = 1),
 
     # Style background to blank (gray in standard ggplot2)
     panel.background = ggplot2::element_blank(),
@@ -128,8 +195,8 @@ tntp_style <- function(font = "Segoe UI",
     strip.background = ggplot2::element_rect(fill = "white"),
     strip.text = ggplot2::element_text(family = font,
                                        hjust = title_h_just,
-                                       size = 22,
-                                       color = "#222222")
+                                       size = facet_size,
+                                       color = text_color)
   )
 
   # Toggle for legend title
@@ -179,7 +246,9 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   tntp_style(show_axis_titles = TRUE,
              show_legend_title = TRUE,
              legend_align = "center",
-             grid = 'Yy') +
+             grid = 'Yy',
+             base_size = 15,
+             text_color = tntpr::palette_tntp("dark_blue")) +
   facet_wrap(~drv)
 
 # Bar Chart
