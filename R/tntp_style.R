@@ -22,13 +22,55 @@
 
 
 
-
-#' Add TNTP theme to ggplot chart
+#' Create TNTP themed [ggplot2] charts
 #'
-#' This function allows you to add the TNTP theme to your ggplot graphics.
-#' @keywords tntp_style
+#' A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
+#'
+#' @param font base font family
+#' @param base_size base font size. Recommended minimum value of 15.
+#' @param text_color text color for titles, axes, legends, and facets
+#' @param caption_color text color for caption
+#' @param show_legend_title Logical. Should the legend title be shown?  Leave as `TRUE` if you want to change the legend title with a subsequent line `+ labs(...)`.
+#' @param show_axis_titles Which axis titles should be shown? Use `TRUE` or `FALSE` for toggle both titles, or `x` or `y` to show just that axis title.
+#' @param grid Which grid lines should be shown? Use `TRUE` or `FALSE` to toggle all grid lines, or a string combination of `X`, `x`, `Y`, `y` for major and minor x and y grid lines.
+#' @param grid_color grid line color
+#' @param title_align,legend_align,caption_align Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`
+#'
 #' @export
-
+#'
+#' @examples
+#' library(ggplot2)
+#' library(dplyr)
+#'
+#' # Scatterplot
+#' ggplot(mpg, aes(displ, hwy, color = class)) +
+#'   geom_point(size = 3) +
+#'   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
+#'        title = "Fuel Efficiency by Engine Size",
+#'        subtitle = "A plot that is only useful for demonstration purposes",
+#'        caption = "Brought to you by the letter 'g'") +
+#'   scale_y_continuous(limits = c(0, 50)) +
+#'   geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
+#'   tntp_style(show_axis_titles = TRUE,
+#'              show_legend_title = TRUE,
+#'              legend_align = "center",
+#'              grid = 'Yy',
+#'              base_size = 15,
+#'              text_color = tntpr::palette_tntp("dark_blue")) +
+#'   facet_wrap(~drv)
+#'
+#' # Bar Chart
+#' count(mpg, class) |>
+#'   ggplot(aes(class, n)) +
+#'   geom_col() +
+#'   geom_text(aes(label = n), nudge_y = 3) +
+#'   labs(x = "", y = "",
+#'        title = "Car Types in the mpg Dataset",
+#'        subtitle = "A plot that is only useful for demonstration purposes",
+#'        caption = "Brought to you by the letter 'g'") +
+#'   tntp_style()
+#'
+#' ggsave("test3.svg", width = 9, height = 6)
 tntp_style <- function(font              = "Segoe UI",
                        base_size         = 28,
                        text_color        = "#222222",
@@ -106,7 +148,7 @@ tntp_style <- function(font              = "Segoe UI",
                      "i" = "Value should be set to TRUE or FALSE"))
   }
   # Check axis title and grid parameters
-  if(!is.logical(show_axis_titles) && !show_axis_titles %in% c('x', 'y', 'xy')) {
+  if(!is.logical(show_axis_titles) && !show_axis_titles %in% c('', 'x', 'y', 'xy')) {
     cli::cli_abort(c("Invalid value {.val {show_axis_titles}} for {.var show_axis_titles}",
                      "i" = "To show both titles, set to TRUE.",
                      "i" = "To hide both titles, set to FALSE.",
@@ -205,7 +247,7 @@ tntp_style <- function(font              = "Segoe UI",
   }
 
   # Toggle for axis titles
-  if(show_axis_titles == FALSE) {
+  if(show_axis_titles == FALSE | show_axis_titles == '') {
     result <- result + ggplot2::theme(axis.title = ggplot2::element_blank())
   } else if(show_axis_titles == 'x') {
     result <- result + ggplot2::theme(axis.title.y = ggplot2::element_blank())
@@ -228,39 +270,4 @@ tntp_style <- function(font              = "Segoe UI",
   result
 
 }
-
-# # Tests / examples
-# library(ggplot2)
-# library(dplyr)
-#
-#
-# # Scatterplot
-# ggplot(mpg, aes(displ, hwy, color = class)) +
-#   geom_point(size = 3) +
-#   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
-#        title = "Seminal ggplot2 scatterplot example",
-#        subtitle = "A plot that is only useful for demonstration purposes",
-#        caption = "Brought to you by the letter 'g'") +
-#   scale_y_continuous(limits = c(0, 50)) +
-#   geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
-#   tntp_style(show_axis_titles = TRUE,
-#              show_legend_title = TRUE,
-#              legend_align = "center",
-#              grid = 'Yy',
-#              base_size = 15,
-#              text_color = tntpr::palette_tntp("dark_blue")) +
-#   facet_wrap(~drv)
-#
-# # Bar Chart
-# count(mpg, class) |>
-#   ggplot(aes(class, n)) +
-#   geom_col() +
-#   geom_text(aes(label = n), nudge_y = 3) +
-#   labs(x = "", y = "",
-#        title = "Seminal ggplot2 bar chart example",
-#        subtitle = "A plot that is only useful for demonstration purposes",
-#        caption = "Brought to you by the letter 'g'") +
-#   tntp_style()
-#
-# ggsave("test3.svg", width = 9, height = 6)
 

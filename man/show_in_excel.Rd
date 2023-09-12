@@ -8,6 +8,8 @@ show_in_excel(.data)
 }
 \arguments{
 \item{.data}{Dataframe}
+
+\item{fileEncoding}{Encoding}
 }
 \value{
 Returns a data.frame.

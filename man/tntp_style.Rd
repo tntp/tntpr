@@ -2,11 +2,75 @@
 % Please edit documentation in R/tntp_style.R
 \name{tntp_style}
 \alias{tntp_style}
-\title{Add TNTP theme to ggplot chart}
+\title{Create TNTP themed [ggplot2] charts}
 \usage{
-tntp_style()
+tntp_style(
+  font = "Segoe UI",
+  base_size = 28,
+  text_color = "#222222",
+  caption_color = "#7D7E81",
+  show_legend_title = FALSE,
+  show_axis_titles = FALSE,
+  grid = FALSE,
+  grid_color = "#CBCBCB",
+  title_align = "left",
+  legend_align = "left",
+  caption_align = "right"
+)
+}
+\arguments{
+\item{font}{base font family}
+
+\item{base_size}{base font size. Recommended minimum value of 15.}
+
+\item{text_color}{text color for titles, axes, legends, and facets}
+
+\item{caption_color}{text color for caption}
+
+\item{show_legend_title}{Logical. Should the legend title be shown?  Leave as `TRUE` if you want to change the legend title with a subsequent line `+ labs(...)`.}
+
+\item{show_axis_titles}{Which axis titles should be shown? Use `TRUE` or `FALSE` for toggle both titles, or `x` or `y` to show just that axis title.}
+
+\item{grid}{Which grid lines should be shown? Use `TRUE` or `FALSE` to toggle all grid lines, or a string combination of `X`, `x`, `Y`, `y` for major and minor x and y grid lines.}
+
+\item{grid_color}{grid line color}
+
+\item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`}
 }
 \description{
-This function allows you to add the TNTP theme to your ggplot graphics.
+A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
 }
-\keyword{tntp_style}
+\examples{
+library(ggplot2)
+library(dplyr)
+
+# Scatterplot
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point(size = 3) +
+  labs(x = "Engine Displacement", y = "MPG", color = "Class:",
+       title = "Fuel Efficiency by Engine Size",
+       subtitle = "A plot that is only useful for demonstration purposes",
+       caption = "Brought to you by the letter 'g'") +
+  scale_y_continuous(limits = c(0, 50)) +
+  geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
+  tntp_style(show_axis_titles = TRUE,
+             show_legend_title = TRUE,
+             legend_align = "center",
+             grid = 'Yy',
+             base_size = 15,
+             text_color = tntpr::palette_tntp("dark_blue")) +
+  facet_wrap(~drv)
+
+# Bar Chart
+count(mpg, class) |>
+  ggplot(aes(class, n)) +
+  geom_col() +
+  geom_text(aes(label = n), nudge_y = 3) +
+  labs(x = "", y = "",
+       title = "Car Types in the mpg Dataset",
+       subtitle = "A plot that is only useful for demonstration purposes",
+       caption = "Brought to you by the letter 'g'") +
+  tntp_style()
+
+ggsave("test3.svg", width = 9, height = 6)
+}
