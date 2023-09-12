@@ -44,24 +44,7 @@ A custom theme including TNTP fonts and other defaults for styling ggplot2 chart
 library(ggplot2)
 library(dplyr)
 
-# Scatterplot
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point(size = 3) +
-  labs(x = "Engine Displacement", y = "MPG", color = "Class:",
-       title = "Fuel Efficiency by Engine Size",
-       subtitle = "A plot that is only useful for demonstration purposes",
-       caption = "Brought to you by the letter 'g'") +
-  scale_y_continuous(limits = c(0, 50)) +
-  geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
-  tntp_style(show_axis_titles = TRUE,
-             show_legend_title = TRUE,
-             legend_align = "center",
-             grid = 'Yy',
-             base_size = 15,
-             text_color = tntpr::palette_tntp("dark_blue")) +
-  facet_wrap(~drv)
-
-# Bar Chart
+# Bar Chart with basic styling
 count(mpg, class) |>
   ggplot(aes(class, n)) +
   geom_col() +
@@ -72,5 +55,24 @@ count(mpg, class) |>
        caption = "Brought to you by the letter 'g'") +
   tntp_style()
 
-ggsave("test3.svg", width = 9, height = 6)
+# Default save size recommendation width = 9, height = 6:
+# ggsave("filename.svg", width = 9, height = 6)
+
+# Scatterplot with custom
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point(size = 3) +
+  labs(x = "Engine Displacement", y = "MPG", color = "Class:",
+       title = "Fuel Efficiency by Engine Size",
+       subtitle = "An in-depth investigation with a very long subtitle that won't fit with default sizing",
+       caption = "Brought to you by the letter 'g'") +
+  scale_y_continuous(limits = c(0, 50)) +
+  geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
+  tntp_style(show_axis_titles = TRUE,
+             show_legend_title = TRUE,
+             legend_align = "center",
+             grid = 'Yy',
+             base_size = 20,
+             text_color = tntpr::palette_tntp("dark_blue")) +
+  facet_wrap(~drv)
+
 }
