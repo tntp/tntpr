@@ -2,7 +2,7 @@
 % Please edit documentation in R/tntp_style.R
 \name{tntp_style}
 \alias{tntp_style}
-\title{Create TNTP themed ggplot2 charts}
+\title{Create TNTP themed \link{ggplot2} charts}
 \usage{
 tntp_style(
   font = "Segoe UI",
@@ -27,15 +27,15 @@ tntp_style(
 
 \item{caption_color}{text color for caption}
 
-\item{show_legend_title}{Logical. Should the legend title be shown?  Leave as `TRUE` if you want to change the legend title with a subsequent line `+ labs(...)`.}
+\item{show_legend_title}{Logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.}
 
-\item{show_axis_titles}{Which axis titles should be shown? Use `TRUE` or `FALSE` for toggle both titles, or `x` or `y` to show just that axis title.}
+\item{show_axis_titles}{Which axis titles should be shown? Use \code{TRUE} or \code{FALSE} for toggle both titles, or \code{x} or \code{y} to show just that axis title.}
 
-\item{grid}{Which grid lines should be shown? Use `TRUE` or `FALSE` to toggle all grid lines, or a string combination of `X`, `x`, `Y`, `y` for major and minor x and y grid lines.}
+\item{grid}{Which grid lines should be shown? Use \code{TRUE} or \code{FALSE} to toggle all grid lines, or a string combination of \code{X}, \code{x}, \code{Y}, \code{y} for major and minor x and y grid lines.}
 
 \item{grid_color}{grid line color}
 
-\item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`}
+\item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts \code{left}, \code{right}, or \code{center}}
 }
 \description{
 A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.

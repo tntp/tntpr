@@ -22,9 +22,11 @@
 
 
 
-#' Create TNTP themed ggplot2 charts
+#' Create TNTP themed [ggplot2] charts
 #'
 #' A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
+#'
+#' @md
 #'
 #' @param font base font family
 #' @param base_size base font size. Recommended minimum value of 15.
