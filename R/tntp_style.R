@@ -40,40 +40,45 @@
 #'
 #' @export
 #'
-#' @examples
-#' library(ggplot2)
+#' @examples \dontrun{
+#' library(tntpr)
 #' library(dplyr)
+#' library(ggplot2)
 #'
-#' # Bar Chart with default settings
-#' count(mpg, class) |>
-#'   ggplot(aes(class, n)) +
-#'   geom_col() +
-#'   geom_text(aes(label = n), nudge_y = 3) +
-#'   labs(x = "", y = "",
-#'        title = "Car Types in the mpg Dataset",
-#'        subtitle = "A plot that is only useful for demonstration purposes",
-#'        caption = "Brought to you by the letter 'g'") +
-#'   tntp_style()
+#' fake_county |>
+#'   filter(t_salary > 0) |>
+#'   ggplot(aes(t_experience, t_salary)) +
+#'   geom_point() +
+#'   scale_y_continuous(labels = scales::dollar) +
+#'   labs(title = "Salary Increases with Experience",
+#'        subtitle = "With significant variation at all levels",
+#'        x = "Years of Experience",
+#'        caption = "Data from the Fake County Data Set") +
+#'   tntp_style(show_axis_titles = "x")
 #'
-#' # Default save size recommendation width = 9, height = 6:
-#' # ggsave("filename.svg", width = 9, height = 6)
+#' frpl_experience <- fake_county |>
+#'   mutate(frpl_bucket = cut(sch_frpl_pct,
+#'                            breaks = c(0, 20, 40, 60, 80, 100),
+#'                            labels = c("0-20%", "20-40%", "40-60%", "60-80%", "80-100%"))) |>
+#'   group_by(frpl_bucket) |>
+#'   summarize(avg_experience = mean(t_experience, na.rm = TRUE)) |>
+#'   mutate(label = as.character(round(avg_experience, digits = 1)),
+#'          label = if_else(frpl_bucket == '0-20%', paste0(label,"\nYears of\nExperience"), label))
 #'
-#' # Scatterplot including some customized settings
-#' ggplot(mpg, aes(displ, hwy, color = class)) +
-#'   geom_point(size = 3) +
-#'   labs(x = "Engine Displacement", y = "MPG", color = "Class:",
-#'        title = "Fuel Efficiency by Engine Size",
-#'        subtitle = "An in-depth investigation with a very long subtitle that won't fit with default sizing",
-#'        caption = "Brought to you by the letter 'g'") +
-#'   scale_y_continuous(limits = c(0, 50)) +
-#'   geom_hline(yintercept = 0, linewidth = 1, color = "#333333") +
-#'   tntp_style(show_axis_titles = TRUE,
-#'              show_legend_title = TRUE,
-#'              legend_align = "center",
-#'              grid = 'Yy',
-#'              base_size = 20,
-#'              text_color = tntpr::palette_tntp("dark_blue")) +
-#'   facet_wrap(~drv)
+#' frpl_experience |>
+#'   ggplot(aes(frpl_bucket, avg_experience)) +
+#'   geom_col(fill = if_else(frpl_experience$frpl_bucket == '60-80%',
+#'                           palette_tntp("orange"),
+#'                           palette_tntp("medium_gray"))) +
+#'   geom_text(aes(label = label), nudge_y = -0.25, vjust = 1,
+#'             color = "white", size = 5, lineheight = 1,
+#'             font_face = "Segoe UI") +
+#'   labs(title = "High Poverty Schools have Less Experienced Teachers",
+#'        x = "% of Student Body Receiving Free/Reduced Lunch") +
+#'   scale_y_continuous(breaks = seq(0, 20, 4)) +
+#'   tntp_style(base_size = 20,
+#'              show_axis_titles = "x")
+#'   }
 #'
 
 tntp_style <- function(font              = "Segoe UI",
@@ -123,7 +128,7 @@ tntp_style <- function(font              = "Segoe UI",
 
   # Validate color inputs
   is_color <- function(x) {
-    res <- try(col2rgb(x), silent = TRUE)
+    res <- try(grDevices::col2rgb(x), silent = TRUE)
     return(!"try-error" %in% class(res))
   }
   if(!is_color(text_color)) {
@@ -166,7 +171,7 @@ tntp_style <- function(font              = "Segoe UI",
   }
 
   # Check that specified font is available for use
-  if(!font %in% names(windowsFonts())) {
+  if(!font %in% names(grDevices::windowsFonts())) {
     cli::cli_warn(c("x" = "Font {.val {font}} is not registered in the font table.",
                     "v" = "Using standard {.val sans} font instead",
                     "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
@@ -275,5 +280,4 @@ tntp_style <- function(font              = "Segoe UI",
   result
 
 }
-
 
