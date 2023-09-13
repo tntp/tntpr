@@ -72,7 +72,7 @@
 #'                           palette_tntp("medium_gray"))) +
 #'   geom_text(aes(label = label), nudge_y = -0.25, vjust = 1,
 #'             color = "white", size = 5, lineheight = 1,
-#'             font_face = "Segoe UI") +
+#'             family = "Segoe UI") +
 #'   labs(title = "High Poverty Schools have Less Experienced Teachers",
 #'        x = "% of Student Body Receiving Free/Reduced Lunch") +
 #'   scale_y_continuous(breaks = seq(0, 20, 4)) +
