@@ -171,7 +171,12 @@ tntp_style <- function(font              = "Segoe UI",
   }
 
   # Check that specified font is available for use
-  if(!font %in% names(grDevices::windowsFonts())) {
+  if(.Platform$OS.type == 'windows') {
+    font_list <- names(grDevices::windowsFonts())
+  } else {
+    font_list <- extrafonts::fonts()
+  }
+  if(!font %in% font_list) {
     cli::cli_warn(c("x" = "Font {.val {font}} is not registered in the font table.",
                     "v" = "Using standard {.val sans} font instead",
                     "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
