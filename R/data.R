@@ -76,4 +76,14 @@
 #' @source \url{https://github.com/OpenSDP/fake-county}, posted under a Creative Commons license.
 "fake_county"
 
-
+#' Teacher survey data
+#'
+#' Simulated teacher survey data. Data only includes teh four TNTP high expectations questions.
+#'
+#' @format ## `teacher survey`
+#' A data frame with 5 columns and 20 rows. The five columns are a `timing` column,
+#' followed by four column for each of the four high expectations questions. Responses
+#' are on the 'strongly agree' to strongly disagree' 6-point scale.
+#'
+#' @source simulated in `data-raw/teacher_survey.R`
+"teacher_survey"
