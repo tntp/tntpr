@@ -12,50 +12,61 @@
 #' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.
 #' @export
 #' @examples
-#' agreement <- c("Strongly agree", "Agree", "Somewhat agree",
-#'   "Somewhat disagree", "Strongly disagree", "Frogs", NA)
+#' agreement <- c(
+#'   "Strongly agree", "Agree", "Somewhat agree",
+#'   "Somewhat disagree", "Strongly disagree", "Frogs", NA
+#' )
 #'
 #' recode_to_binary(agreement) # default values of "strongly agree" and "agree" are used for recoding
 #' recode_to_binary(agreement,
-#'                  label_matched = "Top-2 Agree",
-#'                  label_unmatched = "Not in Top-2") # custom labels of factor levels
+#'   label_matched = "Top-2 Agree",
+#'   label_unmatched = "Not in Top-2"
+#' ) # custom labels of factor levels
 #' recode_to_binary(agreement, "frogs")
-#' recode_to_binary(agreement,
-#'                  "frogs",
-#'                  "FROGS!!!",
-#'                  "not frogs") # custom matching values & labels of factor levels
+#' recode_to_binary(
+#'   agreement,
+#'   "frogs",
+#'   "FROGS!!!",
+#'   "not frogs"
+#' ) # custom matching values & labels of factor levels
 #'
 
 #' freq <- c("always", "often", "sometimes", "never")
 #' recode_to_binary(freq, "always", "always", "less than always")
-recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_matched = "Selected", label_unmatched = "Not selected"){
+recode_to_binary <- function(x, to_match = c("strongly agree", "agree"), label_matched = "Selected", label_unmatched = "Not selected") {
+  if (!is.character(to_match)) {
+    stop("You must supply a character or factor vector to the to_match argument")
+  }
 
-  if(!is.character(to_match)){ stop ("You must supply a character or factor vector to the to_match argument") }
-
-  x           <- tolower(x)
+  x <- tolower(x)
   top2_values <- tolower(to_match)
 
-  if(sum(x %in% top2_values, na.rm = TRUE) == 0){ warning(paste0("no instances of ", paste(paste0("\"", to_match, "\""), collapse = ", "), " found in x")) }
+  if (sum(x %in% top2_values, na.rm = TRUE) == 0) {
+    warning(paste0("no instances of ", paste(paste0("\"", to_match, "\""), collapse = ", "), " found in x"))
+  }
 
   result <- dplyr::case_when(
     is.na(x) ~ NA_character_,
     x %in% top2_values ~ label_matched,
-    ! x %in% top2_values ~ label_unmatched
+    !x %in% top2_values ~ label_unmatched
   )
 
   factor(result, levels = c(label_matched, label_unmatched, NA))
 }
 
 # How does that ^^^^ function compare to this stub from elsewhere?
-convert_to_top_2_agree <- function(x, custom_vals = NULL){
-  if(is.null(custom_vals)){
-    custom_vals <- c("strongly agree", "agree", "highly satisfied",
-                     "extremely satisfied", "satisfied", "very confident",
-                     "confident", "all", "most", "yes")
+convert_to_top_2_agree <- function(x, custom_vals = NULL) {
+  if (is.null(custom_vals)) {
+    custom_vals <- c(
+      "strongly agree", "agree", "highly satisfied",
+      "extremely satisfied", "satisfied", "very confident",
+      "confident", "all", "most", "yes"
+    )
     x <- tolower(x)
   }
   if_else(is.na(x), as.character(NA),
-          if_else(x %in% custom_vals, "Top-2 Agree", "Not in Top-2"))
+    if_else(x %in% custom_vals, "Top-2 Agree", "Not in Top-2")
+  )
 }
 
 
@@ -94,11 +105,15 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL){
 #' x %>%
 #'   check_all_recode(contains("q1"))
 #'
-check_all_recode <- function(dat, ..., set_labels = TRUE){
+check_all_recode <- function(dat, ..., set_labels = TRUE) {
   dat <- dplyr::as_data_frame(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
   original_order <- names(dat)
-  cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
-  if(ncol(cols_of_interest) == 0){ stop("no columns selected; check your variable name specification") }
+  cols_of_interest <- dat %>%
+    dplyr::select(...) %>%
+    as.data.frame()
+  if (ncol(cols_of_interest) == 0) {
+    stop("no columns selected; check your variable name specification")
+  }
   responded <- (rowSums(!is.na(cols_of_interest)) > 0)
 
   # capture label attribute - will need to assign them later, so they aren't lost during the interim lines of code
@@ -116,7 +131,9 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
   cols_of_interest <- lapply(cols_of_interest, as.numeric) %>% dplyr::as_data_frame()
 
   # restore labels
-  if(set_labels){ labelled::var_label(cols_of_interest) <- labels_of_interest }
+  if (set_labels) {
+    labelled::var_label(cols_of_interest) <- labels_of_interest
+  }
 
   # rejoin modified columns back to main df
   dat <- cbind(
@@ -125,7 +142,6 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
   )
 
   dat[, original_order] # reorder to original col order
-
 }
 
 #' @title Tabulate a range of check-all-that-apply response columns in a single table.
@@ -158,14 +174,18 @@ check_all_recode <- function(dat, ..., set_labels = TRUE){
 #' x %>%
 #'   check_all_recode(contains("q1")) %>%
 #'   check_all_count(contains("q1"))
-
-
 # Returns a janitor::tabyl object so can use the adorn_ functions
-check_all_count <- function(dat, ...){
-  if(nrow(dat) == 0){stop("input data.frame \"dat\" has zero rows")}
-  if(sum(dat == 0, na.rm = TRUE) == 0){warning("there are no values of \"0\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")}
+check_all_count <- function(dat, ...) {
+  if (nrow(dat) == 0) {
+    stop("input data.frame \"dat\" has zero rows")
+  }
+  if (sum(dat == 0, na.rm = TRUE) == 0) {
+    warning("there are no values of \"0\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")
+  }
 
-  cols_of_interest <- dat %>% dplyr::select(...) %>% as.data.frame()
+  cols_of_interest <- dat %>%
+    dplyr::select(...) %>%
+    as.data.frame()
   result <- dplyr::bind_rows(
     lapply(
       X = cols_of_interest, FUN = count_single_col
@@ -175,8 +195,8 @@ check_all_count <- function(dat, ...){
   # set first column of result (option name). Ideally this is stored in a label attribute.  This checks for that presence, if it doesn't exist, it uses the variable name.
   var_labels <- unlist(labelled::var_label(dat))
   ifelse(is.null(var_labels), # if no variable labels were set for some reason, say set_labels = FALSE
-         result$response <- names(cols_of_interest),
-         result$response <- ifelse(is.na(var_labels), names(cols_of_interest), var_labels)
+    result$response <- names(cols_of_interest),
+    result$response <- ifelse(is.na(var_labels), names(cols_of_interest), var_labels)
   )
 
 
@@ -186,11 +206,15 @@ check_all_count <- function(dat, ...){
 
 # Helper function that returns a single row data.frame for a check-all-that-apply question
 # Assumes column is first treated with check_all_recode()
-count_single_col <- function(vec){
+count_single_col <- function(vec) {
   var_name <- deparse(substitute(vec))
 
-  if(!is.numeric(vec)){ stop("column is not of type numeric, run check_all_recode() before calling this function") }
-  if(sum(! vec %in% c(0, 1, NA)) > 0){ stop("input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function")}
+  if (!is.numeric(vec)) {
+    stop("column is not of type numeric, run check_all_recode() before calling this function")
+  }
+  if (sum(!vec %in% c(0, 1, NA)) > 0) {
+    stop("input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function")
+  }
 
   actuals <- vec[!is.na(vec)]
   n_selected <- sum(actuals)
@@ -204,14 +228,19 @@ count_single_col <- function(vec){
 }
 
 # function called by check_all_recode; grabs question text and adds it as column attributes, for use in check_all_count.  Returns list of variable labels.
-check_all_q_text_to_label <- function(dat){
-  for(i in seq_along(dat)){
-    if(!is.null(unlist(labelled::var_label(dat[i])))){ warning("column already has a label attribute, overwriting with check-all option text")}
+check_all_q_text_to_label <- function(dat) {
+  for (i in seq_along(dat)) {
+    if (!is.null(unlist(labelled::var_label(dat[i])))) {
+      warning("column already has a label attribute, overwriting with check-all option text")
+    }
     q_text <- unique(dat[[i]][!is.na(dat[[i]])])
-    if(length(q_text) > 1){
-      warning(paste("column", i,  "has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.", sep = " "))
-      q_text <- "Other"}
-    if(length(q_text) == 0){ q_text <- NA_character_ } # in case a column was all NAs
+    if (length(q_text) > 1) {
+      warning(paste("column", i, "has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.", sep = " "))
+      q_text <- "Other"
+    }
+    if (length(q_text) == 0) {
+      q_text <- NA_character_
+    } # in case a column was all NAs
     labelled::var_label(dat[i]) <- as.character(q_text)
   }
   labelled::var_label(dat)

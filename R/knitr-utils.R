@@ -9,7 +9,7 @@
 #' @examples
 #' # not run: set_data_memo_formatting()
 #'
-set_data_memo_formatting <- function(){
+set_data_memo_formatting <- function() {
   # set knitr options
   knitr::opts_chunk$set(dev = "png", fig.width = 6, fig.height = 3.667, dpi = 300) # Sam uses 9" (H) x 5.5" (W) for PPT insertions but trying smaller here for Word
   knitr::opts_chunk$set(echo = FALSE)
@@ -30,12 +30,12 @@ set_data_memo_formatting <- function(){
 #' @examples
 #' # not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
 #'
-#
+#' #
 figureN <- local({
-  i = 0
+  i <- 0
   function(x) {
     i <<- i + 1
-    paste('Figure ', i, '. ', x, sep = '')
+    paste("Figure ", i, ". ", x, sep = "")
   }
 })
 
@@ -52,9 +52,9 @@ figureN <- local({
 #' @examples
 #' # not run, in RMarkdown doc: `r tableN("Distribution of cars by cylinder count")`
 tableN <- local({
-  i = 0
+  i <- 0
   function(x) {
     i <<- i + 1
-    paste('Table ', i, '. ', x, sep = '')
+    paste("Table ", i, ". ", x, sep = "")
   }
 })

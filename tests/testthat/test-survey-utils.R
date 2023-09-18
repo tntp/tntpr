@@ -38,8 +38,7 @@ test_that("treatment performs as expected, including setting labels", {
   )
   var_label(approx) <- list(unrelated = NULL, q1_1 = "a", q1_2 = "b", q1_3 = "c", q1_4 = NA_character_) # need to add variable labels to match the result of treatment
 
-expect_equal(treated_x,  approx)
-
+  expect_equal(treated_x, approx)
 })
 
 test_that("tabulation performs as expected", {
@@ -48,20 +47,24 @@ test_that("tabulation performs as expected", {
     data.frame(
       response = c("a", "b", "c", "q1_4"),
       n = c(2, 2, 1, 0),
-      percent = c(2/3, 2/3, 1/3, 0),
+      percent = c(2 / 3, 2 / 3, 1 / 3, 0),
       stringsAsFactors = FALSE
-      ) %>%
+    ) %>%
       as_tabyl(., 1)
-  )})
+  )
+})
 
 ## Now test with "other" column
 
 treated_x_other <- suppressWarnings(
-  check_all_recode(x,
-                   contains("q1")))
+  check_all_recode(
+    x,
+    contains("q1")
+  )
+)
 
 expect_warning(x %>%
-                 check_all_recode(contains("q1")), "has multiple values")
+  check_all_recode(contains("q1")), "has multiple values")
 
 tabulated_x_other <- treated_x_other %>%
   check_all_count(contains("q1"))
@@ -79,7 +82,6 @@ test_that("treatment performs as expected, including setting labels", {
   var_label(approx_other) <- list(unrelated = NULL, q1_1 = "a", q1_2 = "b", q1_3 = "c", q1_4 = NA_character_, q1_other = "Other")
 
   expect_equal(treated_x_other, approx_other)
-
 })
 
 test_that("tabulation performs as expected", {
@@ -93,15 +95,18 @@ test_that("tabulation performs as expected", {
 })
 
 test_that("select helpers work", {
-  expect_equal(suppressWarnings(x %>% check_all_recode(q1_1:q1_other) %>% check_all_count(q1_1:q1_other)),
-               suppressWarnings(x %>% check_all_recode(contains("q1")) %>% check_all_count(contains("q1"))))
+  expect_equal(
+    suppressWarnings(x %>% check_all_recode(q1_1:q1_other) %>% check_all_count(q1_1:q1_other)),
+    suppressWarnings(x %>% check_all_recode(contains("q1")) %>% check_all_count(contains("q1")))
+  )
 })
 
 test_that("bad inputs are caught", {
-expect_error(check_all_recode(x, contains("not_there")),
-             "no columns selected; check your variable name specification")
-  }
-)
+  expect_error(
+    check_all_recode(x, contains("not_there")),
+    "no columns selected; check your variable name specification"
+  )
+})
 
 
 vec <- c("Strongly agree", "Agree", "Somewhat agree", "Somewhat disagree", "Strongly disagree", "Frogs", NA)
@@ -122,8 +127,9 @@ test_that("same result on factor and character", {
 })
 
 test_that("recode produces correct warning and result when nothing is found to recode", {
-  expect_equal(suppressWarnings(
-    recode_to_binary(vec, "not in the vector", label_matched = "Top-2", label_unmatched = "Not in Top-2")
+  expect_equal(
+    suppressWarnings(
+      recode_to_binary(vec, "not in the vector", label_matched = "Top-2", label_unmatched = "Not in Top-2")
     ),
     factor(c(rep("Not in Top-2", 6), NA), levels = c("Top-2", "Not in Top-2", NA))
   )
@@ -136,25 +142,31 @@ test_that("recode produces correct warning and result when nothing is found to r
 
 test_that("label attributes are skipped when set_labels = FALSE", {
   no_labels <- suppressWarnings(x %>% check_all_recode(contains("q1"), set_labels = FALSE))
-  expect_equal(var_label(no_labels),
-               list(unrelated = NULL, q1_1 = NULL, q1_2 = NULL, q1_3 = NULL, q1_4 = NULL, q1_other = NULL))
+  expect_equal(
+    var_label(no_labels),
+    list(unrelated = NULL, q1_1 = NULL, q1_2 = NULL, q1_3 = NULL, q1_4 = NULL, q1_other = NULL)
+  )
 
-  expect_equal(no_labels %>% check_all_count(contains("q1")),
-               data.frame(
-                 response = c("q1_1", "q1_2", "q1_3", "q1_4", "q1_other"),
-                 n = c(2, 2, 1, 0, 2),
-                 percent = c(2/4, 2/4, 1/4, 0, 2/4),
-                 stringsAsFactors = FALSE
-               ) %>%
-                 as_tabyl(1))
+  expect_equal(
+    no_labels %>% check_all_count(contains("q1")),
+    data.frame(
+      response = c("q1_1", "q1_2", "q1_3", "q1_4", "q1_other"),
+      n = c(2, 2, 1, 0, 2),
+      percent = c(2 / 4, 2 / 4, 1 / 4, 0, 2 / 4),
+      stringsAsFactors = FALSE
+    ) %>%
+      as_tabyl(1)
+  )
 })
 
 
 test_that("bad inputs error or warn appropriately", {
   expect_error(check_all_count(mtcars, cyl:carb),
-               "input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function", fixed = TRUE)
+    "input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function",
+    fixed = TRUE
+  )
   expect_warning(mtcars %>% check_all_recode(cyl:carb),
-                "column 1 has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.",
-                fixed = TRUE)
-
+    "column 1 has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.",
+    fixed = TRUE
+  )
 })

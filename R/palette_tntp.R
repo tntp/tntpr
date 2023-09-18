@@ -4,11 +4,11 @@
 #' eleven colors. There are nine TNTP approved colors: dark_blue, medium_blue,
 #' light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey
 #' (medium_gray), light_grey (light_gray). White and black are also available.
-#'@rdname palette_tntp
-#'@param ... supply quoted color names to include in color palette
-#'@export
-#'@examples
-#'library(ggplot2)
+#' @rdname palette_tntp
+#' @param ... supply quoted color names to include in color palette
+#' @export
+#' @examples
+#' library(ggplot2)
 #'
 #' pal1_tntp <- palette_tntp("green", "gold", "orange")
 #' pal2_tntp <- palette_tntp("dark_blue", "medium_blue", "light_blue")
@@ -29,14 +29,13 @@
 #' g <- g + scale_fill_manual(values = pal2_tntp)
 #' g
 palette_tntp <- function(...) {
-
   # TNTP colors
   colors_tntp
 
   # Throw an error if supplied color doesn't exist
   supplied_colors <- c(...)
 
-  if(sum(!is.element(supplied_colors, names(colors_tntp))) > 0) {
+  if (sum(!is.element(supplied_colors, names(colors_tntp))) > 0) {
     stop("Supplied colors do not exist in TNTP universe, please check spelling")
   }
 
@@ -50,60 +49,55 @@ palette_tntp <- function(...) {
 #'
 #' @examples
 #' \dontrun{
-#'  colors_tntp
+#' colors_tntp
 #' }
 #' @export
 "colors_tntp"
-colors_tntp <- c(# TNTPPalette
-                 dark_blue   = "#00355F",
-                 medium_blue = "#00A4C7",
-                 light_blue  = "#81D2EB",
-                 dark_grey   = "#404041",
-                 dark_gray   = "#404041", # Support alternative spellings
-                 medium_grey = "#7D7E81",
-                 medium_gray = "#7D7E81", # Support alternative spellings
-                 light_grey  = "#C1C2C4",
-                 light_gray  = "#C1C2C4", # Support alternative spellings
-                 orange      = "#EA8835",
-                 green       = "#8EBF3E",
-                 gold        = "#FFC723",
+colors_tntp <- c( # TNTPPalette
+  dark_blue = "#00355F",
+  medium_blue = "#00A4C7",
+  light_blue = "#81D2EB",
+  dark_grey = "#404041",
+  dark_gray = "#404041", # Support alternative spellings
+  medium_grey = "#7D7E81",
+  medium_gray = "#7D7E81", # Support alternative spellings
+  light_grey = "#C1C2C4",
+  light_gray = "#C1C2C4", # Support alternative spellings
+  orange = "#EA8835",
+  green = "#8EBF3E",
+  gold = "#FFC723",
+  white = "#FFFFFF",
+  black = "#000000",
 
-                 white       = "#FFFFFF",
-                 black       = "#000000",
-
-                 # TNTPPaletteExtended
-                 blue_5 = "#00486B",
-                 blue_4 = "#007699",
-                 blue_3 = "#00A4C7",
-                 blue_2 = "#2DD1F4",
-                 blue_1 = "#AEFFFF",
-
-                 orange_5 = "#8E2C00",
-                 orange_4 = "#BC5A07",
-                 orange_3 = "#EA8835",
-                 orange_2 = "#FFB562",
-                 orange_1 = "#FFE390",
-
-                 green_5 = "#326300",
-                 green_4 = "#609110",
-                 green_3 = "#8EBF3E",
-                 green_2 = "#BBD98B",
-                 green_1 = "#D1E5B1",
-
-                 gold_5 = "#A36B00",
-                 gold_4 = "#D19900",
-                 gold_3 = "#FFC72E",
-                 gold_2 = "#FFF45B",
-                 gold_1 = "#FFFF89"
-
-                 )
+  # TNTPPaletteExtended
+  blue_5 = "#00486B",
+  blue_4 = "#007699",
+  blue_3 = "#00A4C7",
+  blue_2 = "#2DD1F4",
+  blue_1 = "#AEFFFF",
+  orange_5 = "#8E2C00",
+  orange_4 = "#BC5A07",
+  orange_3 = "#EA8835",
+  orange_2 = "#FFB562",
+  orange_1 = "#FFE390",
+  green_5 = "#326300",
+  green_4 = "#609110",
+  green_3 = "#8EBF3E",
+  green_2 = "#BBD98B",
+  green_1 = "#D1E5B1",
+  gold_5 = "#A36B00",
+  gold_4 = "#D19900",
+  gold_3 = "#FFC72E",
+  gold_2 = "#FFF45B",
+  gold_1 = "#FFFF89"
+)
 
 
 #' TNTP pallette
 #'
 #' @examples
 #' \dontrun{
-#'  colors_tntp_palette
+#' colors_tntp_palette
 #' }
 #' @export
 "colors_tntp_palette"
@@ -115,13 +109,11 @@ colors_tntp_palette <-
     colors_tntp["green"],
     colors_tntp["orange"],
     colors_tntp["light_grey"],
-
     colors_tntp["dark_blue"],
     colors_tntp["medium_grey"],
     colors_tntp["gold_2"],
     colors_tntp["green_2"],
     colors_tntp["orange_2"],
-
     colors_tntp["blue_1"],
     colors_tntp["dark_grey"],
     colors_tntp["gold_2"],
@@ -133,7 +125,7 @@ colors_tntp_palette <-
 #'
 #' @examples
 #' \dontrun{
-#'  colors_tntp_likert
+#' colors_tntp_likert
 #' }
 #' @export
 "colors_tntp_likert"
@@ -152,7 +144,7 @@ colors_tntp_likert <-
 #'
 #' @examples
 #' \dontrun{
-#'  colors_tntp_likert_orange_to_green
+#' colors_tntp_likert_orange_to_green
 #' }
 #' @export
 "colors_tntp_likert_orange_to_green"
@@ -171,17 +163,19 @@ colors_tntp_likert_orange_to_green <-
 #'
 #' @examples
 #' \dontrun{
-#'  palette_names
+#' palette_names
 #' }
 #' @export
 "palette_names"
-palette_names <- c("tntp_palette",
-                   "likert_4pt",
-                   "likert_5pt",
-                   "likert_6pt",
-                   "likert_orange_to_green_4pt",
-                   "likert_orange_to_green_5pt",
-                   "likert_orange_to_green_6pt")
+palette_names <- c(
+  "tntp_palette",
+  "likert_4pt",
+  "likert_5pt",
+  "likert_6pt",
+  "likert_orange_to_green_4pt",
+  "likert_orange_to_green_5pt",
+  "likert_orange_to_green_6pt"
+)
 
 #' scale_palette_tntp
 #'
@@ -189,8 +183,7 @@ palette_names <- c("tntp_palette",
 #'
 #' @export
 #'
-palette_tntp_scales <- function (palette = palette_names)
-{
+palette_tntp_scales <- function(palette = palette_names) {
   tntp_palette <- colors_tntp_palette
   likert_4pt <- colors_tntp_likert[rev(c(1, 2, 6, 7))]
   likert_5pt <- colors_tntp_likert[rev(c(1, 2, 4, 6, 7))]
@@ -200,13 +193,14 @@ palette_tntp_scales <- function (palette = palette_names)
   likert_orange_to_green_6pt <- colors_tntp_likert_orange_to_green[rev(c(1, 2, 3, 5, 6, 7))]
 
   switch(match.arg(palette),
-         tntp_palette = tntp_palette,
-         likert_4pt = likert_4pt,
-         likert_5pt = likert_5pt,
-         likert_6pt = likert_6pt,
-         likert_orange_to_green_4pt = likert_orange_to_green_4pt,
-         likert_orange_to_green_5pt = likert_orange_to_green_5pt,
-         likert_orange_to_green_6pt = likert_orange_to_green_6pt)
+    tntp_palette = tntp_palette,
+    likert_4pt = likert_4pt,
+    likert_5pt = likert_5pt,
+    likert_6pt = likert_6pt,
+    likert_orange_to_green_4pt = likert_orange_to_green_4pt,
+    likert_orange_to_green_5pt = likert_orange_to_green_5pt,
+    likert_orange_to_green_6pt = likert_orange_to_green_6pt
+  )
 }
 
 
@@ -219,10 +213,9 @@ palette_tntp_scales <- function (palette = palette_names)
 #'
 #' @export
 #'
-scale_colour_tntp <- function (palette = palette_names,
-                               drop = FALSE,
-                               ...)
-{
+scale_colour_tntp <- function(palette = palette_names,
+                              drop = FALSE,
+                              ...) {
   palette <- match.arg(palette)
   discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }
@@ -254,10 +247,9 @@ scale_color_tntp <- scale_colour_tntp
 #'
 #' @export
 #'
-scale_fill_tntp <- function (palette = palette_names,
-                             drop = FALSE,
-                             ...)
-{
+scale_fill_tntp <- function(palette = palette_names,
+                            drop = FALSE,
+                            ...) {
   palette <- match.arg(palette)
   discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }

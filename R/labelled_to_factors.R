@@ -9,11 +9,8 @@
 #' @examples
 #' # not run
 #' # haven::read_spss(filepath) %>% labelled_to_factor()
-
 # Convert labelled columns to factors
-labelled_to_factors <- function(labels_df){
-
-
+labelled_to_factors <- function(labels_df) {
   labeled_var_index <- unlist(
     lapply(labels_df, function(x) class(x) == "labelled")
   )
@@ -23,10 +20,12 @@ labelled_to_factors <- function(labels_df){
 
   # reset label attributes - maybe not needed, and not working
   question_text <- unlist(
-    lapply(raw, function(x) {attr(x, "label")})
+    lapply(raw, function(x) {
+      attr(x, "label")
+    })
   )
 
-  for(i in seq_along(factorized)){
+  for (i in seq_along(factorized)) {
     attr(factorized[[i]], "label") <- question_text[names(factorized)[i]]
   }
 

@@ -4,9 +4,9 @@
 #' @param valid_strings the values that the variable can possibly take on.
 #'
 #' @return numeric proportion between 0 and 1.
-prop_matching <- function(vec, valid_strings){
+prop_matching <- function(vec, valid_strings) {
   vec <- as.character(vec)
-  if(all(is.na(vec))){
+  if (all(is.na(vec))) {
     message("Fully NA column detected; consider janitor::remove_empty()")
     return(0)
   }
@@ -34,17 +34,18 @@ prop_matching <- function(vec, valid_strings){
 #' mtcars %>%
 #'   dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) %>%
 #'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree", "Somewhat agree", "Strongly agree"))
-factorize_df <- function(dat, lvls){
-
+factorize_df <- function(dat, lvls) {
   dat_out <- dat %>%
-    dplyr::mutate_if( ~ prop_matching(.x, lvls) == 1, ~ factor(., lvls))
+    dplyr::mutate_if(~ prop_matching(.x, lvls) == 1, ~ factor(., lvls))
 
 
   # col types stored as list-columns to be robust to multi-part col classes, e.g., POSIX dates with two parts
-  col_diffs <- cbind(lapply(dat, class),
-                     lapply(dat_out, class)) %>%
+  col_diffs <- cbind(
+    lapply(dat, class),
+    lapply(dat_out, class)
+  ) %>%
     tibble::as_tibble(., rownames = "var_name") %>%
-    dplyr::mutate(match_prop = purrr::map_dbl(dat, ~prop_matching(.x, lvls)))
+    dplyr::mutate(match_prop = purrr::map_dbl(dat, ~ prop_matching(.x, lvls)))
 
   types_changed <- purrr::map2_lgl(col_diffs$V1, col_diffs$V2, purrr::negate(identical))
 
@@ -52,17 +53,16 @@ factorize_df <- function(dat, lvls){
 
   # message if a match was _already_ a factor, the transformations made, or if no matches
   new_text <- ""
-  if(any(col_diffs$match_prop == 1 & purrr::map_lgl(dat, inherits, "factor"))){
+  if (any(col_diffs$match_prop == 1 & purrr::map_lgl(dat, inherits, "factor"))) {
     warning("at least one matching column was already a factor, though this call will have reordered it if different levels provided.  Could be caused by overlapping sets of factor levels, e.g., \"Yes\", \"Maybe\", \"No\" and \"Yes\", \"No\".")
     new_text <- "new "
   }
 
-  if(length(changed_cols) > 0) {
+  if (length(changed_cols) > 0) {
     message(paste("Transformed these columns: \n", paste("* ", changed_cols, collapse = ", \n")))
-  } else{
+  } else {
     warning(paste0("No ", new_text, "columns matched.  Check spelling & capitalization of your levels."))
   }
 
   tibble::as_tibble(dat_out)
-
 }

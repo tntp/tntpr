@@ -5,10 +5,9 @@
 #'
 #' @export
 .onAttach <- function(libname, pkgname) {
-
   # adapted from hrbrthemes
 
-  if (.Platform$OS.type == "windows")  { # nocov start
+  if (.Platform$OS.type == "windows") { # nocov start
     windowsFonts <- grDevices::windowsFonts()
     if (interactive()) packageStartupMessage("Registering Windows fonts with R")
     extrafont::loadfonts("win", quiet = TRUE)
@@ -24,7 +23,6 @@
 
   fnt <- extrafont::fonttable()
   if (!any(grepl("Segoe", fnt$FamilyName))) {
-    extrafont::ttf_import(file.path(system.file("fonts", package = 'tntpr')))
+    extrafont::ttf_import(file.path(system.file("fonts", package = "tntpr")))
   } # nocov end
-
 }

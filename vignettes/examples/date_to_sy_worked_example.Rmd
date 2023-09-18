@@ -12,13 +12,14 @@ output:
 ```{r setup,echo=FALSE, include = FALSE}
 library(knitr)
 knitr::opts_chunk$set(error = TRUE)
-knitr::opts_chunk$set(out.width='750px', dpi = 300)
+knitr::opts_chunk$set(out.width = "750px", dpi = 300)
 knitr::opts_chunk$set(dev = "png", fig.width = 8, fig.height = 4.8889, dpi = 300)
 ```
 
 ```{r load_packages, include = FALSE}
 library(pacman)
-if(!require("tntpr")) install_github("tntp/tntpr"); library(tntpr)
+if (!require("tntpr")) install_github("tntp/tntpr")
+library(tntpr)
 p_load(tidyverse, janitor, lubridate)
 ```
 
@@ -30,11 +31,12 @@ Say you have a test date and you want to create a new variable that tells you th
 ```{r, echo=FALSE}
 set.seed(1)
 
-appl_dat <- tibble(student_id = 1:100, 
-                   test_date = sample(seq(as.Date('2010/08/01'), as.Date('2020/01/01'), by="day"), 100))
+appl_dat <- tibble(
+  student_id = 1:100,
+  test_date = sample(seq(as.Date("2010/08/01"), as.Date("2020/01/01"), by = "day"), 100)
+)
 
 appl_dat
-
 ```
 
 Historically, I would have used a long, error-prone `case_when` mutation, but the `tntpr::date_to_sy` function is much easier.
@@ -42,6 +44,6 @@ Historically, I would have used a long, error-prone `case_when` mutation, but th
 The function takes two arguments, `date_var` and `last_day_of_sy` (year doesn't matter) and returns a character string with the school year in the form '(year) - (year)'. 
 
 ```{r}
-appl_dat %>% 
+appl_dat %>%
   mutate(hire_date_sy = date_to_sy(test_date, last_day_of_sy = ymd("2018-06-01")))
 ```

@@ -25,14 +25,14 @@
 #' # setup_repo("ela_access",
 #' # "Access to Grade-Level ELA Content",
 #' # "Dustin Pashouwer and Sam Firke")
-setup_repo <- function(subfolder, proj_name, analyst_name){
-  if(missing(subfolder)){
+setup_repo <- function(subfolder, proj_name, analyst_name) {
+  if (missing(subfolder)) {
     stop("Specify the subfolder name of the project within this repo you'll be working on")
   }
-  if(missing(proj_name)){
+  if (missing(proj_name)) {
     stop("Specify the full name of the subfolder project as it should appear in the README")
   }
-  if(missing(analyst_name)){
+  if (missing(analyst_name)) {
     stop("Specify the analyst(s) working on this subfolder project")
   }
 
@@ -53,16 +53,16 @@ setup_repo <- function(subfolder, proj_name, analyst_name){
   invisible(lapply(subfolder, setup_subdirectory, proj_name, analyst_name))
 
   # Create main repo readme
-  if(!any(grepl("README.Md", list.files(), ignore.case = TRUE))) {
+  if (!any(grepl("README.Md", list.files(), ignore.case = TRUE))) {
     writeLines(create_repo_readme(proj_name, analyst_name), "README.Md")
   } else {
     overwrite_repo_readme <- utils::menu(c("Keep current README.Md", "Replace with template README.Md"),
-                                         title = "This repository already contains a file README.Md.  Do you wish to replace with the tntpr template README file?")
-    if(overwrite_repo_readme == 2){
+      title = "This repository already contains a file README.Md.  Do you wish to replace with the tntpr template README file?"
+    )
+    if (overwrite_repo_readme == 2) {
       writeLines(create_repo_readme(proj_name, analyst_name), "README.Md")
     }
   }
-
 }
 
 
@@ -96,63 +96,68 @@ setup_repo <- function(subfolder, proj_name, analyst_name){
 #' # setup_subdirectory("ela_access",
 #' # "Equitable Access to Grade-Level ELA",
 #' # "Dustin Pashouwer and Sam Firke")
-
-setup_subdirectory <- function(subfolder, proj_name, analyst_name){
-  if(missing(proj_name)){
+setup_subdirectory <- function(subfolder, proj_name, analyst_name) {
+  if (missing(proj_name)) {
     stop("Specify the full name of the subfolder project as it should appear in the README")
   }
-  if(missing(analyst_name)){
+  if (missing(analyst_name)) {
     stop("Specify the analyst(s) working on this subfolder project")
   }
 
   # Check if project exists in main directory, if not create it
   existing_files <- list.files(all.files = TRUE)
-  if(!any(grepl(".Rproj$", existing_files))){
+  if (!any(grepl(".Rproj$", existing_files))) {
     usethis::create_project(path = getwd())
     unlink("R", recursive = TRUE) # create_project created "R" folder, we don't want
   }
-  if(!any(grepl(".gitignore", existing_files))){
+  if (!any(grepl(".gitignore", existing_files))) {
     to_ignore <- c(
       ".Rhistory", ".RData", ".Rproj.user", "~$*" # set RStudio to not store .Rhistory
       # and .RData ... but just in case someone didn't
     )
     usethis::use_git_ignore(ignores = to_ignore)
-
   }
 
   # Create project directories
   dirs_to_make <- paste(
     subfolder,
-    c("data",
+    c(
+      "data",
       "data/raw",
       "data/clean",
       "code",
       "code/prep", # these scripts should read from the data/raw directory
       "code/analysis", # these scripts should read from the data/clean directory
-      "output"), # Reports, with figures etc. in subdirectories as needed
+      "output"
+    ), # Reports, with figures etc. in subdirectories as needed
     sep = "/"
   )
   invisible(lapply(dirs_to_make, usethis::use_directory))
 
 
   # Create subfolder readme
-  if(!any(grepl("README.Md", list.files(subfolder), ignore.case = TRUE))) {
-    writeLines(create_subfolder_readme(proj_name, analyst_name),
-               paste0(subfolder, "/README.Md"))
+  if (!any(grepl("README.Md", list.files(subfolder), ignore.case = TRUE))) {
+    writeLines(
+      create_subfolder_readme(proj_name, analyst_name),
+      paste0(subfolder, "/README.Md")
+    )
   } else {
-    warning(paste0("README.Md already exists in subdirectory ",
-                   subfolder,
-                   "; no new README.Md created"))
+    warning(paste0(
+      "README.Md already exists in subdirectory ",
+      subfolder,
+      "; no new README.Md created"
+    ))
   }
 }
 
 # Create the vector of info to generate a standard README.Md main repo template
-create_repo_readme <- function(proj_name, analyst){
+create_repo_readme <- function(proj_name, analyst) {
   repo_dir <- getwd()
   repo_dir <- stringr::str_split(repo_dir, "/")
   repo_dir <- dplyr::last(repo_dir[[1]])
 
-  c(repo_dir,
+  c(
+    repo_dir,
     paste0(rep("=", nchar(repo_dir)), collapse = ""),
     paste0("**Repository initialized:** ", Sys.Date(), "  "), # 2+ spaces at end create line break in Bitbucket
     "\n",
@@ -169,8 +174,9 @@ create_repo_readme <- function(proj_name, analyst){
 }
 
 # Create the vector of info to generate a standard README.Md subfolder template
-create_subfolder_readme <- function(proj_name, analyst){
-  c(proj_name,
+create_subfolder_readme <- function(proj_name, analyst) {
+  c(
+    proj_name,
     paste0(rep("=", nchar(proj_name)), collapse = ""),
     paste0("**Date initialized:** ", Sys.Date(), "  "), # 2+ spaces at end create line break in Bitbucket
     paste0("**Analyst(s):** ", analyst, "  "),

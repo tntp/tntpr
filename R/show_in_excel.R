@@ -5,8 +5,7 @@
 #' @export
 #' @return Returns a data.frame.
 #'
-show_in_excel <- function (.data)
-{
+show_in_excel <- function(.data) {
   tmp <- paste0(tempfile(), ".csv")
   readr::write_excel_csv(.data, tmp)
   fs::file_show(path = tmp)
