@@ -1,7 +1,10 @@
 ---
 title: 'Worked Example: `tntpr::date_to_sy`'
-output:
-  github_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{date_to_sy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 <!-- vignette: > -->

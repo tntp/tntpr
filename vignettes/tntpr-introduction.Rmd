@@ -1,8 +1,8 @@
 ---
 title: "tntpr-introduction"
-output: github_document
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tntp-style-plots}
+  %\VignetteIndexEntry{tntpr-introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

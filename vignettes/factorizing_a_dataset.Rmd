@@ -1,8 +1,10 @@
 ---
 title: "Factorizing a survey dataset"
-date: '`r Sys.Date()`'
-output:
-  github_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{factorizing-a-dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 <!-- vignette: > -->
