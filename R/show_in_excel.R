@@ -1,7 +1,6 @@
 #' Write datatable to temp excel file and open it.
 #'
 #' @param .data Dataframe
-#' @param fileEncoding Encoding
 #'
 #' @export
 #' @return Returns a data.frame.
