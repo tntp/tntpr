@@ -174,7 +174,7 @@ tntp_style <- function(font              = "Segoe UI",
   if(.Platform$OS.type == 'windows') {
     font_list <- names(grDevices::windowsFonts())
   } else {
-    font_list <- extrafonts::fonts()
+    font_list <- names(grDevices::quartzFonts())
   }
   if(!font %in% font_list) {
     cli::cli_warn(c("x" = "Font {.val {font}} is not registered in the font table.",
