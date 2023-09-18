@@ -15,7 +15,7 @@ Likert orange to green pallette
 }
 \examples{
 \dontrun{
- colors_tntp_likert_orange_to_green
+colors_tntp_likert_orange_to_green
 }
 }
 \keyword{datasets}

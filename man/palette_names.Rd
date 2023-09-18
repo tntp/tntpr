@@ -15,7 +15,7 @@ Pallette names
 }
 \examples{
 \dontrun{
- palette_names
+palette_names
 }
 }
 \keyword{datasets}

@@ -18,4 +18,5 @@ Create sequential figure numbers
 \examples{
 # not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
 
+#
 }

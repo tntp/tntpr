@@ -29,18 +29,23 @@ Recodes a character variable into a binary result, a two-level factor.  All valu
 This recoding is not case-sensitive; if you specify "agree" as a top-2 value, "Agree" will be counted as Top-2, and vice versa.
 }
 \examples{
-agreement <- c("Strongly agree", "Agree", "Somewhat agree",
-  "Somewhat disagree", "Strongly disagree", "Frogs", NA)
+agreement <- c(
+  "Strongly agree", "Agree", "Somewhat agree",
+  "Somewhat disagree", "Strongly disagree", "Frogs", NA
+)
 
 recode_to_binary(agreement) # default values of "strongly agree" and "agree" are used for recoding
 recode_to_binary(agreement,
-                 label_matched = "Top-2 Agree",
-                 label_unmatched = "Not in Top-2") # custom labels of factor levels
+  label_matched = "Top-2 Agree",
+  label_unmatched = "Not in Top-2"
+) # custom labels of factor levels
 recode_to_binary(agreement, "frogs")
-recode_to_binary(agreement,
-                 "frogs",
-                 "FROGS!!!",
-                 "not frogs") # custom matching values & labels of factor levels
+recode_to_binary(
+  agreement,
+  "frogs",
+  "FROGS!!!",
+  "not frogs"
+) # custom matching values & labels of factor levels
 
 freq <- c("always", "often", "sometimes", "never")
 recode_to_binary(freq, "always", "always", "less than always")

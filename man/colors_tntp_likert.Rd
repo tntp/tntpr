@@ -15,7 +15,7 @@ Likert pallette
 }
 \examples{
 \dontrun{
- colors_tntp_likert
+colors_tntp_likert
 }
 }
 \keyword{datasets}

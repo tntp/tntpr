@@ -23,10 +23,12 @@ This is an alternative to calling \code{dplyr::mutate_at} with \code{factor()} a
 library(dplyr)
 mtcars \%>\%
   dplyr::mutate(agr = rep(c("Somewhat agree", "Strongly disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree", "Somewhat agree", "Strongly agree"))
+  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
+                        "Somewhat agree", "Strongly agree"))
 
 # prints warning due to case mismatches:
 mtcars \%>\%
   dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree", "Somewhat agree", "Strongly agree"))
+  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
+                        "Somewhat agree", "Strongly agree"))
 }

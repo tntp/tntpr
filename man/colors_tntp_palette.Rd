@@ -15,7 +15,7 @@ TNTP pallette
 }
 \examples{
 \dontrun{
- colors_tntp_palette
+colors_tntp_palette
 }
 }
 \keyword{datasets}

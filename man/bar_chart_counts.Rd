@@ -68,5 +68,7 @@ an N bar chart (uses position dodge from ggplot2).
 #                    var_color = "orange",
 #                    title     = "Number of mtcars by cylinder")
 # # Specify color by group
-#   bar_chart_counts(mtcars, am, cyl, group_colors = c("orange", "green", "dark_blue"), labels = "pct")
+#   bar_chart_counts(mtcars, am, cyl,
+#                    group_colors = c("orange", "green", "dark_blue"),
+#                    labels = "pct")
 }

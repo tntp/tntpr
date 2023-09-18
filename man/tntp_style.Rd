@@ -51,34 +51,46 @@ fake_county |>
   ggplot(aes(t_experience, t_salary)) +
   geom_point() +
   scale_y_continuous(labels = scales::dollar) +
-  labs(title = "Salary Increases with Experience",
-       subtitle = "With significant variation at all levels",
-       x = "Years of Experience",
-       caption = "Data from the Fake County Data Set") +
+  labs(
+    title = "Salary Increases with Experience",
+    subtitle = "With significant variation at all levels",
+    x = "Years of Experience",
+    caption = "Data from the Fake County Data Set"
+  ) +
   tntp_style(show_axis_titles = "x")
 
 frpl_experience <- fake_county |>
   mutate(frpl_bucket = cut(sch_frpl_pct,
-                           breaks = c(0, 20, 40, 60, 80, 100),
-                           labels = c("0-20\%", "20-40\%", "40-60\%", "60-80\%", "80-100\%"))) |>
+    breaks = c(0, 20, 40, 60, 80, 100),
+    labels = c("0-20\%", "20-40\%", "40-60\%", "60-80\%", "80-100\%")
+  )) |>
   group_by(frpl_bucket) |>
   summarize(avg_experience = mean(t_experience, na.rm = TRUE)) |>
-  mutate(label = as.character(round(avg_experience, digits = 1)),
-         label = if_else(frpl_bucket == '0-20\%', paste0(label,"\nYears of\nExperience"), label))
+  mutate(
+    label = as.character(round(avg_experience, digits = 1)),
+    label = if_else(frpl_bucket == "0-20\%", paste0(label, "\nYears of\nExperience"), label)
+  )
 
 frpl_experience |>
   ggplot(aes(frpl_bucket, avg_experience)) +
-  geom_col(fill = if_else(frpl_experience$frpl_bucket == '60-80\%',
-                          palette_tntp("orange"),
-                          palette_tntp("medium_gray"))) +
-  geom_text(aes(label = label), nudge_y = -0.25, vjust = 1,
-            color = "white", size = 5, lineheight = 1,
-            family = "Segoe UI") +
-  labs(title = "High Poverty Schools have Less Experienced Teachers",
-       x = "\% of Student Body Receiving Free/Reduced Lunch") +
+  geom_col(fill = if_else(frpl_experience$frpl_bucket == "60-80\%",
+    palette_tntp("orange"),
+    palette_tntp("medium_gray")
+  )) +
+  geom_text(aes(label = label),
+    nudge_y = -0.25, vjust = 1,
+    color = "white", size = 5, lineheight = 1,
+    family = "Segoe UI"
+  ) +
+  labs(
+    title = "High Poverty Schools have Less Experienced Teachers",
+    x = "\% of Student Body Receiving Free/Reduced Lunch"
+  ) +
   scale_y_continuous(breaks = seq(0, 20, 4)) +
-  tntp_style(base_size = 20,
-             show_axis_titles = "x")
-  }
+  tntp_style(
+    base_size = 20,
+    show_axis_titles = "x"
+  )
+}
 
 }
