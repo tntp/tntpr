@@ -28,12 +28,14 @@ prop_matching <- function(vec, valid_strings) {
 #' library(dplyr)
 #' mtcars %>%
 #'   dplyr::mutate(agr = rep(c("Somewhat agree", "Strongly disagree"), 16)) %>%
-#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree", "Somewhat agree", "Strongly agree"))
+#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
+#'                         "Somewhat agree", "Strongly agree"))
 #'
 #' # prints warning due to case mismatches:
 #' mtcars %>%
 #'   dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) %>%
-#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree", "Somewhat agree", "Strongly agree"))
+#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
+#'                         "Somewhat agree", "Strongly agree"))
 factorize_df <- function(dat, lvls) {
   dat_out <- dat %>%
     dplyr::mutate_if(~ prop_matching(.x, lvls) == 1, ~ factor(., lvls))
