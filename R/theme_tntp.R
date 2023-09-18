@@ -62,36 +62,36 @@ theme_tntp <- function(show_legend_title = TRUE,
 
   # Build the theme -----------------------------------------------------------
   # Starts with theme_minimal and then modifies some parts
-  result <- theme_minimal(
+  result <- ggplot2::theme_minimal(
     base_size = base_size,
     base_family = base_family
   ) %+replace%
-    theme(
+    ggplot2::theme(
       legend.position = "bottom", # Move legend to bottom
-      legend.key = element_blank(), # Remove border from legend boxes
-      panel.grid.major = element_line(color = grid_color),
-      panel.grid.minor = element_blank(), # Remove minor gridlines entirely
-      axis.line.y = element_line(color = "black", size = 0.25),
-      axis.line.x = element_line(color = "black", size = 0.25),
-      plot.title = element_text(
+      legend.key = ggplot2::element_blank(), # Remove border from legend boxes
+      panel.grid.major = ggplot2::element_line(color = grid_color),
+      panel.grid.minor = ggplot2::element_blank(), # Remove minor gridlines entirely
+      axis.line.y = ggplot2::element_line(color = "black", size = 0.25),
+      axis.line.x = ggplot2::element_line(color = "black", size = 0.25),
+      plot.title = ggplot2::element_text(
         hjust = title_h_just,
         colour = title_color,
         size = title_size
       ),
-      plot.subtitle = element_text(
+      plot.subtitle = ggplot2::element_text(
         hjust = subtitle_h_just,
         colour = subtitle_color,
         size = subtitle_size,
         margin = margin(7)
       ),
-      plot.caption = element_text(
+      plot.caption = ggplot2::element_text(
         hjust = caption_h_just,
         colour = caption_color,
         size = caption_size
       )
     )
   if (!show_legend_title) {
-    result <- result + theme(legend.title = element_blank())
+    result <- result + ggplot2::theme(legend.title = element_blank())
   }
   result
 }

@@ -143,7 +143,7 @@ bar_chart_counts <- function(df,
 
   if (missing(group_var)) {
     if (labels == "pct") {
-      nbc <- ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = perc)) +
+      nbc <- ggplot2::ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = perc)) +
         ggplot2::geom_bar(fill = swap_colors(var_color), stat = "identity") +
         ggplot2::geom_text(ggplot2::aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
           vjust = -0.8,
@@ -151,7 +151,7 @@ bar_chart_counts <- function(df,
           size = font_size * 0.35
         ) # different ratio for font size in geom_text vs. element, see http://stackoverflow.com/a/25062509
     } else {
-      nbc <- ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = n)) +
+      nbc <- ggplot2::ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = n)) +
         ggplot2::geom_bar(fill = swap_colors(var_color), stat = "identity") +
         ggplot2::geom_text(
           mapping = ggplot2::aes(label = n),
@@ -162,37 +162,39 @@ bar_chart_counts <- function(df,
     }
   } else {
     if (labels == "pct") {
-      nbc <- ggplot(
+      nbc <- ggplot2::ggplot(
         data = plot_data,
         mapping = ggplot2::aes(x = vec.factor, y = perc, fill = group.factor)
       ) +
-        geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
-        scale_fill_manual(values = tntp_col_pal)
+        ggplot2::geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
+        ggplot2::scale_fill_manual(values = tntp_col_pal)
 
 
-      nbc <- nbc + geom_text(ggplot2::aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
-        position = position_dodge(width = 0.9),
-        vjust = -0.8,
-        na.rm = TRUE,
-        family = font,
-        size = font_size * 0.35
-      )
+      nbc <- nbc +
+        ggplot2::geom_text(aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
+          position = position_dodge(width = 0.9),
+          vjust = -0.8,
+          na.rm = TRUE,
+          family = font,
+          size = font_size * 0.35
+        )
     } else {
-      nbc <- ggplot(
+      nbc <- ggplot2::ggplot(
         data = plot_data,
-        mapping = ggplot2::aes(x = vec.factor, y = n, fill = group.factor)
+        mapping = aes(x = vec.factor, y = n, fill = group.factor)
       ) +
-        geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
-        scale_fill_manual(values = tntp_col_pal)
+        ggplot2::geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
+        ggplot2::scale_fill_manual(values = tntp_col_pal)
 
 
-      nbc <- nbc + geom_text(ggplot2::aes(label = n),
-        position = position_dodge(width = 0.9),
-        vjust = -0.8,
-        na.rm = TRUE,
-        family = font,
-        size = font_size * 0.35
-      )
+      nbc <- nbc +
+        ggplot2::geom_text(ggplot2::aes(label = n),
+          position = position_dodge(width = 0.9),
+          vjust = -0.8,
+          na.rm = TRUE,
+          family = font,
+          size = font_size * 0.35
+        )
     }
   }
 
@@ -204,12 +206,12 @@ bar_chart_counts <- function(df,
     max(plot_data$n, na.rm = TRUE) * 1.1
   )
   nbc <- nbc +
-    scale_y_continuous(
+    ggplot2::scale_y_continuous(
       expand = c(0, 0), # do people mind there being no whitespace at the bottom?  There's none in Excel
       limits = c(0, max_height)
     ) +
-    labs(title = title, x = var_label) +
-    theme(
+    ggplot2::labs(title = title, x = var_label) +
+    ggplot2::theme(
       axis.line.y = element_blank(),
       axis.line.x = element_line(
         color = "grey70",
