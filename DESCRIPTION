@@ -3,7 +3,7 @@ Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
 Version: 0.1.1
 Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb],
-    Dustin Pashouwer [ctb], Kate Mullan [ctb]
+    Dustin Pashouwer [ctb], Kate Mullan [ctb], Shane Orr [ctb], Sam Talcott [ctb]
 Maintainer: Dustin Pashouwer <dustin.pashouwer@tntp.org>
 Description: An internal TNTP R package that includes functions and
     templates customized with TNTP branding. It is intended for this R
