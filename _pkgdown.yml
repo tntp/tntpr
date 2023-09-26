@@ -4,7 +4,6 @@ articles:
 - title: Articles
   navbar: ~
   contents:
-  - tntpr-introduction
   - visualization-cookbook
 
 template:
