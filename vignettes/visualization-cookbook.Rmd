@@ -40,8 +40,6 @@ For more info on `tntpr` check out the [package's Github repo](https://github.co
 A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. We will use the following packages.
 
 ```{r load_packages}
-# NOTE: You cannot load `tidyverse` because it will fail when the pkgdown site
-# is built since tidyverse is not improted or suggested
 library(tntpr)
 library(ggplot2)
 library(dplyr)
