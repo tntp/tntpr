@@ -33,13 +33,14 @@ If you do not have the `devtools` package installed, you will have to run the fi
 devtools::install_github('tntp/tntpr')
 ```
 
-For more info on `tntpr` check out the [package's Github repo](https://github.com/tntp/tntpr), but most of the details about how to use the package and its functions are detailed below.
-
 ## Load all the libraries you need
 
 A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. We will use the following packages.
 
 ```{r load_packages}
+# NOTE: We are not simply loading `tidyverse` in this vignette due to how vignettes
+# are built to create the documentation website. In other contexts, however, we
+# would simply use `library(tidyverse)` instead of loading many of the packages individually.
 library(tntpr)
 library(ggplot2)
 library(dplyr)
@@ -86,7 +87,7 @@ plt +
 
 We will highlight two parameters to `tntp_style()` that can help customize your plot.
 
-`font`
+*`font`*
 
 The `font` parameter lets you set the text font family. This changes the font family for all items, including plot and axis titles, legend titles and text, and axis text. The parameter defaults to 'Segoe UI', TNTP's font style, but uses 'sans' if 'Segoe UI' is not available. You will receive a warning if your specified font is not found.
 
@@ -98,7 +99,7 @@ You will need to manually import additional fonts using the `extrafont` package 
 
 You can check to see which fonts are available to R with `windowsFonts()` on Windows or `quartzFonts()` on Mac.
 
-`base_size
+*`base_size`*
 
 The `tntp_style()` function allows a parameter called `base_size` which controls font sizes. The default value is 28 and the recommended minimum is 15. The number represents the plot title's font size. Other font sizes, such as subtitles, axis labels and text, and legend labels and text will also be adjusted based on the `base_size` value.
 
