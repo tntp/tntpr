@@ -1,8 +1,8 @@
 ---
-title: "tntpr-introduction"
+title: "Introduction to Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tntpr-introduction}
+  %\VignetteIndexEntry{Introduction to Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

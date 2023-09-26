@@ -2,7 +2,7 @@
 title: "TNTP Visualization Cookbook"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{visualization-cookbook}
+  %\VignetteIndexEntry{TNTP Visualization Cookbook}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -2,15 +2,10 @@
 title: "Factorizing a survey dataset"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{factorizing-a-dataset}
+  %\VignetteIndexEntry{Factorizing a survey dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-<!-- vignette: > -->
-<!--   %\VignetteIndexEntry{Factorizing a survey dataset} -->
-<!--   %\VignetteEngine{knitr::rmarkdown} -->
-<!--   %\VignetteEncoding{UTF-8} -->
 
 ```{r setup,echo=FALSE, include = FALSE}
 library(knitr)

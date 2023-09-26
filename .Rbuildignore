@@ -8,3 +8,5 @@
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+^\.github$
+^vignettes/tntp-style-plots\.rmd$
