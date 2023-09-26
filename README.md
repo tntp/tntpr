@@ -57,12 +57,6 @@ library(tntpr)
 
 Once installed, you can update the package with `update_tntpr()`.
 
-## Using the package
-
-See the
-[vignette](https://github.com/tntp/tntpr/blob/master/vignettes/tntpr-introduction.md)
-for demonstrations of how to use these tntpr functions.
-
 ## Feature Requests and Bug Reports
 
 Have a data problem you think tntpr could help with? Find a bug while

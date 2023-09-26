@@ -41,7 +41,11 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    usethis
+    usethis,
+    ggridges,
+    ggalt,
+    forcats,
+    tidyr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
