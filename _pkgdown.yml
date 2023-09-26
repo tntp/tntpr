@@ -1,0 +1,6 @@
+url: 'https://tntp.github.io/tntpr/'
+
+template:
+  bootstrap: 5
+  bootswatch: cerulean
+
