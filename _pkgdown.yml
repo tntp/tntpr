@@ -6,9 +6,6 @@ articles:
   contents:
   - tntpr-introduction
   - visualization-cookbook
-  - date_to_sy_worked_example
-  - factorizing_a_dataset
-  - tntp-style-plots
 
 template:
   bootstrap: 5
