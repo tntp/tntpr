@@ -98,9 +98,6 @@ will have to run the first line in the code below as well.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages('devtools')</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'tntp/tntpr'</span><span class="op">)</span></span></code></pre></div>
-<p>For more info on <code>tntpr</code> check out the <a href="https://github.com/tntp/tntpr" class="external-link">package’s Github repo</a>, but most
-of the details about how to use the package and its functions are
-detailed below.</p>
 </div>
 <div class="section level3">
 <h3 id="load-all-the-libraries-you-need">Load all the libraries you need<a class="anchor" aria-label="anchor" href="#load-all-the-libraries-you-need"></a>
@@ -109,7 +106,10 @@ detailed below.</p>
 general - require certain packages to be installed and loaded. We will
 use the following packages.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tntp/tntpr" class="external-link">tntpr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># NOTE: We are not simply loading `tidyverse` in this vignette due to how vignettes</span></span>
+<span><span class="co"># are built to create the documentation website. In other contexts, however, we</span></span>
+<span><span class="co"># would simply use `library(tidyverse)` instead of loading many of the packages individually.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tntp/tntpr" class="external-link">tntpr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
@@ -169,7 +169,7 @@ theme.</p>
 </h4>
 <p>We will highlight two parameters to <code><a href="../reference/tntp_style.html">tntp_style()</a></code> that
 can help customize your plot.</p>
-<p><code>font</code></p>
+<p><em><code>font</code></em></p>
 <p>The <code>font</code> parameter lets you set the text font family.
 This changes the font family for all items, including plot and axis
 titles, legend titles and text, and axis text. The parameter defaults to
@@ -195,7 +195,7 @@ run this step in each new R session.</li>
 <p>You can check to see which fonts are available to R with
 <code>windowsFonts()</code> on Windows or <code><a href="https://rdrr.io/r/grDevices/quartzFonts.html" class="external-link">quartzFonts()</a></code> on
 Mac.</p>
-<p>`base_size</p>
+<p><em><code>base_size</code></em></p>
 <p>The <code><a href="../reference/tntp_style.html">tntp_style()</a></code> function allows a parameter called
 <code>base_size</code> which controls font sizes. The default value is
 28 and the recommended minimum is 15. The number represents the plot
