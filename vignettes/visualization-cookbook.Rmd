@@ -381,7 +381,7 @@ ggplot(number_teachers_school, aes(n)) +
   tntp_style(base_size = base_font_size)
 ```
 
-## Making denisty plots
+## Making density plots
 
 The [`ggridges`](https://wilkelab.org/ggridges/) package contains additional plots for plotting distributions using ridgeline plots.
 
