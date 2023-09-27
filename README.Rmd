@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 [![Travis-CI Build
 Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
 
+# tntpr <img src="man/figures/logo.png" align="right" />
+
 About
 -----
 
