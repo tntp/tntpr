@@ -205,16 +205,19 @@ show_tntp_palette <- function(..., reverse = FALSE) {
   }) |> unlist() |> matrix(ncol = max_length, byrow = TRUE)
 
   # Labeling should be cleaned up (not pretty right now)
-  old <- par(pty = "s", mar = c(0, 0, 0, 0))
+  old <- par(pty = "m", mar = c(0, 0, 0, 0))
   on.exit(par(old))
   size <- max(dim(colours))
-  plot(c(0, size + 1), c(0, -size), type = "n", xlab = "", ylab = "",
+  size_x <- dim(colours)[2]
+  size_y <- dim(colours)[1]
+  size_label <- ceiling(size_x / 2)
+  plot(c(0, size_label + size_x), c(0, -size_y), type = "n", xlab = "", ylab = "",
        axes = FALSE)
-  rect(col(colours), -row(colours) + 1, col(colours) + 1, -row(colours),
+  rect(col(colours) - 1 + size_label, -row(colours) + 1, col(colours) + size_label, -row(colours),
        col = colours, border = FALSE)
-  text(x = 0,
+  text(x = size_label - 0.25,
        y = -seq(1, length(palettes)) + 0.5,
-       adj = 0,
+       adj = 1,
        labels = palettes,
        col = "black")
 
