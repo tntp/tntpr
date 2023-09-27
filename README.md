@@ -59,5 +59,5 @@ Once installed, you can update the package with `update_tntpr()`.
 
 ## Feature Requests and Bug Reports
 
-Have a data problem you think tntpr could help with? Find a bug while
+Have a data problem you think `tntpr` could help with? Find a bug while
 working with the `tntpr` package? Please create an issue.
