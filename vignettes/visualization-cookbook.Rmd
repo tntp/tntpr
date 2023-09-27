@@ -386,13 +386,13 @@ ggplot(number_teachers_school, aes(n)) +
 The [`ggridges`](https://wilkelab.org/ggridges/) package contains additional plots for plotting distributions using ridgeline plots.
 
 ```{r}
-ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year)) +
-  stat_density_ridges(quantile_lines = TRUE, quantiles = 4) +
+ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year, fill = factor(school_year))) +
+  geom_density_ridges(quantile_lines = TRUE, quantiles = 4) +
   scale_x_continuous(labels = scales::dollar) +
   labs(title = "Income distrubutions for teachers has remained constant",
        subtitle = "Income distrubution and quantiles for teachers") +
   tntp_style(base_size = base_font_size) + 
-  
+  scale_fill_tntp()
 ```
 
 ------------------------------------------------------------------------
