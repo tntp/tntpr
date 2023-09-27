@@ -421,9 +421,7 @@ teacher_survey_he <- teacher_survey |>
 teacher_survey_he_perc <- teacher_survey_he |> 
   drop_na("response") |>
   # calculate the number of responses for each response option
-  group_by(question, response) |>
-  count(name = 'n_response') |>
-  ungroup() |> 
+  count(question, response, name = 'n_response') |>
   # calculate the number of responses for each question
   group_by(question) |>
   mutate(n_question = sum(n_response)) |>
