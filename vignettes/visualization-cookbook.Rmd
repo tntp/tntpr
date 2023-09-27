@@ -391,7 +391,8 @@ ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year)) +
   scale_x_continuous(labels = scales::dollar) +
   labs(title = "Income distrubutions for teachers has remained constant",
        subtitle = "Income distrubution and quantiles for teachers") +
-  tntp_style(base_size = base_font_size)
+  tntp_style(base_size = base_font_size) + 
+  
 ```
 
 ------------------------------------------------------------------------
