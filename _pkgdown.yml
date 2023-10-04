@@ -1,0 +1,12 @@
+url: https://tntp.github.io/tntpr/
+
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - visualization-cookbook
+
+template:
+  bootstrap: 5
+  bootswatch: cerulean
+

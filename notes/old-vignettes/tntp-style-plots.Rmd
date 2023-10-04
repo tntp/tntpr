@@ -1,8 +1,8 @@
 ---
-title: "tntp-style-plots"
+title: "Old - TNTP style plots"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tntp-style-plots}
+  %\VignetteIndexEntry{Old - TNTP style plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

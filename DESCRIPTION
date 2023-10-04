@@ -10,7 +10,7 @@ Description: An internal TNTP R package that includes functions and
     package to be a one-stop shop for R tools by analysts and other data
     users at TNTP.
 License: CC BY 4.0
-URL: https://github.com/tntp/tntpr
+URL: https://github.com/tntp/tntpr, https://tntp.github.io/tntpr/
 Depends:
     R (>= 3.2)
 Imports: 
@@ -41,7 +41,11 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    usethis
+    usethis,
+    ggridges,
+    ggalt,
+    forcats,
+    tidyr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
