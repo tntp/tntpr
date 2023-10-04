@@ -142,11 +142,6 @@ show the legend title, axis title, and grid lines. All parameters have
 default values so users do not need to set any of them.</p>
 <p>Consult the function’s documentation at <code><a href="../reference/tntp_style.html">?tntp_style</a></code> for
 more information on the parameters.</p>
-<p>By default, <code><a href="../reference/tntp_style.html">tntp_style()</a></code> uses the ‘Segoe UI’ font
-because this font is TNTP’s base font. You must load the font into R.
-This process is beyond the scope of this tutorial, but the <a href="https://github.com/wch/extrafont" class="external-link"><code>extrafont</code>
-package</a> can be used to load the font into R. Users can change the
-font with the font` parameter.</p>
 <p>Note that colors for lines in the case of a line chart or bars for a
 bar chart, do not come out of the box from the <code><a href="../reference/tntp_style.html">tntp_style()</a></code>
 function, but need to be explicitly set in your other standard
@@ -243,6 +238,8 @@ the plot with a theme element.</p>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>show_axis_titles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>To see all available settings you can adjust with a theme element,
+see the documentation for <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme()</a></code>.</p>
 <hr>
 </div>
 </div>
