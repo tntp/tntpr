@@ -195,9 +195,7 @@ ggplot(avg_salary, aes(x = school_year, y = avg_salary)) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
   labs(
     title="Average Teacher Salaries",
-    subtitle = "Teacher salaries remained constant between 2012 and 2015",
-    x = NULL,
-    y = 'Average teacher salary'
+    subtitle = "Teacher salaries remained constant between 2012 and 2015"
   ) +
     tntp_style(base_size = base_font_size)
 ```
@@ -226,12 +224,10 @@ line_plot_schools <- school_salary |>
 ggplot(line_plot_schools, aes(x = school_year, y = avg_salary, color = school_name)) +
   geom_line(size = 1) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
-  scale_colour_manual(values = tntp_colors('dark_green', 'orange')) +
+  scale_colour_manual(values = tntp_colors('dark_green', 'medium_blue')) +
   labs(
     title="Average Teacher Salaries",
-    subtitle = "Teacher salaries remained constant between 2012 and 2015",
-    x = NULL,
-    y = 'Average teacher salary'
+    subtitle = "Teacher salaries remained constant between 2012 and 2015"
   ) +
   tntp_style(base_size = base_font_size)
 ```
