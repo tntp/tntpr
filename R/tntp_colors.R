@@ -69,7 +69,7 @@ tntp_colors <- function(...) {
 
   supplied_colors <- c(...)
 
-  # Return full color list if run with no arguments
+  # Return full color list with names if run with no arguments
   if(is.null(supplied_colors)) {
     return(tntp_color_list)
   }
@@ -89,6 +89,27 @@ tntp_colors <- function(...) {
 #' @rdname tntp_colors
 show_tntp_colors <- function(..., labels = TRUE, borders = NULL, cex_label = 1,
                              ncol = NULL) {
+
+
+  # Validate parameters
+  if(!is.logical(labels)) {
+    cli::cli_warn(c("!" = "Invalid {.var labels} value of {.val {labels}}",
+                    "i" = "{.var labels} accepts values of {.val TRUE} or {.val FALSE}",
+                    "i" = "Defaulting to {.val TRUE}"))
+    labels <- TRUE
+  }
+  # Validate color inputs
+  is_color <- function(x) {
+    res <- try(grDevices::col2rgb(x), silent = TRUE)
+    return(!"try-error" %in% class(res))
+  }
+
+  if(!is_color(borders)) {
+    cli::cli_warn(c("!" = "Invalid {.var borders} value of {.val {borders}}",
+                    "i" = "{.var borders} accepts any color value or {.val NA}",
+                    "i" = "Defaulting to {.val {par(\"fg\")}}"))
+    borders <- par("fg")
+  }
 
   # Code adapted from scales::show_col but with text labels in addition to hex codes
   colours <- tntp_colors(...)
@@ -170,7 +191,7 @@ tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
   if(is.null(pal)) {
     cli::cli_abort(c("x" = "No TNTP palette found for {.val {palette}}",
                      "i" = "Run {.run tntpr::show_tntp_palette()} to see available palettes",
-                     "i" = "You can also use {.code tntp_colors()} to create your own palette"))
+                     "i" = "You can also use {.code tntp_colors()} to create your own palette from available TNTP colors"))
   }
 
   if(reverse) rev(pal) else pal
