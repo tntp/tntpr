@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 [![Travis-CI Build
 Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
 
+# tntpr <img src="man/figures/logo.png" align="right" />
+
 About
 -----
 
@@ -68,11 +70,11 @@ Once installed, you load it like any other package.
 library(tntpr)
 ```
 
-Once installed, you can update the package with `update_tntpr()`.
+Once installed, you can update the package with `update_tntpr()`. 
 
 
 Feature Requests and Bug Reports
 --------------------------------
 
-Have a data problem you think tntpr could help with? Find a bug while
+Have a data problem you think `tntpr` could help with? Find a bug while
 working with the `tntpr` package? Please create an issue.

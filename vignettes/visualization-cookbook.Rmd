@@ -381,17 +381,19 @@ ggplot(number_teachers_school, aes(n)) +
   tntp_style(base_size = base_font_size)
 ```
 
-## Making denisty plots
+## Making density plots
 
 The [`ggridges`](https://wilkelab.org/ggridges/) package contains additional plots for plotting distributions using ridgeline plots.
 
 ```{r}
-ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year)) +
-  stat_density_ridges(quantile_lines = TRUE, quantiles = 4) +
+ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year, fill = factor(school_year))) +
+  geom_density_ridges(quantile_lines = TRUE, quantiles = 4) +
   scale_x_continuous(labels = scales::dollar) +
   labs(title = "Income distrubutions for teachers has remained constant",
        subtitle = "Income distrubution and quantiles for teachers") +
-  tntp_style(base_size = base_font_size)
+  tntp_style(base_size = base_font_size) + 
+  theme(legend.position = "none") + 
+  scale_fill_tntp()
 ```
 
 ------------------------------------------------------------------------
@@ -419,9 +421,7 @@ teacher_survey_he <- teacher_survey |>
 teacher_survey_he_perc <- teacher_survey_he |> 
   drop_na("response") |>
   # calculate the number of responses for each response option
-  group_by(question, response) |>
-  count(name = 'n_response') |>
-  ungroup() |> 
+  count(question, response, name = 'n_response') |>
   # calculate the number of responses for each question
   group_by(question) |>
   mutate(n_question = sum(n_response)) |>
