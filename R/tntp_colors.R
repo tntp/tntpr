@@ -41,42 +41,30 @@
 tntp_colors <- function(...) {
 
     tntp_color_list <- c(
-    dark_blue = "#00355F",
-    medium_blue = "#00A4C7",
-    light_blue = "#81D2EB",
-    dark_grey = "#404041",
-    dark_gray = "#404041", # Support alternative spellings
-    medium_grey = "#7D7E81",
-    medium_gray = "#7D7E81", # Support alternative spellings
-    light_grey = "#C1C2C4",
-    light_gray = "#C1C2C4", # Support alternative spellings
-    orange = "#EA8835",
-    green = "#8EBF3E",
-    gold = "#FFC723",
-    white = "#FFFFFF",
-    black = "#000000",
-    blue_5 = "#00486B",
-    blue_4 = "#007699",
-    blue_3 = "#00A4C7",
-    blue_2 = "#2DD1F4",
-    blue_1 = "#AEFFFF",
-    orange_5 = "#8E2C00",
-    orange_4 = "#BC5A07",
-    orange_3 = "#EA8835",
-    orange_2 = "#FFB562",
-    orange_1 = "#FFE390",
-    green_5 = "#326300",
-    green_4 = "#609110",
-    green_3 = "#8EBF3E",
-    green_2 = "#BBD98B",
-    green_1 = "#D1E5B1",
-    gold_5 = "#A36B00",
-    gold_4 = "#D19900",
-    gold_3 = "#FFC72E",
-    gold_2 = "#FFF45B",
-    gold_1 = "#FFFF89",
-    black = "#000000",
-    white = "#FFFFFF"
+
+      # Primary
+      black       = '#000000',
+      light_gray  = '#F1F1EE',
+      light_grey  = '#F1F1EE', # alternate spelling
+      light_green = '#E2EDDC',
+      white       = '#FFFFFF',
+
+      # Secondary
+      yellow      = '#FDE57B',
+      light_red   = '#FDDACA',
+      medium_blue = '#00A5C7',
+      dark_red    = '#C31F46',
+      dark_green  = '#317D5C',
+
+      # Extended
+      dark_blue    = '#00355F',
+      orange       = '#F26C4C',
+      dark_gray    = '#4A4A4A',
+      dark_gray    = '#4A4A4A', # alternate spelling
+      dark_yellow  = '#F2CF13',
+      light_blue   = '#81D3EB',
+      medium_red   = '#DA8988',
+      medium_green = '#8FB09D'
   )
 
   supplied_colors <- c(...)
@@ -136,14 +124,14 @@ show_tntp_colors <- function(..., labels = TRUE, borders = NULL, cex_label = 1,
 
 # Private variable
 tntp_palette_list <- list(
-  "likert_4" = tntp_colors("dark_blue", "medium_blue", "orange_3", "orange_4"),
-  "likert_5" = tntp_colors("dark_blue", "medium_blue", "light_gray", "orange_3", "orange_4"),
-  "likert_6" = tntp_colors("dark_blue", "medium_blue", "light_blue", "orange_2", "orange_3", "orange_4"),
-  "likert_7" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_gray", "orange_2", "orange_3", "orange_4"),
-  "og_4" = tntp_colors("orange_4", "orange_3", "green_3", "green_4"),
-  "og_5" = tntp_colors("orange_4", "orange_3", "light_gray", "green_3", "green_4"),
-  "og_6" = tntp_colors("orange_4", "orange_3", "orange_2", "green_2", "green_3", "green_4"),
-  "og_7" = tntp_colors("orange_4", "orange_3", "orange_2", "light_gray", "green_2", "green_3", "green_4")
+  "likert_4" = tntp_colors("dark_green", "light_green", "light_red", "dark_red"),
+  "likert_5" = tntp_colors("dark_green", "light_green", "light_gray", "light_red", "dark_red"),
+  "likert_6" = tntp_colors("dark_green", "medium_green", "light_green", "light_red", "medium_red", "dark_red"),
+  "likert_7" = tntp_colors("dark_green", "medium_green", "light_green", "light_gray", "light_red", "medium_red", "dark_red"),
+  "greens" = tntp_colors("dark_green", "medium_green", "light_green"),
+  "reds" = tntp_colors("dark_red", "medium_red", "light_red"),
+  "blues" = tntp_colors("dark_blue", "medium_blue", "light_blue"),
+  "grays" = tntp_colors("black", "dark_gray", "light_gray", "white")
   )
 
 #' Common TNTP Color Palettes
@@ -204,7 +192,7 @@ show_tntp_palette <- function(..., reverse = FALSE) {
     c(pal, rep(NA, max_length - length(pal)))
   }) |> unlist() |> matrix(ncol = max_length, byrow = TRUE)
 
-  # Labeling should be cleaned up (not pretty right now)
+
   old <- par(pty = "m", mar = c(0, 0, 0, 0))
   on.exit(par(old))
   size <- max(dim(colours))
