@@ -60,8 +60,6 @@ The function contains parameters where users can adjust items such as font, font
 
 Consult the function's documentation at `?tntp_style` for more information on the parameters.
 
-By default, `tntp_style()` uses the 'Segoe UI' font because this font is TNTP's base font. You must load the font into R. This process is beyond the scope of this tutorial, but the [`extrafont` package](https://github.com/wch/extrafont) can be used to load the font into R. Users can change the font with the font` parameter.
-
 Note that colors for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `tntp_style()` function, but need to be explicitly set in your other standard `ggplot` chart functions.
 
 ### Example with `tntp_style()`
@@ -128,6 +126,8 @@ plt +
   tntp_style(show_axis_titles = TRUE) +
   theme(panel.border = element_rect(color = "black", fill = NA))
 ```
+
+To see all available settings you can adjust with a theme element, see the documentation for `theme()`.
 
 ------------------------------------------------------------------------
 
