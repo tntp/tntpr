@@ -5,7 +5,7 @@
 
 #' TNTP's ggplot2 theme
 #'
-#' ggplot2 theme customized for TNTP aesthetics
+#' This theme is superseded by [tntp_style()]. Ggplot2 theme customized for TNTP aesthetics
 #' @param show_legend_title logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.
 #' @param base_size base font size
 #' @param base_family base font family
@@ -36,6 +36,7 @@ theme_tntp <- function(show_legend_title = TRUE,
                        caption_color = "black",
                        caption_size = 12) {
   # As of v2.2 ggplot2 left aligns titles by default. -------------------------
+  .Deprecated("tntp_style")
   # title_align and subtitle_align allows tntpr users to quickly change
 
   # Check alignment positions for plot title and subtitle

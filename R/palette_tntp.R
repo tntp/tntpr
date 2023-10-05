@@ -1,5 +1,10 @@
 #' TNTP branded color palettes
 #'
+#' @md
+#' @description
+#' This function as been superseded by [tntp_colors()] which has improved
+#' functionality and includes the most recent TNTP brand colors.
+#'
 #' This function creates user defined color palette combinations for up to
 #' eleven colors. There are nine TNTP approved colors: dark_blue, medium_blue,
 #' light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey
@@ -29,6 +34,7 @@
 #' g <- g + scale_fill_manual(values = pal2_tntp)
 #' g
 palette_tntp <- function(...) {
+  .Deprecated('tntp_colors')
   # TNTP colors
   colors_tntp
 
@@ -46,6 +52,11 @@ palette_tntp <- function(...) {
 
 
 #' TNTP colors
+#'
+#' This list of colors has been superseded by the new brand colors and the new
+#' function [tntp_colors()].
+#'
+#' @md
 #'
 #' @examples
 #' \dontrun{
@@ -95,6 +106,10 @@ colors_tntp <- c( # TNTPPalette
 
 #' TNTP pallette
 #'
+#' This list of colors has been superseded by the new brand colors and the new
+#' function [tntp_colors()].
+#'
+#' @md
 #' @examples
 #' \dontrun{
 #' colors_tntp_palette
@@ -123,6 +138,10 @@ colors_tntp_palette <-
 
 #' Likert pallette
 #'
+#' This likert palette has been superseded by the new brand colors and the new
+#' function [tntp_palette()].
+#'
+#' @md
 #' @examples
 #' \dontrun{
 #' colors_tntp_likert
@@ -142,6 +161,10 @@ colors_tntp_likert <-
 
 #' Likert orange to green pallette
 #'
+#' This likert palette has been superseded by the new brand colors and the new
+#' functions [tntp_colors()] and [tntp_palette()].
+#'
+#' @md
 #' @examples
 #' \dontrun{
 #' colors_tntp_likert_orange_to_green
@@ -161,6 +184,10 @@ colors_tntp_likert_orange_to_green <-
 
 #' Pallette names
 #'
+#' This list of palette names has been superseded by the new brand colors and
+#' new functions [tntp_colors()] and [tntp_palette()].
+#'
+#' @md
 #' @examples
 #' \dontrun{
 #' palette_names
@@ -179,11 +206,16 @@ palette_names <- c(
 
 #' scale_palette_tntp
 #'
+#' This function has been superseded by [tntp_palette()] which includes the new
+#' brand colors.
+#'
+#' @md
 #' @param palette the palette
 #'
 #' @export
 #'
 palette_tntp_scales <- function(palette = palette_names) {
+  .Deprecated("tntp_palette")
   tntp_palette <- colors_tntp_palette
   likert_4pt <- colors_tntp_likert[rev(c(1, 2, 6, 7))]
   likert_5pt <- colors_tntp_likert[rev(c(1, 2, 4, 6, 7))]
@@ -208,6 +240,10 @@ palette_tntp_scales <- function(palette = palette_names) {
 
 #' scale_colour_tntp/scale_color_tntp
 #'
+#' This function is deprecated. Please use
+#' `scale_color_manual(values = tntp_palette(palette_name))` instead
+#'
+#' @md
 #' @param palette character string describing the desired palette
 #' @param ... other arguments to pass through to ggplot2::discrete_scale()
 #'
@@ -216,6 +252,7 @@ palette_tntp_scales <- function(palette = palette_names) {
 scale_colour_tntp <- function(palette = palette_names,
                               drop = FALSE,
                               ...) {
+  .Deprecated("tntp_palette")
   palette <- match.arg(palette)
   discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }
@@ -229,6 +266,10 @@ scale_color_tntp <- scale_colour_tntp
 
 #' scale_fill_tntp
 #'
+#' This function is deprecated. Please use
+#' `scale_fill_manual(values = tntp_palette(palette_name))` instead
+#'
+#' @md
 #' @param palette One of: "default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_old"
 #' @param drop drop
 #' @param ... additional arguments passed to ggplot2::discrete_scale()
@@ -250,6 +291,7 @@ scale_color_tntp <- scale_colour_tntp
 scale_fill_tntp <- function(palette = palette_names,
                             drop = FALSE,
                             ...) {
+  .Deprecated("tntp_palette")
   palette <- match.arg(palette)
   discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }

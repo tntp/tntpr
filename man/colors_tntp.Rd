@@ -11,7 +11,8 @@ An object of class \code{character} of length 34.
 colors_tntp
 }
 \description{
-TNTP colors
+This list of colors has been superseded by the new brand colors and the new
+function \code{\link[=tntp_colors]{tntp_colors()}}.
 }
 \examples{
 \dontrun{

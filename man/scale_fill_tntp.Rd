@@ -14,7 +14,8 @@ scale_fill_tntp(palette = palette_names, drop = FALSE, ...)
 \item{...}{additional arguments passed to ggplot2::discrete_scale()}
 }
 \description{
-scale_fill_tntp
+This function is deprecated. Please use
+\code{scale_fill_manual(values = tntp_palette(palette_name))} instead
 }
 \examples{
 library(ggplot2)

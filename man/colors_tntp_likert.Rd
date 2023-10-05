@@ -11,7 +11,8 @@ An object of class \code{character} of length 7.
 colors_tntp_likert
 }
 \description{
-Likert pallette
+This likert palette has been superseded by the new brand colors and the new
+function \code{\link[=tntp_palette]{tntp_palette()}}.
 }
 \examples{
 \dontrun{

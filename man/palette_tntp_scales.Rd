@@ -10,5 +10,6 @@ palette_tntp_scales(palette = palette_names)
 \item{palette}{the palette}
 }
 \description{
-scale_palette_tntp
+This function has been superseded by \code{\link[=tntp_palette]{tntp_palette()}} which includes the new
+brand colors.
 }

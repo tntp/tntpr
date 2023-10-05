@@ -48,5 +48,5 @@ theme_tntp(
 \item{caption_size}{size of caption text}
 }
 \description{
-ggplot2 theme customized for TNTP aesthetics
+This theme is superseded by [tntp_style()]. Ggplot2 theme customized for TNTP aesthetics
 }

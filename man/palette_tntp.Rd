@@ -10,6 +10,9 @@ palette_tntp(...)
 \item{...}{supply quoted color names to include in color palette}
 }
 \description{
+This function as been superseded by \code{\link[=tntp_colors]{tntp_colors()}} which has improved
+functionality and includes the most recent TNTP brand colors.
+
 This function creates user defined color palette combinations for up to
 eleven colors. There are nine TNTP approved colors: dark_blue, medium_blue,
 light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey

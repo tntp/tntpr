@@ -68,7 +68,7 @@ theme_tntp_2018(
 \item{ticks}{ticks if \code{TRUE} add ticks}
 }
 \description{
-Also has a "dark" / "modern" version for the new RStudio theme
+This theme is superseded by \code{\link[=tntp_style]{tntp_style()}}.
 }
 \section{Building upon \code{theme_tntp}}{
 

@@ -1,6 +1,6 @@
 #' A precise & pristine [ggplot2] theme with opinionated defaults and an emphasis on typography
 #'
-#' Also has a "dark" / "modern" version for the new RStudio theme
+#' This theme is superseded by [tntp_style()].
 #'
 #' @md
 #'
@@ -85,6 +85,7 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
                             plot_margin = margin(30, 30, 30, 30),
                             grid_col = "grey93", grid = TRUE,
                             axis_col = "#cccccc", axis = FALSE, ticks = FALSE) {
+  .Deprecated()
   ret <- ggplot2::theme_minimal(base_family = base_family, base_size = base_size)
 
   ret <- ret + ggplot2::theme(legend.background = element_blank())

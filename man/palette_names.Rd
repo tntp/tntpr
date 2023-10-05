@@ -11,7 +11,8 @@ An object of class \code{character} of length 7.
 palette_names
 }
 \description{
-Pallette names
+This list of palette names has been superseded by the new brand colors and
+new functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_palette]{tntp_palette()}}.
 }
 \examples{
 \dontrun{

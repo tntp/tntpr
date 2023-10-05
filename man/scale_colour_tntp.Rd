@@ -17,5 +17,6 @@ scale_color_tntp(palette = palette_names, drop = FALSE, ...)
 \item{...}{other arguments to pass through to ggplot2::discrete_scale()}
 }
 \description{
-scale_colour_tntp/scale_color_tntp
+This function is deprecated. Please use
+\code{scale_color_manual(values = tntp_palette(palette_name))} instead
 }
