@@ -198,6 +198,14 @@ tntp_palette_list <- list(
 #'
 #' # Or run it with no specified palettes to see all available palettes
 #' show_tntp_palette()
+#'
+#' # For creating a continuous color palette, use scale_color_gradient along with
+#' # tntp_colors():
+#' ggplot(diamonds, aes(depth, table, color = price)) +
+#'   geom_point() +
+#'   scale_color_gradient(low = tntp_colors('light_green'),
+#'                        high = tntp_colors('dark_green'))
+#'
 
 tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 
