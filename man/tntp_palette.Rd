@@ -33,14 +33,16 @@ ggplot(diamonds, aes(y = color, fill = cut)) +
 
 # Use show_tntp_palette() to visualize a single or multiple palettes
 show_tntp_palette('likert_7')
-show_tntp_palette('og_5', 'likert_5')
+show_tntp_palette('bg_5', 'likert_5')
 
+# You can use a pattern to show similar palettes
+show_tntp_palette(pattern = 'bg')
 
 # Or run it with no specified palettes to see all available palettes
 show_tntp_palette()
 
-# For creating a continuous color palette, use scale_color_gradient along with
-# tntp_colors():
+# For creating a continuous color palette, use scale_color_gradient()
+# along with tntp_colors():
 ggplot(diamonds, aes(depth, table, color = price)) +
   geom_point() +
   scale_color_gradient(low = tntp_colors('light_green'),

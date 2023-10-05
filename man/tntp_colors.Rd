@@ -42,19 +42,22 @@ library(ggplot2)
 
 # Use tntp_colors() to retrieve a single color...
 ggplot(mtcars, aes(wt, mpg)) +
-  geom_point(color = tntp_colors('medium_blue'))
+  geom_point(color = tntp_colors('dark_green'))
 
 #... multiple colors ...
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_manual(values = tntp_colors('medium_blue', 'orange', 'green'))
+  scale_color_manual(values = tntp_colors('dark_green', 'orange', 'dark_red'))
 
 #... or a list of all possible TNTP brand colors
 tntp_colors()
 
 # Use show_tntp_colors() to quickly see brand colors in the plotting window
-show_tntp_colors('blue_1', 'blue_2', 'blue_3', 'blue_4', 'blue_5')
+show_tntp_colors('light_green', 'medium_green', 'dark_green')
+
+# You can also use a pattern to return similar colors
+show_tntp_colors(pattern = 'green')
 
 # You can see all colors (and names) by running it with no arguments
-show_tntp_colors
+show_tntp_colors()
 }

@@ -23,21 +23,24 @@
 #'
 #' # Use tntp_colors() to retrieve a single color...
 #' ggplot(mtcars, aes(wt, mpg)) +
-#'   geom_point(color = tntp_colors('medium_blue'))
+#'   geom_point(color = tntp_colors('dark_green'))
 #'
 #' #... multiple colors ...
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 #'   geom_point() +
-#'   scale_color_manual(values = tntp_colors('medium_blue', 'orange', 'green'))
+#'   scale_color_manual(values = tntp_colors('dark_green', 'orange', 'dark_red'))
 #'
 #' #... or a list of all possible TNTP brand colors
 #' tntp_colors()
 #'
 #' # Use show_tntp_colors() to quickly see brand colors in the plotting window
-#' show_tntp_colors('blue_1', 'blue_2', 'blue_3', 'blue_4', 'blue_5')
+#' show_tntp_colors('light_green', 'medium_green', 'dark_green')
+#'
+#' # You can also use a pattern to return similar colors
+#' show_tntp_colors(pattern = 'green')
 #'
 #' # You can see all colors (and names) by running it with no arguments
-#' show_tntp_colors
+#' show_tntp_colors()
 
 tntp_colors <- function(...) {
 
@@ -193,14 +196,16 @@ tntp_palette_list <- list(
 #'
 #' # Use show_tntp_palette() to visualize a single or multiple palettes
 #' show_tntp_palette('likert_7')
-#' show_tntp_palette('og_5', 'likert_5')
+#' show_tntp_palette('bg_5', 'likert_5')
 #'
+#' # You can use a pattern to show similar palettes
+#' show_tntp_palette(pattern = 'bg')
 #'
 #' # Or run it with no specified palettes to see all available palettes
 #' show_tntp_palette()
 #'
-#' # For creating a continuous color palette, use scale_color_gradient along with
-#' # tntp_colors():
+#' # For creating a continuous color palette, use scale_color_gradient()
+#' # along with tntp_colors():
 #' ggplot(diamonds, aes(depth, table, color = price)) +
 #'   geom_point() +
 #'   scale_color_gradient(low = tntp_colors('light_green'),
