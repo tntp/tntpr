@@ -7,7 +7,7 @@
 \usage{
 tntp_palette(palette = "likert_6", reverse = FALSE)
 
-show_tntp_palette(..., reverse = FALSE)
+show_tntp_palette(..., reverse = FALSE, pattern = NULL)
 }
 \arguments{
 \item{palette}{Name of the TNTP palette you want to use. To see all available palettes, use \code{show_tntp_palette()}}
@@ -15,6 +15,8 @@ show_tntp_palette(..., reverse = FALSE)
 \item{reverse}{Logical. If set to \code{TRUE}, reverses the direction of the palette.}
 
 \item{...}{Supply quoted TNTP palette names to visualize. If no names are specified, shows all available palettes.}
+
+\item{pattern}{Optional regular expression. If provided, will return only palettes that match the regular expression}
 }
 \description{
 Use or see

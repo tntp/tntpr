@@ -8,6 +8,7 @@
 #' For often used palettes of TNTP colors, see [tntp_palette()].
 #'
 #' @param ... Supply quoted TNTP color names to return. If no colors are specified, returns all available colors.
+#' @param pattern Optional regular expression. If provided, will return only brand colors that match the regular expression
 #' @param labels Logical. Label colors with names and hex values?
 #' @param borders Border color for each tile. Default uses `par("fg")`. Use `border = NA` to omit borders.
 #' @param cex_label Size of printed labels, as multiplier of default size.
@@ -87,8 +88,8 @@ tntp_colors <- function(...) {
 }
 
 #' @rdname tntp_colors
-show_tntp_colors <- function(..., labels = TRUE, borders = NULL, cex_label = 1,
-                             ncol = NULL) {
+show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
+                             cex_label = 1, ncol = NULL) {
 
 
   # Validate parameters
@@ -113,6 +114,15 @@ show_tntp_colors <- function(..., labels = TRUE, borders = NULL, cex_label = 1,
 
   # Code adapted from scales::show_col but with text labels in addition to hex codes
   colours <- tntp_colors(...)
+
+  # Filter using the pattern, if provided
+  if(!is.null(pattern)) {
+    colours <- colours[grepl(pattern, names(colours))]
+    if(length(colours) == 0) {
+      cli::cli_abort(c("!" = "No colors match the pattern {.val {pattern}}",
+                       "i" = "Run {.run tntpr::show_tntp_colors()} to see available colors"))
+    }
+  }
 
   n <- length(colours)
   ncol <- ifelse(is.null(ncol), ceiling(sqrt(length(colours))), ncol)
@@ -149,6 +159,10 @@ tntp_palette_list <- list(
   "likert_5" = tntp_colors("dark_green", "light_green", "light_gray", "light_red", "dark_red"),
   "likert_6" = tntp_colors("dark_green", "medium_green", "light_green", "light_red", "medium_red", "dark_red"),
   "likert_7" = tntp_colors("dark_green", "medium_green", "light_green", "light_gray", "light_red", "medium_red", "dark_red"),
+  "bg_4" = tntp_colors("dark_blue", "light_blue", "light_green", "dark_green"),
+  "bg_5" = tntp_colors("dark_blue", "light_blue", "light_gray", "light_green", "dark_green"),
+  "bg_6" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_green", "medium_green", "dark_green"),
+  "bg_7" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "dark_green"),
   "greens" = tntp_colors("dark_green", "medium_green", "light_green"),
   "reds" = tntp_colors("dark_red", "medium_red", "light_red"),
   "blues" = tntp_colors("dark_blue", "medium_blue", "light_blue"),
@@ -162,6 +176,7 @@ tntp_palette_list <- list(
 #' @param palette Name of the TNTP palette you want to use. To see all available palettes, use `show_tntp_palette()`
 #' @param ... Supply quoted TNTP palette names to visualize. If no names are specified, shows all available palettes.
 #' @param reverse Logical. If set to `TRUE`, reverses the direction of the palette.
+#' @param pattern Optional regular expression. If provided, will return only palettes that match the regular expression
 #'
 #' @export
 #' @md
@@ -199,10 +214,28 @@ tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 }
 
 #' @rdname tntp_palette
-show_tntp_palette <- function(..., reverse = FALSE) {
+show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
 
   palettes <- c(...)
+
+  # Return an error if arguments include unmatched palettes
+  unmatched_pals <- palettes[!palettes %in% names(tntp_palette_list)]
+  if(length(unmatched_pals) > 0) {
+    cli::cli_abort(c("!" = "No match for the following palette name(s)",
+                     "x" = paste0("{.val ", unmatched_pals, "}", collapse = ", "),
+                     "i" = "Run {.run tntpr::show_tntp_palette()} to see available palettes"))
+  }
+
   if(is.null(palettes)) palettes <- names(tntp_palette_list)
+
+  # Filter by pattern if it exists
+  if(!is.null(pattern)) {
+    palettes <- palettes[grepl(pattern, palettes)]
+    if(length(palettes) == 0) {
+      cli::cli_abort(c("!" = "No palettes match the pattern {.val {pattern}}",
+                       "i" = "Run {.run tntpr::show_tntp_palette()} to see available palettes"))
+    }
+  }
 
   max_length <- max(lengths(tntp_palette_list)[palettes])
 

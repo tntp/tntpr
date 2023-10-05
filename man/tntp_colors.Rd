@@ -9,6 +9,7 @@ tntp_colors(...)
 
 show_tntp_colors(
   ...,
+  pattern = NULL,
   labels = TRUE,
   borders = NULL,
   cex_label = 1,
@@ -17,6 +18,8 @@ show_tntp_colors(
 }
 \arguments{
 \item{...}{Supply quoted TNTP color names to return. If no colors are specified, returns all available colors.}
+
+\item{pattern}{Optional regular expression. If provided, will return only brand colors that match the regular expression}
 
 \item{labels}{Logical. Label colors with names and hex values?}
 
