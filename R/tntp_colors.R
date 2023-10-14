@@ -68,7 +68,12 @@ tntp_colors <- function(...) {
       dark_yellow  = '#F2CF13',
       light_blue   = '#81D3EB',
       medium_red   = '#DA8988',
-      medium_green = '#8FB09D'
+      medium_green = '#8FB09D',
+
+      # NOT IN BRAND PALETTE
+      light_yellow = '#FAEDB8', #'#FBF2CA'
+      medium_gray  = '#B5B5B5',
+      medium_grey  = '#B5B5B5'
   )
 
   supplied_colors <- c(...)
@@ -158,18 +163,23 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "likert_4" = tntp_colors("dark_green", "light_green", "light_red", "dark_red"),
-  "likert_5" = tntp_colors("dark_green", "light_green", "light_gray", "light_red", "dark_red"),
-  "likert_6" = tntp_colors("dark_green", "medium_green", "light_green", "light_red", "medium_red", "dark_red"),
-  "likert_7" = tntp_colors("dark_green", "medium_green", "light_green", "light_gray", "light_red", "medium_red", "dark_red"),
-  "bg_4" = tntp_colors("dark_blue", "light_blue", "light_green", "dark_green"),
-  "bg_5" = tntp_colors("dark_blue", "light_blue", "light_gray", "light_green", "dark_green"),
+  "likert_4" = tntp_colors("dark_yellow", "yellow", "medium_green", "dark_green"),
+  "likert_5" = tntp_colors("dark_yellow", "yellow", "light_gray", "medium_green", "dark_green"),
+  "likert_6" = tntp_colors("dark_yellow", "yellow", "light_yellow", "light_green", "medium_green", "dark_green"),
+  "likert_7" = tntp_colors("dark_yellow", "yellow", "light_yellow", "light_gray", "light_green", "medium_green", "dark_green"),
+  "rb_4" = tntp_colors("dark_red", "medium_red", "medium_blue", "dark_blue"),
+  "rb_5" = tntp_colors("dark_red", "medium_red", "light_gray", "medium_blue", "dark_blue"),
+  "rb_6" = tntp_colors("dark_red", "medium_red", "light_red", "light_blue", "medium_blue", "dark_blue"),
+  "rb_7" = tntp_colors("dark_red", "medium_red", "light_red", "light_gray", "light_blue", "medium_blue", "dark_blue"),
+  "bg_4" = tntp_colors("dark_blue", "medium_blue", "medium_green", "dark_green"),
+  "bg_5" = tntp_colors("dark_blue", "medium_blue", "light_gray", "medium_green", "dark_green"),
   "bg_6" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_green", "medium_green", "dark_green"),
   "bg_7" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "dark_green"),
   "greens" = tntp_colors("dark_green", "medium_green", "light_green"),
   "reds" = tntp_colors("dark_red", "medium_red", "light_red"),
   "blues" = tntp_colors("dark_blue", "medium_blue", "light_blue"),
-  "grays" = tntp_colors("black", "dark_gray", "light_gray", "white")
+  "yellows" = tntp_colors("dark_yellow", "yellow", "light_yellow"),
+  "grays" = tntp_colors("dark_gray", "medium_gray", "light_gray")
   )
 
 #' Common TNTP Color Palettes
