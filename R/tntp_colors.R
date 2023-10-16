@@ -170,6 +170,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
+  "colorful" = tntp_colors("green", "red", "blue", "yellow", "orange"),
   "likert_4" = tntp_colors("yellow", "medium_yellow", "medium_green", "green"),
   "likert_5" = tntp_colors("yellow", "medium_yellow", "light_gray", "medium_green", "green"),
   "likert_6" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
