@@ -136,6 +136,9 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
   # Code adapted from scales::show_col but with text labels in addition to hex codes
   colours <- tntp_colors(...)
 
+  # Add back in names if needed
+  if(!is.null(c(...))) names(colours) <- c(...)
+
   # Filter using the pattern, if provided
   if(!is.null(pattern)) {
     colours <- colours[grepl(pattern, names(colours))]
@@ -176,7 +179,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "colorful" = tntp_colors("green", "red", "blue", "yellow", "orange"),
+  "colorful" = tntp_colors("blue", "yellow", "green", "red", "gray", "orange", "black"),
   "likert_4" = tntp_colors("yellow", "medium_yellow", "medium_green", "green"),
   "likert_5" = tntp_colors("yellow", "medium_yellow", "light_gray", "medium_green", "green"),
   "likert_6" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
