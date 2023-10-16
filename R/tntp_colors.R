@@ -72,8 +72,8 @@ tntp_colors <- function(...) {
 
       # NOT IN BRAND PALETTE
       light_yellow = '#FAEDB8', #'#FBF2CA'
-      medium_gray  = '#B5B5B5',
-      medium_grey  = '#B5B5B5'
+      medium_gray  = '#A5A5A5',
+      medium_grey  = '#A5A5A5'
   )
 
   supplied_colors <- c(...)
