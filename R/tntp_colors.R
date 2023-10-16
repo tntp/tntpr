@@ -193,7 +193,8 @@ tntp_palette_list <- list(
   "reds" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
   "blues" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
   "yellows" = tntp_colors("yellow", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
-  "grays" = tntp_colors("gray", "gray_4", "medium_gray", "gray_2", "light_gray")
+  "grays" = tntp_colors("gray", "gray_4", "medium_gray", "gray_2", "light_gray"),
+  "nps" = tntp_colors("red", "red", "medium_red", "medium_red", "light_red", "light_red", "medium_yellow", "medium_yellow", "green", "green")
   )
 
 #' Common TNTP Color Palettes
@@ -238,7 +239,9 @@ tntp_palette_list <- list(
 
 tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 
-    pal <- tntp_palette_list[[palette]]
+  palette <- gsub("grey", "gray", palette)
+
+  pal <- tntp_palette_list[[palette]]
 
   if(is.null(pal)) {
     cli::cli_abort(c("x" = "No TNTP palette found for {.val {palette}}",
@@ -255,6 +258,12 @@ show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
 
   palettes <- c(...)
 
+  # If run with no arguments, show all palettes
+  if(is.null(palettes)) palettes <- names(tntp_palette_list)
+
+  # Adjust for grey/gray
+  palettes <- gsub("grey", "gray", palettes)
+
   # Return an error if arguments include unmatched palettes
   unmatched_pals <- palettes[!palettes %in% names(tntp_palette_list)]
   if(length(unmatched_pals) > 0) {
@@ -262,8 +271,6 @@ show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
                      "x" = paste0("{.val ", unmatched_pals, "}", collapse = ", "),
                      "i" = "Run {.run tntpr::show_tntp_palette()} to see available palettes"))
   }
-
-  if(is.null(palettes)) palettes <- names(tntp_palette_list)
 
   # Filter by pattern if it exists
   if(!is.null(pattern)) {
