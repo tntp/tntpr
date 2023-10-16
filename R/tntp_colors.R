@@ -23,18 +23,18 @@
 #'
 #' # Use tntp_colors() to retrieve a single color...
 #' ggplot(mtcars, aes(wt, mpg)) +
-#'   geom_point(color = tntp_colors('dark_green'))
+#'   geom_point(color = tntp_colors('green'))
 #'
 #' #... multiple colors ...
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 #'   geom_point() +
-#'   scale_color_manual(values = tntp_colors('dark_green', 'orange', 'dark_red'))
+#'   scale_color_manual(values = tntp_colors('green', 'orange', 'red'))
 #'
 #' #... or a list of all possible TNTP brand colors
 #' tntp_colors()
 #'
 #' # Use show_tntp_colors() to quickly see brand colors in the plotting window
-#' show_tntp_colors('light_green', 'medium_green', 'dark_green')
+#' show_tntp_colors('light_green', 'medium_green', 'green')
 #'
 #' # You can also use a pattern to return similar colors
 #' show_tntp_colors(pattern = 'green')
@@ -54,18 +54,18 @@ tntp_colors <- function(...) {
       white       = '#FFFFFF',
 
       # Secondary
-      yellow      = '#FDE57B',
-      light_red   = '#FDDACA',
-      medium_blue = '#00A5C7',
-      dark_red    = '#C31F46',
-      dark_green  = '#317D5C',
+      medium_yellow = '#FDE57B',
+      light_red     = '#FDDACA',
+      medium_blue   = '#00A5C7',
+      red           = '#C31F46',
+      green         = '#317D5C',
 
       # Extended
-      dark_blue    = '#00355F',
+      blue         = '#00355F',
       orange       = '#F26C4C',
-      dark_gray    = '#4A4A4A',
-      dark_gray    = '#4A4A4A', # alternate spelling
-      dark_yellow  = '#F2CF13',
+      gray         = '#4A4A4A',
+      gray         = '#4A4A4A', # alternate spelling
+      yellow       = '#F2CF13',
       light_blue   = '#81D3EB',
       medium_red   = '#DA8988',
       medium_green = '#8FB09D',
@@ -163,22 +163,22 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "likert_4" = tntp_colors("dark_yellow", "yellow", "medium_green", "dark_green"),
-  "likert_5" = tntp_colors("dark_yellow", "yellow", "light_gray", "medium_green", "dark_green"),
-  "likert_6" = tntp_colors("dark_yellow", "yellow", "light_yellow", "light_green", "medium_green", "dark_green"),
-  "likert_7" = tntp_colors("dark_yellow", "yellow", "light_yellow", "light_gray", "light_green", "medium_green", "dark_green"),
-  "rb_4" = tntp_colors("dark_red", "medium_red", "medium_blue", "dark_blue"),
-  "rb_5" = tntp_colors("dark_red", "medium_red", "light_gray", "medium_blue", "dark_blue"),
-  "rb_6" = tntp_colors("dark_red", "medium_red", "light_red", "light_blue", "medium_blue", "dark_blue"),
-  "rb_7" = tntp_colors("dark_red", "medium_red", "light_red", "light_gray", "light_blue", "medium_blue", "dark_blue"),
-  "bg_4" = tntp_colors("dark_blue", "medium_blue", "medium_green", "dark_green"),
-  "bg_5" = tntp_colors("dark_blue", "medium_blue", "light_gray", "medium_green", "dark_green"),
-  "bg_6" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_green", "medium_green", "dark_green"),
-  "bg_7" = tntp_colors("dark_blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "dark_green"),
-  "greens" = tntp_colors("dark_green", "medium_green", "light_green"),
-  "reds" = tntp_colors("dark_red", "medium_red", "light_red"),
-  "blues" = tntp_colors("dark_blue", "medium_blue", "light_blue"),
-  "yellows" = tntp_colors("dark_yellow", "yellow", "light_yellow"),
+  "likert_4" = tntp_colors("yellow", "medium_yellow", "medium_green", "green"),
+  "likert_5" = tntp_colors("yellow", "medium_yellow", "light_gray", "medium_green", "green"),
+  "likert_6" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
+  "likert_7" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_gray", "light_green", "medium_green", "green"),
+  "rb_4" = tntp_colors("red", "medium_red", "medium_blue", "blue"),
+  "rb_5" = tntp_colors("red", "medium_red", "light_gray", "medium_blue", "blue"),
+  "rb_6" = tntp_colors("red", "medium_red", "light_red", "light_blue", "medium_blue", "blue"),
+  "rb_7" = tntp_colors("red", "medium_red", "light_red", "light_gray", "light_blue", "medium_blue", "blue"),
+  "bg_4" = tntp_colors("blue", "medium_blue", "medium_green", "green"),
+  "bg_5" = tntp_colors("blue", "medium_blue", "light_gray", "medium_green", "green"),
+  "bg_6" = tntp_colors("blue", "medium_blue", "light_blue", "light_green", "medium_green", "green"),
+  "bg_7" = tntp_colors("blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "green"),
+  "greens" = tntp_colors("green", "medium_green", "light_green"),
+  "reds" = tntp_colors("red", "medium_red", "light_red"),
+  "blues" = tntp_colors("blue", "medium_blue", "light_blue"),
+  "yellows" = tntp_colors("yellow", "medium_yellow", "light_yellow"),
   "grays" = tntp_colors("dark_gray", "medium_gray", "light_gray")
   )
 
@@ -219,7 +219,7 @@ tntp_palette_list <- list(
 #' ggplot(diamonds, aes(depth, table, color = price)) +
 #'   geom_point() +
 #'   scale_color_gradient(low = tntp_colors('light_green'),
-#'                        high = tntp_colors('dark_green'))
+#'                        high = tntp_colors('green'))
 #'
 
 tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
