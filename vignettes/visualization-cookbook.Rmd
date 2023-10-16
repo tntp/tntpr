@@ -133,7 +133,7 @@ To see all available settings you can adjust with a theme element, see the docum
 The `tntpr` package includes functions to allow you to easily use TNTP brand colors in your visualizations. The primary function you'll use is `tntp_colors()`, which takes in human-friendly color names as arguments and returns a character vector of the equivalent hex code:
 
 ```{r}
-tntp_colors("dark_green", "light_green")
+tntp_colors("green", "light_green")
 ```
 
 If you want to see all possible color names, you can run the function with no arguments:
@@ -191,7 +191,7 @@ base_font_size <- 16
 ```{r message = FALSE}
 #Make plot
 ggplot(avg_salary, aes(x = school_year, y = avg_salary)) +
-  geom_line(colour = tntp_colors("dark_green"), linewidth = 1) +
+  geom_line(colour = tntp_colors("green"), linewidth = 1) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
   labs(
     title="Average Teacher Salaries",
@@ -224,7 +224,7 @@ line_plot_schools <- school_salary |>
 ggplot(line_plot_schools, aes(x = school_year, y = avg_salary, color = school_name)) +
   geom_line(size = 1) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
-  scale_colour_manual(values = tntp_colors('dark_green', 'medium_blue')) +
+  scale_colour_manual(values = tntp_palette("colorful")) +
   labs(
     title="Average Teacher Salaries",
     subtitle = "Teacher salaries remained constant between 2012 and 2015"
@@ -247,7 +247,7 @@ bar_df <- school_salary |>
 ggplot(bar_df, aes(x = school_name, y = avg_salary)) +
   geom_bar(stat="identity", 
            position="identity", 
-           fill= tntp_colors('dark_green')) +
+           fill= tntp_colors('yellow')) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
   labs(
     title="Acacia had higher average salaries in 2015",
@@ -291,7 +291,7 @@ ggplot(
 ) +
   geom_bar(stat = "identity", position = "stack") +
   scale_y_continuous(labels = scales::percent, limits = c(0,1)) +
-  scale_fill_manual(values = tntp_colors('dark_green', 'medium_green', 'light_green', 'light_gray')) +
+  scale_fill_manual(values = tntp_colors('green', 'medium_green', 'light_green', 'light_gray')) +
   labs(title = "Most teachers earn between $2.5K and $4.5K",
        subtitle = "Percentage of teachers by salary range") +
   theme(legend.position = "top", 
@@ -317,7 +317,7 @@ Note the use of the named vector `colors_to_use` to expressly map colors to valu
 earnings_to_keep <- levels(stacked_df$t_salary_cut)[c(4,1)]
 
 # map bar colors to values
-colors_to_use <- tntp_colors('medium_red', 'dark_green') |> 
+colors_to_use <- tntp_colors('yellow', 'green') |> 
   set_names(earnings_to_keep)
 
 dodged_df <- stacked_df |> 
@@ -353,7 +353,7 @@ scores_salary <- county_data |>
 
 ```{r}
 ggplot(scores_salary, aes(avg_salary, perc_rank_test_score)) +
-  geom_point(color = tntp_colors('dark_green'), alpha = 0.9, size = 3) +
+  geom_point(color = tntp_colors('orange'), alpha = 0.9, size = 3) +
   labs(
     title = 'Schools with higher salaries do not have higher test scores',
     subtitle = 'Relationship between school test scores and salaries',
@@ -379,8 +379,8 @@ ggplot(dumbbell_df, aes(x = `under $2.5k`, xend = `$4.5k+`, y = fct_reorder(scho
   geom_dumbbell(
     colour = "#dddddd",
     size = 3,
-    colour_x = tntp_colors('medium_red'),
-    colour_xend = tntp_colors('dark_green'),
+    colour_x = tntp_colors('yellow'),
+    colour_xend = tntp_colors('green'),
     show.legend = TRUE
   ) +
   labs(title = "More teachers earn over $4.5k than under $2.5k",
@@ -397,7 +397,7 @@ number_teachers_school <- county_data |>
   count(school_year, school_name)
 
 ggplot(number_teachers_school, aes(n)) +
-  geom_histogram(binwidth = 5, colour = "white", fill = tntp_colors('dark_green')) +
+  geom_histogram(binwidth = 5, colour = "white", fill = tntp_colors('blue')) +
   labs(
     title = "Schools have a wide distribution in the number of teachers",
     subtitle = "Total number of teachers per school",
@@ -419,7 +419,7 @@ ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year, fill
        subtitle = "Income distrubution and quantiles for teachers") +
   tntp_style(base_size = base_font_size) + 
   theme(legend.position = "none") + 
-  scale_fill_manual(values = tntp_palette('likert_4', reverse = TRUE))
+  scale_fill_manual(values = tntp_palette('colorful'))
 ```
 
 ------------------------------------------------------------------------
@@ -479,7 +479,7 @@ teacher_survey_he_perc <- teacher_survey_he_perc |>
 The first plot calls out the two highest response values, 'Strongly Agree' and 'Agree'. Note that the `tntp_style()` function does not alter the font size of the text within `geom_text()` so we set it manually.
 
 ```{r}
-agree_scale_colors <- rev(c(tntp_colors('dark_green', 'medium_green'), "#eeeeee", "#cccccc", "#aaaaaa", "#888888"))
+agree_scale_colors <- rev(c(tntp_colors('green', 'medium_green'), "#eeeeee", "#cccccc", "#aaaaaa", "#888888"))
 
 # mapping of colors and responses for plot
 agree_color_pal <- agree_scale_colors |> 
@@ -502,7 +502,7 @@ ggplot(teacher_survey_he_perc, aes(percent, question, fill = response)) +
 
 ```{r}
 # colors to use
-div_scale_colors <- tntp_palette('likert_6', reverse = TRUE)
+div_scale_colors <- tntp_palette('likert_6')
 
 # mapping of colors and responses for plot
 div_color_pal <- div_scale_colors |> 
