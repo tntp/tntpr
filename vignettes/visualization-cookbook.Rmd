@@ -291,7 +291,7 @@ ggplot(
 ) +
   geom_bar(stat = "identity", position = "stack") +
   scale_y_continuous(labels = scales::percent, limits = c(0,1)) +
-  scale_fill_manual(values = tntp_colors('green', 'medium_green', 'light_green', 'light_gray')) +
+  scale_fill_manual(values = tntp_palette("greens")) +
   labs(title = "Most teachers earn between $2.5K and $4.5K",
        subtitle = "Percentage of teachers by salary range") +
   theme(legend.position = "top", 

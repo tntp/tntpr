@@ -49,7 +49,6 @@ tntp_colors <- function(...) {
       # Primary
       black       = '#000000',
       light_gray  = '#F1F1EE',
-      light_grey  = '#F1F1EE', # alternate spelling
       light_green = '#E2EDDC',
       white       = '#FFFFFF',
 
@@ -64,22 +63,26 @@ tntp_colors <- function(...) {
       blue         = '#00355F',
       orange       = '#F26C4C',
       gray         = '#4A4A4A',
-      gray         = '#4A4A4A', # alternate spelling
       yellow       = '#F2CF13',
       light_blue   = '#81D3EB',
       medium_red   = '#DA8988',
       medium_green = '#8FB09D',
 
       # NOT IN BRAND PALETTE
-      light_yellow = '#FAEDB8', #'#FBF2CA'
+      light_yellow = '#FAEDB8',
       medium_gray  = '#A5A5A5',
-      medium_grey  = '#A5A5A5',
 
       # For 5-scale
+      green_4 = "#60977D",
+      green_2 = "#B9CFBD",
       blue_4  = "#006D93",
       blue_2  = "#41BCD9",
       red_4   = "#CF5467",
-      red_2   = "#ECB2A9"
+      red_2   = "#ECB2A9",
+      yellow_4 = "#F8DA47",
+      yellow_2 = "#FCE99A",
+      gray_4  = "#787878",
+      gray_2  = "#CBCBCA"
 
   )
 
@@ -89,6 +92,9 @@ tntp_colors <- function(...) {
   if(is.null(supplied_colors)) {
     return(tntp_color_list)
   }
+
+  # Adjust for gray/grey spelling
+  supplied_colors <- gsub("grey", "gray", supplied_colors)
 
   # Return an error if arguments include unmatched colors
   unmatched_colors <- supplied_colors[!supplied_colors %in% names(tntp_color_list)]
@@ -183,14 +189,11 @@ tntp_palette_list <- list(
   "bg_5" = tntp_colors("blue", "medium_blue", "light_gray", "medium_green", "green"),
   "bg_6" = tntp_colors("blue", "medium_blue", "light_blue", "light_green", "medium_green", "green"),
   "bg_7" = tntp_colors("blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "green"),
-  "greens" = tntp_colors("green", "medium_green", "light_green"),
-  "reds" = tntp_colors("red", "medium_red", "light_red"),
-  "blues" = tntp_colors("blue", "medium_blue", "light_blue"),
-  "yellows" = tntp_colors("yellow", "medium_yellow", "light_yellow"),
-  "grays" = tntp_colors("gray", "medium_gray", "light_gray"),
-  "blue_5" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
-  "red_5" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
-  "likert_10" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red", "light_blue", "blue_2", "medium_blue", "blue_4", "blue")
+  "greens" = tntp_colors("green", "green_4", "medium_green", "green_2", "light_green"),
+  "reds" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
+  "blues" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
+  "yellows" = tntp_colors("yellow", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
+  "grays" = tntp_colors("gray", "gray_4", "medium_gray", "gray_2", "light_gray")
   )
 
 #' Common TNTP Color Palettes
