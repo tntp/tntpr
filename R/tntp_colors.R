@@ -73,7 +73,14 @@ tntp_colors <- function(...) {
       # NOT IN BRAND PALETTE
       light_yellow = '#FAEDB8', #'#FBF2CA'
       medium_gray  = '#A5A5A5',
-      medium_grey  = '#A5A5A5'
+      medium_grey  = '#A5A5A5',
+
+      # For 5-scale
+      blue_4  = "#006D93",
+      blue_2  = "#41BCD9",
+      red_4   = "#CF5467",
+      red_2   = "#ECB2A9"
+
   )
 
   supplied_colors <- c(...)
@@ -179,7 +186,10 @@ tntp_palette_list <- list(
   "reds" = tntp_colors("red", "medium_red", "light_red"),
   "blues" = tntp_colors("blue", "medium_blue", "light_blue"),
   "yellows" = tntp_colors("yellow", "medium_yellow", "light_yellow"),
-  "grays" = tntp_colors("dark_gray", "medium_gray", "light_gray")
+  "grays" = tntp_colors("gray", "medium_gray", "light_gray"),
+  "blue_5" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
+  "red_5" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
+  "likert_10" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red", "light_blue", "blue_2", "medium_blue", "blue_4", "blue")
   )
 
 #' Common TNTP Color Palettes
