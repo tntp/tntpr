@@ -28,15 +28,16 @@
 #'
 #' @md
 #'
-#' @param font base font family
-#' @param base_size base font size. Recommended minimum value of 15.
-#' @param text_color text color for titles, axes, legends, and facets
-#' @param caption_color text color for caption
+#' @param family Base font family. Defaults to "Halyard Display".
+#' @param header_family Font family for title and subtitle. Defaults to the base font family.
+#' @param base_size Base font size. Recommended minimum value of 15.
+#' @param text_color Text color for titles, axes, legends, and facets.
+#' @param caption_color Text color for caption.
 #' @param show_legend_title Logical. Should the legend title be shown?  Leave as `TRUE` if you want to change the legend title with a subsequent line `+ labs(...)`.
 #' @param show_axis_titles Which axis titles should be shown? Use `TRUE` or `FALSE` for toggle both titles, or `x` or `y` to show just that axis title.
 #' @param grid Which grid lines should be shown? Use `TRUE` or `FALSE` to toggle all grid lines, or a string combination of `X`, `x`, `Y`, `y` for major and minor x and y grid lines.
-#' @param grid_color grid line color
-#' @param title_align,legend_align,caption_align Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`
+#' @param grid_color Grid line color.
+#' @param title_align,legend_align,caption_align Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`.
 #'
 #' @export
 #'
@@ -92,7 +93,8 @@
 #'   )
 #' }
 #'
-tntp_style <- function(font = "Segoe UI",
+tntp_style <- function(family = "Halyard Display",
+                       header_family = family,
                        base_size = 28,
                        text_color = "#222222",
                        caption_color = "#7D7E81",
@@ -188,21 +190,34 @@ tntp_style <- function(font = "Segoe UI",
     ))
   }
 
-  # Check that specified font is available for use
+  # Check that specified font(s) are available for use
   if (.Platform$OS.type == "windows") {
     font_list <- names(grDevices::windowsFonts())
   } else {
     font_list <- names(grDevices::quartzFonts())
   }
-  if (!font %in% font_list) {
+  if (!header_family %in% font_list && header_family != family) {
     cli::cli_warn(c(
-      "x" = "Font {.val {font}} is not registered in the font table.",
+      "x" = "Family {.val {header_family}} is not registered in the font table.",
       "v" = "Using standard {.val sans} font instead",
       "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
       "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
     ))
-    font <- "sans"
+    header_family <- "sans"
   }
+  if (!family %in% font_list) {
+    cli::cli_warn(c(
+      "x" = "Family {.val {family}} is not registered in the font table.",
+      "v" = "Using standard {.val sans} font instead",
+      "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
+      "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
+    ))
+
+    if(header_family == family) header_family <- "sans"
+    family <- "sans"
+
+  }
+
 
   # Convert text position to a numeric value to supply
   title_h_just <- switch(title_align,
@@ -216,32 +231,26 @@ tntp_style <- function(font = "Segoe UI",
     right = 1
   )
 
-  # Update font family and color for geom_text() and geom_label()
-  # ggplot2::update_geom_defaults("text", list(family = font,
-  #                                   color = "#222222"))
-  # ggplot2::update_geom_defaults("label", list(family = font,
-  #                                    color = "#222222"))
-
   # Create base theme
   result <- ggplot2::theme(
 
     # Style title, subtitle, and caption. Includes a margin above and below the subtitle
     plot.title = ggplot2::element_text(
-      family = font,
+      family = header_family,
       hjust = title_h_just,
       size = title_size,
       face = "bold",
       color = text_color
     ),
     plot.subtitle = ggplot2::element_text(
-      family = font,
+      family = header_family,
       hjust = title_h_just,
       size = subtitle_size,
       color = text_color,
       margin = ggplot2::margin(subtitle_margin, 0, subtitle_margin, 0)
     ),
     plot.caption = ggplot2::element_text(
-      family = font,
+      family = family,
       hjust = caption_h_just,
       size = caption_size,
       face = "italic",
@@ -256,24 +265,24 @@ tntp_style <- function(font = "Segoe UI",
     legend.background = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
     legend.title = ggplot2::element_text(
-      family = font,
+      family = family,
       size = legend_size,
       color = text_color
     ),
     legend.text = ggplot2::element_text(
-      family = font,
+      family = family,
       size = legend_size,
       color = text_color
     ),
 
     # Style axes. Includes a margin on x axis text, no ticks or lines
     axis.title = ggplot2::element_text(
-      family = font,
+      family = family,
       size = axis_title_size,
       color = text_color
     ),
     axis.text = ggplot2::element_text(
-      family = font,
+      family = family,
       size = axis_title_size,
       color = text_color
     ),
@@ -291,7 +300,7 @@ tntp_style <- function(font = "Segoe UI",
     # Style facet background & title
     strip.background = ggplot2::element_rect(fill = "white"),
     strip.text = ggplot2::element_text(
-      family = font,
+      family = family,
       hjust = title_h_just,
       size = facet_size,
       color = text_color

@@ -5,7 +5,8 @@
 \title{Create TNTP themed \link{ggplot2} charts}
 \usage{
 tntp_style(
-  font = "Segoe UI",
+  family = "Halyard Display",
+  header_family = family,
   base_size = 28,
   text_color = "#222222",
   caption_color = "#7D7E81",
@@ -19,13 +20,15 @@ tntp_style(
 )
 }
 \arguments{
-\item{font}{base font family}
+\item{family}{Base font family. Defaults to "Halyard Display".}
 
-\item{base_size}{base font size. Recommended minimum value of 15.}
+\item{header_family}{Font family for title and subtitle. Defaults to the base font family.}
 
-\item{text_color}{text color for titles, axes, legends, and facets}
+\item{base_size}{Base font size. Recommended minimum value of 15.}
 
-\item{caption_color}{text color for caption}
+\item{text_color}{Text color for titles, axes, legends, and facets.}
+
+\item{caption_color}{Text color for caption.}
 
 \item{show_legend_title}{Logical. Should the legend title be shown?  Leave as \code{TRUE} if you want to change the legend title with a subsequent line \code{+ labs(...)}.}
 
@@ -33,9 +36,9 @@ tntp_style(
 
 \item{grid}{Which grid lines should be shown? Use \code{TRUE} or \code{FALSE} to toggle all grid lines, or a string combination of \code{X}, \code{x}, \code{Y}, \code{y} for major and minor x and y grid lines.}
 
-\item{grid_color}{grid line color}
+\item{grid_color}{Grid line color.}
 
-\item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts \code{left}, \code{right}, or \code{center}}
+\item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts \code{left}, \code{right}, or \code{center}.}
 }
 \description{
 A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
