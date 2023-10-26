@@ -47,30 +47,46 @@ tntp_colors <- function(...) {
     tntp_color_list <- c(
 
       # Primary
-      black       = '#000000',
-      light_gray  = '#F1F1EE',
+      mint        = '#E2EDDC',
       light_green = '#E2EDDC',
+      gray        = '#F1F1EE',
+      grey        = '#F1F1EE',
+      light_gray  = '#F1F1EE',
+      light_grey  = '#F1F1EE',
       white       = '#FFFFFF',
+      black       = '#000000',
 
       # Secondary
+      yellow        = '#FDE57B',
       medium_yellow = '#FDE57B',
+      navy          = '#00355F',
+      blue          = '#00355F',
+      pink          = '#FDDACA',
       light_red     = '#FDDACA',
-      medium_blue   = '#00A5C7',
       red           = '#C31F46',
       green         = '#317D5C',
 
       # Extended
-      blue         = '#00355F',
+      charcoal     = '#4A4A4A',
+      dark_gray    = '#4A4A4A',
+      dark_grey    = '#4A4A4A',
+      tangerine    = '#F26C4C',
       orange       = '#F26C4C',
-      gray         = '#4A4A4A',
-      yellow       = '#F2CF13',
-      light_blue   = '#81D3EB',
+      salmon       = '#DA8988',
       medium_red   = '#DA8988',
+      gold         = '#F2CF13',
+      dark_yellow  = '#F2CF13',
+      moss         = '#8FB09D',
       medium_green = '#8FB09D',
+      sky          = '#81D3EB',
+      light_blue   = '#81D3EB',
+      cerulean     = '#00A5C7',
+      medium_blue  = '#00A5C7',
 
       # NOT IN BRAND PALETTE
       light_yellow = '#FAEDB8',
       medium_gray  = '#A5A5A5',
+      medium_grey  = '#A5A5A5',
 
       # For 5-scale
       green_4 = "#60977D",
@@ -82,7 +98,9 @@ tntp_colors <- function(...) {
       yellow_4 = "#F8DA47",
       yellow_2 = "#FCE99A",
       gray_4  = "#787878",
-      gray_2  = "#CBCBCA"
+      grey_4  = "#787878",
+      gray_2  = "#CBCBCA",
+      grey_2  = "#CBCBCA"
 
   )
 
@@ -90,11 +108,19 @@ tntp_colors <- function(...) {
 
   # Return full color list with names if run with no arguments
   if(is.null(supplied_colors)) {
-    return(tntp_color_list)
-  }
 
-  # Adjust for gray/grey spelling
-  supplied_colors <- gsub("grey", "gray", supplied_colors)
+    # Consolidate names for colors that appear in the list multiple times
+    consolidated_colors <- unique(tntp_color_list)
+    consolidated_names <- character(length(consolidated_colors))
+
+    for(i in seq_along(consolidated_colors)) {
+      consolidated_names[i] <- paste0(names(tntp_color_list)[tntp_color_list == consolidated_colors[i]], collapse = "|")
+    }
+
+    names(consolidated_colors) <- consolidated_names
+
+    return(consolidated_colors)
+  }
 
   # Return an error if arguments include unmatched colors
   unmatched_colors <- supplied_colors[!supplied_colors %in% names(tntp_color_list)]
@@ -136,8 +162,14 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
   # Code adapted from scales::show_col but with text labels in addition to hex codes
   colours <- tntp_colors(...)
 
-  # Add back in names if needed
-  if(!is.null(c(...))) names(colours) <- c(...)
+  # If the full list was pulled
+  if(is.null(c(...))) {
+    # Format consolidated names for printing
+    names(colours) <- gsub("|", "\n", names(colours), fixed = TRUE)
+  } else {
+    # Otherwise add back in selected names
+    names(colours) <- c(...)
+  }
 
   # Filter using the pattern, if provided
   if(!is.null(pattern)) {
@@ -179,11 +211,11 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "colorful" = tntp_colors("blue", "yellow", "green", "red", "gray", "orange", "black"),
-  "likert_4" = tntp_colors("yellow", "medium_yellow", "medium_green", "green"),
-  "likert_5" = tntp_colors("yellow", "medium_yellow", "light_gray", "medium_green", "green"),
-  "likert_6" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
-  "likert_7" = tntp_colors("yellow", "medium_yellow", "light_yellow", "light_gray", "light_green", "medium_green", "green"),
+  "colorful" = tntp_colors("blue", "dark_yellow", "green", "red", "dark_gray", "orange", "black"),
+  "likert_4" = tntp_colors("dark_yellow", "medium_yellow", "medium_green", "green"),
+  "likert_5" = tntp_colors("dark_yellow", "medium_yellow", "light_gray", "medium_green", "green"),
+  "likert_6" = tntp_colors("dark_yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
+  "likert_7" = tntp_colors("dark_yellow", "medium_yellow", "light_yellow", "light_gray", "light_green", "medium_green", "green"),
   "rb_4" = tntp_colors("red", "medium_red", "medium_blue", "blue"),
   "rb_5" = tntp_colors("red", "medium_red", "light_gray", "medium_blue", "blue"),
   "rb_6" = tntp_colors("red", "medium_red", "light_red", "light_blue", "medium_blue", "blue"),
@@ -195,8 +227,8 @@ tntp_palette_list <- list(
   "greens" = tntp_colors("green", "green_4", "medium_green", "green_2", "light_green"),
   "reds" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
   "blues" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
-  "yellows" = tntp_colors("yellow", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
-  "grays" = tntp_colors("gray", "gray_4", "medium_gray", "gray_2", "light_gray"),
+  "yellows" = tntp_colors("dark_yellow", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
+  "grays" = tntp_colors("dark_gray", "gray_4", "medium_gray", "gray_2", "light_gray"),
   "nps" = tntp_colors("red", "red", "medium_red", "medium_red", "light_red", "light_red", "medium_yellow", "medium_yellow", "green", "green")
   )
 
@@ -242,8 +274,6 @@ tntp_palette_list <- list(
 
 tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 
-  palette <- gsub("grey", "gray", palette)
-
   pal <- tntp_palette_list[[palette]]
 
   if(is.null(pal)) {
@@ -263,9 +293,6 @@ show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
 
   # If run with no arguments, show all palettes
   if(is.null(palettes)) palettes <- names(tntp_palette_list)
-
-  # Adjust for grey/gray
-  palettes <- gsub("grey", "gray", palettes)
 
   # Return an error if arguments include unmatched palettes
   unmatched_pals <- palettes[!palettes %in% names(tntp_palette_list)]

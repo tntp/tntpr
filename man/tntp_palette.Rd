@@ -46,6 +46,6 @@ show_tntp_palette()
 ggplot(diamonds, aes(depth, table, color = price)) +
   geom_point() +
   scale_color_gradient(low = tntp_colors('light_green'),
-                       high = tntp_colors('dark_green'))
+                       high = tntp_colors('green'))
 
 }
