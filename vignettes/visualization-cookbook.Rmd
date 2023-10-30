@@ -377,10 +377,10 @@ dumbbell_df <- dodged_df |>
 
 ggplot(dumbbell_df, aes(x = `under $2.5k`, xend = `$4.5k+`, y = fct_reorder(school_name, `under $2.5k`)), group = school_names) + 
   geom_dumbbell(
-    colour = "#dddddd",
+    color = tntp_colors("light_grey"),
     size = 3,
-    colour_x = tntp_colors('yellow'),
-    colour_xend = tntp_colors('green'),
+    colour_x = tntp_colors('dark_yellow'),
+    colour_xend = tntp_colors('dark_green'),
     show.legend = TRUE
   ) +
   labs(title = "More teachers earn over $4.5k than under $2.5k",
@@ -479,20 +479,14 @@ teacher_survey_he_perc <- teacher_survey_he_perc |>
 The first plot calls out the two highest response values, 'Strongly Agree' and 'Agree'. Note that the `tntp_style()` function does not alter the font size of the text within `geom_text()` so we set it manually.
 
 ```{r}
-agree_scale_colors <- rev(c(tntp_colors('green', 'medium_green'), "#eeeeee", "#cccccc", "#aaaaaa", "#888888"))
-
-# mapping of colors and responses for plot
-agree_color_pal <- agree_scale_colors |> 
-  set_names(agree_disagree_scale)
-
 ggplot(teacher_survey_he_perc, aes(percent, question, fill = response)) +
   geom_col() +
   geom_text(
     aes(label = scales::percent(strong_response_percent, accuracy = 1), x = strong_response_percent),
-    color = 'white', fontface='bold', size = 5, hjust = 1
+    color = 'white', fontface='bold', size = 5, hjust = 1.05
   ) +
   scale_x_continuous(labels = scales::percent, limits = c(0,1)) +
-  scale_fill_manual(values = agree_color_pal, drop = FALSE) +
+  scale_fill_manual(values = rev(tntp_palette("likert_6")), drop = FALSE) +
   guides(fill=guide_legend(nrow=2, byrow=TRUE, reverse = TRUE))  +
   labs(title = "High Expectations Survey Responses") +
   tntp_style(base_size = base_font_size)
@@ -501,13 +495,6 @@ ggplot(teacher_survey_he_perc, aes(percent, question, fill = response)) +
 ## Plot likert items - diverging
 
 ```{r}
-# colors to use
-div_scale_colors <- tntp_palette('likert_6')
-
-# mapping of colors and responses for plot
-div_color_pal <- div_scale_colors |> 
-  set_names(agree_disagree_scale)
-
 legend_order <- c(agree_disagree_scale[c(1,2,3)], agree_disagree_scale[c(6,5,4)])
 
 teacher_survey_div <- teacher_survey_he_perc |> 
@@ -519,7 +506,7 @@ teacher_survey_div <- teacher_survey_he_perc |>
 ggplot(teacher_survey_div, aes(x = perc_diverge, y = question, fill = response)) +
   geom_col() +
   scale_fill_manual(
-    values = div_color_pal, drop = FALSE,
+    values = rev(tntp_palette("likert_6")), drop = FALSE,
     breaks = agree_disagree_scale,
     labels = agree_disagree_scale
   ) +
