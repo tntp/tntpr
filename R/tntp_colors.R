@@ -136,6 +136,7 @@ tntp_colors <- function(...) {
   tntp_color_list[supplied_colors] |> unname()
 }
 
+#' @export
 #' @rdname tntp_colors
 show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
                              cex_label = 1, ncol = NULL) {
@@ -293,6 +294,7 @@ tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 
 }
 
+#' @export
 #' @rdname tntp_palette
 show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
 
