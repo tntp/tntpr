@@ -179,21 +179,26 @@ titles, legend titles and text, and axis text. The parameter defaults to
 Display’ is not available. You will receive a warning if your specified
 font is not found. You can also specify a separate header font using the
 <code>header_family</code> parameter.</p>
-<p>You will need to manually import additional fonts using the
-<code>extrafont</code> package before they are available to R. Follow
-these steps to import fonts:</p>
+<p>You will need to manually import additional fonts, including the
+Halyard fonts, using the <code>extrafont</code> package before they are
+available to R. Follow these steps to import fonts:</p>
 <ol style="list-style-type: decimal">
-<li>Install the <code>extrafont</code> package with
-<code>install.packages('extrafont)</code>. Ensure you are using version
-0.13 or higher.</li>
+<li>Download the Halyard Display Fonts in .ttf forms from the <a href="https://tntp.sharepoint.com/sites/DataAnalytics/Shared%20Documents/Forms/AllItems.aspx?viewid=ed2700f4%2D6b5b%2D4d23%2Da5c5%2D5567e8a5ccce" class="external-link">Data
+Analytics Sharepoint</a> under the “Fonts” category.</li>
+<li>Open the fonts folder on your laptop (Settings -&gt; Personalization
+-&gt; Fonts) and drag and drop the Halyard Fonts there to install them
+on your computer.</li>
+<li>In RStudio, install the <code>extrafont</code> package with
+<code>install.packages('extrafont)</code>.</li>
 <li>Import fonts into the extrafont database with
-`<code><a href="https://rdrr.io/pkg/extrafont/man/font_import.html" class="external-link">extrafont::font_import()</a></code>. This only needs to be done
-once.</li>
+<code><a href="https://rdrr.io/pkg/extrafont/man/font_import.html" class="external-link">extrafont::font_import()</a></code>. This only needs to be done once.
+The process is long, and can be significantly shortened by only
+importing the Halyard fonts using
+<code>extrafont::font_import(pattern = 'Halyard')</code>.</li>
 <li>Register the extra fonts with R using
-<code><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html" class="external-link">extrafont::loadfonts()</a></code>. If you are using version 0.13 or
-higher you only need to do this once, right after you import the fonts
-in step 2. If you are using a version lower than 0.13 you will need to
-run this step in each new R session.</li>
+<code><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html" class="external-link">extrafont::loadfonts()</a></code>. This needs to be done once each R
+session, but will be done automatically when loading the
+<code>tntpr</code> library.</li>
 </ol>
 <p>You can check to see which fonts are available to R with
 <code>windowsFonts()</code> on Windows or <code><a href="https://rdrr.io/r/grDevices/quartzFonts.html" class="external-link">quartzFonts()</a></code> on
