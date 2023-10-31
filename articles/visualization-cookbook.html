@@ -247,10 +247,13 @@ see the documentation for <code><a href="https://ggplot2.tidyverse.org/reference
 <h3 id="using-tntp-brand-colors">Using TNTP brand colors<a class="anchor" aria-label="anchor" href="#using-tntp-brand-colors"></a>
 </h3>
 <p>The <code>tntpr</code> package includes functions to allow you to
-easily use TNTP brand colors in your visualizations. The primary
-function you’ll use is <code><a href="../reference/tntp_colors.html">tntp_colors()</a></code>, which takes in
-human-friendly color names as arguments and returns a character vector
-of the equivalent hex code:</p>
+easily use TNTP brand colors in your visualizations.</p>
+<div class="section level4">
+<h4 id="colors">Colors<a class="anchor" aria-label="anchor" href="#colors"></a>
+</h4>
+<p>The primary function you’ll use is <code><a href="../reference/tntp_colors.html">tntp_colors()</a></code>, which
+takes in human-friendly color names as arguments and returns a character
+vector of the equivalent hex code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"mint"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#317D5C" "#E2EDDC"</span></span></code></pre></div>
@@ -295,8 +298,10 @@ make a quick display of the given colors in the plot window. Again, you
 can use <code><a href="../reference/tntp_colors.html">show_tntp_colors()</a></code> with no arguments to display all
 available colors and names:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_colors.html">show_tntp_colors</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="co"># Note: the cex_label parameter is used to adjust the relative font size</span></span>
+<span><span class="fu"><a href="../reference/tntp_colors.html">show_tntp_colors</a></span><span class="op">(</span>cex_label <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-8-1.png" width="700">
+### Palettes</p>
 <p>Some color palettes are used frequently in visualizations. The
 <code><a href="../reference/tntp_palette.html">tntp_palette()</a></code> function allows you to access these
 pre-determined palettes more easily:</p>
@@ -314,6 +319,7 @@ function with no arguments:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_palette.html">show_tntp_palette</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="the-example-plots-below-will-show-how-to-incorporate-these-functions-into-your-ggplot2-visualizations-">The example plots below will show how to incorporate these functions
