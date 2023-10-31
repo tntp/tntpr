@@ -130,7 +130,12 @@ plt +
 To see all available settings you can adjust with a theme element, see the documentation for `theme()`.
 
 ## Using TNTP brand colors
-The `tntpr` package includes functions to allow you to easily use TNTP brand colors in your visualizations. The primary function you'll use is `tntp_colors()`, which takes in human-friendly color names as arguments and returns a character vector of the equivalent hex code:
+
+The `tntpr` package includes functions to allow you to easily use TNTP brand colors in your visualizations. 
+
+### Colors
+
+The primary function you'll use is `tntp_colors()`, which takes in human-friendly color names as arguments and returns a character vector of the equivalent hex code:
 
 ```{r}
 tntp_colors("green", "mint")
@@ -143,8 +148,10 @@ tntp_colors()
 
 A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. Again, you can use `show_tntp_colors()` with no arguments to display all available colors and names:
 ```{r}
-show_tntp_colors()
+# Note: the cex_label parameter is used to adjust the relative font size
+show_tntp_colors(cex_label = 0.7)
 ```
+### Palettes
 
 Some color palettes are used frequently in visualizations. The `tntp_palette()` function allows you to access these pre-determined palettes more easily:
 ```{r}
