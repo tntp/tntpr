@@ -135,12 +135,17 @@ The `tntpr` package includes functions to allow you to easily use TNTP brand col
 
 ### Colors
 
-The primary function you'll use is `tntp_colors()`, which takes in human-friendly color names as arguments and returns a character vector of the equivalent hex code:
+The primary function you'll use is `tntp_colors()`, which takes in human-friendly color names as arguments and returns a character vector of the equivalent hex codes:
 
 ```{r}
 tntp_colors("green", "mint")
 ```
-A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. You can use `show_tntp_colors()` with no arguments to display all available colors and names:
+A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. 
+```{r}
+show_tntp_colors('green', 'moss', 'mint')
+```
+
+You can also use `show_tntp_colors()` with no color arguments to display all available colors and names:
 ```{r}
 # Note: the cex_label parameter is used to adjust the relative font size
 show_tntp_colors(cex_label = 0.7)
