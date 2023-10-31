@@ -257,68 +257,32 @@ vector of the equivalent hex code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"mint"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#317D5C" "#E2EDDC"</span></span></code></pre></div>
-<p>If you want to see all possible color names, you can run the function
-with no arguments:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                mint|light_green gray|grey|light_gray|light_grey </span></span>
-<span><span class="co">#&gt;                       "#E2EDDC"                       "#F1F1EE" </span></span>
-<span><span class="co">#&gt;                           white                           black </span></span>
-<span><span class="co">#&gt;                       "#FFFFFF"                       "#000000" </span></span>
-<span><span class="co">#&gt;            yellow|medium_yellow                       navy|blue </span></span>
-<span><span class="co">#&gt;                       "#FDE57B"                       "#00355F" </span></span>
-<span><span class="co">#&gt;                  pink|light_red                             red </span></span>
-<span><span class="co">#&gt;                       "#FDDACA"                       "#C31F46" </span></span>
-<span><span class="co">#&gt;                           green    charcoal|dark_gray|dark_grey </span></span>
-<span><span class="co">#&gt;                       "#317D5C"                       "#4A4A4A" </span></span>
-<span><span class="co">#&gt;                tangerine|orange               salmon|medium_red </span></span>
-<span><span class="co">#&gt;                       "#F26C4C"                       "#DA8988" </span></span>
-<span><span class="co">#&gt;                            gold               moss|medium_green </span></span>
-<span><span class="co">#&gt;                       "#F2CF13"                       "#8FB09D" </span></span>
-<span><span class="co">#&gt;                  sky|light_blue            cerulean|medium_blue </span></span>
-<span><span class="co">#&gt;                       "#81D3EB"                       "#00A5C7" </span></span>
-<span><span class="co">#&gt;                    light_yellow         medium_gray|medium_grey </span></span>
-<span><span class="co">#&gt;                       "#FAEDB8"                       "#9E9E9C" </span></span>
-<span><span class="co">#&gt;                       dark_gold                      dark_green </span></span>
-<span><span class="co">#&gt;                       "#C2A60A"                       "#1D4935" </span></span>
-<span><span class="co">#&gt;                        dark_red                         green_4 </span></span>
-<span><span class="co">#&gt;                       "#7C132C"                       "#60977D" </span></span>
-<span><span class="co">#&gt;                         green_2                          blue_4 </span></span>
-<span><span class="co">#&gt;                       "#B9CFBD"                       "#006D93" </span></span>
-<span><span class="co">#&gt;                          blue_2                           red_4 </span></span>
-<span><span class="co">#&gt;                       "#41BCD9"                       "#CF5467" </span></span>
-<span><span class="co">#&gt;                           red_2                        yellow_4 </span></span>
-<span><span class="co">#&gt;                       "#ECB2A9"                       "#F8DA47" </span></span>
-<span><span class="co">#&gt;                        yellow_2                   gray_4|grey_4 </span></span>
-<span><span class="co">#&gt;                       "#FCE99A"                       "#747473" </span></span>
-<span><span class="co">#&gt;                   gray_2|grey_2 </span></span>
-<span><span class="co">#&gt;                       "#C7C7C5"</span></span></code></pre></div>
 <p>A companion function is <code><a href="../reference/tntp_colors.html">show_tntp_colors()</a></code>, which will
-make a quick display of the given colors in the plot window. Again, you
-can use <code><a href="../reference/tntp_colors.html">show_tntp_colors()</a></code> with no arguments to display all
+make a quick display of the given colors in the plot window. You can use
+<code><a href="../reference/tntp_colors.html">show_tntp_colors()</a></code> with no arguments to display all
 available colors and names:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Note: the cex_label parameter is used to adjust the relative font size</span></span>
 <span><span class="fu"><a href="../reference/tntp_colors.html">show_tntp_colors</a></span><span class="op">(</span>cex_label <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-8-1.png" width="700">
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-7-1.png" width="700">
 ### Palettes</p>
 <p>Some color palettes are used frequently in visualizations. The
 <code><a href="../reference/tntp_palette.html">tntp_palette()</a></code> function allows you to access these
 pre-determined palettes more easily:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_palette.html">tntp_palette</a></span><span class="op">(</span><span class="st">"likert_6"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#C2A60A" "#F2CF13" "#FDE57B" "#8FB09D" "#317D5C" "#1D4935"</span></span></code></pre></div>
 <p>Palettes can be reversed by setting <code>reverse = TRUE</code>, and
 can be quickly displayed using the <code><a href="../reference/tntp_palette.html">show_tntp_palette()</a></code>
 function:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_palette.html">show_tntp_palette</a></span><span class="op">(</span><span class="st">"likert_6"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>For a list and visualization of all pre-set palettes, run the
 function with no arguments:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tntp_palette.html">show_tntp_palette</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -333,7 +297,7 @@ into your ggplot2 visualizations.<a class="anchor" aria-label="anchor" href="#th
 <p>We will now show examples of plots that we frequently use at TNTP
 using a fake data set from the <code>tntpr</code> package. Let’s first
 load and clean the data set.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load fake data into global environment</span></span>
 <span><span class="co"># remove all salaries of 0</span></span>
 <span><span class="va">county_data</span> <span class="op">&lt;-</span> <span class="fu">tntpr</span><span class="fu">::</span><span class="va"><a href="../reference/fake_county.html">fake_county</a></span> <span class="op">|&gt;</span> </span>
@@ -344,12 +308,12 @@ load and clean the data set.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">school_year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>avg_salary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">t_salary</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span></code></pre></div>
 <p>We will lower the font size for all plots to 16.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">base_font_size</span> <span class="op">&lt;-</span> <span class="fl">16</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="make-a-line-chart">Make a line chart<a class="anchor" aria-label="anchor" href="#make-a-line-chart"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Make plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">avg_salary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">school_year</span>, y <span class="op">=</span> <span class="va">avg_salary</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="../reference/tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">"green"</span><span class="op">)</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -359,7 +323,7 @@ load and clean the data set.</p>
 <span>    subtitle <span class="op">=</span> <span class="st">"Teacher salaries remained constant between 2012 and 2015"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-multiple-line-chart">Make a multiple line chart<a class="anchor" aria-label="anchor" href="#make-a-multiple-line-chart"></a>
@@ -369,7 +333,7 @@ load and clean the data set.</p>
 We pulled the hex codes for the colors we wanted to use with
 <code><a href="../reference/tntp_palette.html">tntp_palette()</a></code> and added them to the chart with
 <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual()</a></code>.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Prepare data</span></span>
 <span><span class="va">school_salary</span> <span class="op">&lt;-</span> <span class="va">county_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">t_salary</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -382,7 +346,7 @@ We pulled the hex codes for the colors we wanted to use with
 <span><span class="co"># only plot two schools</span></span>
 <span><span class="va">line_plot_schools</span> <span class="op">&lt;-</span> <span class="va">school_salary</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">school_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">school_names</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">line_plot_schools</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">school_year</span>, y <span class="op">=</span> <span class="va">avg_salary</span>, color <span class="op">=</span> <span class="va">school_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -392,12 +356,12 @@ We pulled the hex codes for the colors we wanted to use with
 <span>    subtitle <span class="op">=</span> <span class="st">"Teacher salaries remained constant between 2012 and 2015"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-bar-chart">Make a bar chart<a class="anchor" aria-label="anchor" href="#make-a-bar-chart"></a>
 </h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Prepare data</span></span>
 <span><span class="va">bar_df</span> <span class="op">&lt;-</span> <span class="va">school_salary</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -417,7 +381,7 @@ We pulled the hex codes for the colors we wanted to use with
 <span>    subtitle <span class="op">=</span> <span class="st">"Average teacher salaries in 2015 by school"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-stacked-bar-chart">Make a stacked bar chart<a class="anchor" aria-label="anchor" href="#make-a-stacked-bar-chart"></a>
@@ -435,7 +399,7 @@ more transparent, and easier to check. We could have also replaced
 <code>geom_bar(stat = "identity", position = "stack")</code> with
 <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col()</a></code> (no parameters needed) to arrive at the same
 plot.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#prepare data</span></span>
 <span><span class="va">stacked_df</span> <span class="op">&lt;-</span> <span class="va">county_data</span> <span class="op">|&gt;</span> </span>
@@ -457,7 +421,7 @@ plot.</p>
 <span></span>
 <span><span class="co">#set order of stacks by changing factor levels</span></span>
 <span><span class="va">stacked_df</span><span class="op">$</span><span class="va">t_salary_cut</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">stacked_df</span><span class="op">$</span><span class="va">t_salary_cut</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">stacked_df</span><span class="op">$</span><span class="va">t_salary_cut</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">stacked_df</span>, </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">school_name</span>, y <span class="op">=</span> <span class="va">perc_in_each_cut</span>, fill <span class="op">=</span> <span class="va">t_salary_cut</span><span class="op">)</span></span>
@@ -471,7 +435,7 @@ plot.</p>
 <span>        legend.justification <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
 <p>This example shows proportions, but you might want to make a stacked
 bar chart showing number values instead - this is easy to change!</p>
 <p>The value passed to the <code>position</code> argument will determine
@@ -488,7 +452,7 @@ just need to change <code>position = "identity"</code> to
 <p>Note the use of the named vector <code>colors_to_use</code> to
 expressly map colors to values. This is a safe way to ensure we are
 properly mapping colors to values.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># only plot the lowest and highest earning groups</span></span>
 <span><span class="va">earnings_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">stacked_df</span><span class="op">$</span><span class="va">t_salary_cut</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
@@ -509,12 +473,12 @@ properly mapping colors to values.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"More teachers earn over $4.5k than under $2.5k"</span>,</span>
 <span>         subtitle <span class="op">=</span> <span class="st">"Percentage of teachers by salary range"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-scatterplot">Make a scatterplot<a class="anchor" aria-label="anchor" href="#make-a-scatterplot"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create data set showing school test scores and average school salaries</span></span>
 <span><span class="va">scores_salary</span> <span class="op">&lt;-</span> <span class="va">county_data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">school_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -526,7 +490,7 @@ properly mapping colors to values.</p>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>perc_rank_test_score <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/percent_rank.html" class="external-link">percent_rank</a></span><span class="op">(</span><span class="va">avg_test_score</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">scores_salary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">avg_salary</span>, <span class="va">perc_rank_test_score</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="../reference/tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">'tangerine'</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.9</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
@@ -538,7 +502,7 @@ properly mapping colors to values.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span>, show_axis_titles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-dumbbell-chart">Make a dumbbell chart<a class="anchor" aria-label="anchor" href="#make-a-dumbbell-chart"></a>
@@ -546,7 +510,7 @@ properly mapping colors to values.</p>
 <p>Another way of showing difference is a dumbbell chart. Note that
 <code>geom_dumbell()</code> comes from the <a href="https://yonicd.github.io/ggalt/index.html" class="external-link"><code>ggalt</code></a>
 package.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dumbbell_df</span> <span class="op">&lt;-</span> <span class="va">dodged_df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="st">'school_name'</span>, names_from <span class="op">=</span> <span class="st">'t_salary_cut'</span>, values_from <span class="op">=</span> <span class="st">'n_cut_school'</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="va">.x</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -563,12 +527,12 @@ package.</p>
 <span>       subtitle <span class="op">=</span> <span class="st">"Number of teachers by salary range"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Number of teachers earnign a given salary"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-histogram">Make a histogram<a class="anchor" aria-label="anchor" href="#make-a-histogram"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># number of teachers per school</span></span>
 <span><span class="va">number_teachers_school</span> <span class="op">&lt;-</span> <span class="va">county_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">school_year</span>, <span class="va">school_name</span><span class="op">)</span></span>
@@ -582,7 +546,7 @@ package.</p>
 <span>    y <span class="op">=</span> <span class="st">'Count'</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="making-density-plots">Making density plots<a class="anchor" aria-label="anchor" href="#making-density-plots"></a>
@@ -590,7 +554,7 @@ package.</p>
 <p>The <a href="https://wilkelab.org/ggridges/" class="external-link"><code>ggridges</code></a> package
 contains additional plots for plotting distributions using ridgeline
 plots.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">county_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">t_salary</span>, y <span class="op">=</span> <span class="va">school_year</span>, group <span class="op">=</span> <span class="va">school_year</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">school_year</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html" class="external-link">geom_density_ridges</a></span><span class="op">(</span>quantile_lines <span class="op">=</span> <span class="cn">TRUE</span>, quantiles <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/dollar_format.html" class="external-link">dollar</a></span><span class="op">)</span> <span class="op">+</span></span>
@@ -599,7 +563,7 @@ plots.</p>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="../reference/tntp_palette.html">tntp_palette</a></span><span class="op">(</span><span class="st">'colorful'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 <hr>
 </div>
 </div>
@@ -611,7 +575,7 @@ couple examples of plotting survey data. We will use the
 <code>teacher_survey</code> data set in the <code>tntpr</code> package,
 which is a fake teacher survey. Let’s start by loading the data set and
 calculating averages.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">teacher_survey</span> <span class="op">&lt;-</span> <span class="fu">tntpr</span><span class="fu">::</span><span class="va"><a href="../reference/teacher_survey.html">teacher_survey</a></span></span>
 <span></span>
 <span><span class="co"># the y-axis will contain text of an entire survey question</span></span>
@@ -662,7 +626,7 @@ calculating averages.</p>
 Agree’ and ‘Agree’. Note that the <code><a href="../reference/tntp_style.html">tntp_style()</a></code> function
 does not alter the font size or family of the text within
 <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text()</a></code> so we set it manually.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">teacher_survey_he_perc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">percent</span>, <span class="va">question</span>, fill <span class="op">=</span> <span class="va">response</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span></span>
@@ -674,12 +638,12 @@ does not alter the font size or family of the text within
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"High Expectations Survey Responses"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="plot-likert-items---diverging">Plot likert items - diverging<a class="anchor" aria-label="anchor" href="#plot-likert-items---diverging"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">legend_order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">agree_disagree_scale</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>, <span class="va">agree_disagree_scale</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">5</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">teacher_survey_div</span> <span class="op">&lt;-</span> <span class="va">teacher_survey_he_perc</span> <span class="op">|&gt;</span> </span>
@@ -700,7 +664,7 @@ does not alter the font size or family of the text within
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">.25</span><span class="op">)</span>, labels <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"High Expectations Survey Responses"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/tntp_style.html">tntp_style</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_font_size</span><span class="op">)</span></span></code></pre></div>
-<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
+<p><img src="visualization-cookbook_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
