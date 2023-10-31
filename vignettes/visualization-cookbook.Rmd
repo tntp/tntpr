@@ -492,7 +492,7 @@ ggplot(teacher_survey_he_perc, aes(percent, question, fill = response)) +
     color = 'white', fontface='bold', family = "Halyard Display", size = 5, hjust = 1.05
   ) +
   scale_x_continuous(labels = scales::percent, limits = c(0,1)) +
-  scale_fill_manual(values = rev(tntp_palette("top2_6", reverse = TRUE)), drop = FALSE) +
+  scale_fill_manual(values = tntp_palette("top2_6"), drop = FALSE) +
   guides(fill=guide_legend(nrow=2, byrow=TRUE, reverse = TRUE))  +
   labs(title = "High Expectations Survey Responses") +
   tntp_style(base_size = base_font_size)
