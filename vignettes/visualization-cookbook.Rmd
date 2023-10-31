@@ -89,11 +89,13 @@ We will highlight two parameters to `tntp_style()` that can help customize your 
 
 The `family` parameter lets you set the text font family. This changes the font family for all items, including plot and axis titles, legend titles and text, and axis text. The parameter defaults to 'Halyard Display', TNTP's font style, but uses 'sans' if 'Halyard Display' is not available. You will receive a warning if your specified font is not found. You can also specify a separate header font using the `header_family` parameter.
 
-You will need to manually import additional fonts using the `extrafont` package before they are available to R. Follow these steps to import fonts:
+You will need to manually import additional fonts, including the Halyard fonts, using the `extrafont` package before they are available to R. Follow these steps to import fonts:
 
-1. Install the `extrafont` package with `install.packages('extrafont)`. Ensure you are using version 0.13 or higher.
-2. Import fonts into the extrafont database with ``extrafont::font_import()`. This only needs to be done once.
-3. Register the extra fonts with R using `extrafont::loadfonts()`. If you are using version 0.13 or higher you only need to do this once, right after you import the fonts in step 2. If you are using a version lower than 0.13 you will need to run this step in each new R session.
+1. Download the Halyard Display Fonts in .ttf forms from the [Data Analytics Sharepoint](https://tntp.sharepoint.com/sites/DataAnalytics/Shared%20Documents/Forms/AllItems.aspx?viewid=ed2700f4%2D6b5b%2D4d23%2Da5c5%2D5567e8a5ccce) under the "Fonts" category.
+2. Open the fonts folder on your laptop (Settings -> Personalization -> Fonts) and drag and drop the Halyard Fonts there to install them on your computer.
+3. In RStudio, install the `extrafont` package with `install.packages('extrafont)`.
+4. Import fonts into the extrafont database with `extrafont::font_import()`. This only needs to be done once. The process is long, and can be significantly shortened by only importing the Halyard fonts using `extrafont::font_import(pattern = 'Halyard')`.
+5. Register the extra fonts with R using `extrafont::loadfonts()`. This needs to be done once each R session, but will be done automatically when loading the `tntpr` library.
 
 You can check to see which fonts are available to R with `windowsFonts()` on Windows or `quartzFonts()` on Mac.
 
