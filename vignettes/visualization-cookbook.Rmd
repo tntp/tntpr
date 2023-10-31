@@ -140,13 +140,7 @@ The primary function you'll use is `tntp_colors()`, which takes in human-friendl
 ```{r}
 tntp_colors("green", "mint")
 ```
-
-If you want to see all possible color names, you can run the function with no arguments:
-```{r}
-tntp_colors()
-```
-
-A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. Again, you can use `show_tntp_colors()` with no arguments to display all available colors and names:
+A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. You can use `show_tntp_colors()` with no arguments to display all available colors and names:
 ```{r}
 # Note: the cex_label parameter is used to adjust the relative font size
 show_tntp_colors(cex_label = 0.7)
