@@ -47,13 +47,13 @@ ggplot(mtcars, aes(wt, mpg)) +
 #... multiple colors ...
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_manual(values = tntp_colors('green', 'orange', 'red'))
+  scale_color_manual(values = tntp_colors('green', 'navy', 'red'))
 
 #... or a list of all possible TNTP brand colors
 tntp_colors()
 
 # Use show_tntp_colors() to quickly see brand colors in the plotting window
-show_tntp_colors('light_green', 'medium_green', 'green')
+show_tntp_colors('mint', 'moss', 'green')
 
 # You can also use a pattern to return similar colors
 show_tntp_colors(pattern = 'green')

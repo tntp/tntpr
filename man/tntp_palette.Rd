@@ -28,7 +28,7 @@ library(ggplot2)
 # Use to add a common palette to a ggplot visualization
 ggplot(diamonds, aes(y = color, fill = cut)) +
   geom_bar(position = "fill") +
-  scale_fill_manual(values = tntp_palette('likert_5', reverse = TRUE))
+  scale_fill_manual(values = tntp_palette('blues', reverse = TRUE))
 
 
 # Use show_tntp_palette() to visualize a single or multiple palettes
@@ -36,16 +36,16 @@ show_tntp_palette('likert_7')
 show_tntp_palette('bg_5', 'likert_5')
 
 # You can use a pattern to show similar palettes
-show_tntp_palette(pattern = 'bg')
+show_tntp_palette(pattern = 'top2')
+show_tntp_palette(pattern = '_6')
 
 # Or run it with no specified palettes to see all available palettes
 show_tntp_palette()
 
 # For creating a continuous color palette, use scale_color_gradient()
 # along with tntp_colors():
-ggplot(diamonds, aes(depth, table, color = price)) +
-  geom_point() +
-  scale_color_gradient(low = tntp_colors('light_green'),
+ggplot(mtcars, aes(hp, disp, color = mpg)) +
+  geom_point(size = 3) +
+  scale_color_gradient(low = tntp_colors('red'),
                        high = tntp_colors('green'))
-
 }

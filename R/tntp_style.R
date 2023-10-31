@@ -74,8 +74,8 @@
 #' frpl_experience |>
 #'   ggplot(aes(frpl_bucket, avg_experience)) +
 #'   geom_col(fill = if_else(frpl_experience$frpl_bucket == "60-80%",
-#'     palette_tntp("orange"),
-#'     palette_tntp("medium_gray")
+#'     tntp_colors("tangerine"),
+#'     tntp_colors("medium_gray")
 #'   )) +
 #'   geom_text(aes(label = label),
 #'     nudge_y = -0.25, vjust = 1,
