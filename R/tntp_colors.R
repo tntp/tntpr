@@ -159,7 +159,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
     cli::cli_warn(c("!" = "Invalid {.var borders} value of {.val {borders}}",
                     "i" = "{.var borders} accepts any color value or {.val NA}",
                     "i" = "Defaulting to {.val {par(\"fg\")}}"))
-    borders <- par("fg")
+    borders <- graphics::par("fg")
   }
 
   # Code adapted from scales::show_col but with text labels in addition to hex codes
@@ -194,21 +194,21 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
   colours <- matrix(colours, ncol = ncol, byrow = TRUE)
   color_labels <- matrix(color_labels, ncol = ncol, byrow = TRUE)
-  old <- par(pty = "s", mar = c(0, 0, 0, 0))
-  on.exit(par(old))
+  old <- graphics::par(pty = "s", mar = c(0, 0, 0, 0))
+  on.exit(graphics::par(old))
   size <- max(dim(colours))
   plot(c(0, size), c(0, -size), type = "n", xlab = "", ylab = "",
        axes = FALSE)
-  rect(col(colours) - 1, -row(colours) + 1, col(colours), -row(colours),
+  graphics::rect(col(colours) - 1, -row(colours) + 1, col(colours), -row(colours),
        col = colours, border = borders)
   if (labels) {
     hcl <- farver::decode_colour(colours, "rgb", "hcl")
     label_col <- ifelse(hcl[, "l"] > 50, "black", "white")
-    text(x = col(colours) - 0.5,
-         y = -row(colours) + 0.5,
-         labels = color_labels,
-         cex = cex_label,
-         col = label_col)
+    graphics::text(x = col(colours) - 0.5,
+                   y = -row(colours) + 0.5,
+                   labels = color_labels,
+                   cex = cex_label,
+                   col = label_col)
   }
 }
 
@@ -330,17 +330,17 @@ show_tntp_palette <- function(..., reverse = FALSE, pattern = NULL) {
   }) |> unlist() |> matrix(ncol = max_length, byrow = TRUE)
 
 
-  old <- par(pty = "m", mar = c(0, 0, 0, 0))
-  on.exit(par(old))
+  old <- graphics::par(pty = "m", mar = c(0, 0, 0, 0))
+  on.exit(graphics::par(old))
   size <- max(dim(colours))
   size_x <- dim(colours)[2]
   size_y <- dim(colours)[1]
   size_label <- ceiling(size_x / 2)
   plot(c(0, size_label + size_x), c(0, -size_y), type = "n", xlab = "", ylab = "",
        axes = FALSE)
-  rect(col(colours) - 1 + size_label, -row(colours) + 1, col(colours) + size_label, -row(colours),
+  graphics::rect(col(colours) - 1 + size_label, -row(colours) + 1, col(colours) + size_label, -row(colours),
        col = colours, border = FALSE)
-  text(x = size_label - 0.25,
+  graphics::text(x = size_label - 0.25,
        y = -seq(1, length(palettes)) + 0.5,
        adj = 1,
        labels = palettes,
