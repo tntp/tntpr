@@ -75,7 +75,6 @@ tntp_colors <- function(...) {
       salmon       = '#DA8988',
       medium_red   = '#DA8988',
       gold         = '#F2CF13',
-      dark_yellow  = '#F2CF13',
       moss         = '#8FB09D',
       medium_green = '#8FB09D',
       sky          = '#81D3EB',
@@ -85,8 +84,11 @@ tntp_colors <- function(...) {
 
       # NOT IN BRAND PALETTE
       light_yellow = '#FAEDB8',
-      medium_gray  = '#A5A5A5',
-      medium_grey  = '#A5A5A5',
+      medium_gray  = '#9E9E9C',
+      medium_grey  = '#9E9E9C',
+      dark_gold    = '#C2A60A',
+      dark_green   = '#1D4935',
+      dark_red     = '#7C132C',
 
       # For 5-scale
       green_4 = "#60977D",
@@ -97,10 +99,10 @@ tntp_colors <- function(...) {
       red_2   = "#ECB2A9",
       yellow_4 = "#F8DA47",
       yellow_2 = "#FCE99A",
-      gray_4  = "#787878",
-      grey_4  = "#787878",
-      gray_2  = "#CBCBCA",
-      grey_2  = "#CBCBCA"
+      gray_4  = "#747473",
+      grey_4  = "#747473",
+      gray_2  = "#C7C7C5",
+      grey_2  = "#C7C7C5"
 
   )
 
@@ -211,23 +213,23 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "colorful" = tntp_colors("blue", "dark_yellow", "green", "red", "dark_gray", "orange", "black"),
-  "likert_4" = tntp_colors("dark_yellow", "medium_yellow", "medium_green", "green"),
-  "likert_5" = tntp_colors("dark_yellow", "medium_yellow", "light_gray", "medium_green", "green"),
-  "likert_6" = tntp_colors("dark_yellow", "medium_yellow", "light_yellow", "light_green", "medium_green", "green"),
-  "likert_7" = tntp_colors("dark_yellow", "medium_yellow", "light_yellow", "light_gray", "light_green", "medium_green", "green"),
-  "rb_4" = tntp_colors("red", "medium_red", "medium_blue", "blue"),
-  "rb_5" = tntp_colors("red", "medium_red", "light_gray", "medium_blue", "blue"),
-  "rb_6" = tntp_colors("red", "medium_red", "light_red", "light_blue", "medium_blue", "blue"),
-  "rb_7" = tntp_colors("red", "medium_red", "light_red", "light_gray", "light_blue", "medium_blue", "blue"),
-  "bg_4" = tntp_colors("blue", "medium_blue", "medium_green", "green"),
-  "bg_5" = tntp_colors("blue", "medium_blue", "light_gray", "medium_green", "green"),
-  "bg_6" = tntp_colors("blue", "medium_blue", "light_blue", "light_green", "medium_green", "green"),
-  "bg_7" = tntp_colors("blue", "medium_blue", "light_blue", "light_gray", "light_green", "medium_green", "green"),
+  "colorful" = tntp_colors("navy", "gold", "green", "red", "charcoal", "tangerine", "black"),
+  "likert_4" = tntp_colors("dark_gold", "gold", "green", "dark_green"),
+  "likert_5" = tntp_colors("dark_gold", "gold", "gray_2", "green", "dark_green"),
+  "likert_6" = tntp_colors("dark_gold", "gold", "yellow", "moss", "green", "dark_green"),
+  "likert_7" = tntp_colors("dark_gold", "gold", "yellow", "gray_2", "moss", "green", "dark_green"),
+  "rb_4" = tntp_colors("dark_red", "red", "cerulean", "navy"),
+  "rb_5" = tntp_colors("dark_red", "red", "gray_2", "cerulean", "navy"),
+  "rb_6" = tntp_colors("dark_red", "red", "salmon", "sky", "cerulean", "navy"),
+  "rb_7" = tntp_colors("dark_red", "red", "salmon", "gray_2", "sky", "cerulean", "navy"),
+  "bg_4" = tntp_colors("navy", "cerulean", "green", "dark_green"),
+  "bg_5" = tntp_colors("navy", "cerulean", "gray_2", "green", "dark_green"),
+  "bg_6" = tntp_colors("navy", "cerulean", "sky", "moss", "green", "dark_green"),
+  "bg_7" = tntp_colors("navy", "cerulean", "sky", "gray_2", "moss", "green", "dark_green"),
   "greens" = tntp_colors("green", "green_4", "medium_green", "green_2", "light_green"),
   "reds" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
   "blues" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
-  "yellows" = tntp_colors("dark_yellow", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
+  "yellows" = tntp_colors("gold", "yellow_4", "medium_yellow", "yellow_2", "light_yellow"),
   "grays" = tntp_colors("dark_gray", "gray_4", "medium_gray", "gray_2", "light_gray"),
   "nps" = tntp_colors("red", "red", "medium_red", "medium_red", "light_red", "light_red", "medium_yellow", "medium_yellow", "green", "green")
   )
