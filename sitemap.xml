@@ -103,9 +103,6 @@
     <loc>https://tntp.github.io/tntpr/reference/show_in_excel.html</loc>
   </url>
   <url>
-    <loc>https://tntp.github.io/tntpr/reference/show_tntp_colors.html</loc>
-  </url>
-  <url>
     <loc>https://tntp.github.io/tntpr/reference/tableN.html</loc>
   </url>
   <url>
@@ -116,6 +113,12 @@
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/theme_tntp_2018.html</loc>
+  </url>
+  <url>
+    <loc>https://tntp.github.io/tntpr/reference/tntp_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://tntp.github.io/tntpr/reference/tntp_palette.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/tntp_style.html</loc>

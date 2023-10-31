@@ -55,7 +55,8 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tntp_style</span><span class="op">(</span></span>
-<span>  font <span class="op">=</span> <span class="st">"Segoe UI"</span>,</span>
+<span>  family <span class="op">=</span> <span class="st">"Halyard Display"</span>,</span>
+<span>  header_family <span class="op">=</span> <span class="va">family</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">28</span>,</span>
 <span>  text_color <span class="op">=</span> <span class="st">"#222222"</span>,</span>
 <span>  caption_color <span class="op">=</span> <span class="st">"#7D7E81"</span>,</span>
@@ -71,20 +72,24 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>font</dt>
-<dd><p>base font family</p></dd>
+    <dl><dt>family</dt>
+<dd><p>Base font family. Defaults to "Halyard Display".</p></dd>
+
+
+<dt>header_family</dt>
+<dd><p>Font family for title and subtitle. Defaults to the base font family.</p></dd>
 
 
 <dt>base_size</dt>
-<dd><p>base font size. Recommended minimum value of 15.</p></dd>
+<dd><p>Base font size. Recommended minimum value of 15.</p></dd>
 
 
 <dt>text_color</dt>
-<dd><p>text color for titles, axes, legends, and facets</p></dd>
+<dd><p>Text color for titles, axes, legends, and facets.</p></dd>
 
 
 <dt>caption_color</dt>
-<dd><p>text color for caption</p></dd>
+<dd><p>Text color for caption.</p></dd>
 
 
 <dt>show_legend_title</dt>
@@ -100,11 +105,11 @@
 
 
 <dt>grid_color</dt>
-<dd><p>grid line color</p></dd>
+<dd><p>Grid line color.</p></dd>
 
 
 <dt>title_align, legend_align, caption_align</dt>
-<dd><p>Alignment of title, legend, and caption. Accepts <code>left</code>, <code>right</code>, or <code>center</code></p></dd>
+<dd><p>Alignment of title, legend, and caption. Accepts <code>left</code>, <code>right</code>, or <code>center</code>.</p></dd>
 
 </dl></div>
 
@@ -143,8 +148,8 @@
 <span class="r-in"><span><span class="va">frpl_experience</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">frpl_bucket</span>, <span class="va">avg_experience</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="va">frpl_experience</span><span class="op">$</span><span class="va">frpl_bucket</span> <span class="op">==</span> <span class="st">"60-80%"</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="palette_tntp.html">palette_tntp</a></span><span class="op">(</span><span class="st">"orange"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="palette_tntp.html">palette_tntp</a></span><span class="op">(</span><span class="st">"medium_gray"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">"tangerine"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="st">"medium_gray"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    nudge_y <span class="op">=</span> <span class="op">-</span><span class="fl">0.25</span>, vjust <span class="op">=</span> <span class="fl">1</span>,</span></span>
