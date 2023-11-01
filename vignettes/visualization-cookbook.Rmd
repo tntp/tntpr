@@ -172,6 +172,7 @@ show_tntp_palette()
 ```
 
 The example plots below will show how to incorporate these functions into your ggplot2 visualizations.
+
 ------------------------------------------------------------------------
 
 # Example Plots
