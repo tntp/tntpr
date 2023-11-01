@@ -71,10 +71,11 @@ Here is a quick example on using the `tntp_style()` theme.
 plt <- ggplot(ggplot2::mpg, aes(displ, hwy)) +
   geom_point() +
   labs(
-    title = 'Cars with more displacement have\na lower MPG',
-    subtitle = 'Relationship between displacement and MPG',
-    x = 'MPG',
-    y = 'Engine Displ.'
+    title = 'Cars with higher displacement\nhave a lower MPG',
+    subtitle = 'Displacement vs. MPG',
+    caption = "Data from ggplot's mpg dataset",
+    x = 'Engine Displ.',
+    y = 'MPG'
   )
 
 plt +
