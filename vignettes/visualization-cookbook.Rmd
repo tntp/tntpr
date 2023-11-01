@@ -26,7 +26,7 @@ We'll get to how you can put together the various elements of these graphics, bu
 
 `tntpr` is not on CRAN, so you will have to install it directly from Github using `devtools`.
 
-If you do not have the `devtools` package installed, you will have to run the first line in the code below as well.
+If you do not have the `devtools` package installed, you will have to run the first line in the code below as well. This command will also work for updating `tntpr` if you already have it installed.
 
 ```{r eval=FALSE}
 # install.packages('devtools')
