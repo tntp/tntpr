@@ -130,7 +130,7 @@ plt +
   theme(panel.border = element_rect(color = "black", fill = NA))
 ```
 
-To see all available settings you can adjust with a theme element, see the documentation for `theme()`.
+To see all available settings you can adjust with a theme element, see the documentation for `?theme`.
 
 ## Using TNTP brand colors
 
