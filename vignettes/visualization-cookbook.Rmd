@@ -153,6 +153,7 @@ You can also use `show_tntp_colors()` with no color arguments to display all ava
 # Note: the cex_label parameter is used to adjust the relative font size
 show_tntp_colors(cex_label = 0.7)
 ```
+
 ### Palettes
 
 Some color palettes are used frequently in visualizations. The `tntp_palette()` function allows you to access these pre-determined palettes more easily:
