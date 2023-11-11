@@ -136,6 +136,20 @@ tntp_colors <- function(...) {
   tntp_color_list[supplied_colors] |> unname()
 }
 
+# Validate color inputs
+is_color <- function(x) {
+  res <- try(grDevices::col2rgb(x), silent = TRUE)
+  return(!"try-error" %in% class(res))
+}
+
+# Choose a text color given a background color
+choose_text_color <- function(bg_color) {
+  stopifnot(is_color(bg_color))
+  ifelse(colSums(grDevices::col2rgb(bg_color) * c(.299, .587, .114)) > 150,
+     "black", "white")
+}
+
+
 #' @export
 #' @rdname tntp_colors
 show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
@@ -149,11 +163,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
                     "i" = "Defaulting to {.val TRUE}"))
     labels <- TRUE
   }
-  # Validate color inputs
-  is_color <- function(x) {
-    res <- try(grDevices::col2rgb(x), silent = TRUE)
-    return(!"try-error" %in% class(res))
-  }
+
 
   if(!is_color(borders)) {
     cli::cli_warn(c("!" = "Invalid {.var borders} value of {.val {borders}}",
@@ -202,8 +212,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
   graphics::rect(col(colours) - 1, -row(colours) + 1, col(colours), -row(colours),
        col = colours, border = borders)
   if (labels) {
-    hcl <- farver::decode_colour(colours, "rgb", "hcl")
-    label_col <- ifelse(hcl[, "l"] > 50, "black", "white")
+    label_col <- choose_text_color(colours)
     graphics::text(x = col(colours) - 0.5,
                    y = -row(colours) + 0.5,
                    labels = color_labels,

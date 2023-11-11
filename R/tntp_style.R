@@ -140,11 +140,6 @@ tntp_style <- function(family = "Halyard Display",
   subtitle_margin <- base_size * 0.3
   axis_text_margin <- base_size * 0.15
 
-  # Validate color inputs
-  is_color <- function(x) {
-    res <- try(grDevices::col2rgb(x), silent = TRUE)
-    return(!"try-error" %in% class(res))
-  }
   if (!is_color(text_color)) {
     cli::cli_warn(c("Invalid {.var text_color} {.val {text_color}}.",
       "i" = "Using default value of {.val #222222}"
