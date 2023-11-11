@@ -16,7 +16,7 @@ function \code{\link[=tntp_colors]{tntp_colors()}}.
 }
 \examples{
 \dontrun{
-colors_tntp
+tntp_colors()
 }
 }
 \keyword{datasets}

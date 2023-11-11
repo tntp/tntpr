@@ -15,8 +15,8 @@
 #' @examples
 #' library(ggplot2)
 #'
-#' pal1_tntp <- palette_tntp("green", "gold", "orange")
-#' pal2_tntp <- palette_tntp("dark_blue", "medium_blue", "light_blue")
+#' pal1_tntp <- tntp_colors("green", "gold", "orange")
+#' pal2_tntp <- tntp_colors("navy", "cerulean", "sky")
 #'
 #' p <- ggplot(mtcars, aes(wt, mpg))
 #' p <- p + geom_point(aes(colour = factor(cyl)))
@@ -60,7 +60,7 @@ palette_tntp <- function(...) {
 #'
 #' @examples
 #' \dontrun{
-#' colors_tntp
+#' tntp_colors()
 #' }
 #' @export
 "colors_tntp"
@@ -112,7 +112,7 @@ colors_tntp <- c( # TNTPPalette
 #' @md
 #' @examples
 #' \dontrun{
-#' colors_tntp_palette
+#' tntp_colors()
 #' }
 #' @export
 "colors_tntp_palette"
@@ -144,7 +144,7 @@ colors_tntp_palette <-
 #' @md
 #' @examples
 #' \dontrun{
-#' colors_tntp_likert
+#' tntp_palette('likert_6')
 #' }
 #' @export
 "colors_tntp_likert"
@@ -167,7 +167,7 @@ colors_tntp_likert <-
 #' @md
 #' @examples
 #' \dontrun{
-#' colors_tntp_likert_orange_to_green
+#' tntp_palette('bg_6')
 #' }
 #' @export
 "colors_tntp_likert_orange_to_green"
@@ -185,12 +185,13 @@ colors_tntp_likert_orange_to_green <-
 #' Pallette names
 #'
 #' This list of palette names has been superseded by the new brand colors and
-#' new functions [tntp_colors()] and [tntp_palette()].
+#' new functions [tntp_colors()] and [tntp_palette()]. To see all of the new
+#' brand palettes, use [show_tntp_palette()].
 #'
 #' @md
 #' @examples
 #' \dontrun{
-#' palette_names
+#' show_tntp_palette()
 #' }
 #' @export
 "palette_names"
@@ -283,7 +284,7 @@ scale_color_tntp <- scale_colour_tntp
 #'
 #' ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
 #'   geom_col() +
-#'   scale_fill_tntp()
+#'   scale_fill_manual(values = tntp_palette())
 
 #'
 #' @export

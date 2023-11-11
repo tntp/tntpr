@@ -27,6 +27,6 @@ x <- mtcars \%>\%
 
 ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
   geom_col() +
-  scale_fill_tntp()
+  scale_fill_manual(values = tntp_palette())
 
 }

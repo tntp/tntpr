@@ -12,11 +12,12 @@ palette_names
 }
 \description{
 This list of palette names has been superseded by the new brand colors and
-new functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_palette]{tntp_palette()}}.
+new functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_palette]{tntp_palette()}}. To see all of the new
+brand palettes, use \code{\link[=show_tntp_palette]{show_tntp_palette()}}.
 }
 \examples{
 \dontrun{
-palette_names
+show_tntp_palette()
 }
 }
 \keyword{datasets}

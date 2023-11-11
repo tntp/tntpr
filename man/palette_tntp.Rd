@@ -21,8 +21,8 @@ light_blue, green, orange, gold, dark_grey (dark_gray), medium_grey
 \examples{
 library(ggplot2)
 
-pal1_tntp <- palette_tntp("green", "gold", "orange")
-pal2_tntp <- palette_tntp("dark_blue", "medium_blue", "light_blue")
+pal1_tntp <- tntp_colors("green", "gold", "orange")
+pal2_tntp <- tntp_colors("navy", "cerulean", "sky")
 
 p <- ggplot(mtcars, aes(wt, mpg))
 p <- p + geom_point(aes(colour = factor(cyl)))

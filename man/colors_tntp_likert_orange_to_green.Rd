@@ -16,7 +16,7 @@ functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_palett
 }
 \examples{
 \dontrun{
-colors_tntp_likert_orange_to_green
+tntp_palette('bg_6')
 }
 }
 \keyword{datasets}
