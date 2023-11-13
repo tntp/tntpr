@@ -8,5 +8,5 @@
 show_in_excel <- function(.data) {
   tmp <- paste0(tempfile(), ".csv")
   readr::write_excel_csv(.data, tmp)
-  fs::file_show(path = tmp)
+  utils::browseURL(url = tmp)
 }
