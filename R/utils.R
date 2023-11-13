@@ -1,3 +1,5 @@
+utils::globalVariables(c("vec", "vec.factor", "n", "group.vec", "group.factor", "perc", "."))
+
 #' Title
 #'
 #' @param libname library name

@@ -64,7 +64,7 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL) {
     )
     x <- tolower(x)
   }
-  if_else(is.na(x), as.character(NA),
+  ifelse(is.na(x), as.character(NA),
     ifelse(x %in% custom_vals, "Top-2 Agree", "Not in Top-2")
   )
 }
