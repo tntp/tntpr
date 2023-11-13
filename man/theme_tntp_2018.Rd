@@ -28,7 +28,7 @@ theme_tntp_2018(
   axis_title_size = 9,
   axis_title_face = "plain",
   axis_title_just = "rt",
-  plot_margin = margin(30, 30, 30, 30),
+  plot_margin = ggplot2::margin(30, 30, 30, 30),
   grid_col = "grey93",
   grid = TRUE,
   axis_col = "#cccccc",

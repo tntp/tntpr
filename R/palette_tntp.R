@@ -255,7 +255,7 @@ scale_colour_tntp <- function(palette = palette_names,
                               ...) {
   .Deprecated("tntp_palette")
   palette <- match.arg(palette)
-  discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
+  ggplot2::discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }
 
 #' @rdname scale_colour_tntp
@@ -294,5 +294,5 @@ scale_fill_tntp <- function(palette = palette_names,
                             ...) {
   .Deprecated("tntp_palette")
   palette <- match.arg(palette)
-  discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
+  ggplot2::discrete_scale("fill", "tntpcolors", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
 }

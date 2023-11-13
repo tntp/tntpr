@@ -19,6 +19,7 @@
 #' @param caption_align alignment of caption, defaults to "right"; also accepts "left" or "center"
 #' @param caption_color color of caption text
 #' @param caption_size size of caption text
+#' @importFrom ggplot2 '%+replace%'
 #' @export
 #' @rdname theme_tntp
 
@@ -83,7 +84,7 @@ theme_tntp <- function(show_legend_title = TRUE,
         hjust = subtitle_h_just,
         colour = subtitle_color,
         size = subtitle_size,
-        margin = margin(7)
+        margin = ggplot2::margin(7)
       ),
       plot.caption = ggplot2::element_text(
         hjust = caption_h_just,
@@ -92,7 +93,7 @@ theme_tntp <- function(show_legend_title = TRUE,
       )
     )
   if (!show_legend_title) {
-    result <- result + ggplot2::theme(legend.title = element_blank())
+    result <- result + ggplot2::theme(legend.title = ggplot2::element_blank())
   }
   result
 }

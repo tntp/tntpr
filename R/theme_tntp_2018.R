@@ -82,14 +82,14 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
                             axis_text = TRUE, axis_text_size = base_size,
                             axis_title_family = subtitle_family, axis_title_size = 9,
                             axis_title_face = "plain", axis_title_just = "rt",
-                            plot_margin = margin(30, 30, 30, 30),
+                            plot_margin = ggplot2::margin(30, 30, 30, 30),
                             grid_col = "grey93", grid = TRUE,
                             axis_col = "#cccccc", axis = FALSE, ticks = FALSE) {
   .Deprecated()
   ret <- ggplot2::theme_minimal(base_family = base_family, base_size = base_size)
 
-  ret <- ret + ggplot2::theme(legend.background = element_blank())
-  ret <- ret + ggplot2::theme(legend.key = element_blank())
+  ret <- ret + ggplot2::theme(legend.background = ggplot2::element_blank())
+  ret <- ret + ggplot2::theme(legend.key = ggplot2::element_blank())
 
   if (inherits(grid, "character") | grid == TRUE) {
     ret <- ret + ggplot2::theme(panel.grid = ggplot2::element_line(color = grid_col, size = 0.2))
@@ -195,12 +195,12 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
     margin = ggplot2::margin(b = plot_title_margin),
     family = plot_title_family, face = plot_title_face
   ))
-  ret <- ret + ggplot2::theme(plot.subtitle = element_text(
+  ret <- ret + ggplot2::theme(plot.subtitle = ggplot2::element_text(
     hjust = 0, size = subtitle_size,
     margin = ggplot2::margin(b = subtitle_margin),
     family = subtitle_family, face = subtitle_face
   ))
-  ret <- ret + ggplot2::theme(plot.caption = element_text(
+  ret <- ret + ggplot2::theme(plot.caption = ggplot2::element_text(
     hjust = 1, size = caption_size,
     margin = ggplot2::margin(t = caption_margin),
     family = caption_family, face = caption_face

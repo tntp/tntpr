@@ -15,7 +15,7 @@ labelled_to_factors <- function(labels_df) {
     lapply(labels_df, function(x) class(x) == "labelled")
   )
   factorized <- labels_df
-  factorized[, labeled_var_index] <- lapply(factorized[, labeled_var_index], as_factor)
+  factorized[, labeled_var_index] <- lapply(factorized[, labeled_var_index], as.factor)
 
 
   # reset label attributes - maybe not needed, and not working

@@ -145,7 +145,7 @@ bar_chart_counts <- function(df,
     if (labels == "pct") {
       nbc <- ggplot2::ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = perc)) +
         ggplot2::geom_bar(fill = swap_colors(var_color), stat = "identity") +
-        ggplot2::geom_text(ggplot2::aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
+        ggplot2::geom_text(ggplot2::aes(label = scales::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
           vjust = -0.8,
           family = font,
           size = font_size * 0.35
@@ -171,8 +171,8 @@ bar_chart_counts <- function(df,
 
 
       nbc <- nbc +
-        ggplot2::geom_text(aes(label = formattable::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
-          position = position_dodge(width = 0.9),
+        ggplot2::geom_text(ggplot2::aes(label = scales::percent(janitor::round_half_up(perc, digits + 2), digits = digits)),
+          position = ggplot2::position_dodge(width = 0.9),
           vjust = -0.8,
           na.rm = TRUE,
           family = font,
@@ -181,7 +181,7 @@ bar_chart_counts <- function(df,
     } else {
       nbc <- ggplot2::ggplot(
         data = plot_data,
-        mapping = aes(x = vec.factor, y = n, fill = group.factor)
+        mapping = ggplot2::aes(x = vec.factor, y = n, fill = group.factor)
       ) +
         ggplot2::geom_bar(position = "dodge", stat = "identity", na.rm = TRUE) + # silences warnings when there's an empty bar because of a subgroup of size 0
         ggplot2::scale_fill_manual(values = tntp_col_pal)
@@ -189,7 +189,7 @@ bar_chart_counts <- function(df,
 
       nbc <- nbc +
         ggplot2::geom_text(ggplot2::aes(label = n),
-          position = position_dodge(width = 0.9),
+          position = ggplot2::position_dodge(width = 0.9),
           vjust = -0.8,
           na.rm = TRUE,
           family = font,
@@ -212,33 +212,33 @@ bar_chart_counts <- function(df,
     ) +
     ggplot2::labs(title = title, x = var_label) +
     ggplot2::theme(
-      axis.line.y = element_blank(),
-      axis.line.x = element_line(
+      axis.line.y = ggplot2::element_blank(),
+      axis.line.x = ggplot2::element_line(
         color = "grey70",
         size = 0.20
       ),
-      axis.text.y = element_blank(),
-      axis.text.x = element_text(
+      axis.text.y = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_text(
         family = font,
         size = font_size
       ),
-      axis.ticks = element_blank(),
-      axis.title.x = element_text(
+      axis.ticks = ggplot2::element_blank(),
+      axis.title.x = ggplot2::element_text(
         family = font,
         size = font_size
       ),
-      axis.title.y = element_blank(),
-      legend.key = element_blank(),
+      axis.title.y = ggplot2::element_blank(),
+      legend.key = ggplot2::element_blank(),
       legend.position = "bottom",
-      legend.text = element_text(
+      legend.text = ggplot2::element_text(
         family = font,
         size = font_size
       ),
-      legend.title = element_blank(),
-      panel.background = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      plot.title = element_text(
+      legend.title = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.title = ggplot2::element_text(
         family = font,
         face = "bold",
         size = font_size
