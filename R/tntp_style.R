@@ -1,25 +1,41 @@
-# Changes from BBC Style:
-# - added options for title presence (legend, axis)
-# - added options for title / legend / caption alignment (and defaults)
-# - added options for grid lines
-# - added options for font
-# - added caption and legend/axis title styling (originally empty)
-# - adjusted facet-title styling
 
-# Unresolved:
-# - font management (2018)?
 
-# Questions:
-# - do we add all the parameters with proper defaults? OR use + theme()
-#   - Include "most used" parameters, don't include others.
-#   - Add base_size to scale all text sizes
-# - function name: keep as tntp_style() or match tntp_theme_xxxx() or theme_tntp()
+# Helper function. Checks if a given family value is available, and if not returns
+# the default font family ("sans" or user provided)
+get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 
-# Next steps - get to polished draft stage, then get feedback from folks.
-# - We start using / testing. Think through questions above
-# - Sam adds / drafts documentation
-# - Finalize next meeting, then roll out to data team.
+  # Get a platform-independent list of usable fonts
+  if (.Platform$OS.type == "windows") {
+    font_list <- names(grDevices::windowsFonts())
+  } else {
+    font_list <- names(grDevices::quartzFonts())
+  }
 
+  # Make sure the default family is available
+  if(!default_family %in% font_list) {
+    cli::cli_abort(c(
+      "x" = "Default family {.val {default_family}} is not registered in the font table.",
+      "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
+      "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
+    ))
+  }
+
+  # Check to see if the provided family is available
+  if (!family %in% font_list) {
+    if(!silent) {
+      cli::cli_warn(c(
+        "x" = "Family {.val {family}} is not registered in the font table.",
+        "v" = "Using standard {.val sans} font instead",
+        "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
+        "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
+      ))
+    }
+
+    default_family
+  } else {
+    family
+  }
+}
 
 
 #' Create TNTP themed [ggplot2] charts
@@ -186,33 +202,13 @@ tntp_style <- function(family = "Halyard Display",
   }
 
   # Check that specified font(s) are available for use
-  if (.Platform$OS.type == "windows") {
-    font_list <- names(grDevices::windowsFonts())
+  if(header_family != family) {
+    family        <- get_usable_family(family)
+    header_family <- get_usable_family(header_family)
   } else {
-    font_list <- names(grDevices::quartzFonts())
+    family        <- get_usable_family(family)
+    header_family <- family
   }
-  if (!header_family %in% font_list && header_family != family) {
-    cli::cli_warn(c(
-      "x" = "Family {.val {header_family}} is not registered in the font table.",
-      "v" = "Using standard {.val sans} font instead",
-      "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
-      "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
-    ))
-    header_family <- "sans"
-  }
-  if (!family %in% font_list) {
-    cli::cli_warn(c(
-      "x" = "Family {.val {family}} is not registered in the font table.",
-      "v" = "Using standard {.val sans} font instead",
-      "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
-      "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
-    ))
-
-    if(header_family == family) header_family <- "sans"
-    family <- "sans"
-
-  }
-
 
   # Convert text position to a numeric value to supply
   title_h_just <- switch(title_align,
