@@ -29,7 +29,7 @@
 #'   bar_chart_counts(var       = cyl,
 #'                    group_var = vs,
 #'                    labels    = "pct",
-#'                    title     = "Percentage of V vs. Straight engines by # of cylinders",
+#'                    title     = "% of V vs. Straight engines by # of cylinders",
 #'                    font  = "sans")
 #'
 #' # Change default color
@@ -48,12 +48,12 @@
 
 bar_chart_counts <- function(df,
                              var,
-                             group_var,
+                             group_var = NULL,
                              labels = "n",
                              var_color = "green",
-                             group_colors,
+                             group_colors = NULL,
                              title = NULL,
-                             var_label,
+                             var_label = NULL,
                              digits = 1,
                              font = "Halyard Display",
                              font_size = 12) {
@@ -70,11 +70,14 @@ bar_chart_counts <- function(df,
   # Ensure the specified font is valid
   font <- get_usable_family(font)
 
+  # Store whether there is a grouping variable
+  grouped <- !rlang::quo_is_null(rlang::enquo(group_var))
+
   # Create a plot_data object -------------------------------------------------
   # plot_data should contain user specified column and its factor equivalent
 
   # Check if a grouping variable was specified
-  if (missing(group_var)) {
+  if (!grouped) {
     plot_data <- df |>
       dplyr::select(vec = {{var}}) |>
       dplyr::mutate(vec.factor = as.factor(vec)) |>
@@ -100,8 +103,8 @@ bar_chart_counts <- function(df,
   # Create a color palette ----------------------------------------------------
 
   # Check if group_var is supplied
-  if (!missing(group_var)) {
-    if (missing(group_colors)) {
+  if (grouped) {
+    if (is.null(group_colors)) {
       # QC: If group_var is supplied, but no colors, create a color palette
       #     while also making sure there are enough colors for each group
 
@@ -137,14 +140,14 @@ bar_chart_counts <- function(df,
   }
 
   # Check whether user specified an x axis label ------------------------------
-  if (missing(var_label)) {
+  if (is.null(var_label)) {
     var_label <- deparse(substitute(var))
   }
 
   # Build the N bar chart -----------------------------------------------------
   # Condition on presence of group_var
 
-  if (missing(group_var)) {
+  if (!grouped) {
     if (labels == "pct") {
       nbc <- ggplot2::ggplot(data = plot_data, ggplot2::aes(x = vec.factor, y = perc)) +
         ggplot2::geom_bar(fill = swap_colors(var_color), stat = "identity") +

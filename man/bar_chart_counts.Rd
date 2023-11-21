@@ -7,12 +7,12 @@
 bar_chart_counts(
   df,
   var,
-  group_var,
+  group_var = NULL,
   labels = "n",
   var_color = "green",
-  group_colors,
+  group_colors = NULL,
   title = NULL,
-  var_label,
+  var_label = NULL,
   digits = 1,
   font = "Halyard Display",
   font_size = 12
@@ -59,7 +59,7 @@ mtcars |>
   bar_chart_counts(var       = cyl,
                    group_var = vs,
                    labels    = "pct",
-                   title     = "Percentage of V vs. Straight engines by # of cylinders",
+                   title     = "\% of V vs. Straight engines by # of cylinders",
                    font  = "sans")
 
 # Change default color
