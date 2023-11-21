@@ -28,3 +28,17 @@ test_that("bar_chart_counts grouping variable works", {
   expect_equal(plt$data, exp)
 
 })
+
+test_that("swap_colors provides TNTP colors if possible", {
+  expect_equal(swap_colors(c('navy', 'mint')), tntp_colors('navy', 'mint'))
+})
+
+test_that("swap_colors uses R colors if TNTP colors aren't found", {
+  expect_message(swap_colors(c("brown", "orange")), "Unable to map some colors.* to TNTP colors")
+  expect_equal(suppressMessages(swap_colors(c("brown", "orange"))), c("brown", "orange"))
+})
+
+test_that("swqp_colors raises a warning and uses the colorful TNTP palette if no mapping is found", {
+  expect_warning(swap_colors(c("blue", "notacolor")), "Unable to map some colors")
+  expect_equal(suppressWarnings(swap_colors(c("blue", "notacolor"))), tntp_palette('colorful'))
+})
