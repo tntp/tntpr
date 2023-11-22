@@ -25,28 +25,25 @@ prop_matching <- function(vec, valid_strings) {
 #' @return data.frame with factorization completed in place.
 #' @export
 #' @examples
-#' library(dplyr)
-#' mtcars %>%
-#'   dplyr::mutate(agr = rep(c("Somewhat agree", "Strongly disagree"), 16)) %>%
-#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-#'                         "Somewhat agree", "Strongly agree"))
+#' teacher_survey |>
+#'   factorize_df(lvls = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
+#'                         "Somewhat Agree", "Agree", "Strongly Agree"))
 #'
 #' # prints warning due to case mismatches:
-#' mtcars %>%
-#'   dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) %>%
-#'   factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-#'                         "Somewhat agree", "Strongly agree"))
+#' teacher_survey |>
+#'   factorize_df(lvls = c("Strongly disagree", "Disagree", "Somewhat disagree",
+#'                         "Somewhat agree", "Agree", "Strongly agree"))
 factorize_df <- function(dat, lvls) {
-  dat_out <- dat %>%
-    dplyr::mutate_if(~ prop_matching(.x, lvls) == 1, ~ factor(., lvls))
+  dat_out <- dat |>
+    dplyr::mutate_if(~prop_matching(.x, lvls) == 1, ~factor(., lvls))
 
 
   # col types stored as list-columns to be robust to multi-part col classes, e.g., POSIX dates with two parts
   col_diffs <- cbind(
-    lapply(dat, class),
-    lapply(dat_out, class)
-  ) %>%
-    tibble::as_tibble(., rownames = "var_name") %>%
+    V1 = lapply(dat, class),
+    V2 = lapply(dat_out, class)
+  ) |>
+    tibble::as_tibble(rownames = "var_name") |>
     dplyr::mutate(match_prop = purrr::map_dbl(dat, ~ prop_matching(.x, lvls)))
 
   types_changed <- purrr::map2_lgl(col_diffs$V1, col_diffs$V2, purrr::negate(identical))
@@ -56,14 +53,14 @@ factorize_df <- function(dat, lvls) {
   # message if a match was _already_ a factor, the transformations made, or if no matches
   new_text <- ""
   if (any(col_diffs$match_prop == 1 & purrr::map_lgl(dat, inherits, "factor"))) {
-    warning("at least one matching column was already a factor, though this call will have reordered it if different levels provided.  Could be caused by overlapping sets of factor levels, e.g., \"Yes\", \"Maybe\", \"No\" and \"Yes\", \"No\".")
+    cli::cli_warn(c("!" = "At least one matching column was already a factor, though this call will have reordered it if different levels were provided. This could be caused by overlapping sets of factor levels, e.g., {.val Yes}, {.val Maybe}, {.val No} and {.val Yes}, {.val No}"))
     new_text <- "new "
   }
 
   if (length(changed_cols) > 0) {
-    message(paste("Transformed these columns: \n", paste("* ", changed_cols, collapse = ", \n")))
+    cli::cli_inform(c("i" = "Changed the following columns to factors: {.var {changed_cols}}"))
   } else {
-    warning(paste0("No ", new_text, "columns matched.  Check spelling & capitalization of your levels."))
+    cli::cli_warn(c("!" = "No {new_text}columns matched. Check spelling & capitalization of your levels."))
   }
 
   tibble::as_tibble(dat_out)

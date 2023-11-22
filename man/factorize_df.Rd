@@ -20,15 +20,12 @@ This function examines each column in a data.frame; when it finds a column compo
 This is an alternative to calling \code{dplyr::mutate_at} with \code{factor()} and identifying the specific variables you want to transform, if you have several repeated sets of responses.
 }
 \examples{
-library(dplyr)
-mtcars \%>\%
-  dplyr::mutate(agr = rep(c("Somewhat agree", "Strongly disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-                        "Somewhat agree", "Strongly agree"))
+teacher_survey |>
+  factorize_df(lvls = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
+                        "Somewhat Agree", "Agree", "Strongly Agree"))
 
 # prints warning due to case mismatches:
-mtcars \%>\%
-  dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-                        "Somewhat agree", "Strongly agree"))
+teacher_survey |>
+  factorize_df(lvls = c("Strongly disagree", "Disagree", "Somewhat disagree",
+                        "Somewhat agree", "Agree", "Strongly agree"))
 }
