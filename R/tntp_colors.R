@@ -136,13 +136,21 @@ tntp_colors <- function(...) {
   tntp_color_list[supplied_colors] |> unname()
 }
 
-# Validate color inputs
+#' Validate color inputs
+#'
+#' @param x a color
+#'
+#' @return TRUE if x can be interpreted as a color
 is_color <- function(x) {
   res <- try(grDevices::col2rgb(x), silent = TRUE)
   return(!"try-error" %in% class(res))
 }
 
-# Choose a text color given a background color
+#' Choose a text color given a background color
+#'
+#' @param bg_color a color
+#'
+#' @return "black" or "white"
 choose_text_color <- function(bg_color) {
   stopifnot(is_color(bg_color))
   ifelse(colSums(grDevices::col2rgb(bg_color) * c(.299, .587, .114)) > 150,

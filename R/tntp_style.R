@@ -1,7 +1,15 @@
 
 
-# Helper function. Checks if a given family value is available, and if not returns
-# the default font family ("sans" or user provided)
+#' Checks if a font family is usable and returns a usable font if not
+#'
+#' Helper function. Checks if a given family value is available, and if not returns
+#' the default font family ("sans" or user provided)
+#'
+#' @param family the font family to check as a character
+#' @param silent logical. If TRUE doesn't raise a warning if the font family is unavailable
+#' @param default_family defaults to "sans", but can be set to another fallback family.
+#'
+#' @return a character of a usable font family
 get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 
   # Get a platform-independent list of usable fonts

@@ -37,8 +37,16 @@ date_to_sy <- function(date_var, last_day_of_sy = NULL) {
   )
 }
 
-# Helper function. Returns a date object as is, or noisily attempts to parse
-# a string in the form YYYY-MM-DD or MM/DD/YYYY
+#' Attempt to parse a date with common formats
+#'
+#' Helper function for date_to_sy. Returns a date object as is, or noisily attempts to parse
+#' a string in the form YYYY-MM-DD or MM/DD/YYYY. If the date cannot be parsed,
+#' throws an error.
+#'
+#' @param date a character or Date vector to parse
+#'
+#' @return Date vector
+#'
 parse_date <- function(date) {
 
   parse_formats <- c("%Y-%m-%d",
