@@ -7,6 +7,51 @@ x <- data.frame(
 )
 
 # Tests
+test_that("prop_matching works as expected", {
+  a <- c("frog", "lizard", "frog", "frog")
+  b <- c("FroG", "LIZard", "FROG", "frog")
+  c <- c("frog", "bunny", "frog", "lizard")
+
+  valid <- c("frog", "lizard")
+
+  expect_equal(prop_matching(a, valid), 1)
+  expect_equal(prop_matching(b, valid, ignore.case = FALSE), 0.25)
+  expect_equal(prop_matching(b, valid, ignore.case = TRUE), 1)
+  expect_equal(prop_matching(c, valid), 0.75)
+})
+
+test_that("update_case works as expected", {
+  a <- c("yes", "no", "Yes", "Yess", "NO")
+  expect_equal(update_case(a, "Yes"), c("Yes", "no", "Yes", "Yess", "NO"))
+  expect_equal(update_case(a, c("YES", "NO")), c("YES", "NO", "YES", "Yess", "NO"))
+})
+
+test_that("ignore.case works", {
+  df <- tibble::tibble(
+    a = c("Yes", "yes", "No", "nO"),
+    b = c("Yes", "yes", "yes", "YES"),
+    c = c("yes", "maybe", "no", "no")
+  )
+
+  ymn <- c("yes", "maybe", "no")
+  YN <- c("Yes", "No")
+
+  # Warning when not provided:
+  expect_equal(factorize_df(df, ymn), df |> dplyr::mutate(c = factor(c, levels = ymn))) |>
+    expect_warning("NOT matched, but would match if") |>
+    suppressMessages()
+
+  # No warning when set to FALSE
+  expect_equal(factorize_df(df, ymn, ignore.case = FALSE), df |> dplyr::mutate(c = factor(c, levels = ymn))) |>
+    suppressMessages()
+
+  # Ignores case and no warning when set to TRUE:
+  factorize_df(df, YN, ignore.case = TRUE) |>
+    expect_equal(df |> dplyr::mutate(a = factor(c("Yes", "Yes", "No", "No"), levels = YN),
+                                     b = factor(c("Yes", "Yes", "Yes", "Yes"), levels = YN))) |>
+    suppressMessages()
+})
+
 test_that("works with POSIX (two-class) columns present", {
   y <- x
   y$a <- factor(y$a, c("a little", "some", "a lot"))

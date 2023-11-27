@@ -4,12 +4,14 @@
 \alias{prop_matching}
 \title{Calculate the percent of non-missing values in a character vector containing the values of interest.  This is a helper function for factorize_df().}
 \usage{
-prop_matching(vec, valid_strings)
+prop_matching(vec, valid_strings, ignore.case = FALSE)
 }
 \arguments{
 \item{vec}{character vector.}
 
 \item{valid_strings}{the values that the variable can possibly take on.}
+
+\item{ignore.case}{if TRUE, ignores case in matching}
 }
 \value{
 numeric proportion between 0 and 1.

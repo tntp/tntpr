@@ -4,12 +4,14 @@
 \alias{factorize_df}
 \title{Convert all character vectors containing a set of values in a data.frame to factors.}
 \usage{
-factorize_df(dat, lvls)
+factorize_df(dat, lvls, ignore.case = NULL)
 }
 \arguments{
 \item{dat}{data.frame with some factor variables stored as characters.}
 
 \item{lvls}{The factor levels in your variable(s), in order.  If you have a question whose possible responses are a subset of another question's, don't use this function; manipulate the specific columns with \code{dplyr::mutate_at}.}
+
+\item{ignore.case}{Logical. If TRUE, will match without checking case, using the capitalization from the \code{lvls} parameter for the final output. If not provided, the function will provide a warning if it detects columns that would match without checking case but will NOT coerce them.}
 }
 \value{
 data.frame with factorization completed in place.

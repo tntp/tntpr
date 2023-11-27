@@ -32,7 +32,8 @@ Imports:
     scales,
     stringr (>= 1.4.0),
     tibble (>= 2.1.3),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    tidyselect
 Suggests: 
     devtools,
     knitr,
