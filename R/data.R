@@ -63,7 +63,7 @@
 #'   \item{sch_regular}{double: School Is Regular School}
 #'   \item{sch_title_1}{double: School Is Title 1 School}
 #'   \item{sch_magnet}{double: School Is Magnet School}
-#'   \item{sch_vocati~l}{double: School is Vocational School}
+#'   \item{sch_vocational}{double: School is Vocational School}
 #'   \item{sch_region}{double: School Region Code}
 #'   \item{sch_calendar_type}{double: School Calendar Type}
 #'   \item{sch_iep_pct}{double: School Special Education Student Share in 2012-15}
@@ -71,7 +71,7 @@
 #'   \item{sch_frpl_pct}{double: School Free and Reduced Price Lunch Student Share in 2012-15}
 #'   \item{sch_ela_avg}{double: School ELA Test Score Average in 2012-15 (in standard deviations)}
 #'   \item{sch_math_avg}{double: School Math Test Score Average in 2012-15 (in standard deviations)}
-#'   \item{sch_enrollment_2015}{double: School Enrollment in 2015}
+#'   \item{sch_enroll_2015}{double: School Enrollment in 2015}
 #' }
 #' @source \url{https://github.com/OpenSDP/fake-county}, posted under a Creative Commons license.
 "fake_county"
