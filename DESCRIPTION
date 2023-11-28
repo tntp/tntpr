@@ -42,7 +42,8 @@ Suggests:
     usethis,
     ggridges,
     ggalt,
-    forcats
+    forcats,
+    haven
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

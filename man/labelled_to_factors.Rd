@@ -13,9 +13,13 @@ labelled_to_factors(labels_df)
 Returns a data.frame.
 }
 \description{
+Deprecated. Use the \code{as_factor()} function from the \code{haven} package instead for the same functionality.
+
 Takes a data.frame, checks for columns that are class \code{labelled} from the \code{haven} package, and converts them to factor class.
 }
 \examples{
-# not run
-# haven::read_spss(filepath) \%>\% labelled_to_factor()
+
+tntpr::fake_county |>
+  haven::as_factor()
+
 }
