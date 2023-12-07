@@ -20,10 +20,10 @@ test_that("prop_matching works as expected", {
   expect_equal(prop_matching(c, valid), 0.75)
 })
 
-test_that("update_case works as expected", {
+test_that("standardize_case works as expected", {
   a <- c("yes", "no", "Yes", "Yess", "NO")
-  expect_equal(update_case(a, "Yes"), c("Yes", "no", "Yes", "Yess", "NO"))
-  expect_equal(update_case(a, c("YES", "NO")), c("YES", "NO", "YES", "Yess", "NO"))
+  expect_equal(standardize_case(a, "Yes"), c("Yes", "no", "Yes", "Yess", "NO"))
+  expect_equal(standardize_case(a, c("YES", "NO")), c("YES", "NO", "YES", "Yess", "NO"))
 })
 
 test_that("ignore.case works", {

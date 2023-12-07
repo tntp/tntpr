@@ -28,7 +28,7 @@ prop_matching <- function(vec, valid_strings, ignore.case = FALSE) {
 #'
 #' @return a character vector the same length as vec
 #'
-update_case <- function(vec, new_case) {
+standardize_case <- function(vec, new_case) {
 
   names(new_case) <- tolower(new_case)
   vec_l <- tolower(vec)
@@ -77,7 +77,7 @@ factorize_df <- function(dat, lvls, ignore.case = NULL) {
     # Update capitalization if ignoring case
     dat_out <- dat_out |>
       dplyr::mutate(dplyr::across(tidyselect::all_of(transform_cols),
-                                  ~update_case(., lvls)))
+                                  ~standardize_case(., lvls)))
   }
 
   dat_out <- dat_out |>
