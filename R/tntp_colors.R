@@ -223,7 +223,7 @@ show_tntp_colors <- function(..., pattern = NULL, labels = TRUE, borders = NULL,
 
 # Private variable
 tntp_palette_list <- list(
-  "colorful" = tntp_colors("navy", "gold", "green", "red", "charcoal", "tangerine", "black"),
+  "colorful" = tntp_colors("green", "gold", "navy", "red", "charcoal", "tangerine", "black"),
   "likert_4" = tntp_colors("dark_gold", "gold", "green", "dark_green"),
   "likert_5" = tntp_colors("dark_gold", "gold", "gray_2", "green", "dark_green"),
   "likert_6" = tntp_colors("dark_gold", "gold", "yellow", "moss", "green", "dark_green"),
