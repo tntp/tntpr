@@ -22,6 +22,7 @@ Imports:
     grDevices,
     grid,
     janitor,
+    keyring,
     labelled,
     lazyeval,
     lubridate (>= 1.7.4),
@@ -43,7 +44,8 @@ Suggests:
     usethis,
     ggridges,
     ggalt,
-    forcats
+    forcats,
+    qualtRics
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
