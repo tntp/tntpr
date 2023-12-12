@@ -2,7 +2,7 @@
 title: "TNTP Qualtrics/R Cookbook"
 output: html_document
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{TNTP Qualtrics/R Cookbook}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -178,5 +178,10 @@ There are a bunch of other functions within the qualtRics package to pull other 
 -   `survey_questions()` to pull information on each question in a survey. Similar to the `column_map` that is downloaded by `fetch_survey()` by default.
 
 ## Analysis
+
+Finally it's time to dig into the data! We'll cover a few different common analysis tasks here, including:
+
+1.  Likert Matrix questions
+1.  
 
 ## Advanced Tools
