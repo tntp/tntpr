@@ -2,9 +2,12 @@
 % Please edit documentation in R/tntp_cred.R
 \name{tntp_cred}
 \alias{tntp_cred}
+\alias{tntp_cred_list}
 \title{TNTP Credential Get/Set Command}
 \usage{
 tntp_cred(service, username = NULL, keyring = NULL, .set = FALSE)
+
+tntp_cred_list(service = NULL, keyring = NULL)
 }
 \arguments{
 \item{service}{The identifier for the credential you are pulling or setting}
@@ -20,9 +23,12 @@ A stored (or newly created) credential
 }
 \description{
 A wrapper around the \code{keyring} package for secure credential management.
-This command will attempt to get a key, and if no credential is found it
+
+\code{tntp_cred()} will attempt to get a key, and if no credential is found it
 will prompt you to add it (and then return it). You can also use this to
 just set (or overwrite) values by using the \code{.set} parameter.
+
+\code{tntp_cred_list()} will list all current credentials by service and username
 }
 \examples{
 \dontrun{

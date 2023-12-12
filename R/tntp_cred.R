@@ -1,9 +1,13 @@
 #' TNTP Credential Get/Set Command
 #'
+#' @description
 #' A wrapper around the `keyring` package for secure credential management.
-#' This command will attempt to get a key, and if no credential is found it
+#'
+#' `tntp_cred()` will attempt to get a key, and if no credential is found it
 #' will prompt you to add it (and then return it). You can also use this to
 #' just set (or overwrite) values by using the `.set` parameter.
+#'
+#' `tntp_cred_list()` will list all current credentials by service and username
 #'
 #' @md
 #'
@@ -42,11 +46,17 @@ tntp_cred <- function(service, username = NULL, keyring = NULL, .set = FALSE) {
       return(cred)
 
       # If no credential is found, ask if a user wants to create it
-    } else if(!isTRUE(utils::askYesNo(paste0("No credentials found for '", service,
-                                "'.\n\nDo you want to set credentials now?")))) {
+    } else {
+      cli::cli_inform(c("i" = "No credentials found for {.val {service}}",
+                        "i" = "To list all current credentials stop the script and run {.run tntpr::tntp_cred_list()}",
+                        "","Would you like to set new credentials for {.val {service}} now?"))
+
+      input <- utils::select.list(c("Yes","No"))
 
       # If not, end with an error
-      cli::cli_abort("No credentials found for {.val {service}}.")
+      if(input != "Yes") {
+        cli::cli_abort("No credentials found for {.val {service}}.")
+      }
     }
   }
 
@@ -57,4 +67,10 @@ tntp_cred <- function(service, username = NULL, keyring = NULL, .set = FALSE) {
   # Return the newly set value
   if(!.set) keyring::key_get(service, username, keyring)
 
+}
+
+#' @export
+#' @rdname tntp_cred
+tntp_cred_list <- function(service = NULL, keyring = NULL) {
+  keyring::key_list(service, keyring)
 }
