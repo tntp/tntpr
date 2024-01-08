@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 ```
 ## Introduction
 
-This vignette is designed to showcase best practices for setting up, pulling, and processing Qualtrics data in R. There are *many* different ways to accomplish these tasks, but we will lay out a recommended workflow that we belive to be the simplest and most flexible. This document will go through the following big ideas:
+This vignette is designed to showcase best practices for setting up, pulling, and processing Qualtrics data in R. There are *many* different ways to accomplish these tasks, but we will lay out a recommended workflow that we believe to be the simplest and most flexible. This document will go through the following big ideas:
 
 1.  **Setup:** Installing the necessary packages
 2.  **Building Surveys:** Best practices in Qualtrics for creating surveys in a way that will help you analyze efficiently
-3.  **Qualtrics Authentication: ** How to get an API token from Qualtrics and safely store it in R.
+3.  **Qualtrics Authentication:** How to get an API token from Qualtrics and safely store it in R.
 4.  **Getting Data:** How to use the `qualtRics` package to pull survey data.
 5.  **Analysis:** Some common methods of analysis, including helpful functions from `tntpr`
 6.  **Advanced Tools:** A brief overview of the `QualtricsInR` and `httr2` packages and how they can be used to automate even more in Qualtrics.
