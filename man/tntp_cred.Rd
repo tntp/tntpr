@@ -2,10 +2,19 @@
 % Please edit documentation in R/tntp_cred.R
 \name{tntp_cred}
 \alias{tntp_cred}
+\alias{tntp_cred_set}
 \alias{tntp_cred_list}
 \title{TNTP Credential Get/Set Command}
 \usage{
-tntp_cred(service, username = NULL, keyring = NULL, .set = FALSE)
+tntp_cred(service, username = NULL, keyring = NULL, prompt = NULL)
+
+tntp_cred_set(
+  service = NULL,
+  username = NULL,
+  keyring = NULL,
+  prompt = NULL,
+  overwrite = NA
+)
 
 tntp_cred_list(service = NULL, keyring = NULL)
 }
@@ -16,7 +25,9 @@ tntp_cred_list(service = NULL, keyring = NULL)
 
 \item{keyring}{OPTIONAL. Can be used to specify a specific keyring}
 
-\item{.set}{Logical. If \code{TRUE}, will prompt the user to set a credential and will not return a value. Essentially the same as \code{keyring::key_set()}.}
+\item{prompt}{OPTIONAL. What text should be displayed above the input box for the key while setting?}
+
+\item{overwrite}{OPTIONAL. By default, \code{tntp_cred_set()} will prompt if it finds a credential already saved. Set this to \code{TRUE} to overwrite without prompting or \code{FALSE} to throw an error if a current credential is found.}
 }
 \value{
 A stored (or newly created) credential
@@ -24,11 +35,14 @@ A stored (or newly created) credential
 \description{
 A wrapper around the \code{keyring} package for secure credential management.
 
-\code{tntp_cred()} will attempt to get a key, and if no credential is found it
-will prompt you to add it (and then return it). You can also use this to
-just set (or overwrite) values by using the \code{.set} parameter.
+\code{tntp_cred()} will attempt to get a credential, and if no credential is found
+it will prompt you to add it (and then return it).
 
-\code{tntp_cred_list()} will list all current credentials by service and username
+\code{tntp_cred_set()} will set a credential. By default it will prompt before
+overwriting any current credentials.
+
+\code{tntp_cred_list()} will list all current credentials by sorted by service
+and username.
 }
 \examples{
 \dontrun{
