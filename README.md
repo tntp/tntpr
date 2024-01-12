@@ -1,8 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-[![Travis-CI Build
-Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr)
+[![R-CMD-check](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+# tntpr <img src="man/figures/logo.png" align="right" />
 
 ## About
 
