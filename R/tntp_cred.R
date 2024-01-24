@@ -74,7 +74,7 @@ tntp_cred_set <- function(service = NULL, username = NULL, keyring = NULL, promp
 
   if(is.null(prompt)) prompt <- paste0("Enter credential for '", service, "': ")
 
-  # If overwrite is TRUE, skip to writing
+  # If overwrite is not TRUE, check for existing credential first
   if(!isTRUE(overwrite)) {
 
     # Check for existence of key by looking for an error in key_get()
@@ -88,12 +88,13 @@ tntp_cred_set <- function(service = NULL, username = NULL, keyring = NULL, promp
       if(isFALSE(overwrite)) cli::cli_abort(c("x" = "Credential already found for this service and username.",
                                              "i" = "To overwrite, run with parameter {.code overwrite = TRUE}"))
 
-      # If overwrite is anything else (NA), warn about duplicate and prompt to overwrite
+      # If overwrite is anything else (NULL), warn about duplicate and prompt to overwrite
       cli::cli_inform(c("i" = "Credential already found for this service and username. Overwrite?"))
-      if(select.list(c('Overwrite with new credential','Cancel')) == 'Cancel') cli::cli_abort("Credentials not updated")
+      if(utils::select.list(c('Overwrite with new credential','Cancel')) == 'Cancel') cli::cli_abort("Credentials not updated")
     }
   }
 
+  # Write credential
   keyring::key_set(service, username, keyring, prompt)
 
 }
