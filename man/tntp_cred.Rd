@@ -13,7 +13,7 @@ tntp_cred_set(
   username = NULL,
   keyring = NULL,
   prompt = NULL,
-  overwrite = NA
+  overwrite = NULL
 )
 
 tntp_cred_list(service = NULL, keyring = NULL)

@@ -19,7 +19,7 @@
 #' @param caption_align alignment of caption, defaults to "right"; also accepts "left" or "center"
 #' @param caption_color color of caption text
 #' @param caption_size size of caption text
-#' @importFrom ggplot2 '%+replace%'
+#' @importFrom ggplot2 %+replace%
 #' @export
 #' @rdname theme_tntp
 
