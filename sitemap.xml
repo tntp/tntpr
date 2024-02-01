@@ -31,6 +31,9 @@
     <loc>https://tntp.github.io/tntpr/reference/check_all_recode.html</loc>
   </url>
   <url>
+    <loc>https://tntp.github.io/tntpr/reference/choose_text_color.html</loc>
+  </url>
+  <url>
     <loc>https://tntp.github.io/tntpr/reference/colors_tntp.html</loc>
   </url>
   <url>
@@ -58,6 +61,9 @@
     <loc>https://tntp.github.io/tntpr/reference/figureN.html</loc>
   </url>
   <url>
+    <loc>https://tntp.github.io/tntpr/reference/get_usable_family.html</loc>
+  </url>
+  <url>
     <loc>https://tntp.github.io/tntpr/reference/header_tntp.html</loc>
   </url>
   <url>
@@ -65,6 +71,9 @@
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tntp.github.io/tntpr/reference/is_color.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/labelled_to_factors.html</loc>
@@ -77,6 +86,9 @@
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/palette_tntp_scales.html</loc>
+  </url>
+  <url>
+    <loc>https://tntp.github.io/tntpr/reference/parse_date.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/prop_matching.html</loc>
@@ -103,6 +115,9 @@
     <loc>https://tntp.github.io/tntpr/reference/show_in_excel.html</loc>
   </url>
   <url>
+    <loc>https://tntp.github.io/tntpr/reference/standardize_case.html</loc>
+  </url>
+  <url>
     <loc>https://tntp.github.io/tntpr/reference/tableN.html</loc>
   </url>
   <url>
@@ -116,6 +131,9 @@
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/tntp_colors.html</loc>
+  </url>
+  <url>
+    <loc>https://tntp.github.io/tntpr/reference/tntp_cred.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/tntp_palette.html</loc>

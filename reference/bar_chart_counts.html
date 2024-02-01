@@ -60,14 +60,14 @@ an N bar chart (uses position dodge from ggplot2).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bar_chart_counts</span><span class="op">(</span></span>
 <span>  <span class="va">df</span>,</span>
 <span>  <span class="va">var</span>,</span>
-<span>  <span class="va">group_var</span>,</span>
+<span>  group_var <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  labels <span class="op">=</span> <span class="st">"n"</span>,</span>
-<span>  var_color <span class="op">=</span> <span class="st">"medium_blue"</span>,</span>
-<span>  <span class="va">group_colors</span>,</span>
+<span>  var_color <span class="op">=</span> <span class="st">"green"</span>,</span>
+<span>  group_colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">var_label</span>,</span>
+<span>  var_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  font <span class="op">=</span> <span class="st">"Segoe UI"</span>,</span>
+<span>  font <span class="op">=</span> <span class="st">"Halyard Display"</span>,</span>
 <span>  font_size <span class="op">=</span> <span class="fl">12</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -91,7 +91,7 @@ an N bar chart (uses position dodge from ggplot2).</p>
 
 
 <dt>var_color</dt>
-<dd><p>color for non-grouped charts; set to medium_blue by default. For both this and <code>group_colors</code>, strings will be tried in <code>palette_tntp</code> automatically.  So <code>c("orange", "dark_blue")</code> will get you the official TNTP colors, while <code>c("orange", "blue")</code> will get you TNTP orange but generic blue.</p></dd>
+<dd><p>color for non-grouped charts; set to TNTP green by default. For both this and <code>group_colors</code>, strings will be tried in <code>tntp_colors</code> automatically.  So <code>c("red", "green")</code> will get you the official TNTP colors, while <code>c("red", "brown")</code> will get you base R red and blue.</p></dd>
 
 
 <dt>group_colors</dt>
@@ -122,31 +122,38 @@ an N bar chart (uses position dodge from ggplot2).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># all examples not run b/c of Travis CI failures</span></span></span>
-<span class="r-in"><span><span class="co"># failure due to not having Segoe UI font imported</span></span></span>
-<span class="r-in"><span><span class="co"># library(dplyr) # for %&gt;% pipe</span></span></span>
-<span class="r-in"><span><span class="co"># # An N bar chart by default</span></span></span>
-<span class="r-in"><span><span class="co"># mtcars %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#   bar_chart_counts(var     = cyl,</span></span></span>
-<span class="r-in"><span><span class="co">#                    title   = "Number of mtcars by cylinder")</span></span></span>
-<span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># # Use a grouping variable</span></span></span>
-<span class="r-in"><span><span class="co"># mtcars %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#   bar_chart_counts(var          = cyl,</span></span></span>
-<span class="r-in"><span><span class="co">#                    group_var    = vs,</span></span></span>
-<span class="r-in"><span><span class="co">#                    labels        = "pct",</span></span></span>
-<span class="r-in"><span><span class="co">#                    title        = "Percentage of V vs. Straight engines by # of cylinders")</span></span></span>
-<span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># # Change default color</span></span></span>
-<span class="r-in"><span><span class="co"># mtcars %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#   bar_chart_counts(var       = cyl,</span></span></span>
-<span class="r-in"><span><span class="co">#                    var_color = "orange",</span></span></span>
-<span class="r-in"><span><span class="co">#                    title     = "Number of mtcars by cylinder")</span></span></span>
-<span class="r-in"><span><span class="co"># # Specify color by group</span></span></span>
-<span class="r-in"><span><span class="co">#   bar_chart_counts(mtcars, am, cyl,</span></span></span>
-<span class="r-in"><span><span class="co">#                    group_colors = c("orange", "green", "dark_blue"),</span></span></span>
-<span class="r-in"><span><span class="co">#                    labels = "pct")</span></span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># An N bar chart by default</span></span></span>
+<span class="r-in"><span><span class="co"># All examples use font = "sans" to avoid triggering font warnings</span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">bar_chart_counts</span><span class="op">(</span>var   <span class="op">=</span> <span class="va">cyl</span>,</span></span>
+<span class="r-in"><span>                   title <span class="op">=</span> <span class="st">"Number of mtcars by cylinder"</span>,</span></span>
+<span class="r-in"><span>                   font  <span class="op">=</span> <span class="st">"sans"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bar_chart_counts-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use a grouping variable</span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">bar_chart_counts</span><span class="op">(</span>var       <span class="op">=</span> <span class="va">cyl</span>,</span></span>
+<span class="r-in"><span>                   group_var <span class="op">=</span> <span class="va">vs</span>,</span></span>
+<span class="r-in"><span>                   labels    <span class="op">=</span> <span class="st">"pct"</span>,</span></span>
+<span class="r-in"><span>                   title     <span class="op">=</span> <span class="st">"% of V vs. Straight engines by # of cylinders"</span>,</span></span>
+<span class="r-in"><span>                   font  <span class="op">=</span> <span class="st">"sans"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bar_chart_counts-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Change default color</span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">bar_chart_counts</span><span class="op">(</span>var       <span class="op">=</span> <span class="va">cyl</span>,</span></span>
+<span class="r-in"><span>                   var_color <span class="op">=</span> <span class="st">"orange"</span>,</span></span>
+<span class="r-in"><span>                   title     <span class="op">=</span> <span class="st">"Number of mtcars by cylinder"</span>,</span></span>
+<span class="r-in"><span>                   font  <span class="op">=</span> <span class="st">"sans"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bar_chart_counts-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify color by group</span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">bar_chart_counts</span><span class="op">(</span><span class="va">am</span>, <span class="va">cyl</span>,</span></span>
+<span class="r-in"><span>                   group_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"navy"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   labels <span class="op">=</span> <span class="st">"pct"</span>,</span></span>
+<span class="r-in"><span>                   font  <span class="op">=</span> <span class="st">"sans"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bar_chart_counts-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

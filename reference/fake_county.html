@@ -59,45 +59,120 @@
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A data frame with 39,339 rows and 38 variables:</p><dl>
-  \itemtiddouble: Teacher ID
-  \itemfake_datadouble: Record Is Simulated
-  \itemschool_yeardouble: School Year
-  \itemschool_codedouble: School Code
-  \itemschool_namecharacter: School Name
-  \itemt_maledouble: Teacher Is Male
-  \itemt_race_ethnicitydouble: Teacher Race/Ethnicity
-  \itemt_job_areadouble: Teacher Assignment Type
-  \itemt_salarydouble: Monthly Salary
-  \itemt_nbptsdouble: Teacher Has National Board Certification
-  \itemt_tenureddouble: Teacher Is Tenured
-  \itemt_experiencedouble: Years of Teaching Experience
-  \itemt_ftedouble: Teacher's FTE Status
-  \itemt_highest_degreedouble: Teacher's Highest Degree
-  \itemt_licensed_stemdouble: Teacher Is Licensed In STEM Field
-  \itemt_eval_obsdouble: Evaluation Summary Observation Score
-  \itemt_eval_growthdouble: Evaluation Summary Student Growth Score
-  \itemt_staydouble: Teacher in Same School in Following Year
-  \itemt_transferdouble: Teacher in Different School in Following Year
-  \itemt_leavedouble: Teacher Not Teaching in Fake County Schools in Following Year
-  \itemt_novicedouble: Teacher Is Novice First-Year Teacher
-  \itemt_new_hiredouble: Teacher Did Not Teach in Fake County in Prior Year
-  \itemsch_elemdouble: School Is Elementary School
-  \itemsch_middledouble: School Is Middle School
-  \itemsch_highdouble: School Is High School
-  \itemsch_alternativedouble: School Is Alternative School
-  \itemsch_regulardouble: School Is Regular School
-  \itemsch_title_1double: School Is Title 1 School
-  \itemsch_magnetdouble: School Is Magnet School
-  \itemsch_vocati~ldouble: School is Vocational School
-  \itemsch_regiondouble: School Region Code
-  \itemsch_calendar_typedouble: School Calendar Type
-  \itemsch_iep_pctdouble: School Special Education Student Share in 2012-15
-  \itemsch_minority_pctdouble: School Minority Student Share in 2012-15
-  \itemsch_frpl_pctdouble: School Free and Reduced Price Lunch Student Share in 2012-15
-  \itemsch_ela_avgdouble: School ELA Test Score Average in 2012-15 (in standard deviations)
-  \itemsch_math_avgdouble: School Math Test Score Average in 2012-15 (in standard deviations)
-  \itemsch_enrollment_2015double: School Enrollment in 2015
+    <p>A data frame with 39,339 rows and 38 variables:</p><dl><dt>tid</dt>
+<dd><p>double: Teacher ID</p></dd>
+
+  <dt>fake_data</dt>
+<dd><p>double: Record Is Simulated</p></dd>
+
+  <dt>school_year</dt>
+<dd><p>double: School Year</p></dd>
+
+  <dt>school_code</dt>
+<dd><p>double: School Code</p></dd>
+
+  <dt>school_name</dt>
+<dd><p>character: School Name</p></dd>
+
+  <dt>t_male</dt>
+<dd><p>double: Teacher Is Male</p></dd>
+
+  <dt>t_race_ethnicity</dt>
+<dd><p>double: Teacher Race/Ethnicity</p></dd>
+
+  <dt>t_job_area</dt>
+<dd><p>double: Teacher Assignment Type</p></dd>
+
+  <dt>t_salary</dt>
+<dd><p>double: Monthly Salary</p></dd>
+
+  <dt>t_nbpts</dt>
+<dd><p>double: Teacher Has National Board Certification</p></dd>
+
+  <dt>t_tenured</dt>
+<dd><p>double: Teacher Is Tenured</p></dd>
+
+  <dt>t_experience</dt>
+<dd><p>double: Years of Teaching Experience</p></dd>
+
+  <dt>t_fte</dt>
+<dd><p>double: Teacher's FTE Status</p></dd>
+
+  <dt>t_highest_degree</dt>
+<dd><p>double: Teacher's Highest Degree</p></dd>
+
+  <dt>t_licensed_stem</dt>
+<dd><p>double: Teacher Is Licensed In STEM Field</p></dd>
+
+  <dt>t_eval_obs</dt>
+<dd><p>double: Evaluation Summary Observation Score</p></dd>
+
+  <dt>t_eval_growth</dt>
+<dd><p>double: Evaluation Summary Student Growth Score</p></dd>
+
+  <dt>t_stay</dt>
+<dd><p>double: Teacher in Same School in Following Year</p></dd>
+
+  <dt>t_transfer</dt>
+<dd><p>double: Teacher in Different School in Following Year</p></dd>
+
+  <dt>t_leave</dt>
+<dd><p>double: Teacher Not Teaching in Fake County Schools in Following Year</p></dd>
+
+  <dt>t_novice</dt>
+<dd><p>double: Teacher Is Novice First-Year Teacher</p></dd>
+
+  <dt>t_new_hire</dt>
+<dd><p>double: Teacher Did Not Teach in Fake County in Prior Year</p></dd>
+
+  <dt>sch_elem</dt>
+<dd><p>double: School Is Elementary School</p></dd>
+
+  <dt>sch_middle</dt>
+<dd><p>double: School Is Middle School</p></dd>
+
+  <dt>sch_high</dt>
+<dd><p>double: School Is High School</p></dd>
+
+  <dt>sch_alternative</dt>
+<dd><p>double: School Is Alternative School</p></dd>
+
+  <dt>sch_regular</dt>
+<dd><p>double: School Is Regular School</p></dd>
+
+  <dt>sch_title_1</dt>
+<dd><p>double: School Is Title 1 School</p></dd>
+
+  <dt>sch_magnet</dt>
+<dd><p>double: School Is Magnet School</p></dd>
+
+  <dt>sch_vocational</dt>
+<dd><p>double: School is Vocational School</p></dd>
+
+  <dt>sch_region</dt>
+<dd><p>double: School Region Code</p></dd>
+
+  <dt>sch_calendar_type</dt>
+<dd><p>double: School Calendar Type</p></dd>
+
+  <dt>sch_iep_pct</dt>
+<dd><p>double: School Special Education Student Share in 2012-15</p></dd>
+
+  <dt>sch_minority_pct</dt>
+<dd><p>double: School Minority Student Share in 2012-15</p></dd>
+
+  <dt>sch_frpl_pct</dt>
+<dd><p>double: School Free and Reduced Price Lunch Student Share in 2012-15</p></dd>
+
+  <dt>sch_ela_avg</dt>
+<dd><p>double: School ELA Test Score Average in 2012-15 (in standard deviations)</p></dd>
+
+  <dt>sch_math_avg</dt>
+<dd><p>double: School Math Test Score Average in 2012-15 (in standard deviations)</p></dd>
+
+  <dt>sch_enroll_2015</dt>
+<dd><p>double: School Enrollment in 2015</p></dd>
+
 
 </dl></div>
     <div class="section level2">
