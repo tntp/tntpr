@@ -73,8 +73,8 @@ theme_tntp <- function(show_legend_title = TRUE,
       legend.key = ggplot2::element_blank(), # Remove border from legend boxes
       panel.grid.major = ggplot2::element_line(color = grid_color),
       panel.grid.minor = ggplot2::element_blank(), # Remove minor gridlines entirely
-      axis.line.y = ggplot2::element_line(color = "black", size = 0.25),
-      axis.line.x = ggplot2::element_line(color = "black", size = 0.25),
+      axis.line.y = ggplot2::element_line(color = "black", linewidth = 0.25),
+      axis.line.x = ggplot2::element_line(color = "black", linewidth = 0.25),
       plot.title = ggplot2::element_text(
         hjust = title_h_just,
         colour = title_color,

@@ -4,7 +4,6 @@ library(testthat)
 library(janitor)
 library(labelled)
 library(dplyr)
-context("survey utilities")
 
 
 x <- data.frame( # 4th person didn't respond at all
@@ -165,8 +164,10 @@ test_that("bad inputs error or warn appropriately", {
     "input vectors should only have values of 0, 1, and NA; run check_all_recode() before calling this function",
     fixed = TRUE
   )
-  expect_warning(mtcars %>% check_all_recode(cyl:carb),
-    "column 1 has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.",
-    fixed = TRUE
-  )
+  mtcars %>%
+    check_all_recode(cyl:disp) |>
+    expect_warning("column 1 has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.",
+                   fixed = TRUE) |>
+    expect_warning("column 2 has multiple values besides NA; not sure which is the question text.  Guessing this an \"Other (please specify)\" column.",
+                   fixed = TRUE)
 })

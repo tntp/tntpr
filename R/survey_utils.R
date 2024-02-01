@@ -106,7 +106,7 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL) {
 #'   check_all_recode(contains("q1"))
 #'
 check_all_recode <- function(dat, ..., set_labels = TRUE) {
-  dat <- dplyr::as_data_frame(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
+  dat <- tibble::as_tibble(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
   original_order <- names(dat)
   cols_of_interest <- dat %>%
     dplyr::select(...) %>%
@@ -128,7 +128,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE) {
   cols_of_interest[responded, ][!is.na(cols_of_interest[responded, ])] <- 1
   cols_of_interest[responded, ][is.na(cols_of_interest[responded, ])] <- 0
   # convert columns to numeric
-  cols_of_interest <- lapply(cols_of_interest, as.numeric) %>% dplyr::as_data_frame()
+  cols_of_interest <- lapply(cols_of_interest, as.numeric) %>% as.data.frame()
 
   # restore labels
   if (set_labels) {

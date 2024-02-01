@@ -1,0 +1,51 @@
+test_that("tntp_colors returns duplicated colors", {
+  expect_equal(tntp_colors("navy", "navy"), c(tntp_colors("navy"), tntp_colors("navy")))
+})
+
+test_that("tntp_colors returns colors in the correct order", {
+  expect_equal(tntp_colors("navy", "mint"), rev(tntp_colors("mint", "navy")))
+})
+
+test_that("tntp_colors and tntp_palette return an unnamed vector when run with arguments", {
+  expect_equal(tntp_colors("navy"), tntp_colors("navy") |> unname())
+  expect_equal(tntp_colors("navy", "mint"), tntp_colors("navy", "mint") |> unname())
+  expect_equal(tntp_palette("likert_4"), tntp_palette("likert_4") |> unname())
+})
+
+test_that("tntp_colors returns named vector when run empty", {
+  expect_equal(length(names(tntp_colors())), length(tntp_colors()))
+})
+
+test_that("tntp_colors returns no duplicates when run empty", {
+  expect_equal(unname(tntp_colors()), unique(tntp_colors()))
+})
+
+test_that("tntp_colors and tntp_palette raise an error for unmatched colors or palettes", {
+  expect_error(tntp_colors("notacolor"), "No match")
+  expect_error(show_tntp_colors("notacolor"), "No match")
+  expect_error(tntp_palette("notapalette"), "No TNTP palette found")
+  expect_error(show_tntp_palette("notapalette"), "No match")
+})
+
+test_that("choose_text_color works as expected for very light and dark colors", {
+  expect_equal(choose_text_color("#111111"), "white")
+  expect_equal(choose_text_color("#EEEEEE"), "black")
+})
+
+test_that("is_color recognizes common words and hex values", {
+  expect_equal(is_color("blue"), TRUE)
+  expect_equal(is_color("#FFFFFF"), TRUE)
+  expect_equal(is_color("notacolor"), FALSE)
+  expect_equal(is_color("#BAD10"), FALSE)
+})
+
+test_that("tntp_palette reverse works as expected", {
+  expect_equal(rev(tntp_palette()), tntp_palette(reverse = TRUE))
+})
+
+test_that("show_tntp_colors and show_tntp_palette parameter validation is working", {
+  expect_warning(show_tntp_colors(labels = "yes"), "Invalid")
+  expect_warning(show_tntp_colors(borders = "notacolor"), "Invalid")
+  expect_error(show_tntp_palette(pattern = FALSE), "No palettes")
+  expect_error(show_tntp_colors(pattern = FALSE), "No colors")
+})

@@ -24,10 +24,8 @@ Imports:
     janitor,
     keyring,
     labelled,
-    lazyeval,
     lubridate (>= 1.7.4),
     magrittr (>= 1.5),
-    plyr,
     purrr (>= 0.3.3),
     readr,
     rlang,
@@ -35,7 +33,8 @@ Imports:
     scales,
     stringr (>= 1.4.0),
     tibble (>= 2.1.3),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    tidyselect
 Suggests: 
     devtools,
     knitr,
@@ -45,7 +44,8 @@ Suggests:
     ggridges,
     ggalt,
     forcats,
-    qualtRics
+    qualtRics,
+    haven
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
