@@ -92,7 +92,7 @@ The `family` parameter lets you set the text font family. This changes the font 
 
 You will need to manually import additional fonts, including the Halyard fonts, using the `extrafont` package before they are available to R. Follow these steps to import fonts:
 
-1. Download the Halyard Display Fonts in .ttf forms from the [Data Analytics Sharepoint](https://tntp.sharepoint.com/sites/DataAnalytics/Shared%20Documents/Forms/AllItems.aspx?viewid=ed2700f4%2D6b5b%2D4d23%2Da5c5%2D5567e8a5ccce) under the "Fonts" category.
+1. Download the Halyard Display Fonts in .ttf forms from the [Data Analytics Sharepoint](https://tntp.sharepoint.com/sites/DataAnalytics/Shared%20Documents/Forms/AllItems.aspx) under the "Fonts" category.
 2. Open the fonts folder on your laptop (Settings -> Personalization -> Fonts) and drag and drop the Halyard Fonts there to install them on your computer.
 3. In RStudio, install the `extrafont` package with `install.packages('extrafont)`.
 4. Import fonts into the extrafont database with `extrafont::font_import()`. This only needs to be done once. The process is long, and can be significantly shortened by only importing the Halyard fonts using `extrafont::font_import(pattern = 'Halyard')`.

@@ -4,12 +4,12 @@
 \alias{date_to_sy}
 \title{Convert a date value into its school year.}
 \usage{
-date_to_sy(date_var, last_day_of_sy)
+date_to_sy(date_var, last_day_of_sy = NULL)
 }
 \arguments{
-\item{date_var}{the date to convert.}
+\item{date_var}{the date to convert. Can be a \code{Date} object or a string in the form 'YYYY-MM-DD' or 'MM/DD/YYYY'}
 
-\item{last_day_of_sy}{the cutoff date, after which a date is considered part of the following school year.  The year of this argument does not matter.}
+\item{last_day_of_sy}{the cutoff date, after which a date is considered part of the following school year. The year of this argument does not matter. Defaults (noisily) to July 1st.}
 }
 \value{
 Returns a character vector in the format of "2013 - 2014"

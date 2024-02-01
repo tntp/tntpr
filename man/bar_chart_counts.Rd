@@ -7,14 +7,14 @@
 bar_chart_counts(
   df,
   var,
-  group_var,
+  group_var = NULL,
   labels = "n",
-  var_color = "medium_blue",
-  group_colors,
+  var_color = "green",
+  group_colors = NULL,
   title = NULL,
-  var_label,
+  var_label = NULL,
   digits = 1,
-  font = "Segoe UI",
+  font = "Halyard Display",
   font_size = 12
 )
 }
@@ -27,7 +27,7 @@ bar_chart_counts(
 
 \item{labels}{should labels show the count (\code{"n"}) or the percentage (\code{"pct"})?}
 
-\item{var_color}{color for non-grouped charts; set to medium_blue by default. For both this and \code{group_colors}, strings will be tried in \code{palette_tntp} automatically.  So \code{c("orange", "dark_blue")} will get you the official TNTP colors, while \code{c("orange", "blue")} will get you TNTP orange but generic blue.}
+\item{var_color}{color for non-grouped charts; set to TNTP green by default. For both this and \code{group_colors}, strings will be tried in \code{tntp_colors} automatically.  So \code{c("red", "green")} will get you the official TNTP colors, while \code{c("red", "brown")} will get you base R red and blue.}
 
 \item{group_colors}{character vector of group colors, if a specific palette is desired}
 
@@ -47,28 +47,32 @@ an N bar chart (uses position dodge from ggplot2).
 }
 \examples{
 
-# all examples not run b/c of Travis CI failures
-# failure due to not having Segoe UI font imported
-# library(dplyr) # for \%>\% pipe
-# # An N bar chart by default
-# mtcars \%>\%
-#   bar_chart_counts(var     = cyl,
-#                    title   = "Number of mtcars by cylinder")
-#
-# # Use a grouping variable
-# mtcars \%>\%
-#   bar_chart_counts(var          = cyl,
-#                    group_var    = vs,
-#                    labels        = "pct",
-#                    title        = "Percentage of V vs. Straight engines by # of cylinders")
-#
-# # Change default color
-# mtcars \%>\%
-#   bar_chart_counts(var       = cyl,
-#                    var_color = "orange",
-#                    title     = "Number of mtcars by cylinder")
-# # Specify color by group
-#   bar_chart_counts(mtcars, am, cyl,
-#                    group_colors = c("orange", "green", "dark_blue"),
-#                    labels = "pct")
+# An N bar chart by default
+# All examples use font = "sans" to avoid triggering font warnings
+mtcars |>
+  bar_chart_counts(var   = cyl,
+                   title = "Number of mtcars by cylinder",
+                   font  = "sans")
+
+# Use a grouping variable
+mtcars |>
+  bar_chart_counts(var       = cyl,
+                   group_var = vs,
+                   labels    = "pct",
+                   title     = "\% of V vs. Straight engines by # of cylinders",
+                   font  = "sans")
+
+# Change default color
+mtcars |>
+  bar_chart_counts(var       = cyl,
+                   var_color = "orange",
+                   title     = "Number of mtcars by cylinder",
+                   font  = "sans")
+
+# Specify color by group
+mtcars |>
+  bar_chart_counts(am, cyl,
+                   group_colors = c("orange", "green", "navy"),
+                   labels = "pct",
+                   font  = "sans")
 }

@@ -92,9 +92,9 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
   ret <- ret + ggplot2::theme(legend.key = ggplot2::element_blank())
 
   if (inherits(grid, "character") | grid == TRUE) {
-    ret <- ret + ggplot2::theme(panel.grid = ggplot2::element_line(color = grid_col, size = 0.2))
-    ret <- ret + ggplot2::theme(panel.grid.major = ggplot2::element_line(color = grid_col, size = 0.2))
-    ret <- ret + ggplot2::theme(panel.grid.minor = ggplot2::element_line(color = grid_col, size = 0.15))
+    ret <- ret + ggplot2::theme(panel.grid = ggplot2::element_line(color = grid_col, linewidth = 0.2))
+    ret <- ret + ggplot2::theme(panel.grid.major = ggplot2::element_line(color = grid_col, linewidth = 0.2))
+    ret <- ret + ggplot2::theme(panel.grid.minor = ggplot2::element_line(color = grid_col, linewidth = 0.15))
 
     if (inherits(grid, "character")) {
       if (regexpr("X", grid)[1] < 0) ret <- ret + ggplot2::theme(panel.grid.major.x = ggplot2::element_blank())
@@ -123,22 +123,22 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
   }
 
   if (inherits(axis, "character") | axis == TRUE) {
-    ret <- ret + ggplot2::theme(axis.line = ggplot2::element_line(color = "#2b2b2b", size = 0.15))
+    ret <- ret + ggplot2::theme(axis.line = ggplot2::element_line(color = "#2b2b2b", linewidth = 0.15))
     if (inherits(axis, "character")) {
       axis <- tolower(axis)
       if (regexpr("x", axis)[1] < 0) {
         ret <- ret + ggplot2::theme(axis.line.x = ggplot2::element_blank())
       } else {
-        ret <- ret + ggplot2::theme(axis.line.x = ggplot2::element_line(color = axis_col, size = 0.15))
+        ret <- ret + ggplot2::theme(axis.line.x = ggplot2::element_line(color = axis_col, linewidth = 0.15))
       }
       if (regexpr("y", axis)[1] < 0) {
         ret <- ret + ggplot2::theme(axis.line.y = ggplot2::element_blank())
       } else {
-        ret <- ret + ggplot2::theme(axis.line.y = ggplot2::element_line(color = axis_col, size = 0.15))
+        ret <- ret + ggplot2::theme(axis.line.y = ggplot2::element_line(color = axis_col, linewidth = 0.15))
       }
     } else {
-      ret <- ret + ggplot2::theme(axis.line.x = ggplot2::element_line(color = axis_col, size = 0.15))
-      ret <- ret + ggplot2::theme(axis.line.y = ggplot2::element_line(color = axis_col, size = 0.15))
+      ret <- ret + ggplot2::theme(axis.line.x = ggplot2::element_line(color = axis_col, linewidth = 0.15))
+      ret <- ret + ggplot2::theme(axis.line.y = ggplot2::element_line(color = axis_col, linewidth = 0.15))
     }
   } else {
     ret <- ret + ggplot2::theme(axis.line = ggplot2::element_blank())
@@ -149,9 +149,9 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
     ret <- ret + ggplot2::theme(axis.ticks.x = ggplot2::element_blank())
     ret <- ret + ggplot2::theme(axis.ticks.y = ggplot2::element_blank())
   } else {
-    ret <- ret + ggplot2::theme(axis.ticks = ggplot2::element_line(size = 0.15))
-    ret <- ret + ggplot2::theme(axis.ticks.x = ggplot2::element_line(size = 0.15))
-    ret <- ret + ggplot2::theme(axis.ticks.y = ggplot2::element_line(size = 0.15))
+    ret <- ret + ggplot2::theme(axis.ticks = ggplot2::element_line(linewidth = 0.15))
+    ret <- ret + ggplot2::theme(axis.ticks.x = ggplot2::element_line(linewidth = 0.15))
+    ret <- ret + ggplot2::theme(axis.ticks.y = ggplot2::element_line(linewidth = 0.15))
     ret <- ret + ggplot2::theme(axis.ticks.length = grid::unit(5, "pt"))
   }
 

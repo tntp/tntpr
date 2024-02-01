@@ -4,12 +4,14 @@
 \alias{factorize_df}
 \title{Convert all character vectors containing a set of values in a data.frame to factors.}
 \usage{
-factorize_df(dat, lvls)
+factorize_df(dat, lvls, ignore.case = NULL)
 }
 \arguments{
 \item{dat}{data.frame with some factor variables stored as characters.}
 
 \item{lvls}{The factor levels in your variable(s), in order.  If you have a question whose possible responses are a subset of another question's, don't use this function; manipulate the specific columns with \code{dplyr::mutate_at}.}
+
+\item{ignore.case}{Logical. If TRUE, will match without checking case, using the capitalization from the \code{lvls} parameter for the final output. If not provided, the function will provide a warning if it detects columns that would match without checking case but will NOT coerce them.}
 }
 \value{
 data.frame with factorization completed in place.
@@ -20,15 +22,12 @@ This function examines each column in a data.frame; when it finds a column compo
 This is an alternative to calling \code{dplyr::mutate_at} with \code{factor()} and identifying the specific variables you want to transform, if you have several repeated sets of responses.
 }
 \examples{
-library(dplyr)
-mtcars \%>\%
-  dplyr::mutate(agr = rep(c("Somewhat agree", "Strongly disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-                        "Somewhat agree", "Strongly agree"))
+teacher_survey |>
+  factorize_df(lvls = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
+                        "Somewhat Agree", "Agree", "Strongly Agree"))
 
 # prints warning due to case mismatches:
-mtcars \%>\%
-  dplyr::mutate(agr = rep(c("Somewhat Agree", "Strongly Disagree"), 16)) \%>\%
-  factorize_df(lvls = c("Strongly disagree", "Somewhat disagree",
-                        "Somewhat agree", "Strongly agree"))
+teacher_survey |>
+  factorize_df(lvls = c("Strongly disagree", "Disagree", "Somewhat disagree",
+                        "Somewhat agree", "Agree", "Strongly agree"))
 }

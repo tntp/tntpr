@@ -10,3 +10,11 @@ An in-house TNTP R package. Includes tools for data manipulation,
 analysis, and reporting, including making TNTP-themed charts and documents.
 By and for TNTP data-using staff, though available to the broader public.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tntp/tntpr}
+  \item \url{https://tntp.github.io/tntpr/}
+}
+
+}
