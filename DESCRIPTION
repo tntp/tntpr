@@ -22,6 +22,7 @@ Imports:
     grDevices,
     grid,
     janitor,
+    keyring,
     labelled,
     lazyeval,
     lubridate (>= 1.7.4),
@@ -43,10 +44,11 @@ Suggests:
     usethis,
     ggridges,
     ggalt,
-    forcats
+    forcats,
+    qualtRics
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 Config/testthat/edition: 3
