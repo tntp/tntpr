@@ -95,6 +95,7 @@
 <ul>
 <li>TNTP brand colors and palettes with the <code><a href="reference/tntp_colors.html">tntp_colors()</a></code> and <code><a href="reference/tntp_palette.html">tntp_palette()</a></code> functions</li>
 <li>A TNTP ggplot2 theme using brand fonts (<code><a href="reference/tntp_style.html">tntp_style()</a></code>)</li>
+<li>The <code><a href="reference/tntp_cred.html">tntp_cred()</a></code> functions for securely managing credentials (passwords, API keys, etc.) in R.</li>
 <li>TNTP-themed RMarkdown templates, for starting a new analysis with a shell that can already generate a TNTP-themed .docx report</li>
 <li>Functions for initializing a new repository or project folder with TNTP-standard directories and documentation</li>
 <li>Survey analysis tools such as <code><a href="reference/factorize_df.html">factorize_df()</a></code>, <code><a href="reference/recode_to_binary.html">recode_to_binary()</a></code>, and functions for dealing with check-all style questions</li>
@@ -114,7 +115,9 @@
 <p>Once installed, you load it like any other package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tntp/tntpr" class="external-link">tntpr</a></span><span class="op">)</span></span></code></pre></div>
-<p>To update <code>tntpr</code>, you’ll need to unload it (or start a fresh R session) and then run the <code>install_github('tntp/tntpr')</code> command again.</p>
+<p>To update <code>tntpr</code>, you’ll need to first unload it (or start a fresh R session). You can then run the code above below.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tntpr</span><span class="fu">::</span><span class="fu"><a href="reference/update_tntpr.html">update_tntpr</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="feature-requests-and-bug-reports">Feature Requests and Bug Reports<a class="anchor" aria-label="anchor" href="#feature-requests-and-bug-reports"></a>
