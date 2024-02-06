@@ -1,9 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- [![Travis-CI Build
-Status](https://travis-ci.org/tntp/tntpr.svg?branch=master)](https://travis-ci.org/tntp/tntpr) 
-&#10;# tntpr <img src="man/figures/logo.png" align="right" />
-&#10;Removed above - doesn't seem to link to anything?  -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+<a href="https://www.tntp.org" target="_blank">
+<img src="man/figures/logo.png" width="70" height="70"
+alt="TNTP logo" /> </a>
+
+# tntpr
 
 ## About
 
@@ -19,6 +25,8 @@ Some of the highlights of the package include:
 - TNTP brand colors and palettes with the `tntp_colors()` and
   `tntp_palette()` functions
 - A TNTP ggplot2 theme using brand fonts (`tntp_style()`)
+- The `tntp_cred()` functions for securely managing credentials
+  (passwords, API keys, etc.) in R.
 - TNTP-themed RMarkdown templates, for starting a new analysis with a
   shell that can already generate a TNTP-themed .docx report
 - Functions for initializing a new repository or project folder with
@@ -54,8 +62,12 @@ Once installed, you load it like any other package.
 library(tntpr)
 ```
 
-To update `tntpr`, you’ll need to unload it (or start a fresh R session)
-and then run the `install_github('tntp/tntpr')` command again.
+To update `tntpr`, you’ll need to first unload it (or start a fresh R
+session). You can then run the code above below.
+
+``` r
+tntpr::update_tntpr()
+```
 
 ## Feature Requests and Bug Reports
 
