@@ -1,7 +1,7 @@
 Type: Package
 Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
-Version: 0.1.1
+Version: 0.2.1
 Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb],
     Dustin Pashouwer [ctb], Kate Mullan [ctb], Shane Orr [ctb], Sam Talcott [ctb]
 Maintainer: Dustin Pashouwer <dustin.pashouwer@tntp.org>
