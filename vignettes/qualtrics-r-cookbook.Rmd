@@ -75,10 +75,7 @@ Once your survey is built and ready to go, you'll want to get data from it (well
 
 ## Qualtrics Authentication
 
-This section will cover:
-1.  Getting a Qualtrics API Token
-1.  Storing your token securely in R
-1.  Accessing your token in R
+To get R to communicate with the Qualtrics API, you'll need to get an API Token from your Qualtrics account, and then securely store (and access) it from your script.
 
 ### Qualtrics API Token
 
@@ -98,49 +95,37 @@ Your API Token should be treated and protected like a password. Just like you wo
 api_token <- 'abcdefghijklmnopqrstuvwxyz'
 ```
 
-Instead we're going to save our token in a local file called `.Renviron` (which lives in your home directory and is not synced by Github, Bitbucket, or Sharepoint), and then pull it in from there.
+Instead we're going to save our token in our local operating system's credential manager and then have the script automatically pull it from there. We'll do this using the `tntp_cred()` function from `tntpr`, which is built around the [`keyring` package](https://keyring.r-lib.org/index.html).
 
-The qualtRics package provides an automated way to do this saving. Note that you should run the script below only one time and from the Console. **DON'T put it in your analysis script(s)** (otherwise you're defeating the whole point):
-
-```{r, eval = FALSE}
-# Run this ONCE from the console to save your credentials
-qualtrics_api_credentials(
-  api_key = "YOUR KEY HERE",
-  base_url = "tntp.co1.qualtrics.com",
-  install = TRUE
-)
+Start by making a call to `tntp_cred()` at the top of your script and saving the value for authentication use later:
+```{r, eval=FALSE}
+q_key <- tntp_cred('QUALTRICS_TOKEN')
 ```
 
-### Accessing Credentials in R
+*Note: Using the same name for the credential across different scripts will make your life easier, so we recommend "QUALTRICS_TOKEN" for this credential, and the basic format "SYSTEM_TYPE" for other credentials.*
 
-Once you've saved your credentials, you'll need to restart R (either close and re-open RStudio or run `.rs.restartR()`) and then you should be able to access your credentials using the `Sys.getenv()` command:
-
-```{r, eval = FALSE}
-Sys.getenv('QUALTRICS_API_KEY')
-Sys.getenv('QUALTRICS_BASE_URL')
-```
-
-From now on, these environmental variables will be available every time you open R. You can use this same process to store other tokens or passwords:
-
-```{r, eval = FALSE}
-# Open the .Renviron file
-usethis::edit_r_environ()
-
-# Add any values you want to the file in the format below and then save the file
-# MY_KEY_NAME = 'keyvalue'
-
-# Restart R / RStudio
-
-# Access variables from the .Renviron file
-my_key <- Sys.getenv('MY_KEY_NAME')
-```
+The first time you run your script, the function will notify you that it can't find the specified credential and ask if you want to save it now. Select "Yes", and then paste your API key into the prompt box to save it. Now that the credential is saved, calling `tntp_cred('QUALTRICS_TOKEN')` from any script on your computer will pull that value in automatically. If you need to update your token, use `tntp_cred_set('QUALTRICS_TOKEN')` to overwrite it.
 
 Congrats! You've now securely saved your Qualtrics credentials, and you're ready to start pulling down survey data!
 
 ## Getting Data
 
+### Set your Qualtrics authentication
+
+The `qualtRics` package will temporarily store your credentials for use in all of its functions with the `qualtrics_api_credentials()` function. Call this at the top of your script (with your securely stored key) before using any of the other `qualtRics` functions:
+```{r, eval = FALSE}
+q_key <- tntp_cred('QUALTRICS_TOKEN')
+
+# Authenticate for this session
+qualtrics_api_credentials(
+  api_key = q_key,
+  base_url = "tntp.co1.qualtrics.com"
+)
+```
+
 ### Survey ID
-In addition to your survey data, you'll need the survey ID for the survey you are trying to pull. This ID will be in the form "SV_**********", and the easiest way to get it is by navigating to the survey in your browser and copying it from the URL bar:
+In addition to your authentication key, you'll need the survey ID for the survey you are trying to pull. This ID will be in the form "SV_**********", and the easiest way to get it is by navigating to the survey in your browser and copying it from the URL bar:
+
 ![](qr-survey_id.png "Survey ID in URL bar")
 
 You can also pull down all surveys you have access to using the `all_surveys()` function from `qualtRics`, and then filter that by name:
@@ -154,16 +139,15 @@ surveys |>
 Your survey ID is *not* a secret, so you can happily keep that value hard-coded at the top of your script
 
 ### Pulling Survey Data
-Now that you have your authentication details saved in `.Renviron` and your survey id ready to go, it's time to pull a survey!
+Now that you're authenticated and have your survey id ready to go, it's time to pull a survey!
 
 ```{r, eval = FALSE}
 survey_id <- 'SV_dbwpKPZ8Cw0CcEC'
-survey <- fetch_survey(survey_id, force_request = TRUE)
+survey <- fetch_survey(survey_id)
 ```
 
-It's worth noting a few of the useful optional arguments in `fetch_survey()` (one of which we used above):
+It's worth noting a few of the useful optional arguments in `fetch_survey()`:
 
--   `force_request = TRUE` by default qualtRics saves the survey data for the session and will use that data when you call `fetch_survey()` again for the same id. This argument forces a fresh pull, which is useful when you're testing a script or if you want to make sure you have the most up-to-date data.
 -   `start_date` and `end_date` can be used to limit the responses pulled by `RecordedDate`
 -   `include_metadata = NA` or `include_embedded = NA` can be used to exclude metadata or embedded data columns. You can also run them with a character vector to include only certain columns: `include_metadata = c('RecipientEmail', 'RecordedDate')`
 -   `label = FALSE` Enabling this option will pull recode values instead of text (e.g. `6` instead of `Strongly Agree`)
