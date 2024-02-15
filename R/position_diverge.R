@@ -74,9 +74,9 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::Position,
 
                              # Make data negative if it's before the break
                              lvls_p <- levels(data$fill)[1:params$break_after]
-                             data$y    <- ifelse(data$fill %in% lvls_p, data$y,    -data$y)
-                             data$ymax <- ifelse(data$fill %in% lvls_p, data$ymax, -data$ymax)
-                             data$ymin <- ifelse(data$fill %in% lvls_p, data$ymin, -data$ymin)
+                             if('y'    %in% names(data)) data$y    <- ifelse(data$fill %in% lvls_p, data$y,    -data$y)
+                             if('ymax' %in% names(data)) data$ymax <- ifelse(data$fill %in% lvls_p, data$ymax, -data$ymax)
+                             if('ymin' %in% names(data)) data$ymin <- ifelse(data$fill %in% lvls_p, data$ymin, -data$ymin)
 
                              flip_data(data, params$flipped_aes)
                            },
