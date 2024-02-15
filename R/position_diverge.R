@@ -13,6 +13,42 @@
 #' @importFrom rlang `%||%`
 #' @export
 #'
+#' @examples \dontrun{
+#' library(ggplot2)
+#'
+#' # Example data
+#' test_df <- tibble::tribble(
+#'   ~q,  ~response,  ~prop,
+#'   'a', 'Yes',      0.25,
+#'   'a', 'Mostly',   0.25,
+#'   'a', 'Somewhat', 0.25,
+#'   'a', 'Not Yet',  0.25,
+#'   'b', 'Yes',      0.4,
+#'   'b', 'Mostly',   0.3,
+#'   'b', 'Somewhat', 0.2,
+#'   'b', 'Not Yet',  0.1
+#'   ) |>
+#'   dplyr::mutate(
+#'     response = forcats::fct_inorder(response),
+#'     q = forcats::fct_inorder(q)
+#'   )
+#'
+#' # Default diverging (splits in half)
+#' test_df |>
+#'   ggplot(aes(q, prop, fill = response)) +
+#'   geom_col(position = position_diverge()) +
+#'   geom_text(aes(label = prop), position = position_diverge(vjust = 0.5)) +
+#'   geom_hline(yintercept = 0) +
+#'   tntp_style()
+#'
+#' # break_after paramater
+#' test_df |>
+#'   ggplot(aes(q, prop, fill = response)) +
+#'   geom_col(position = position_diverge(break_after = 'Somewhat')) +
+#'   geom_hline(yintercept = 0) +
+#'   tntp_style()
+#' }
+#'
 position_diverge <- function(vjust = 1, break_after = NULL) {
   ggplot2::ggproto(NULL, PositionDiverge, vjust = vjust, break_after = break_after)
 }
