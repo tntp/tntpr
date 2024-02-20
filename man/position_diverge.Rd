@@ -42,16 +42,20 @@ test_df <- tibble::tribble(
 test_df |>
   ggplot(aes(q, prop, fill = response)) +
   geom_col(position = position_diverge()) +
-  geom_text(aes(label = prop), position = position_diverge(vjust = 0.5)) +
+  geom_text(aes(label = scales::percent(prop,)), position = position_diverge(vjust = 0.5)) +
   geom_hline(yintercept = 0) +
-  tntp_style()
+  tntp_style() +
+  # Adjust axis labels to be positive on both sides
+  scale_y_continuous(labels = ~scales::percent(abs(.)))
 
 # break_after paramater
 test_df |>
   ggplot(aes(q, prop, fill = response)) +
-  geom_col(position = position_diverge(break_after = 'Somewhat')) +
+  geom_col(position = position_diverge(break_after = 'Yes')) +
   geom_hline(yintercept = 0) +
-  tntp_style()
+  tntp_style() +
+  # Adjust axis labels to be positive on both sides
+  scale_y_continuous(labels = ~scales::percent(abs(.)))
 }
 
 }
