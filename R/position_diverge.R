@@ -67,12 +67,15 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::Position,
                              flipped_aes <- ggplot2::has_flipped_aes(data)
                              data <- ggplot2::flip_data(data, flipped_aes)
 
-                             # Check for a valid factor provided to fill
-                             if(!is.factor(data$fill)) {
-                               cli::cli_abort(c("x" = "`position_diverge()` requires a provided fill aesthetic that is a factor"))
+                             # Pull lvls
+                             if(is.factor(data$fill)) {
+                               lvls <- levels(data$fill)
+                             } else if(!is.null(data$fill)){
+                               lvls <- sort(unique(data$fill))
+                               cli::cli_inform(c("i" = "For best results, use a factor for the {.var fill} aesthetic with `position_diverge()`"))
+                             } else {
+                               cli::cli_abort(c("x" = "`position_diverge()` requires a provided {.var fill} aesthetic."))
                              }
-
-                             lvls <- levels(data$fill)
 
                              # Use length over 2 if break_after isn't provided
                              break_after <- self$break_after %||% floor(length(lvls) / 2)
@@ -93,7 +96,8 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::Position,
                                fill = self$fill,
                                vjust = self$vjust,
                                flipped_aes = flipped_aes,
-                               break_after = break_after
+                               break_after = break_after,
+                               lvls = lvls
                              )
                            },
 
@@ -113,7 +117,7 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::Position,
                              data[missing, vars] <- NA
 
                              # Make data negative if it's before the break
-                             lvls_p <- levels(data$fill)[1:params$break_after]
+                             lvls_p <- params$lvls[1:params$break_after]
                              if('y'    %in% names(data)) data$y    <- ifelse(data$fill %in% lvls_p, data$y,    -data$y)
                              if('ymax' %in% names(data)) data$ymax <- ifelse(data$fill %in% lvls_p, data$ymax, -data$ymax)
                              if('ymin' %in% names(data)) data$ymin <- ifelse(data$fill %in% lvls_p, data$ymin, -data$ymin)
