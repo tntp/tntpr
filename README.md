@@ -5,7 +5,7 @@
 [![R-CMD-check](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-<a href="https://www.tntp.org" target="_blank">
+<a href="https://tntp.org" target="_blank">
 <img src="man/figures/logo.png" width="70" height="70"
 alt="TNTP logo" /> </a>
 
