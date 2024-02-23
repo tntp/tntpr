@@ -20,7 +20,10 @@
 #' @param prompt OPTIONAL. What text should be displayed above the input box for the key while setting?
 #' @param overwrite OPTIONAL. By default, `tntp_cred_set()` will prompt if it finds a credential already saved. Set this to `TRUE` to overwrite without prompting or `FALSE` to throw an error if a current credential is found.
 #'
-#' @return A stored (or newly created) credential
+#' @returns
+#' *  `tntp_cred()` returns a stored (or newly created) credential
+#' *  `tntp_cred_set()` returns nothing
+#' *  `tntp_cred_list()` returns a 2-column data frame of services and usernames
 #' @export
 #'
 #' @examples
@@ -106,5 +109,8 @@ tntp_cred_list <- function(service = NULL, keyring = NULL) {
   list <- keyring::key_list(service, keyring)
 
   # Sort by service, then username
-  list[order(list$service, list$username),]
+  sorted <- list[order(list$service, list$username),]
+
+  # Fix row names
+  row.names(sorted) <- 1:nrow(sorted)
 }

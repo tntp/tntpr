@@ -4,7 +4,7 @@
 #' internal function that calls standard formatting options for the Data Memo RMarkdown template
 #' moved here to keep the actual memo template cleaner and easier to use
 #'
-#' @return nothing
+#' @returns nothing
 #' @export
 #' @examples
 #' # not run: set_data_memo_formatting()
@@ -25,7 +25,7 @@ set_data_memo_formatting <- function() {
 #' Create sequential figure numbers
 #'
 #' @param x character string description of the figure
-#' @return nothing
+#' @returns nothing
 #' @export
 #' @examples
 #' # not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
@@ -47,7 +47,7 @@ figureN <- local({
 #'
 #' @param x character string description of the figure
 #'
-#' @return nothing
+#' @returns nothing
 #' @export
 #' @examples
 #' # not run, in RMarkdown doc: `r tableN("Distribution of cars by cylinder count")`

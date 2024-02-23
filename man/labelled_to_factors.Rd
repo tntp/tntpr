@@ -10,7 +10,7 @@ labelled_to_factors(labels_df)
 \item{labels_df}{a data.frame containing some columns of class labelled}
 }
 \value{
-Returns a data.frame.
+Returns a data.frame, the same size as \code{labels_df}
 }
 \description{
 Deprecated. Use the \code{as_factor()} function from the \code{haven} package instead for the same functionality.

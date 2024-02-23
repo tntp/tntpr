@@ -10,7 +10,7 @@ parse_date(date)
 \item{date}{a character or Date vector to parse}
 }
 \value{
-Date vector
+a Date vector, the same length as `date`
 }
 \description{
 Helper function for date_to_sy. Returns a date object as is, or noisily attempts to parse

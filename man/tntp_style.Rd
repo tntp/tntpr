@@ -40,6 +40,9 @@ tntp_style(
 
 \item{title_align, legend_align, caption_align}{Alignment of title, legend, and caption. Accepts \code{left}, \code{right}, or \code{center}.}
 }
+\value{
+a ggplot theme object.
+}
 \description{
 A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
 }

@@ -46,10 +46,15 @@ Some of the highlights of the package include:
 
 ## Installing the `tntpr` package
 
-`tntpr` is not currently on CRAN, so you’ll need to install this package
-from its GitHub repository using `devtools`. If you do not have the
-`devtools` package installed, you will have to run the first line in the
-code below as well:
+You can install `tntpr` from CRAN as follows:
+
+``` r
+install.packages('tntpr')
+```
+
+You can also install this package from its GitHub repository using
+`devtools`. If you do not have the `devtools` package installed, you
+will have to run the first line in the code below as well:
 
 ``` r
 # install.packages('devtools')

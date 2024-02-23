@@ -6,6 +6,16 @@
 \usage{
 update_tntpr()
 }
+\value{
+nothing
+}
 \description{
 Re-install the tntpr package from GitHub.
+}
+\examples{
+\dontrun{
+# Run without loading tntpr first
+tntpr::update_tntpr()
+}
+
 }

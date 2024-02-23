@@ -15,6 +15,7 @@
 #' @param font font for chart text; Segoe UI by default
 #' @param font_size size for chart text; set to 12 by default
 #' @export
+#' @returns A ggplot object
 #' @examples
 #'
 #' # An N bar chart by default

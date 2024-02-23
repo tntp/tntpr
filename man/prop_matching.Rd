@@ -14,7 +14,7 @@ prop_matching(vec, valid_strings, ignore.case = FALSE)
 \item{ignore.case}{if TRUE, ignores case in matching}
 }
 \value{
-numeric proportion between 0 and 1.
+a numeric proportion between 0 and 1.
 }
 \description{
 Calculate the percent of non-missing values in a character vector containing the values of interest.  This is a helper function for factorize_df().

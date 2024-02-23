@@ -17,6 +17,9 @@ appear in the subfolder's README.md file.}
 \item{analyst_name}{the name(s) of the analysts currently working on the subfolder
 project.  This will appear in the subfolder's README.md file.}
 }
+\value{
+nothing
+}
 \description{
 A repository might represent a region, like "Anywhere City",
 or a major client or contract, like "Midwestern Charter Network.
@@ -33,8 +36,7 @@ with this function.
 \examples{
 # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 # and a new project analysis subfolder is needed within that repo:
-## not run
-# setup_subdirectory("ela_access",
-# "Equitable Access to Grade-Level ELA",
-# "Dustin Pashouwer and Sam Firke")
+\dontrun{
+setup_subdirectory("ela_access",
+}
 }

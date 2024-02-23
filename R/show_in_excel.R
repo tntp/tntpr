@@ -1,9 +1,15 @@
-#' Write datatable to temp excel file and open it.
+#' Write Dataframe to a temp excel file and open it.
 #'
 #' @param .data Dataframe
 #'
 #' @export
-#' @return Returns a data.frame.
+#' @returns nothing
+#' @examples
+#' \dontrun{
+#' # View a data set in excel
+#' mtcars |> show_in_excel()
+#' }
+#'
 #'
 show_in_excel <- function(.data) {
   tmp <- paste0(tempfile(), ".csv")

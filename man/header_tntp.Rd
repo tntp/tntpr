@@ -6,6 +6,15 @@
 \usage{
 header_tntp()
 }
+\value{
+nothing
+}
 \description{
-Call this function to insert the header from 'TNTP R Shell.R'.
+Call this function inside a .R file to insert the standard TNTP header.
+}
+\examples{
+\dontrun{
+header_tntp()
+}
+
 }

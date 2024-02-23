@@ -41,6 +41,9 @@ bar_chart_counts(
 
 \item{font_size}{size for chart text; set to 12 by default}
 }
+\value{
+A ggplot object
+}
 \description{
 Takes a user supplied data frame and turns the designated column into
 an N bar chart (uses position dodge from ggplot2).

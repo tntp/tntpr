@@ -30,7 +30,11 @@ tntp_cred_list(service = NULL, keyring = NULL)
 \item{overwrite}{OPTIONAL. By default, \code{tntp_cred_set()} will prompt if it finds a credential already saved. Set this to \code{TRUE} to overwrite without prompting or \code{FALSE} to throw an error if a current credential is found.}
 }
 \value{
-A stored (or newly created) credential
+\itemize{
+\item \code{tntp_cred()} returns a stored (or newly created) credential
+\item \code{tntp_cred_set()} returns nothing
+\item \code{tntp_cred_list()} returns a 2-column data frame of services and usernames
+}
 }
 \description{
 A wrapper around the \code{keyring} package for secure credential management.

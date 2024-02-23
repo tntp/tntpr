@@ -9,7 +9,7 @@
 #' @param silent logical. If TRUE doesn't raise a warning if the font family is unavailable
 #' @param default_family defaults to "sans", but can be set to another fallback family.
 #'
-#' @return a character of a usable font family
+#' @returns a character of a usable font family
 get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 
   # Get a platform-independent list of usable fonts
@@ -64,6 +64,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #' @param title_align,legend_align,caption_align Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`.
 #'
 #' @export
+#' @returns a ggplot theme object.
 #'
 #' @examples \dontrun{
 #' library(tntpr)

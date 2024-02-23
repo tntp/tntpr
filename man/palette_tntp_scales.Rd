@@ -9,7 +9,15 @@ palette_tntp_scales(palette = palette_names)
 \arguments{
 \item{palette}{the palette}
 }
+\value{
+a character vector
+}
 \description{
 This function has been superseded by \code{\link[=tntp_palette]{tntp_palette()}} which includes the new
 brand colors.
+}
+\examples{
+\dontrun{
+colors <- palette_tntp_scales('likert_5pt')
+}
 }

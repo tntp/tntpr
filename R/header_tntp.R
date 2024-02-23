@@ -1,8 +1,14 @@
 #' Insert header_script_tntp.
 #'
-#' Call this function to insert the header from 'TNTP R Shell.R'.
+#' Call this function inside a .R file to insert the standard TNTP header.
 #'
 #' @export
+#' @returns nothing
+#' @examples
+#' \dontrun{
+#' header_tntp()
+#' }
+#'
 header_tntp <- function() {
   rstudioapi::insertText("# TITLE: [enter]
 # AUTHOR(S): [enter]

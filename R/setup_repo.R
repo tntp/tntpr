@@ -18,13 +18,15 @@
 #' project.  This will appear in the subfolder's README.md file.
 #'
 #' @export
+#' @returns nothing
 #' @examples
 #' # After the user has created a repository "Anywhere City" and set their working
 #' # directory to that folder:
-#' ## not run
-#' # setup_repo("ela_access",
-#' # "Access to Grade-Level ELA Content",
-#' # "Dustin Pashouwer and Sam Firke")
+#' \dontrun{
+#' setup_repo("ela_access",
+#'   proj_name = "Access to Grade-Level ELA Content",
+#'   analyst_name = "Dustin Pashouwer and Sam Firke")
+#' }
 setup_repo <- function(subfolder, proj_name, analyst_name) {
   if (missing(subfolder)) {
     stop("Specify the subfolder name of the project within this repo you'll be working on")
@@ -89,13 +91,16 @@ setup_repo <- function(subfolder, proj_name, analyst_name) {
 #' project.  This will appear in the subfolder's README.md file.
 
 #' @export
+#' @returns nothing
 #' @examples
 #' # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 #' # and a new project analysis subfolder is needed within that repo:
-#' ## not run
-#' # setup_subdirectory("ela_access",
-#' # "Equitable Access to Grade-Level ELA",
-#' # "Dustin Pashouwer and Sam Firke")
+#' \dontrun{
+#' setup_subdirectory("ela_access",
+#   proj_name = "Equitable Access to Grade-Level ELA",
+#   analyst_name = "Dustin Pashouwer and Sam Firke")
+#' }
+
 setup_subdirectory <- function(subfolder, proj_name, analyst_name) {
   if (missing(proj_name)) {
     stop("Specify the full name of the subfolder project as it should appear in the README")

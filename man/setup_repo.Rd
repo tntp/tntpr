@@ -17,6 +17,9 @@ appear in the subfolder's README.md file.  E.g., "Access to Grade-Level ELA Cont
 \item{analyst_name}{the name(s) of the analysts currently working on the subfolder
 project.  This will appear in the subfolder's README.md file.}
 }
+\value{
+nothing
+}
 \description{
 Create a new repository on Bitbucket, then set your working
 directory to that folder and run this function.  It will set up the main
@@ -30,8 +33,9 @@ used to create a README.Md file.
 \examples{
 # After the user has created a repository "Anywhere City" and set their working
 # directory to that folder:
-## not run
-# setup_repo("ela_access",
-# "Access to Grade-Level ELA Content",
-# "Dustin Pashouwer and Sam Firke")
+\dontrun{
+setup_repo("ela_access",
+  proj_name = "Access to Grade-Level ELA Content",
+  analyst_name = "Dustin Pashouwer and Sam Firke")
+}
 }

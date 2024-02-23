@@ -13,6 +13,8 @@ date_to_sy(date_var, last_day_of_sy = NULL)
 }
 \value{
 Returns a character vector in the format of "2013 - 2014"
+
+A character vector the same length as \code{date_var}
 }
 \description{
 Checks to see if a date is past the user-specified cutoff point for delineating school years, then maps to the appropriate year.

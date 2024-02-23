@@ -9,7 +9,7 @@
 #' @param to_match a character vector with the strings that should be put in the first level of the factor.  Defaults to "strongly agree" and "agree" but can be overwritten.
 #' @param label_matched what should be the factor label of values that match the strings specified in \code{to_match}?  Defaults to "Selected"
 #' @param label_unmatched what should be the factor label of values that don't match the strings specified in \code{to_match}?  Defaults to "Not selected".
-#' @return a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.
+#' @returns a factor variable (for nicer ordering in calls to \code{janitor::tabyl}) with values mapped to the two levels.
 #' @export
 #' @examples
 #' agreement <- c(
@@ -87,7 +87,7 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL) {
 #' @param dat a data.frame with survey data
 #' @param ... unquoted variable names containing the answer choices.  Can be specified as a range, i.e., \code{q1_1:q1_5} or using other helper functions from \code{dplyr::select()}.
 #' @param set_labels should the label attribute of the columns be over-written with the column text?  Allow this to be TRUE unless there are currently label attributes you don't wish to overwrite.
-#' @return Returns the original data.frame with the specified column range updated, and with label attributes on the questions.
+#' @returns the original data.frame with the specified column range updated, and with label attributes on the questions.
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
@@ -155,7 +155,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE) {
 #'
 #' @param dat a data.frame with survey data
 #' @param ... unquoted column names containing the range of the answer choices.  Can be specified individually, as a range, i.e., \code{q1_1:q1_5}, or using other helper functions from \code{dplyr::select()}.
-#' @return Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)  This is an object of class \code{tabyl} which means that you can call \code{janitor::adorn_pct_formatting()} and it will format the correct columns.
+#' @returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)  This is an object of class \code{tabyl} which means that you can call \code{janitor::adorn_pct_formatting()} and it will format the correct columns.
 #' @export
 #' @examples
 #' x <- data.frame( # 4th person didn't respond at all
