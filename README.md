@@ -67,13 +67,6 @@ Once installed, you load it like any other package.
 library(tntpr)
 ```
 
-To update `tntpr`, you’ll need to first unload it (or start a fresh R
-session). You can then run the code above below.
-
-``` r
-tntpr::update_tntpr()
-```
-
 ## Feature Requests and Bug Reports
 
 Have a data problem you think `tntpr` could help with? Find a bug while

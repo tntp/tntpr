@@ -86,6 +86,10 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
                             grid_col = "grey93", grid = TRUE,
                             axis_col = "#cccccc", axis = FALSE, ticks = FALSE) {
   .Deprecated()
+
+  # Check for a usable font family
+  base_family <- get_usable_family(base_family)
+
   ret <- ggplot2::theme_minimal(base_family = base_family, base_size = base_size)
 
   ret <- ret + ggplot2::theme(legend.background = ggplot2::element_blank())
@@ -216,6 +220,13 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
 #'
 #' @param family,face,size,color font family name, face, size and color
 #' @export
+#' @returns nothing
+#' @examples
+#' \dontrun{
+#' # Update text geoms to use Arial font
+#' update_geom_font_defaults(family = 'Arial')
+#' }
+#'
 update_geom_font_defaults <- function(family = "Segoe UI", face = "plain", size = 3.5,
                                       color = "#2b2b2b") {
   ggplot2::update_geom_defaults("text", list(family = family, face = face, size = size, color = color))
@@ -224,34 +235,44 @@ update_geom_font_defaults <- function(family = "Segoe UI", face = "plain", size 
 
 #' Import Segoe UI Condensed font for use in charts
 #'
-#' There is an option `tntpr.loadfonts` which -- if set to `TRUE` -- will
-#' call `extrafont::loadfonts()` to register non-core fonts with R PDF & PostScript
-#' devices. If you are running under Windows, the package calls the same function
-#' to register non-core fonts with the Windows graphics device.
+#' This function will check if Segoe UI is already accessible in R and if not
+#' it will attempt to import it using the `extrafont` package
 #'
 #' @md
-#' @note This will take care of ensuring PDF/PostScript usage. The location of the
-#'   font directory is displayed after the base import is complete. It is highly
-#'   recommended that you install them on your system the same way you would any
-#'   other font you wish to use in other programs.
 #' @export
+#' @returns nothing
+#' @examples
+#' \dontrun{
+#' import_segoe_ui()
+#' }
+#'
 import_segoe_ui <- function() {
-  segoe_font_dir <- system.file("fonts", "segoe-ui", package = "tntpr")
 
-  suppressWarnings(suppressMessages(extrafont::font_import(segoe_font_dir, prompt = FALSE)))
+  # Check if it's already installed
+  fnt <- extrafont::fonttable()
+  if (any(grepl("Segoe UI", fnt$FamilyName))) {
+    cli::cli_inform("Segoe UI is already installed and accessible in R")
+    return()
+  }
 
-  message(
-    sprintf(
-      "You will likely need to install these fonts on your system as well.\n\nYou can find them in [%s]",
-      segoe_font_dir
-    )
-  )
+  # Try loading fonts
+  extrafont::loadfonts(quiet = TRUE)
+  fnt <- extrafont::fonttable()
+  if (any(grepl("Segoe UI", fnt$FamilyName))) {
+    cli::cli_inform("Segoe UI is now accessible in R")
+    return()
+  }
+
+  # Try importing fonts
+  cli::cli_inform("Segoe UI not found in R fonts. Importing all system fonts...")
+  extrafont::font_import(prompt = FALSE)
+  extrafont::loadfonts(quiet = TRUE)
+
+  # Check again for Segoe
+  fnt <- extrafont::fonttable()
+  if (any(grepl("Segoe UI", fnt$FamilyName))) {
+    cli::cli_inform(c("v" = "Segoe UI successfully imported."))
+  } else {
+    cli::cli_inform(c("x" = "Segoe UI could not be imported from your system."))
+  }
 }
-
-#' @rdname SegoeUI
-#' @md
-#' @title Segoe UI font name R variable aliases
-#' @description `font_an` == "`Segoe UI`"
-#' @format length 1 character vector
-#' @export
-font_se <- "Segoe UI"

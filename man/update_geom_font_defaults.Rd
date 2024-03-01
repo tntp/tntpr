@@ -14,6 +14,16 @@ update_geom_font_defaults(
 \arguments{
 \item{family, face, size, color}{font family name, face, size and color}
 }
+\value{
+nothing
+}
 \description{
 Updates [ggplot2::geom_label] and [ggplot2::geom_text] font defaults
+}
+\examples{
+\dontrun{
+# Update text geoms to use Arial font
+update_geom_font_defaults(family = 'Arial')
+}
+
 }

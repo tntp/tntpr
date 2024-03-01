@@ -33,7 +33,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
     if(!silent) {
       cli::cli_warn(c(
         "x" = "Family {.val {family}} is not registered in the font table.",
-        "v" = "Using standard {.val sans} font instead",
+        "v" = "Using default {.val {default_family}} font instead",
         "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
         "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
       ))
