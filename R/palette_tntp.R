@@ -60,9 +60,8 @@ palette_tntp <- function(...) {
 #' @md
 #'
 #' @examples
-#' \dontrun{
 #' tntp_colors()
-#' }
+#'
 #' @export
 "colors_tntp"
 colors_tntp <- c( # TNTPPalette
@@ -112,9 +111,8 @@ colors_tntp <- c( # TNTPPalette
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_colors()
-#' }
+#'
 #' @export
 "colors_tntp_palette"
 colors_tntp_palette <-
@@ -144,9 +142,8 @@ colors_tntp_palette <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_palette('likert_6')
-#' }
+#'
 #' @export
 "colors_tntp_likert"
 colors_tntp_likert <-
@@ -167,9 +164,8 @@ colors_tntp_likert <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_palette('bg_6')
-#' }
+#'
 #' @export
 "colors_tntp_likert_orange_to_green"
 colors_tntp_likert_orange_to_green <-
@@ -191,9 +187,8 @@ colors_tntp_likert_orange_to_green <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' show_tntp_palette()
-#' }
+#'
 #' @export
 "palette_names"
 palette_names <- c(
@@ -216,9 +211,8 @@ palette_names <- c(
 #'
 #' @returns a character vector
 #' @examples
-#' \dontrun{
-#' colors <- palette_tntp_scales('likert_5pt')
-#' }
+#' colors <- tntp_palette("likert_5")
+#'
 #' @export
 #'
 palette_tntp_scales <- function(palette = palette_names) {
@@ -257,7 +251,6 @@ palette_tntp_scales <- function(palette = palette_names) {
 #' @returns a ggplot Scale object
 #'
 #' @examples
-#' \dontrun{
 #' library(ggplot2)
 #' library(dplyr)
 #'
@@ -268,7 +261,6 @@ palette_tntp_scales <- function(palette = palette_names) {
 #' ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
 #'   geom_col() +
 #'   scale_fill_manual(values = tntp_palette())
-#' }
 #'
 scale_colour_tntp <- function(palette = palette_names,
                               ...) {

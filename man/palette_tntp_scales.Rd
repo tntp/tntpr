@@ -17,7 +17,6 @@ This function has been superseded by \code{\link[=tntp_palette]{tntp_palette()}}
 brand colors.
 }
 \examples{
-\dontrun{
-colors <- palette_tntp_scales('likert_5pt')
-}
+colors <- tntp_palette("likert_5")
+
 }

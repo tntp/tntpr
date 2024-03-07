@@ -66,8 +66,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #' @export
 #' @returns a ggplot theme object.
 #'
-#' @examples \dontrun{
-#' library(tntpr)
+#' @examples
 #' library(dplyr)
 #' library(ggplot2)
 #'
@@ -82,7 +81,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'     x = "Years of Experience",
 #'     caption = "Data from the Fake County Data Set"
 #'   ) +
-#'   tntp_style(show_axis_titles = "x")
+#'   tntp_style(family = 'sans', show_axis_titles = "x")
 #'
 #' frpl_experience <- fake_county |>
 #'   mutate(frpl_bucket = cut(sch_frpl_pct,
@@ -104,8 +103,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'   )) +
 #'   geom_text(aes(label = label),
 #'     nudge_y = -0.25, vjust = 1,
-#'     color = "white", size = 5, lineheight = 1,
-#'     family = "Segoe UI"
+#'     color = "white", size = 5, lineheight = 1
 #'   ) +
 #'   labs(
 #'     title = "High Poverty Schools have Less Experienced Teachers",
@@ -113,10 +111,10 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'   ) +
 #'   scale_y_continuous(breaks = seq(0, 20, 4)) +
 #'   tntp_style(
+#'     family = 'sans',
 #'     base_size = 20,
 #'     show_axis_titles = "x"
 #'   )
-#' }
 #'
 tntp_style <- function(family = "Halyard Display",
                        header_family = family,

@@ -10,11 +10,13 @@ tableN(x)
 \item{x}{character string description of the figure}
 }
 \value{
-nothing
+An atomic character vector prepended with a Table number
 }
 \description{
 Create sequential table numbers
 }
 \examples{
-# not run, in RMarkdown doc: `r tableN("Distribution of cars by cylinder count")`
+
+tableN("Distribution of cars by cylinder count")
+# Inline RMarkdown code: `r tableN("Distribution of cars by cylinder count")`
 }

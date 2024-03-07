@@ -22,6 +22,7 @@
 #' @importFrom ggplot2 %+replace%
 #' @export
 #' @rdname theme_tntp
+#' @returns a ggplot theme object.
 
 theme_tntp <- function(show_legend_title = TRUE,
                        base_size = 12,

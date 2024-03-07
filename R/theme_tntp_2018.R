@@ -38,7 +38,8 @@
 #' @param axis add x or y axes? `TRUE`, `FALSE`, "`xy`"
 #' @param ticks ticks if `TRUE` add ticks
 #' @export
-#' @examples \dontrun{
+#' @returns a ggplot theme object.
+#' @examples
 #' library(ggplot2)
 #' library(dplyr)
 #'
@@ -51,12 +52,9 @@
 #'     subtitle = "A plot that is only useful for demonstration purposes",
 #'     caption = "Brought to you by the letter 'g'"
 #'   ) +
-#'   theme_ipsum()
+#'   tntp_style(family = 'sans')
 #'
 #' # seminal bar chart
-#'
-#' update_geom_font_defaults()
-#'
 #' count(mpg, class) %>%
 #'   ggplot(aes(class, n)) +
 #'   geom_col() +
@@ -67,9 +65,9 @@
 #'     subtitle = "A plot that is only useful for demonstration purposes",
 #'     caption = "Brought to you by the letter 'g'"
 #'   ) +
-#'   theme_ipsum(grid = "Y") +
+#'   tntp_style(family = 'sans') +
 #'   theme(axis.text.y = element_blank())
-#' }
+
 theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
                             plot_title_family = base_family, plot_title_size = 18,
                             plot_title_face = "bold", plot_title_margin = 10,
@@ -221,11 +219,9 @@ theme_tntp_2018 <- function(base_family = "Segoe UI", base_size = 11.5,
 #' @param family,face,size,color font family name, face, size and color
 #' @export
 #' @returns nothing
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # Update text geoms to use Arial font
 #' update_geom_font_defaults(family = 'Arial')
-#' }
 #'
 update_geom_font_defaults <- function(family = "Segoe UI", face = "plain", size = 3.5,
                                       color = "#2b2b2b") {
@@ -241,10 +237,8 @@ update_geom_font_defaults <- function(family = "Segoe UI", face = "plain", size 
 #' @md
 #' @export
 #' @returns nothing
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' import_segoe_ui()
-#' }
 #'
 import_segoe_ui <- function() {
 

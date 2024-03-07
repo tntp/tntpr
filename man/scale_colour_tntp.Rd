@@ -26,7 +26,6 @@ These functions are deprecated. Please use
 \code{scale_fill_manual(values = tntp_palette(palette_name))} instead.
 }
 \examples{
-\dontrun{
 library(ggplot2)
 library(dplyr)
 
@@ -37,6 +36,5 @@ x <- mtcars \%>\%
 ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
   geom_col() +
   scale_fill_manual(values = tntp_palette())
-}
 
 }

@@ -34,9 +34,11 @@ and create the RProject and .gitignore files.  Add subsequent analysis project f
 with this function.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 # and a new project analysis subfolder is needed within that repo:
-\dontrun{
 setup_subdirectory("ela_access",
-}
+  proj_name = "Equitable Access to Grade-Level ELA",
+  analyst_name = "Dustin Pashouwer and Sam Firke")
+\dontshow{\}) # examplesIf}
 }

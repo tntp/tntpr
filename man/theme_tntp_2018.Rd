@@ -67,6 +67,9 @@ theme_tntp_2018(
 
 \item{ticks}{ticks if \code{TRUE} add ticks}
 }
+\value{
+a ggplot theme object.
+}
 \description{
 This theme is superseded by \code{\link[=tntp_style]{tntp_style()}}.
 }
@@ -92,7 +95,6 @@ to register non-core fonts with the Windows graphics device.
 }
 
 \examples{
-\dontrun{
 library(ggplot2)
 library(dplyr)
 
@@ -105,12 +107,9 @@ ggplot(mtcars, aes(mpg, wt)) +
     subtitle = "A plot that is only useful for demonstration purposes",
     caption = "Brought to you by the letter 'g'"
   ) +
-  theme_ipsum()
+  tntp_style(family = 'sans')
 
 # seminal bar chart
-
-update_geom_font_defaults()
-
 count(mpg, class) \%>\%
   ggplot(aes(class, n)) +
   geom_col() +
@@ -121,7 +120,6 @@ count(mpg, class) \%>\%
     subtitle = "A plot that is only useful for demonstration purposes",
     caption = "Brought to you by the letter 'g'"
   ) +
-  theme_ipsum(grid = "Y") +
+  tntp_style(family = 'sans') +
   theme(axis.text.y = element_blank())
-}
 }

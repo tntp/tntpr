@@ -31,11 +31,11 @@ that project and the analyst(s) working on it.  These latter two values are
 used to create a README.Md file.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # After the user has created a repository "Anywhere City" and set their working
 # directory to that folder:
-\dontrun{
 setup_repo("ela_access",
   proj_name = "Access to Grade-Level ELA Content",
   analyst_name = "Dustin Pashouwer and Sam Firke")
-}
+\dontshow{\}) # examplesIf}
 }

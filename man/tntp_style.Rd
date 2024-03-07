@@ -47,8 +47,6 @@ a ggplot theme object.
 A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
 }
 \examples{
-\dontrun{
-library(tntpr)
 library(dplyr)
 library(ggplot2)
 
@@ -63,7 +61,7 @@ fake_county |>
     x = "Years of Experience",
     caption = "Data from the Fake County Data Set"
   ) +
-  tntp_style(show_axis_titles = "x")
+  tntp_style(family = 'sans', show_axis_titles = "x")
 
 frpl_experience <- fake_county |>
   mutate(frpl_bucket = cut(sch_frpl_pct,
@@ -85,8 +83,7 @@ frpl_experience |>
   )) +
   geom_text(aes(label = label),
     nudge_y = -0.25, vjust = 1,
-    color = "white", size = 5, lineheight = 1,
-    family = "Segoe UI"
+    color = "white", size = 5, lineheight = 1
   ) +
   labs(
     title = "High Poverty Schools have Less Experienced Teachers",
@@ -94,9 +91,9 @@ frpl_experience |>
   ) +
   scale_y_continuous(breaks = seq(0, 20, 4)) +
   tntp_style(
+    family = 'sans',
     base_size = 20,
     show_axis_titles = "x"
   )
-}
 
 }

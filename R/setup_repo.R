@@ -19,14 +19,12 @@
 #'
 #' @export
 #' @returns nothing
-#' @examples
+#' @examplesIf interactive()
 #' # After the user has created a repository "Anywhere City" and set their working
 #' # directory to that folder:
-#' \dontrun{
 #' setup_repo("ela_access",
 #'   proj_name = "Access to Grade-Level ELA Content",
 #'   analyst_name = "Dustin Pashouwer and Sam Firke")
-#' }
 setup_repo <- function(subfolder, proj_name, analyst_name) {
   if (missing(subfolder)) {
     stop("Specify the subfolder name of the project within this repo you'll be working on")
@@ -92,14 +90,12 @@ setup_repo <- function(subfolder, proj_name, analyst_name) {
 
 #' @export
 #' @returns nothing
-#' @examples
+#' @examplesIf interactive()
 #' # When there's already a repository "Anywhere City" with an RProject and a .gitignore
 #' # and a new project analysis subfolder is needed within that repo:
-#' \dontrun{
 #' setup_subdirectory("ela_access",
-#   proj_name = "Equitable Access to Grade-Level ELA",
-#   analyst_name = "Dustin Pashouwer and Sam Firke")
-#' }
+#'   proj_name = "Equitable Access to Grade-Level ELA",
+#'   analyst_name = "Dustin Pashouwer and Sam Firke")
 
 setup_subdirectory <- function(subfolder, proj_name, analyst_name) {
   if (missing(proj_name)) {

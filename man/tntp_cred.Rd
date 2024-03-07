@@ -49,7 +49,7 @@ overwriting any current credentials.
 and username.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive() && rlang::is_installed("qualtRics")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Using tntp_cred() with qualtRics
 library(qualtRics)
 
@@ -60,6 +60,5 @@ qualtrics_api_credentials(api_key = qualtrics_token,
 
 # To overwrite your Qualtrics credential
 tntp_cred("QUALTRICS_TOKEN", .set = TRUE)
-}
-
+\dontshow{\}) # examplesIf}
 }
