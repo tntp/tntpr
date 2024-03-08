@@ -2,10 +2,11 @@
 
 This is a resubmission. In this version I have:
 
-*   Clarified "TNTP" in the CMD check comments below
-*   Added documentatoin of values to theme_tntp.Rd and theme_tntp_2018.Rd
+*   Clarified "TNTP" in the R CMD check comments below
+*   Added documentation of values to theme_tntp.Rd and theme_tntp_2018.Rd
 *   Removed \dontrun{} tags from all examples
 *   Fixed the error in setup_subdirectory.Rd example code
+*   Adjusted the code for setup_repo() and setup_subdirectory() so they no longer include a default path of getwd()
 
 A comment on the original submission said: 
 

@@ -4,9 +4,11 @@
 \alias{setup_repo}
 \title{Initialize a new repository, and a single subfolder, TNTP style.}
 \usage{
-setup_repo(subfolder, proj_name, analyst_name)
+setup_repo(project_path, subfolder, proj_name, analyst_name)
 }
 \arguments{
+\item{project_path}{the path to the main project directory. To use the current project, use `project_path = here::here()`.}
+
 \item{subfolder}{a character vector containing the concise name of a project subfolder.
 E.g., if the repository is the name of a city "Anywhere City", a project subfolder might be
 "ela_access" or "aps_talent_landscape").}
@@ -31,11 +33,9 @@ that project and the analyst(s) working on it.  These latter two values are
 used to create a README.Md file.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# After the user has created a repository "Anywhere City" and set their working
-# directory to that folder:
-setup_repo("ela_access",
-  proj_name = "Access to Grade-Level ELA Content",
-  analyst_name = "Dustin Pashouwer and Sam Firke")
-\dontshow{\}) # examplesIf}
+# Setting up in a temporary directory
+setup_repo(project_path = tempdir(),
+           subfolder = "ela_access",
+           proj_name = "Access to Grade-Level ELA Content",
+           analyst_name = "Dustin Pashouwer and Sam Firke")
 }
