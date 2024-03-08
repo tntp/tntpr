@@ -66,7 +66,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #' @export
 #' @returns a ggplot theme object.
 #'
-#' @examples
+#' @examples \donttest{
 #' library(dplyr)
 #' library(ggplot2)
 #'
@@ -115,6 +115,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'     base_size = 20,
 #'     show_axis_titles = "x"
 #'   )
+#'   }
 #'
 tntp_style <- function(family = "Halyard Display",
                        header_family = family,

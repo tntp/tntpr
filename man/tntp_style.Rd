@@ -47,6 +47,7 @@ a ggplot theme object.
 A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
 }
 \examples{
+\donttest{
 library(dplyr)
 library(ggplot2)
 
@@ -95,5 +96,6 @@ frpl_experience |>
     base_size = 20,
     show_axis_titles = "x"
   )
+  }
 
 }
