@@ -1,3 +1,11 @@
+## Resubmission Part 2
+
+This is a second resubmission. In this version I have:
+
+*   Further clarified "TNTP" in the R CMD check comments below (short version: it isn't an acronym anymore).
+*   Changed DESCRIPTION to use an Authors@R: field
+*   Re-wrote the Description: field in DESCRIPTION based on feedback from the last submission.
+
 ## Resubmission
 
 This is a resubmission. In this version I have:
@@ -18,5 +26,5 @@ This package doesn't reference academic publications, so there are no references
 
 0 errors | 0 warnings | 1 notes
 
-*   Note: the word "TNTP" in README.md is the name of an organization, not an acronym or mis-spelled word.
+*   Note: the word "TNTP" in README.md and in DESCRIPTION is the name of an organization, not an acronym or mis-spelled word. Although TNTP used to stand for "The New Teacher Project", that name was dropped around 2013 (as the organization branched out into areas beyond new teacher training) and the current name is not an acronym for anything.
 *   This is a new release.
