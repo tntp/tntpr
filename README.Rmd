@@ -26,10 +26,10 @@ knitr::opts_chunk$set(
 About
 -----
 
-The `tntpr` package makes data science at TNTP easier and more accurate
-by supplying tools that are needed for common TNTP analyses. Because
-this package specifically serves the TNTP analysis community, functions
-can be tailored to our exact use cases.
+The `tntpr` package contains an assortment of functions and templates 
+customized to meet the needs of data analysts at the non-profit organization 
+TNTP. It includes functions for branded colors and plots, credentials 
+management, repository set-up, and other common analytic tasks.
 
 Package summary
 ---------------
