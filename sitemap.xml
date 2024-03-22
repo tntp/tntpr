@@ -19,7 +19,7 @@
     <loc>https://tntp.github.io/tntpr/index.html</loc>
   </url>
   <url>
-    <loc>https://tntp.github.io/tntpr/reference/SegoeUI.html</loc>
+    <loc>https://tntp.github.io/tntpr/news/index.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/bar_chart_counts.html</loc>
@@ -98,9 +98,6 @@
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/scale_colour_tntp.html</loc>
-  </url>
-  <url>
-    <loc>https://tntp.github.io/tntpr/reference/scale_fill_tntp.html</loc>
   </url>
   <url>
     <loc>https://tntp.github.io/tntpr/reference/set_data_memo_formatting.html</loc>

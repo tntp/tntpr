@@ -22,7 +22,7 @@ used to create a README.Md file."><meta property="og:image" content="https://tnt
     
     <a class="navbar-brand me-2" href="../index.html">tntpr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,9 @@ used to create a README.Md file."><meta property="og:image" content="https://tnt
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/visualization-cookbook.html">TNTP Visualization Cookbook</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -72,12 +75,16 @@ used to create a README.Md file.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setup_repo</span><span class="op">(</span><span class="va">subfolder</span>, <span class="va">proj_name</span>, <span class="va">analyst_name</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setup_repo</span><span class="op">(</span><span class="va">project_path</span>, <span class="va">subfolder</span>, <span class="va">proj_name</span>, <span class="va">analyst_name</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>subfolder</dt>
+    <dl><dt>project_path</dt>
+<dd><p>the path to the main project directory. To use the current project, use `project_path = here::here()`.</p></dd>
+
+
+<dt>subfolder</dt>
 <dd><p>a character vector containing the concise name of a project subfolder.
 E.g., if the repository is the name of a city "Anywhere City", a project subfolder might be
 "ela_access" or "aps_talent_landscape").</p></dd>
@@ -93,16 +100,32 @@ appear in the subfolder's README.md file.  E.g., "Access to Grade-Level ELA Cont
 project.  This will appear in the subfolder's README.md file.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>nothing</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># After the user has created a repository "Anywhere City" and set their working</span></span></span>
-<span class="r-in"><span><span class="co"># directory to that folder:</span></span></span>
-<span class="r-in"><span><span class="co">## not run</span></span></span>
-<span class="r-in"><span><span class="co"># setup_repo("ela_access",</span></span></span>
-<span class="r-in"><span><span class="co"># "Access to Grade-Level ELA Content",</span></span></span>
-<span class="r-in"><span><span class="co"># "Dustin Pashouwer and Sam Firke")</span></span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Setting up in a temporary directory</span></span></span>
+<span class="r-in"><span><span class="fu">setup_repo</span><span class="op">(</span>project_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>           subfolder <span class="op">=</span> <span class="st">"ela_access"</span>,</span></span>
+<span class="r-in"><span>           proj_name <span class="op">=</span> <span class="st">"Access to Grade-Level ELA Content"</span>,</span></span>
+<span class="r-in"><span>           analyst_name <span class="op">=</span> <span class="st">"Dustin Pashouwer and Sam Firke"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">'/tmp/RtmprT9CXA'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating <span style="color: #0000BB;">'R/'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing a sentinel file <span style="color: #0000BB;">'.here'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">•</span> Build robust paths within your project via <span style="color: #555555;">`here::here()`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">•</span> Learn more at &lt;https://here.r-lib.org&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">'&lt;no active project&gt;'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">'/tmp/RtmprT9CXA'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating <span style="color: #0000BB;">'R/'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing a sentinel file <span style="color: #0000BB;">'.here'</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">•</span> Build robust paths within your project via <span style="color: #555555;">`here::here()`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">•</span> Learn more at &lt;https://here.r-lib.org&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">'&lt;no active project&gt;'</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -110,7 +133,7 @@ project.  This will appear in the subfolder's README.md file.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dustin Pashouwer.</p>
+  <p></p><p>Developed by Dustin Pashouwer, Sam Firke, Shane Orr, Sam Talcott.</p>
 </div>
 
 <div class="pkgdown-footer-right">

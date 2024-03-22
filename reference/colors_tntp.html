@@ -12,7 +12,7 @@ function tntp_colors()."><meta property="og:image" content="https://tntp.github.
     
     <a class="navbar-brand me-2" href="../index.html">tntpr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@ function tntp_colors()."><meta property="og:image" content="https://tntp.github.
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/visualization-cookbook.html">TNTP Visualization Cookbook</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -67,9 +70,40 @@ function <code><a href="tntp_colors.html">tntp_colors()</a></code>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="tntp_colors.html">tntp_colors</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                mint|light_green gray|grey|light_gray|light_grey </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#E2EDDC"                       "#F1F1EE" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           white                           black </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#FFFFFF"                       "#000000" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            yellow|medium_yellow                       navy|blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#FDE57B"                       "#00355F" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  pink|light_red                             red </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#FDDACA"                       "#C31F46" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           green    charcoal|dark_gray|dark_grey </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#317D5C"                       "#4A4A4A" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                tangerine|orange               salmon|medium_red </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#F26C4C"                       "#DA8988" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            gold               moss|medium_green </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#F2CF13"                       "#8FB09D" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  sky|light_blue            cerulean|medium_blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#81D3EB"                       "#00A5C7" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    light_yellow         medium_gray|medium_grey </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#FAEDB8"                       "#9E9E9C" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       dark_gold                      dark_green </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#C2A60A"                       "#1D4935" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        dark_red                         green_4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#7C132C"                       "#60977D" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         green_2                          blue_4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#B9CFBD"                       "#006D93" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          blue_2                           red_4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#41BCD9"                       "#CF5467" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           red_2                        yellow_4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#ECB2A9"                       "#F8DA47" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        yellow_2                   gray_4|grey_4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#FCE99A"                       "#747473" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   gray_2|grey_2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "#C7C7C5" </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -77,7 +111,7 @@ function <code><a href="tntp_colors.html">tntp_colors()</a></code>.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dustin Pashouwer.</p>
+  <p></p><p>Developed by Dustin Pashouwer, Sam Firke, Shane Orr, Sam Talcott.</p>
 </div>
 
 <div class="pkgdown-footer-right">

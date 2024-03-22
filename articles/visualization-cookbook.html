@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tntpr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/visualization-cookbook.html">TNTP Visualization Cookbook</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -98,15 +101,9 @@ first…</strong></p>
 <div class="section level3">
 <h3 id="install-the-tntpr-package">Install the <code>tntpr</code> package<a class="anchor" aria-label="anchor" href="#install-the-tntpr-package"></a>
 </h3>
-<p><code>tntpr</code> is not on CRAN, so you will have to install it
-directly from Github using <code>devtools</code>.</p>
-<p>If you do not have the <code>devtools</code> package installed, you
-will have to run the first line in the code below as well. This command
-will also work for updating <code>tntpr</code> if you already have it
-installed.</p>
+<p>You can install <code>tntpr</code> from CRAN as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages('devtools')</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'tntp/tntpr'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'tntpr'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="load-all-the-libraries-you-need">Load all the libraries you need<a class="anchor" aria-label="anchor" href="#load-all-the-libraries-you-need"></a>
@@ -687,7 +684,7 @@ does not alter the font size or family of the text within
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Dustin Pashouwer.</p>
+<p>Developed by Dustin Pashouwer, Sam Firke, Shane Orr, Sam Talcott.</p>
 </div>
 
 <div class="pkgdown-footer-right">
