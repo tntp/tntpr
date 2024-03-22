@@ -1,14 +1,20 @@
 Type: Package
 Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
-Version: 1.0.0
-Author: Sam Firke [aut, cre], Jake Russ [aut, cre], Alex Spurrier [ctb],
-    Dustin Pashouwer [ctb], Kate Mullan [ctb], Shane Orr [ctb], Sam Talcott [ctb]
-Maintainer: Dustin Pashouwer <dustin.pashouwer@tntp.org>
-Description: An internal TNTP R package that includes functions and
-    templates customized with TNTP branding. It is intended for this R
-    package to be a one-stop shop for R tools by analysts and other data
-    users at TNTP.
+Version: 1.0.2
+Authors@R: c(
+      person("Dustin", "Pashouwer", role = c("aut", "cre"), 
+             email = "dustin.pashouwer@tntp.org"),
+      person("Sam", "Firke", role = "aut"),
+      person("Shane", "Orr", role = "aut",
+             email = "shane.orr@tntp.org"),
+      person("Sam", "Talcott", role = "aut", 
+             email = "sam.talcott@tntp.org")
+    )
+Description: An assortment of functions and templates customized to meet 
+    the needs of data analysts at the non-profit organization TNTP. 
+    Includes functions for branded colors and plots, credentials management,
+    repository set-up, and other common analytic tasks.
 License: CC BY 4.0
 URL: https://github.com/tntp/tntpr, https://tntp.github.io/tntpr/
 Depends:

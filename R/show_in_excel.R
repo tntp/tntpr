@@ -4,11 +4,9 @@
 #'
 #' @export
 #' @returns nothing
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # View a data set in excel
 #' mtcars |> show_in_excel()
-#' }
 #'
 #'
 show_in_excel <- function(.data) {

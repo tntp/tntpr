@@ -16,8 +16,7 @@ new functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_pa
 brand palettes, use \code{\link[=show_tntp_palette]{show_tntp_palette()}}.
 }
 \examples{
-\dontrun{
 show_tntp_palette()
-}
+
 }
 \keyword{datasets}

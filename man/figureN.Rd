@@ -10,13 +10,15 @@ figureN(x)
 \item{x}{character string description of the figure}
 }
 \value{
-nothing
+An atomic character vector prepended with a Figure number
 }
 \description{
 Create sequential figure numbers
 }
 \examples{
-# not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
+
+figureN("Distribution of cars by cylinder count")
+# Inline RMarkdown code: `r figureN("Distribution of cars by cylinder count")`
 
 #
 }

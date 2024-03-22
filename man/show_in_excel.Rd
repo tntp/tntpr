@@ -16,10 +16,9 @@ nothing
 Write Dataframe to a temp excel file and open it.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # View a data set in excel
 mtcars |> show_in_excel()
-}
 
-
+\dontshow{\}) # examplesIf}
 }

@@ -1,11 +1,9 @@
 #' @title Re-install the tntpr package from GitHub.
 #' @export
 #' @returns nothing
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # Run without loading tntpr first
 #' tntpr::update_tntpr()
-#' }
 #'
 
 update_tntpr <- function() {

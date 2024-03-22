@@ -10,11 +10,11 @@ header_tntp()
 nothing
 }
 \description{
-Call this function inside a .R file to insert the standard TNTP header.
+Call this function from inside a .R file in RStudio to insert the standard
+TNTP header into your active script.
 }
 \examples{
-\dontrun{
+\dontshow{if (rstudioapi::isAvailable()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 header_tntp()
-}
-
+\dontshow{\}) # examplesIf}
 }

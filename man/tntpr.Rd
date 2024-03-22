@@ -18,3 +18,14 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Dustin Pashouwer \email{dustin.pashouwer@tntp.org}
+
+Authors:
+\itemize{
+  \item Sam Firke
+  \item Shane Orr \email{shane.orr@tntp.org}
+  \item Sam Talcott \email{sam.talcott@tntp.org}
+}
+
+}

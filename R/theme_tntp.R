@@ -22,6 +22,7 @@
 #' @importFrom ggplot2 %+replace%
 #' @export
 #' @rdname theme_tntp
+#' @returns a ggplot theme object.
 
 theme_tntp <- function(show_legend_title = TRUE,
                        base_size = 12,
@@ -36,8 +37,12 @@ theme_tntp <- function(show_legend_title = TRUE,
                        caption_align = "right",
                        caption_color = "black",
                        caption_size = 12) {
-  # As of v2.2 ggplot2 left aligns titles by default. -------------------------
   .Deprecated("tntp_style")
+
+  # Check for a usable font family
+  base_family <- get_usable_family(base_family)
+
+  # As of v2.2 ggplot2 left aligns titles by default. -------------------------
   # title_align and subtitle_align allows tntpr users to quickly change
 
   # Check alignment positions for plot title and subtitle

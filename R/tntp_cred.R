@@ -26,8 +26,7 @@
 #' *  `tntp_cred_list()` returns a 2-column data frame of services and usernames
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive() && rlang::is_installed("qualtRics")
 #' # Using tntp_cred() with qualtRics
 #' library(qualtRics)
 #'
@@ -38,7 +37,6 @@
 #'
 #' # To overwrite your Qualtrics credential
 #' tntp_cred("QUALTRICS_TOKEN", .set = TRUE)
-#' }
 #'
 tntp_cred <- function(service, username = NULL, keyring = NULL, prompt = NULL) {
 
