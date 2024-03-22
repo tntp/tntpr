@@ -14,7 +14,7 @@ factorize_df(dat, lvls, ignore.case = NULL)
 \item{ignore.case}{Logical. If TRUE, will match without checking case, using the capitalization from the \code{lvls} parameter for the final output. If not provided, the function will provide a warning if it detects columns that would match without checking case but will NOT coerce them.}
 }
 \value{
-data.frame with factorization completed in place.
+a data.frame the same size as \code{dat}, with factorization completed in place.
 }
 \description{
 This function examines each column in a data.frame; when it finds a column composed solely of the values provided to the \code{lvls} argument it updates them to be factor variables, with levels in the order provided.

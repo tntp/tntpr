@@ -3,20 +3,38 @@
 \name{scale_colour_tntp}
 \alias{scale_colour_tntp}
 \alias{scale_color_tntp}
-\title{scale_colour_tntp/scale_color_tntp}
+\alias{scale_fill_tntp}
+\title{scale_color_tntp/scale_fill_tntp}
 \usage{
-scale_colour_tntp(palette = palette_names, drop = FALSE, ...)
+scale_colour_tntp(palette = palette_names, ...)
 
-scale_color_tntp(palette = palette_names, drop = FALSE, ...)
+scale_color_tntp(palette = palette_names, ...)
+
+scale_fill_tntp(palette = palette_names, ...)
 }
 \arguments{
-\item{palette}{character string describing the desired palette}
-
-\item{drop}{drop}
+\item{palette}{character string describing the desired palette from}
 
 \item{...}{other arguments to pass through to ggplot2::discrete_scale()}
 }
+\value{
+a ggplot Scale object
+}
 \description{
-This function is deprecated. Please use
-\code{scale_color_manual(values = tntp_palette(palette_name))} instead
+These functions are deprecated. Please use
+\code{scale_color_manual(values = tntp_palette(palette_name))} or
+\code{scale_fill_manual(values = tntp_palette(palette_name))} instead.
+}
+\examples{
+library(ggplot2)
+library(dplyr)
+
+x <- mtcars \%>\%
+  count(cyl, am) \%>\%
+  mutate(am = as.factor(am))
+
+ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
+  geom_col() +
+  scale_fill_manual(values = tntp_palette())
+
 }

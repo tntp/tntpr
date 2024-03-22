@@ -2,7 +2,7 @@
 % Please edit documentation in R/show_in_excel.R
 \name{show_in_excel}
 \alias{show_in_excel}
-\title{Write datatable to temp excel file and open it.}
+\title{Write Dataframe to a temp excel file and open it.}
 \usage{
 show_in_excel(.data)
 }
@@ -10,8 +10,15 @@ show_in_excel(.data)
 \item{.data}{Dataframe}
 }
 \value{
-Returns a data.frame.
+nothing
 }
 \description{
-Write datatable to temp excel file and open it.
+Write Dataframe to a temp excel file and open it.
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# View a data set in excel
+mtcars |> show_in_excel()
+
+\dontshow{\}) # examplesIf}
 }

@@ -29,6 +29,12 @@ show_tntp_colors(
 
 \item{ncol}{Number of columns. If not supplied, tries to be as square as possible.}
 }
+\value{
+\itemize{
+\item \code{tntp_colors()} returns a character vector of color codes
+\item \code{show_tntp_colors()} returns nothing
+}
+}
 \description{
 Translate human friendly TNTP brand color names like "medium_blue" into
 accurate hex values for use in plotting. This function can also be used to

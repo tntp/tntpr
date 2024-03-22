@@ -18,6 +18,12 @@ show_tntp_palette(..., reverse = FALSE, pattern = NULL)
 
 \item{pattern}{Optional regular expression. If provided, will return only palettes that match the regular expression}
 }
+\value{
+\itemize{
+\item \code{tntp_palette()} returns a character vector of color codes
+\item \code{show_tntp_palette()} returns nothing
+}
+}
 \description{
 Use or see
 }

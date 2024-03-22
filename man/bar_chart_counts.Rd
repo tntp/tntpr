@@ -41,6 +41,9 @@ bar_chart_counts(
 
 \item{font_size}{size for chart text; set to 12 by default}
 }
+\value{
+A ggplot object
+}
 \description{
 Takes a user supplied data frame and turns the designated column into
 an N bar chart (uses position dodge from ggplot2).
@@ -51,28 +54,16 @@ an N bar chart (uses position dodge from ggplot2).
 # All examples use font = "sans" to avoid triggering font warnings
 mtcars |>
   bar_chart_counts(var   = cyl,
+                   var_color = "orange",
                    title = "Number of mtcars by cylinder",
                    font  = "sans")
 
-# Use a grouping variable
+# Use a grouping variable with custom colors
 mtcars |>
   bar_chart_counts(var       = cyl,
                    group_var = vs,
+                   group_colors = c("orange", "navy"),
                    labels    = "pct",
                    title     = "\% of V vs. Straight engines by # of cylinders",
-                   font  = "sans")
-
-# Change default color
-mtcars |>
-  bar_chart_counts(var       = cyl,
-                   var_color = "orange",
-                   title     = "Number of mtcars by cylinder",
-                   font  = "sans")
-
-# Specify color by group
-mtcars |>
-  bar_chart_counts(am, cyl,
-                   group_colors = c("orange", "green", "navy"),
-                   labels = "pct",
                    font  = "sans")
 }

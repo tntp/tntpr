@@ -5,7 +5,6 @@ utils::globalVariables(c("vec", "vec.factor", "n", "group.vec", "group.factor", 
 #' @param libname library name
 #' @param pkgname package name
 #'
-#' @export
 .onAttach <- function(libname, pkgname) {
   # adapted from hrbrthemes
 
@@ -24,7 +23,11 @@ utils::globalVariables(c("vec", "vec.factor", "n", "group.vec", "group.factor", 
   }
 
   fnt <- extrafont::fonttable()
-  if (!any(grepl("Segoe", fnt$FamilyName))) {
-    extrafont::ttf_import(file.path(system.file("fonts", package = "tntpr")))
+  if (!any(grepl("Halyard Display", fnt$FamilyName))) {
+    packageStartupMessage("NOTE: The 'Halyard Display' font is the default font for the tntp_style() theme. This font is not currently installed on your system. ")
+    packageStartupMessage("")
+    packageStartupMessage("      To install 'Halyard Display', follow the directions in the TNTP Visualization Cookbook at the following link:")
+    packageStartupMessage("")
+    packageStartupMessage("      https://tntp.github.io/tntpr/articles/visualization-cookbook.html#setting-font-family-and-font-sizes")
   } # nocov end
 }

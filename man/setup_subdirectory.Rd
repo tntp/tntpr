@@ -4,9 +4,11 @@
 \alias{setup_subdirectory}
 \title{Initialize a new subdirectory in an existing repository, TNTP style.}
 \usage{
-setup_subdirectory(subfolder, proj_name, analyst_name)
+setup_subdirectory(project_path, subfolder, proj_name, analyst_name)
 }
 \arguments{
+\item{project_path}{the path to the main project directory. To use the current project, use `project_path = here::here()`.}
+
 \item{subfolder}{a character vector containing the concise name of a project subfolder.
 E.g., if the repository is the name of a city "Anywhere City", a project subfolder might be
 "ela_access" or "aps_talent_landscape").}
@@ -16,6 +18,9 @@ appear in the subfolder's README.md file.}
 
 \item{analyst_name}{the name(s) of the analysts currently working on the subfolder
 project.  This will appear in the subfolder's README.md file.}
+}
+\value{
+nothing
 }
 \description{
 A repository might represent a region, like "Anywhere City",
@@ -31,10 +36,9 @@ and create the RProject and .gitignore files.  Add subsequent analysis project f
 with this function.
 }
 \examples{
-# When there's already a repository "Anywhere City" with an RProject and a .gitignore
-# and a new project analysis subfolder is needed within that repo:
-## not run
-# setup_subdirectory("ela_access",
-# "Equitable Access to Grade-Level ELA",
-# "Dustin Pashouwer and Sam Firke")
+# Setting up in a temporary directory
+setup_subdirectory(tempdir(),
+                   subfolder = "ela_access",
+                   proj_name = "Equitable Access to Grade-Level ELA",
+                   analyst_name = "Dustin Pashouwer and Sam Firke")
 }

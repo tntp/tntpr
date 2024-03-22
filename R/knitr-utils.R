@@ -4,10 +4,10 @@
 #' internal function that calls standard formatting options for the Data Memo RMarkdown template
 #' moved here to keep the actual memo template cleaner and easier to use
 #'
-#' @return nothing
+#' @returns nothing
 #' @export
-#' @examples
-#' # not run: set_data_memo_formatting()
+#' @examplesIf interactive()
+#' set_data_memo_formatting()
 #'
 set_data_memo_formatting <- function() {
   # set knitr options
@@ -25,10 +25,12 @@ set_data_memo_formatting <- function() {
 #' Create sequential figure numbers
 #'
 #' @param x character string description of the figure
-#' @return nothing
+#' @returns An atomic character vector prepended with a Figure number
 #' @export
 #' @examples
-#' # not run, in RMarkdown doc: `r figureN("Distribution of cars by cylinder count")`
+#'
+#' figureN("Distribution of cars by cylinder count")
+#' # Inline RMarkdown code: `r figureN("Distribution of cars by cylinder count")`
 #'
 #' #
 figureN <- local({
@@ -47,10 +49,12 @@ figureN <- local({
 #'
 #' @param x character string description of the figure
 #'
-#' @return nothing
+#' @returns An atomic character vector prepended with a Table number
 #' @export
 #' @examples
-#' # not run, in RMarkdown doc: `r tableN("Distribution of cars by cylinder count")`
+#'
+#' tableN("Distribution of cars by cylinder count")
+#' # Inline RMarkdown code: `r tableN("Distribution of cars by cylinder count")`
 tableN <- local({
   i <- 0
   function(x) {

@@ -30,7 +30,11 @@ tntp_cred_list(service = NULL, keyring = NULL)
 \item{overwrite}{OPTIONAL. By default, \code{tntp_cred_set()} will prompt if it finds a credential already saved. Set this to \code{TRUE} to overwrite without prompting or \code{FALSE} to throw an error if a current credential is found.}
 }
 \value{
-A stored (or newly created) credential
+\itemize{
+\item \code{tntp_cred()} returns a stored (or newly created) credential
+\item \code{tntp_cred_set()} returns nothing
+\item \code{tntp_cred_list()} returns a 2-column data frame of services and usernames
+}
 }
 \description{
 A wrapper around the \code{keyring} package for secure credential management.
@@ -45,7 +49,7 @@ overwriting any current credentials.
 and username.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive() && rlang::is_installed("qualtRics")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Using tntp_cred() with qualtRics
 library(qualtRics)
 
@@ -56,6 +60,5 @@ qualtrics_api_credentials(api_key = qualtrics_token,
 
 # To overwrite your Qualtrics credential
 tntp_cred("QUALTRICS_TOKEN", .set = TRUE)
-}
-
+\dontshow{\}) # examplesIf}
 }

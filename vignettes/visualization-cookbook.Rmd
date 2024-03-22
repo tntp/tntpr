@@ -24,13 +24,10 @@ We'll get to how you can put together the various elements of these graphics, bu
 
 ## Install the `tntpr` package
 
-`tntpr` is not on CRAN, so you will have to install it directly from Github using `devtools`.
-
-If you do not have the `devtools` package installed, you will have to run the first line in the code below as well. This command will also work for updating `tntpr` if you already have it installed.
+You can install `tntpr` from CRAN as follows:
 
 ```{r eval=FALSE}
-# install.packages('devtools')
-devtools::install_github('tntp/tntpr')
+install.packages('tntpr')
 ```
 
 ## Load all the libraries you need
@@ -92,7 +89,7 @@ The `family` parameter lets you set the text font family. This changes the font 
 
 You will need to manually import additional fonts, including the Halyard fonts, using the `extrafont` package before they are available to R. Follow these steps to import fonts:
 
-1. Download the Halyard Display Fonts in .ttf forms from the [Data Analytics Sharepoint](https://tntp.sharepoint.com/sites/DataAnalytics/Shared%20Documents/Forms/AllItems.aspx) under the "Fonts" category.
+1. Download the Halyard Display Fonts in .ttf forms from the Data Analytics Sharepoint Document Library under the "Fonts" category.
 2. Open the fonts folder on your laptop (Settings -> Personalization -> Fonts) and drag and drop the Halyard Fonts there to install them on your computer.
 3. In RStudio, install the `extrafont` package with `install.packages('extrafont)`.
 4. Import fonts into the extrafont database with `extrafont::font_import()`. This only needs to be done once. The process is long, and can be significantly shortened by only importing the Halyard fonts using `extrafont::font_import(pattern = 'Halyard')`.

@@ -4,7 +4,7 @@
 #' @param valid_strings the values that the variable can possibly take on.
 #' @param ignore.case if TRUE, ignores case in matching
 #'
-#' @return numeric proportion between 0 and 1.
+#' @returns a numeric proportion between 0 and 1.
 prop_matching <- function(vec, valid_strings, ignore.case = FALSE) {
   vec <- as.character(vec)
   if (all(is.na(vec))) {
@@ -26,7 +26,7 @@ prop_matching <- function(vec, valid_strings, ignore.case = FALSE) {
 #' @param vec The character vector you want to update
 #' @param new_case A character vector of correctly cased strings
 #'
-#' @return a character vector the same length as vec
+#' @returns a character vector the same length as vec
 #'
 standardize_case <- function(vec, new_case) {
 
@@ -48,7 +48,7 @@ standardize_case <- function(vec, new_case) {
 #' @param lvls The factor levels in your variable(s), in order.  If you have a question whose possible responses are a subset of another question's, don't use this function; manipulate the specific columns with \code{dplyr::mutate_at}.
 #' @param ignore.case Logical. If TRUE, will match without checking case, using the capitalization from the `lvls` parameter for the final output. If not provided, the function will provide a warning if it detects columns that would match without checking case but will NOT coerce them.
 #'
-#' @return data.frame with factorization completed in place.
+#' @returns a data.frame the same size as `dat`, with factorization completed in place.
 #' @export
 #' @examples
 #' teacher_survey |>

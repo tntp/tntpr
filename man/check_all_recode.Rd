@@ -14,7 +14,7 @@ check_all_recode(dat, ..., set_labels = TRUE)
 \item{set_labels}{should the label attribute of the columns be over-written with the column text?  Allow this to be TRUE unless there are currently label attributes you don't wish to overwrite.}
 }
 \value{
-Returns the original data.frame with the specified column range updated, and with label attributes on the questions.
+the original data.frame with the specified column range updated, and with label attributes on the questions.
 }
 \description{
 Some survey software returns check-all-that-apply response columns where missing values could indicate either that the respondent skipped the question entirely, or that they did not select that particular answer choice.  To count the responses properly, the cases where a respondent did not check any of choices - i.e., they skipped the question - should not be counted in the denominator (assuming that the choices were completely exhaustive, or that there was an NA option).

@@ -9,6 +9,9 @@ palette_tntp(...)
 \arguments{
 \item{...}{supply quoted color names to include in color palette}
 }
+\value{
+a character vector
+}
 \description{
 This function as been superseded by \code{\link[=tntp_colors]{tntp_colors()}} which has improved
 functionality and includes the most recent TNTP brand colors.

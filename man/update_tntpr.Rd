@@ -6,6 +6,15 @@
 \usage{
 update_tntpr()
 }
+\value{
+nothing
+}
 \description{
 Re-install the tntpr package from GitHub.
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Run without loading tntpr first
+tntpr::update_tntpr()
+\dontshow{\}) # examplesIf}
 }

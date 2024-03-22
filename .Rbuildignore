@@ -11,3 +11,5 @@
 ^\.github$
 ^vignettes/tntp-style-plots\.rmd$
 ^notes$
+^cran-comments\.md$
+^CRAN-SUBMISSION$

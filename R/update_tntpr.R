@@ -1,5 +1,10 @@
 #' @title Re-install the tntpr package from GitHub.
 #' @export
+#' @returns nothing
+#' @examplesIf interactive()
+#' # Run without loading tntpr first
+#' tntpr::update_tntpr()
+#'
 
 update_tntpr <- function() {
   if (!requireNamespace("devtools", quietly = TRUE)) {

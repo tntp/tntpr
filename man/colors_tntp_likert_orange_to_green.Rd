@@ -15,8 +15,7 @@ This likert palette has been superseded by the new brand colors and the new
 functions \code{\link[=tntp_colors]{tntp_colors()}} and \code{\link[=tntp_palette]{tntp_palette()}}.
 }
 \examples{
-\dontrun{
 tntp_palette('bg_6')
-}
+
 }
 \keyword{datasets}

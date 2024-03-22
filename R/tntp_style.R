@@ -9,7 +9,7 @@
 #' @param silent logical. If TRUE doesn't raise a warning if the font family is unavailable
 #' @param default_family defaults to "sans", but can be set to another fallback family.
 #'
-#' @return a character of a usable font family
+#' @returns a character of a usable font family
 get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 
   # Get a platform-independent list of usable fonts
@@ -33,7 +33,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
     if(!silent) {
       cli::cli_warn(c(
         "x" = "Family {.val {family}} is not registered in the font table.",
-        "v" = "Using standard {.val sans} font instead",
+        "v" = "Using default {.val {default_family}} font instead",
         "i" = "Run {.code extrafont::loadfonts()} to register non-core fonts (needs to be done once each session)",
         "i" = "If you've never imported your fonts before, run {.code extrafont::font_import()} first, then {.code extrafont::loadfonts()}"
       ))
@@ -64,9 +64,9 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #' @param title_align,legend_align,caption_align Alignment of title, legend, and caption. Accepts `left`, `right`, or `center`.
 #'
 #' @export
+#' @returns a ggplot theme object.
 #'
-#' @examples \dontrun{
-#' library(tntpr)
+#' @examples \donttest{
 #' library(dplyr)
 #' library(ggplot2)
 #'
@@ -81,7 +81,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'     x = "Years of Experience",
 #'     caption = "Data from the Fake County Data Set"
 #'   ) +
-#'   tntp_style(show_axis_titles = "x")
+#'   tntp_style(family = 'sans', show_axis_titles = "x")
 #'
 #' frpl_experience <- fake_county |>
 #'   mutate(frpl_bucket = cut(sch_frpl_pct,
@@ -103,8 +103,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'   )) +
 #'   geom_text(aes(label = label),
 #'     nudge_y = -0.25, vjust = 1,
-#'     color = "white", size = 5, lineheight = 1,
-#'     family = "Segoe UI"
+#'     color = "white", size = 5, lineheight = 1
 #'   ) +
 #'   labs(
 #'     title = "High Poverty Schools have Less Experienced Teachers",
@@ -112,10 +111,11 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 #'   ) +
 #'   scale_y_continuous(breaks = seq(0, 20, 4)) +
 #'   tntp_style(
+#'     family = 'sans',
 #'     base_size = 20,
 #'     show_axis_titles = "x"
 #'   )
-#' }
+#'   }
 #'
 tntp_style <- function(family = "Halyard Display",
                        header_family = family,

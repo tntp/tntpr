@@ -6,6 +6,15 @@
 \usage{
 header_tntp()
 }
+\value{
+nothing
+}
 \description{
-Call this function to insert the header from 'TNTP R Shell.R'.
+Call this function from inside a .R file in RStudio to insert the standard
+TNTP header into your active script.
+}
+\examples{
+\dontshow{if (rstudioapi::isAvailable()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+header_tntp()
+\dontshow{\}) # examplesIf}
 }

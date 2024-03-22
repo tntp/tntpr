@@ -15,6 +15,9 @@
 #' @param ncol Number of columns. If not supplied, tries to be as square as possible.
 #'
 #' @export
+#' @returns
+#' * `tntp_colors()` returns a character vector of color codes
+#' * `show_tntp_colors()` returns nothing
 #'
 #' @md
 #' @examples
@@ -140,7 +143,7 @@ tntp_colors <- function(...) {
 #'
 #' @param x a color
 #'
-#' @return TRUE if x can be interpreted as a color
+#' @returns TRUE if x can be interpreted as a color
 is_color <- function(x) {
   res <- try(grDevices::col2rgb(x), silent = TRUE)
   return(!"try-error" %in% class(res))
@@ -150,7 +153,7 @@ is_color <- function(x) {
 #'
 #' @param bg_color a color
 #'
-#' @return "black" or "white"
+#' @returns "black" or "white"
 choose_text_color <- function(bg_color) {
   stopifnot(is_color(bg_color))
   ifelse(colSums(grDevices::col2rgb(bg_color) * c(.299, .587, .114)) > 150,
@@ -267,6 +270,9 @@ tntp_palette_list <- list(
 #'
 #' @export
 #' @md
+#' @returns
+#' * `tntp_palette()` returns a character vector of color codes
+#' * `show_tntp_palette()` returns nothing
 #'
 #' @examples
 #'
@@ -295,8 +301,6 @@ tntp_palette_list <- list(
 #'   geom_point(size = 3) +
 #'   scale_color_gradient(low = tntp_colors('red'),
 #'                        high = tntp_colors('green'))
-
-
 tntp_palette <- function(palette = "likert_6", reverse = FALSE) {
 
   pal <- tntp_palette_list[[palette]]

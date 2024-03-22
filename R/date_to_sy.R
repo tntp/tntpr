@@ -14,6 +14,7 @@
 #' date_to_sy(as.Date("2014-07-05"), as.Date("2000-07-01"))
 #'
 #' @export
+#' @returns A character vector the same length as `date_var`
 
 ## Date to SY function
 ## Year of 2nd argument does not matter
@@ -45,7 +46,7 @@ date_to_sy <- function(date_var, last_day_of_sy = NULL) {
 #'
 #' @param date a character or Date vector to parse
 #'
-#' @return Date vector
+#' @returns a Date vector, the same length as `date`
 #'
 parse_date <- function(date) {
 

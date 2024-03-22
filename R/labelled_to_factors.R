@@ -8,7 +8,7 @@
 #' Takes a data.frame, checks for columns that are class `labelled` from the `haven` package, and converts them to factor class.
 #'
 #' @param labels_df a data.frame containing some columns of class labelled
-#' @return Returns a data.frame.
+#' @returns Returns a data.frame, the same size as `labels_df`
 #' @export
 #' @examples
 #'

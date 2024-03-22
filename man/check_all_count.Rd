@@ -12,7 +12,7 @@ check_all_count(dat, ...)
 \item{...}{unquoted column names containing the range of the answer choices.  Can be specified individually, as a range, i.e., \code{q1_1:q1_5}, or using other helper functions from \code{dplyr::select()}.}
 }
 \value{
-Returns a data.frame with the tabulated results (n and % of question respondents choosing each choice.)  This is an object of class \code{tabyl} which means that you can call \code{janitor::adorn_pct_formatting()} and it will format the correct columns.
+a data.frame with the tabulated results (n and % of question respondents choosing each choice.)  This is an object of class \code{tabyl} which means that you can call \code{janitor::adorn_pct_formatting()} and it will format the correct columns.
 }
 \description{
 This function is to be run on columns treated with \code{check_all_recode()}.

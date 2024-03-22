@@ -5,7 +5,7 @@
 [![R-CMD-check](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tntp/tntpr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-<a href="https://www.tntp.org" target="_blank">
+<a href="https://tntp.org" target="_blank">
 <img src="man/figures/logo.png" width="70" height="70"
 alt="TNTP logo" /> </a>
 
@@ -13,10 +13,11 @@ alt="TNTP logo" /> </a>
 
 ## About
 
-The `tntpr` package makes data science at TNTP easier and more accurate
-by supplying tools that are needed for common TNTP analyses. Because
-this package specifically serves the TNTP analysis community, functions
-can be tailored to our exact use cases.
+The `tntpr` package contains an assortment of functions and templates
+customized to meet the needs of data analysts at the non-profit
+organization TNTP. It includes functions for branded colors and plots,
+credentials management, repository set-up, and other common analytic
+tasks.
 
 ## Package summary
 
@@ -26,7 +27,7 @@ Some of the highlights of the package include:
   `tntp_palette()` functions
 - A TNTP ggplot2 theme using brand fonts (`tntp_style()`)
 - The `tntp_cred()` functions for securely managing credentials
-  (passwords, API keys, etc.) in R.
+  (passwords, API keys, etc.).
 - TNTP-themed RMarkdown templates, for starting a new analysis with a
   shell that can already generate a TNTP-themed .docx report
 - Functions for initializing a new repository or project folder with
@@ -46,10 +47,15 @@ Some of the highlights of the package include:
 
 ## Installing the `tntpr` package
 
-`tntpr` is not currently on CRAN, so you’ll need to install this package
-from its GitHub repository using `devtools`. If you do not have the
-`devtools` package installed, you will have to run the first line in the
-code below as well:
+You can install `tntpr` from CRAN as follows:
+
+``` r
+install.packages('tntpr')
+```
+
+You can also install this package from its GitHub repository using
+`devtools`. If you do not have the `devtools` package installed, you
+will have to run the first line in the code below as well:
 
 ``` r
 # install.packages('devtools')
@@ -60,13 +66,6 @@ Once installed, you load it like any other package.
 
 ``` r
 library(tntpr)
-```
-
-To update `tntpr`, you’ll need to first unload it (or start a fresh R
-session). You can then run the code above below.
-
-``` r
-tntpr::update_tntpr()
 ```
 
 ## Feature Requests and Bug Reports

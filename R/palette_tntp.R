@@ -12,6 +12,7 @@
 #' @rdname palette_tntp
 #' @param ... supply quoted color names to include in color palette
 #' @export
+#' @returns a character vector
 #' @examples
 #' library(ggplot2)
 #'
@@ -59,9 +60,8 @@ palette_tntp <- function(...) {
 #' @md
 #'
 #' @examples
-#' \dontrun{
 #' tntp_colors()
-#' }
+#'
 #' @export
 "colors_tntp"
 colors_tntp <- c( # TNTPPalette
@@ -111,9 +111,8 @@ colors_tntp <- c( # TNTPPalette
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_colors()
-#' }
+#'
 #' @export
 "colors_tntp_palette"
 colors_tntp_palette <-
@@ -143,9 +142,8 @@ colors_tntp_palette <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_palette('likert_6')
-#' }
+#'
 #' @export
 "colors_tntp_likert"
 colors_tntp_likert <-
@@ -166,9 +164,8 @@ colors_tntp_likert <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' tntp_palette('bg_6')
-#' }
+#'
 #' @export
 "colors_tntp_likert_orange_to_green"
 colors_tntp_likert_orange_to_green <-
@@ -190,9 +187,8 @@ colors_tntp_likert_orange_to_green <-
 #'
 #' @md
 #' @examples
-#' \dontrun{
 #' show_tntp_palette()
-#' }
+#'
 #' @export
 "palette_names"
 palette_names <- c(
@@ -212,6 +208,10 @@ palette_names <- c(
 #'
 #' @md
 #' @param palette the palette
+#'
+#' @returns a character vector
+#' @examples
+#' colors <- tntp_palette("likert_5")
 #'
 #' @export
 #'
@@ -237,43 +237,19 @@ palette_tntp_scales <- function(palette = palette_names) {
 }
 
 
-# scale_(fill/color)_tntp functions
-
-#' scale_colour_tntp/scale_color_tntp
+#' scale_color_tntp/scale_fill_tntp
 #'
-#' This function is deprecated. Please use
-#' `scale_color_manual(values = tntp_palette(palette_name))` instead
+#' These functions are deprecated. Please use
+#' `scale_color_manual(values = tntp_palette(palette_name))` or
+#' `scale_fill_manual(values = tntp_palette(palette_name))` instead.
 #'
 #' @md
-#' @param palette character string describing the desired palette
+#' @param palette character string describing the desired palette from
 #' @param ... other arguments to pass through to ggplot2::discrete_scale()
 #'
 #' @export
+#' @returns a ggplot Scale object
 #'
-scale_colour_tntp <- function(palette = palette_names,
-                              drop = FALSE,
-                              ...) {
-  .Deprecated("tntp_palette")
-  palette <- match.arg(palette)
-  ggplot2::discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
-}
-
-#' @rdname scale_colour_tntp
-#' @aliases scale_colour_tntp
-#' @param drop drop
-#' @param ... other arguments to pass through to ggplot2::discrete_scale()
-#' @export
-scale_color_tntp <- scale_colour_tntp
-
-#' scale_fill_tntp
-#'
-#' This function is deprecated. Please use
-#' `scale_fill_manual(values = tntp_palette(palette_name))` instead
-#'
-#' @md
-#' @param palette One of: "default", "likert_4pt", "likert_5pt", "likert_6pt", "colors_tntp_old"
-#' @param drop drop
-#' @param ... additional arguments passed to ggplot2::discrete_scale()
 #' @examples
 #' library(ggplot2)
 #' library(dplyr)
@@ -285,12 +261,23 @@ scale_color_tntp <- scale_colour_tntp
 #' ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic
 #'   geom_col() +
 #'   scale_fill_manual(values = tntp_palette())
-
 #'
+scale_colour_tntp <- function(palette = palette_names,
+                              ...) {
+  .Deprecated("tntp_palette")
+  palette <- match.arg(palette)
+  ggplot2::discrete_scale("colour", "tntp", scales::manual_pal(unname(palette_tntp_scales(palette))), ...)
+}
+
+#' @rdname scale_colour_tntp
+#' @aliases scale_colour_tntp
+#' @export
+scale_color_tntp <- scale_colour_tntp
+
+#' @rdname scale_colour_tntp
 #' @export
 #'
 scale_fill_tntp <- function(palette = palette_names,
-                            drop = FALSE,
                             ...) {
   .Deprecated("tntp_palette")
   palette <- match.arg(palette)
