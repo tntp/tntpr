@@ -111,4 +111,7 @@ tntp_cred_list <- function(service = NULL, keyring = NULL) {
 
   # Fix row names
   row.names(sorted) <- 1:nrow(sorted)
+
+  # return sorted list
+  sorted
 }
