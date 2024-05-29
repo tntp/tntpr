@@ -24,7 +24,7 @@ The default behavior of `base::factor()` and `base::ordered()` will silently
 coerce values to NA if they don't match the provided levels.
 
 These functions call the base functions, but provide an informative error
-if any values in the vector would be coerced.
+if any values in the vector don't match a provided level.
 }
 \examples{
 
@@ -32,9 +32,9 @@ if any values in the vector would be coerced.
 tntpr::teacher_survey |>
   dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Post")))
 
-\donttest{
 # Mis-typed level generates an error
-tntpr::teacher_survey |>
-  dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
-}
+try(
+  tntpr::teacher_survey |>
+    dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
+)
 }

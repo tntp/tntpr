@@ -6,7 +6,7 @@
 #' coerce values to NA if they don't match the provided levels.
 #'
 #' These functions call the base functions, but provide an informative error
-#' if any values in the vector would be coerced.
+#' if any values in the vector don't match a provided level.
 #'
 #' @param x a vector of data, usually taking a small number of distinct values
 #' @param levels a vector of unique values
@@ -21,11 +21,11 @@
 #' tntpr::teacher_survey |>
 #'   dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Post")))
 #'
-#' \donttest{
 #' # Mis-typed level generates an error
-#' tntpr::teacher_survey |>
-#'   dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
-#' }
+#' try(
+#'   tntpr::teacher_survey |>
+#'     dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
+#' )
 safe_factor <- function(x = character(), levels, ...) {
   # Still needed: check levels value, deal with no provided levels, write tests
   vals <- unique(x)
