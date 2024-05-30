@@ -27,7 +27,10 @@
 #'     dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
 #' )
 safe_factor <- function(x = character(), levels, ...) {
-  # Still needed: check levels value, deal with no provided levels, write tests
+
+  # If levels aren't provided, no need to run checks
+  if (missing(levels)) return(factor(x, ...))
+
   vals <- unique(x)
   na_vals <- vals[!vals %in% c(levels, NA)]
   if (length(na_vals) > 0) {
