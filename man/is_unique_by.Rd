@@ -4,12 +4,12 @@
 \alias{is_unique_by}
 \title{Check a data frame for uniquely identifying columns}
 \usage{
-is_unique_by(df, ..., .print = TRUE)
+is_unique_by(data, ..., .print = TRUE)
 }
 \arguments{
-\item{df}{The input data frame}
+\item{data}{The input data frame}
 
-\item{...}{Columns to check for uniqueness. Takes a tidyselect specification}
+\item{...}{Columns to check for uniqueness. Takes a tidyselect specification. If no selections are specified, checks for uniqueness by all columns}
 
 \item{.print}{Should duplicates be printed if they exist? Defaults to TRUE}
 }
@@ -29,6 +29,8 @@ This function is pipe-friendly and designed to be used with \code{stopifnot()} o
 }
 \examples{
 
+library(assertthat)
+
 # Testing for unique key values (TRUE)
 stopifnot(
   fake_county |> is_unique_by(tid, school_year)
@@ -36,7 +38,7 @@ stopifnot(
 
 # Testing for unique key values (FALSE)
 try(
-  stopifnot(
+  assert_that(
     wisc |> is_unique_by(district, school, grade)
   )
 )

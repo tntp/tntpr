@@ -42,6 +42,7 @@ Imports:
     tidyr (>= 1.0.0),
     tidyselect
 Suggests: 
+    assertthat,
     devtools,
     knitr,
     rmarkdown,

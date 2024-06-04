@@ -13,8 +13,8 @@
 #'
 #' @md
 #'
-#' @param df The input data frame
-#' @param ... Columns to check for uniqueness. Takes a tidyselect specification
+#' @param data The input data frame
+#' @param ... Columns to check for uniqueness. Takes a tidyselect specification. If no selections are specified, checks for uniqueness by all columns
 #' @param .print Should duplicates be printed if they exist? Defaults to TRUE
 #'
 #' @return returns a logical value. If the data frame is NOT uniquely
@@ -25,6 +25,8 @@
 #'
 #' @examples
 #'
+#' library(assertthat)
+#'
 #' # Testing for unique key values (TRUE)
 #' stopifnot(
 #'   fake_county |> is_unique_by(tid, school_year)
@@ -32,15 +34,15 @@
 #'
 #' # Testing for unique key values (FALSE)
 #' try(
-#'   stopifnot(
+#'   assert_that(
 #'     wisc |> is_unique_by(district, school, grade)
 #'   )
 #' )
 #'
-is_unique_by <- function(df, ..., .print = TRUE) {
+is_unique_by <- function(data, ..., .print = TRUE) {
 
   # Suppress the default "No duplicates found" message
-  dupes <- suppressMessages(janitor::get_dupes(df, ...))
+  dupes <- suppressMessages(janitor::get_dupes(data, ...))
   is_unique <- nrow(dupes) == 0
   if (!is_unique && .print) {
     cli::cli_inform(c("i" = "Duplicates shown below"))
@@ -52,10 +54,30 @@ is_unique_by <- function(df, ..., .print = TRUE) {
 
 # Custom error message for assert_that
 assertthat::on_failure(is_unique_by) <- function(call, env) {
-  df <- deparse(call$df)
-  args <- rlang::call_args(call)
-  cols <- as.character(args[!names(args) %in% c("df", ".print")])
+  df_name <- deparse(call$data)
+
+  # Remove function from call
+  arg_list <- as.list(call)[-1]
+
+  # Extract data argument
+  df_val <- arg_list$data
+
+  # Remove data and .print arguments to get the selecting statements
+  arg_list$.print <- NULL
+  arg_list$data <- NULL
+
+  if (length(arg_list) == 0) {
+    quo_list <- rlang::expr(everything())
+  } else {
+    quo_list <- lapply(arg_list, \(arg) rlang::enquo(arg))
+  }
+
+  # Get column names by actually calling select. This allows functions like
+  # starts_with() to be evaluated first and the resulting columns to be printed
+  # Does seem like there ought to be a better way though...
+  cols <- do.call(dplyr::select, c(list(df_val), quo_list)) |> names()
   cols <- paste0("`", cols, "`")
 
-  cli::pluralize("{df} contains duplicate values of the columns {cols}")
+  paste0(df_name,
+         cli::pluralize(" contains duplicate values of the column{?s} {cols}"))
 }
