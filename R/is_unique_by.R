@@ -55,29 +55,26 @@ is_unique_by <- function(data, ..., .print = TRUE) {
 # Custom error message for assert_that
 assertthat::on_failure(is_unique_by) <- function(call, env) {
   df_name <- deparse(call$data)
+  df_val <- eval(call$data, env)
 
   # Remove function from call
   arg_list <- as.list(call)[-1]
 
-  # Extract data argument
-  df_val <- arg_list$data
-
-  # Remove data and .print arguments to get the selecting statements
-  arg_list$.print <- NULL
-  arg_list$data <- NULL
+  # Remove data and .print arguments (if they exist)
+  arg_list[c("data", ".print")] <- NULL
 
   if (length(arg_list) == 0) {
-    quo_list <- rlang::expr(everything())
+    expr <- rlang::expr(everything())
   } else {
-    quo_list <- lapply(arg_list, \(arg) rlang::enquo(arg))
+    expr <- rlang::expr(c(!!!arg_list))
   }
 
-  # Get column names by actually calling select. This allows functions like
-  # starts_with() to be evaluated first and the resulting columns to be printed
-  # Does seem like there ought to be a better way though...
-  cols <- do.call(dplyr::select, c(list(df_val), quo_list)) |> names()
+  # Get column names with tidyselect. This allows functions like starts_with()
+  # to be evaluated first and the resulting columns to be printed
+  cols <- tidyselect::eval_select(expr, df_val) |> names()
   cols <- paste0("`", cols, "`")
 
-  paste0(df_name,
-         cli::pluralize(" contains duplicate values of the column{?s} {cols}"))
+  paste0(df_name, cli::pluralize(
+    " contains duplicate values across the column{?s} {cols}"
+  ))
 }
