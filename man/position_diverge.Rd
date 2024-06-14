@@ -9,16 +9,16 @@ position_diverge(vjust = 1, break_after = NULL)
 \arguments{
 \item{vjust}{OPTIONAL set to 0.5 for geom_text() or geom_label() to center within the bar.}
 
-\item{break_after}{OPTIONAL. Either an integer index or character value that is the last positive level}
+\item{break_after}{OPTIONAL. Either an integer index or character value that represents the last positive level}
 }
 \description{
-This is a modification of `ggplot2::position_stack()` for creating diverging bar charts.
-In order to use this function, you must set a fill aesthetic and that aesthetic must be
-a factor. This function will automatically break your chart into negative and positive
-values and display them in the same order as geom_col()
+This is a modification of \code{ggplot2::position_stack()} for creating diverging
+bar charts. In order to use this function, you \emph{must} set a fill aesthetic
+(and that aesthetic should probably be a factor). This function will
+automatically break your chart into negative and positive values and display
+them in the same order as geom_col()
 }
 \examples{
-\dontrun{
 library(ggplot2)
 
 # Example data
@@ -38,24 +38,24 @@ test_df <- tibble::tribble(
     q = forcats::fct_inorder(q)
   )
 
-# Default diverging (splits in half)
+# Default diverging with text
 test_df |>
   ggplot(aes(q, prop, fill = response)) +
   geom_col(position = position_diverge()) +
-  geom_text(aes(label = scales::percent(prop,)), position = position_diverge(vjust = 0.5)) +
+  geom_text(aes(label = scales::percent(prop,)),
+            position = position_diverge(vjust = 0.5)) +
   geom_hline(yintercept = 0) +
-  tntp_style() +
+  tntp_style(family = "sans") +
   # Adjust axis labels to be positive on both sides
   scale_y_continuous(labels = ~scales::percent(abs(.)))
 
-# break_after paramater
+# Custom breaks with the break_after parameter
 test_df |>
   ggplot(aes(q, prop, fill = response)) +
   geom_col(position = position_diverge(break_after = 'Yes')) +
   geom_hline(yintercept = 0) +
-  tntp_style() +
+  tntp_style(family = "sans") +
   # Adjust axis labels to be positive on both sides
   scale_y_continuous(labels = ~scales::percent(abs(.)))
-}
 
 }
