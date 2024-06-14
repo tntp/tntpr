@@ -10,8 +10,10 @@
 #'
 #' @md
 #'
-#' @param vjust OPTIONAL set to 0.5 for geom_text() or geom_label() to center within the bar.
+#' @param vjust OPTIONAL. Set to 0.5 for geom_text() or geom_label() to center within the bar.
 #' @param break_after OPTIONAL. Either an integer index or character value that represents the last positive level
+#' @param fill OPTIONAL. If `TRUE` will automatically scale bars to 100% as with `position_fill()`
+#' @param reverse If `TRUE`, will reverse the default stacking order.
 #'
 #' @importFrom rlang `%||%`
 #' @export
@@ -56,123 +58,123 @@
 #'   # Adjust axis labels to be positive on both sides
 #'   scale_y_continuous(labels = ~scales::percent(abs(.)))
 #'
-position_diverge <- function(vjust = 1, break_after = NULL) {
-  ggplot2::ggproto(NULL, PositionDiverge, vjust = vjust, break_after = break_after)
+position_diverge <- function(vjust = 1, break_after = NULL, fill = FALSE,
+                             reverse = FALSE) {
+  ggplot2::ggproto(NULL, PositionDiverge, vjust = vjust,
+                   break_after = break_after, fill = fill, reverse = reverse)
 }
 
-PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::Position,
-  type = NULL,
-  vjust = 1,
-  fill = FALSE,
+PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::PositionStack,
   break_after = NULL,
 
+  # This doesn't seem to work?
+  required_aes = "fill",
+
   setup_params = function(self, data) {
-   flipped_aes <- ggplot2::has_flipped_aes(data)
-   data <- ggplot2::flip_data(data, flipped_aes)
+    # Copied from PositionStack
+    flipped_aes <- ggplot2::has_flipped_aes(data)
+    data <- ggplot2::flip_data(data, flipped_aes)
 
-   # Pull lvls
-   if(is.factor(data$fill)) {
-     lvls <- levels(data$fill)
-   } else if(!is.null(data$fill)){
-     lvls <- sort(unique(data$fill))
-     cli::cli_inform(c(
-       "i" = "For best results, use a factor for the {.var fill} aesthetic with `position_diverge()`"
-     ))
-   } else {
-     cli::cli_abort(c(
-       "x" = "`position_diverge()` requires a provided {.var fill} aesthetic."
-     ))
-   }
+    # New
+    # Pull lvls
+    if (is.factor(data$fill)) {
+      lvls <- levels(data$fill)
+    } else if(!is.null(data$fill)) {
+      lvls <- sort(unique(data$fill))
+      cli::cli_inform(c(
+        "i" = "For best results, use a factor for the {.var fill} aesthetic with `position_diverge()`"
+      ))
+    } else {
+      cli::cli_abort(c(
+        "x" = "`position_diverge()` requires a provided {.var fill} aesthetic."
+      ))
+    }
 
-   # Use length over 2 if break_after isn't provided
-   break_after <- self$break_after %||% floor(length(lvls) / 2)
+    # Use length over 2 if break_after isn't provided
+    break_after <- self$break_after %||% floor(length(lvls) / 2)
 
-   # Parse character provision of break_after
-   if(is.character(break_after)) {
-     char <- break_after
-     break_after <- which(lvls == break_after)
-     # If value isn't found
-     if(length(break_after) == 0) {
-       cli::cli_abort(c("x" = "Provided break_after level {.val {char}} not found in the levels for the fill variable",
-                        "i" = "Fill variable levels are {.val {lvls}}"))
-     }
-   }
+    # Parse character provision of break_after
+    if(is.character(break_after)) {
+      char <- break_after
+      break_after <- which(lvls == break_after)
+      # If value isn't found
+      if(length(break_after) == 0) {
+        cli::cli_abort(c("x" = "Provided break_after level {.val {char}} not found in the levels for the fill variable",
+                         "i" = "Fill variable levels are {.val {lvls}}"))
+      }
+    }
 
-   list(
-     var = self$var %||% ggplot2:::stack_var(data),
-     fill = self$fill,
-     vjust = self$vjust,
-     flipped_aes = flipped_aes,
-     break_after = break_after,
-     lvls = lvls
-   )
-  },
-
-  setup_data = function(self, data, params) {
-   data <- ggplot2::flip_data(data, params$flipped_aes)
-   if (is.null(params$var)) {
-     return(data)
-   }
-
-   data$ymax <- switch(params$var,
-                       y = data$y,
-                       ymax = as.numeric(ifelse(data$ymax == 0, data$ymin, data$ymax))
-   )
-
-   vars <- intersect(c("x", "xmin", "xmax", "y"), names(data))
-   missing <- ggplot2:::detect_missing(data, vars)
-   data[missing, vars] <- NA
-
-   # Check for data positivity
-   y_vals <- intersect(c("y", "ymin", "ymax"), names(data))
-   if (any(unlist(data[y_vals]) < 0)) {
-     cli::cli_warn(c(
-       "!" = "Data contains negative plotting values.",
-       "i" = "Values have been coerced to positive for plotting with `position_diverge()`"
-     ))
-
-     data[y_vals] <- lapply(data[y_vals],
-                            \(x) if (is.null(x)) NULL else abs(x))
-   }
-
-   # Make data negative if it's before the break
-   lvls_p <- params$lvls[1:params$break_after]
-   data[y_vals] <- lapply(data[y_vals],
-                          \(y) ifelse(data$fill %in% lvls_p, y, -y))
-
-   ggplot2::flip_data(data, params$flipped_aes)
+    list(
+      # From PositionStack
+      var = self$var %||% ggplot2:::stack_var(data),
+      fill = self$fill,
+      vjust = self$vjust,
+      reverse = self$reverse,
+      flipped_aes = flipped_aes,
+      # New
+      break_after = break_after,
+      lvls = lvls
+    )
   },
 
   compute_panel = function(data, params, scales) {
-   data <- ggplot2::flip_data(data, params$flipped_aes)
-   if (is.null(params$var)) {
-     return(data)
-   }
+    data <- ggplot2::flip_data(data, params$flipped_aes)
 
-   negative <- data$ymax < 0
-   negative[is.na(negative)] <- FALSE
+    # Check/adjust for data positivity
+    y_vals <- intersect(c("y", "ymin", "ymax"), names(data))
+    if (any(unlist(data[y_vals]) < 0)) {
+      cli::cli_warn(c(
+        "!" = "Data contains negative plotting values.",
+        "i" = "Values have been coerced to positive for plotting with `position_diverge()`"
+        ))
 
-   neg <- data[negative, , drop = FALSE]
-   pos <- data[!negative, , drop = FALSE]
+      data[y_vals] <- lapply(data[y_vals], abs)
+    }
 
-   if (any(negative)) {
-     neg <- ggplot2:::collide(neg, NULL, "position_stack", ggplot2:::pos_stack,
-                              vjust = params$vjust,
-                              fill = params$fill,
-                              # Reverse the negative side (undoes the inside-out stacking)
-                              reverse = TRUE
-     )
-   }
-   if (!all(negative)) {
-     pos <- ggplot2:::collide(pos, NULL, "position_stack", ggplot2:::pos_stack,
-                              vjust = params$vjust,
-                              fill = params$fill,
-                              # Don't reverse the positive side
-                              reverse = FALSE
-     )
-   }
+    # Order data, reversing if needed
+    if (params$reverse) {
+      data <- dplyr::arrange(data, x, fill)
+      break_before <- params$break_after
+    } else {
+      data <- dplyr::arrange(data, x, desc(fill))
+      break_before <- length(params$lvls) - params$break_after
+    }
 
-   data <- ggplot2:::vec_rbind0(neg, pos)[match(seq_len(nrow(data)), c(which(negative), which(!negative))),]
-   ggplot2::flip_data(data, params$flipped_aes)
+    # Stack ymax
+    data$ymax <- data$ymax |>
+      split(data$x) |>
+      lapply(cumsum) |>
+      unlist()
+
+    # Scale (if fill = TRUE)
+    if (params$fill) {
+      data$ymax <- data$ymax |>
+        split(data$x) |>
+        lapply(\(v) v / max(v)) |>
+        unlist()
+    }
+
+    # Set ymin
+    data$ymin <- data$ymax |>
+      split(data$x) |>
+      lapply(\(v) c(0, v[-length(v)])) |>
+      unlist()
+
+    # Set y, adjusting for vjust
+    data$y <- data$ymin + params$vjust * (data$ymax - data$ymin)
+
+    # Break at break_after
+    data <- data |>
+      split(~x) |>
+      lapply(\(df) {
+        b <- df$ymax[[break_before]]
+        df[c("ymax", "ymin", "y")] <- df[c("ymax", "ymin", "y")] - b
+        df
+      }) |>
+      do.call(rbind, args = _)
+
+    # Return data (flipped back if necessary)
+    ggplot2::flip_data(data, params$flipped_aes)
   }
+
 )

@@ -4,12 +4,16 @@
 \alias{position_diverge}
 \title{Easy Diverging Bar Charts}
 \usage{
-position_diverge(vjust = 1, break_after = NULL)
+position_diverge(vjust = 1, break_after = NULL, fill = FALSE, reverse = FALSE)
 }
 \arguments{
-\item{vjust}{OPTIONAL set to 0.5 for geom_text() or geom_label() to center within the bar.}
+\item{vjust}{OPTIONAL. Set to 0.5 for geom_text() or geom_label() to center within the bar.}
 
 \item{break_after}{OPTIONAL. Either an integer index or character value that represents the last positive level}
+
+\item{fill}{OPTIONAL. If \code{TRUE} will automatically scale bars to 100\% as with \code{position_fill()}}
+
+\item{reverse}{If \code{TRUE}, will reverse the default stacking order.}
 }
 \description{
 This is a modification of \code{ggplot2::position_stack()} for creating diverging
