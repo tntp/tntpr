@@ -7,11 +7,11 @@
 position_diverge(vjust = 1, break_after = NULL, fill = FALSE, reverse = FALSE)
 }
 \arguments{
-\item{vjust}{OPTIONAL. Set to 0.5 for geom_text() or geom_label() to center within the bar.}
+\item{vjust}{Vertical adjustment for geoms that have a position (like text or points), not a dimension (like bars or areas). Set to 0 to align with the bottom, 0.5 for the middle, and 1 (the default) for the top.}
 
-\item{break_after}{OPTIONAL. Either an integer index or character value that represents the last positive level}
+\item{break_after}{Either an integer index or character value that represents the last positive level. The default, \code{NULL}, will split the levels halfway (with fewer positive levels if the total number of levels is odd).}
 
-\item{fill}{OPTIONAL. If \code{TRUE} will automatically scale bars to 100\% as with \code{position_fill()}}
+\item{fill}{If \code{TRUE} will automatically scale bars to 100\% as with \code{position_fill()}}
 
 \item{reverse}{If \code{TRUE}, will reverse the default stacking order.}
 }
@@ -20,7 +20,7 @@ This is a modification of \code{ggplot2::position_stack()} for creating divergin
 bar charts. In order to use this function, you \emph{must} set a fill aesthetic
 (and that aesthetic should probably be a factor). This function will
 automatically break your chart into negative and positive values and display
-them in the same order as geom_col()
+them in the same order as your fill levels.
 }
 \examples{
 library(ggplot2)
@@ -43,6 +43,8 @@ test_df <- tibble::tribble(
   )
 
 # Default diverging with text
+# In interactive use, this can also be run with `position = "diverge"`
+
 test_df |>
   ggplot(aes(q, prop, fill = response)) +
   geom_col(position = position_diverge()) +

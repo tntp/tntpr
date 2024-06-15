@@ -6,13 +6,13 @@
 #' bar charts. In order to use this function, you *must* set a fill aesthetic
 #' (and that aesthetic should probably be a factor). This function will
 #' automatically break your chart into negative and positive values and display
-#' them in the same order as geom_col()
+#' them in the same order as your fill levels.
 #'
 #' @md
 #'
-#' @param vjust OPTIONAL. Set to 0.5 for geom_text() or geom_label() to center within the bar.
-#' @param break_after OPTIONAL. Either an integer index or character value that represents the last positive level
-#' @param fill OPTIONAL. If `TRUE` will automatically scale bars to 100% as with `position_fill()`
+#' @param vjust Vertical adjustment for geoms that have a position (like text or points), not a dimension (like bars or areas). Set to 0 to align with the bottom, 0.5 for the middle, and 1 (the default) for the top.
+#' @param break_after Either an integer index or character value that represents the last positive level. The default, `NULL`, will split the levels halfway (with fewer positive levels if the total number of levels is odd).
+#' @param fill If `TRUE` will automatically scale bars to 100% as with `position_fill()`
 #' @param reverse If `TRUE`, will reverse the default stacking order.
 #'
 #' @importFrom rlang `%||%`
@@ -39,6 +39,8 @@
 #'   )
 #'
 #' # Default diverging with text
+#' # In interactive use, this can also be run with `position = "diverge"`
+#'
 #' test_df |>
 #'   ggplot(aes(q, prop, fill = response)) +
 #'   geom_col(position = position_diverge()) +
@@ -76,7 +78,7 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::PositionStack,
     data <- ggplot2::flip_data(data, flipped_aes)
 
     # New
-    # Pull lvls
+    # Check lvls
     if (is.factor(data$fill)) {
       lvls <- levels(data$fill)
     } else if(!is.null(data$fill)) {
@@ -131,13 +133,16 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::PositionStack,
       data[y_vals] <- lapply(data[y_vals], abs)
     }
 
-    # Order data, reversing if needed
+    # Store original data order
+    data$order <- seq_len(nrow(data))
+
+    # Order data temporarily, reversing if needed
     if (params$reverse) {
       data <- dplyr::arrange(data, x, fill)
-      break_before <- params$break_after
+      break_lvls <- params$lvls[1:params$break_after]
     } else {
       data <- dplyr::arrange(data, x, desc(fill))
-      break_before <- length(params$lvls) - params$break_after
+      break_lvls <- params$lvls[(params$break_after + 1):length(params$lvls)]
     }
 
     # Stack ymax
@@ -167,11 +172,19 @@ PositionDiverge <- ggplot2::ggproto("PositionDiverge", ggplot2::PositionStack,
     data <- data |>
       split(~x) |>
       lapply(\(df) {
-        b <- df$ymax[[break_before]]
-        df[c("ymax", "ymin", "y")] <- df[c("ymax", "ymin", "y")] - b
+        if (any(df$fill %in% break_lvls)) {
+          b_max <- max(df$ymax[df$fill %in% break_lvls])
+        } else {
+          b_max <- 0
+        }
+        df[c("ymax", "ymin", "y")] <- df[c("ymax", "ymin", "y")] - b_max
         df
       }) |>
       do.call(rbind, args = _)
+
+    # Restore original order
+    data <- data[order(data$order), ]
+    data$order <- NULL
 
     # Return data (flipped back if necessary)
     ggplot2::flip_data(data, params$flipped_aes)
