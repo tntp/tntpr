@@ -39,7 +39,7 @@ stopifnot(
 # Testing for unique key values (FALSE)
 try(
   assert_that(
-    wisc |> is_unique_by(district, school, grade)
+    mtcars |> is_unique_by(cyl, mpg)
   )
 )
 
