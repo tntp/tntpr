@@ -42,14 +42,16 @@
 #' # In interactive use, this can also be run with `position = "diverge"`
 #'
 #' test_df |>
-#'   ggplot(aes(q, prop, fill = response)) +
+#'   ggplot(aes(prop, q, fill = response)) +
 #'   geom_col(position = position_diverge()) +
 #'   geom_text(aes(label = scales::percent(prop,)),
 #'             position = position_diverge(vjust = 0.5)) +
-#'   geom_hline(yintercept = 0) +
+#'   geom_vline(xintercept = 0) +
 #'   tntp_style(family = "sans") +
+#'   # Reverse legend to match horizontal bar order
+#'   guides(fill = guide_legend(reverse = TRUE)) +
 #'   # Adjust axis labels to be positive on both sides
-#'   scale_y_continuous(labels = ~scales::percent(abs(.)))
+#'   scale_x_continuous(labels = ~scales::percent(abs(.)))
 #'
 #' # Custom breaks with the break_after parameter
 #' test_df |>
