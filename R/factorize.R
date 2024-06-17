@@ -20,8 +20,9 @@ prop_matching <- function(vec, valid_strings, ignore.case = FALSE) {
 
 #' Update case of a character vector
 #'
-#' Helper function for factorize_df(). Returns a vector of the same length as vec,
-#' with any values that match values in valid_strings updated to the case in valid_strings
+#' Helper function for factorize_df() and safe_factor(). Returns a vector of
+#' the same length as vec, with any values that match values in valid_strings
+#' updated to the case in valid_strings
 #'
 #' @param vec The character vector you want to update
 #' @param new_case A character vector of correctly cased strings

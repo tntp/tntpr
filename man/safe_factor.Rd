@@ -5,14 +5,16 @@
 \alias{safe_ordered}
 \title{Set factor levels safely}
 \usage{
-safe_factor(x = character(), levels, ...)
+safe_factor(x = character(), levels, update.case = FALSE, ...)
 
-safe_ordered(x = character(), levels, ...)
+safe_ordered(x = character(), levels, update.case = FALSE, ...)
 }
 \arguments{
 \item{x}{a vector of data, usually taking a small number of distinct values}
 
 \item{levels}{a vector of unique values}
+
+\item{update.case}{Logical. If `TRUE`, will match without checking case, using the capitalization from the levels parameter for the final output.}
 
 \item{...}{additional arguments passed on to factor() or ordered()}
 }
@@ -29,12 +31,17 @@ if any values in the vector don't match a provided level.
 \examples{
 
 # No error:
-tntpr::teacher_survey |>
+teacher_survey |>
   dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Post")))
 
 # Mis-typed level generates an error
 try(
-  tntpr::teacher_survey |>
+  teacher_survey |>
     dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
 )
+
+# Use update.case to automatically update levels
+teacher_survey |>
+  dplyr::mutate(timing = safe_factor(timing, levels = c("pre", "post"),
+                                     update.case = TRUE))
 }

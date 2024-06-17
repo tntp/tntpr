@@ -10,6 +10,7 @@
 #'
 #' @param x a vector of data, usually taking a small number of distinct values
 #' @param levels a vector of unique values
+#' @param update.case Logical. If `TRUE`, will match without checking case, using the capitalization from the levels parameter for the final output.
 #' @param ... additional arguments passed on to factor() or ordered()
 #'
 #' @return a factor
@@ -18,23 +19,43 @@
 #' @examples
 #'
 #' # No error:
-#' tntpr::teacher_survey |>
+#' teacher_survey |>
 #'   dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Post")))
 #'
 #' # Mis-typed level generates an error
 #' try(
-#'   tntpr::teacher_survey |>
+#'   teacher_survey |>
 #'     dplyr::mutate(timing = safe_factor(timing, levels = c("Pre", "Pst")))
 #' )
-safe_factor <- function(x = character(), levels, ...) {
+#'
+#' # Use update.case to automatically update levels
+#' teacher_survey |>
+#'   dplyr::mutate(timing = safe_factor(timing, levels = c("pre", "post"),
+#'                                      update.case = TRUE))
+safe_factor <- function(x = character(), levels,  update.case = FALSE, ...) {
 
   # If levels aren't provided, no need to run checks
   if (missing(levels)) return(factor(x, ...))
 
+  # Deal with update.case
+  if (update.case) {
+    x <- standardize_case(x, levels)
+  }
+
   vals <- unique(x)
   na_vals <- vals[!vals %in% c(levels, NA)]
   if (length(na_vals) > 0) {
-    cli::cli_abort("Value{?s} {.val {na_vals}} does not match provided levels.")
+    msg <- c(
+      "x" = "Value{?s} {.val {na_vals}} {?does/do} not match provided levels.",
+      "i" = "Provided levels were {.val {levels}}"
+    )
+    if (!update.case && all(standardize_case(na_vals, levels) %in% levels)) {
+      msg <- c(
+        msg,
+        "i" = "Run with `update.case = TRUE` to automatically re-case data"
+      )
+    }
+    cli::cli_abort(msg)
   }
   factor(x, levels, ...)
 }
@@ -42,6 +63,6 @@ safe_factor <- function(x = character(), levels, ...) {
 
 #' @export
 #' @rdname safe_factor
-safe_ordered <- function(x = character(), levels, ...) {
-  safe_factor(x, levels, ordered = TRUE, ...)
+safe_ordered <- function(x = character(), levels, update.case = FALSE, ...) {
+  safe_factor(x, levels, update.case, ordered = TRUE, ...)
 }

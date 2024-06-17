@@ -1,13 +1,15 @@
 test_that("output values match factor()/ordered() for good input", {
+  x <- c("a", "b", "c", NA, "b")
+  lvls <- c("c", "b", "a")
   # Levels work as expected
   expect_equal(
-    safe_factor(c("a", "b", "c", NA, "b"), levels = c("c", "b", "a")),
-    factor(c("a", "b", "c", NA, "b"), levels = c("c", "b", "a"))
+    safe_factor(x, levels = lvls),
+    factor(x, levels = lvls)
   )
 
   expect_equal(
-    safe_ordered(c("a", "b", "c", NA, "b"), levels = c("c", "b", "a")),
-    ordered(c("a", "b", "c", NA, "b"), levels = c("c", "b", "a"))
+    safe_ordered(x, levels = lvls),
+    ordered(x, levels = lvls)
   )
 })
 
@@ -18,14 +20,10 @@ test_that("ordered inputs are returned as ordered", {
 
 test_that("unmatched values trigger an error", {
   expect_error(safe_factor(c("a", "b"), levels = c("a", "c")),
-               "does not match provided levels")
+               "not match provided levels")
 
   expect_error(safe_ordered(c("a", "b"), levels = c("a", "c")),
-               "does not match provided levels")
-
-  # Checks for casing
-  expect_error(safe_factor(c("a", "b"), levels = c("a", "B")),
-               "does not match provided levels")
+               "not match provided levels")
 })
 
 test_that("works with no input vector", {
@@ -51,3 +49,26 @@ test_that("Works with no set levels", {
     ordered(c("a", "b"))
   )
 })
+
+test_that("doesn't ignore case by default", {
+  expect_error(safe_factor(c("a", "b"), levels = c("a", "B")),
+               "not match provided levels")
+
+  expect_error(safe_ordered(c("a", "b"), levels = c("a", "B")),
+               "not match provided levels")
+})
+
+test_that("updates case when directed", {
+  expect_equal(safe_factor(c("test", "Test", "TeSt", "ing", "inG"),
+                           levels = c("TEST", "ING"),
+                           update.case = TRUE),
+              factor(c("TEST", "TEST", "TEST", "ING", "ING"),
+                     levels = c("TEST", "ING")))
+
+  expect_equal(safe_ordered(c("test", "Test", "TeSt", "ing", "inG"),
+                            levels = c("TEST", "ING"),
+                            update.case = TRUE),
+               ordered(c("TEST", "TEST", "TEST", "ING", "ING"),
+                       levels = c("TEST", "ING")))
+})
+

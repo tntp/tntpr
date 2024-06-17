@@ -15,6 +15,7 @@ standardize_case(vec, new_case)
 a character vector the same length as vec
 }
 \description{
-Helper function for factorize_df(). Returns a vector of the same length as vec,
-with any values that match values in valid_strings updated to the case in valid_strings
+Helper function for factorize_df() and safe_factor(). Returns a vector of
+the same length as vec, with any values that match values in valid_strings
+updated to the case in valid_strings
 }
