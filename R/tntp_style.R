@@ -255,9 +255,11 @@ tntp_style <- function(family = "Halyard Display",
       face = "italic",
       color = caption_color
     ),
+    plot.title.position = "plot",
 
     # Style legend, including alignment
     legend.position = "top",
+    legend.location = "plot",
     legend.justification = legend_align,
     legend.direction = "horizontal",
     legend.text.align = 0,
