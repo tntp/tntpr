@@ -1,3 +1,27 @@
+test_that("choose_text_color() matches the names of bg_color", {
+  a <- c("Yes" = "green", "No" = "red")
+  b <- unname(a)
+  expect_equal(names(choose_text_color(a)), names(a))
+  expect_equal(names(choose_text_color(b)), names(b))
+})
+
+test_that("choose_text_color() works as expected for basic colors", {
+  expect_equal(choose_text_color(c("#111111", "#DDDDDD")), c("white", "black"))
+})
+
+test_that("choose_text_color() handles edge cases as expected", {
+  expect_equal(choose_text_color("#111111"), "white")
+  expect_equal(choose_text_color("white", text_colors = "blue"), "blue")
+  expect_equal(choose_text_color(list()), list())
+  expect_equal(choose_text_color(NULL), NULL)
+
+  expect_error(choose_text_color("red", text_colors = NULL), "No text colors provided")
+  expect_error(choose_text_color("red", text_colors = list()), "No text colors provided")
+  expect_error(choose_text_color("a"), "must be a vector of colors")
+  expect_error(choose_text_color("red", text_colors = "a"), "must be a vector of colors")
+  expect_error(choose_text_color("white", text_colors = "yellow"), "No high-contrast text color")
+})
+
 test_that("tntp_colors returns duplicated colors", {
   expect_equal(tntp_colors("navy", "navy"), c(tntp_colors("navy"), tntp_colors("navy")))
 })

@@ -3,6 +3,7 @@
 export(bar_chart_counts)
 export(check_all_count)
 export(check_all_recode)
+export(choose_text_color)
 export(colors_tntp)
 export(colors_tntp_likert)
 export(colors_tntp_likert_orange_to_green)

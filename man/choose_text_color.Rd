@@ -2,16 +2,44 @@
 % Please edit documentation in R/tntp_colors.R
 \name{choose_text_color}
 \alias{choose_text_color}
-\title{Choose a text color given a background color}
+\title{Get contrasting text colors for fills}
 \usage{
-choose_text_color(bg_color)
+choose_text_color(bg_color, text_colors = c("black", "white"), min_ratio = 4.5)
 }
 \arguments{
-\item{bg_color}{a color}
+\item{bg_color}{a vector of colors to be used as background colors}
+
+\item{text_colors}{a vector of options for text colors. Defaults to "black" and "white"}
+
+\item{min_ratio}{Minimum contrast ratio. By default this is set to 4.5, the WCAG recommendation for regular text.}
 }
 \value{
-"black" or "white"
+a vector of text colors the same length as \code{bg_color}.
 }
 \description{
-Choose a text color given a background color
+Get appropriate high-contrast text colors for a vector of background colors.
+This function uses the W3C contrast ratio guidance (through the
+\code{colorspace::contrast_ratio()} function) to determine the contrast,
+and will raise an error if no high-enough contrast colors can be found.
+}
+\details{
+By default, this function uses black and white as the text color options,
+however custom text color options can be set with the \code{text_colors}
+argument.
+}
+\examples{
+
+library(ggplot2)
+
+fills <- tntp_palette("top2_5")
+
+diamonds |>
+  dplyr::summarize(m = mean(price), .by = cut) |>
+  ggplot(aes(cut, m, fill = cut)) +
+  geom_col() +
+  geom_text(aes(label = scales::dollar(m), color = cut), vjust = 1.5) +
+  scale_fill_manual(values = fills, guide = "none") +
+  scale_color_manual(values = choose_text_color(fills), guide = "none") +
+  tntp_style(family = "sans")
+
 }
