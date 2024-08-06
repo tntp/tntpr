@@ -149,15 +149,73 @@ is_color <- function(x) {
   return(!"try-error" %in% class(res))
 }
 
-#' Choose a text color given a background color
+#' Get contrasting text colors for fills
 #'
-#' @param bg_color a color
+#' Get appropriate high-contrast text colors for a vector of background colors.
+#' This function uses the W3C contrast ratio guidance (through the
+#' `colorspace::contrast_ratio()` function) to determine the contrast,
+#' and will raise an error if no high-enough contrast colors can be found.
 #'
-#' @returns "black" or "white"
-choose_text_color <- function(bg_color) {
-  stopifnot(is_color(bg_color))
-  ifelse(colSums(grDevices::col2rgb(bg_color) * c(.299, .587, .114)) > 150,
-     "black", "white")
+#' By default, this function uses black and white as the text color options,
+#' however custom text color options can be set with the `text_colors`
+#' argument.
+#'
+#' @param bg_color a vector of colors to be used as background colors
+#' @param text_colors a vector of options for text colors. Defaults to "black" and "white"
+#' @param min_ratio Minimum contrast ratio. By default this is set to 4.5, the WCAG recommendation for regular text.
+#'
+#' @md
+#'
+#' @returns a vector of text colors the same length as `bg_color`.
+#' @export
+#' @examples
+#'
+#' library(ggplot2)
+#'
+#' fills <- tntp_palette("top2_5")
+#'
+#' diamonds |>
+#'   dplyr::summarize(m = mean(price), .by = cut) |>
+#'   ggplot(aes(cut, m, fill = cut)) +
+#'   geom_col() +
+#'   geom_text(aes(label = scales::dollar(m), color = cut), vjust = 1.5) +
+#'   scale_fill_manual(values = fills, guide = "none") +
+#'   scale_color_manual(values = choose_text_color(fills), guide = "none") +
+#'   tntp_style(family = "sans")
+#'
+choose_text_color <- function(bg_color, text_colors = c("black", "white"),
+                              min_ratio = 4.5) {
+  # Argument validation
+  if (!is_color(bg_color)) {
+    bad_colors <- bg_color[!sapply(bg_color, is_color)]
+    cli::cli_abort(
+      "{.arg bg_color} must be a vector of colors.",
+      "i" = "{.val {bad_colors}} {?is not a valid color/are not valid colors}."
+    )
+  }
+  if (!is_color(text_colors)) {
+    bad_colors <- text_colors[!sapply(text_colors, is_color)]
+    cli::cli_abort(
+      "{.arg text_colors} must be a vector of colors.",
+      "i" = "{.val {bad_colors}} {?is not a valid color/are not valid colors}."
+    )
+  }
+  if (is.null(text_colors) || length(text_colors) == 0) cli::cli_abort("No text colors provided")
+  if (is.null(bg_color)) return(NULL)
+
+  highest_contrast <- function(bg_col, text_colors) {
+    con <- sapply(text_colors, \(x) colorspace::contrast_ratio(bg_col, x))
+    if (max(con) < min_ratio) {
+      cli::cli_abort(c(
+        "No high-contrast text color options found for {.val {bg_col}}",
+        "i" = "Max contrast is {.val {round(max(con), 2)}}, which is less than the {.var min_ratio} value of {.val {min_ratio}}"
+      ))
+    }
+    text_colors[[which.max(con)]]
+  }
+
+  sapply(bg_color, \(bg_col) highest_contrast(bg_col, text_colors),
+         USE.NAMES = FALSE)
 }
 
 
@@ -243,6 +301,10 @@ tntp_palette_list <- list(
   "top2_5" = tntp_colors("medium_gray", "gray_2", "gray", "green", "dark_green"),
   "top2_6" = tntp_colors("gray_4", "medium_gray", "gray_2", "gray", "green", "dark_green"),
   "top2_7" = tntp_colors("charcoal", "gray_4", "medium_gray", "gray_2", "gray", "green", "dark_green"),
+  "yb_4" = tntp_colors("dark_gold", "gold", "cerulean", "navy"),
+  "yb_5" = tntp_colors("dark_gold", "gold", "gray_2", "cerulean", "navy"),
+  "yb_6" = tntp_colors("dark_gold", "gold", "yellow", "sky", "cerulean", "navy"),
+  "yb_7" = tntp_colors("dark_gold", "gold", "yellow", "gray_2", "sky", "cerulean", "navy"),
   "rb_4" = tntp_colors("dark_red", "red", "cerulean", "navy"),
   "rb_5" = tntp_colors("dark_red", "red", "gray_2", "cerulean", "navy"),
   "rb_6" = tntp_colors("dark_red", "red", "salmon", "sky", "cerulean", "navy"),
@@ -251,6 +313,10 @@ tntp_palette_list <- list(
   "bg_5" = tntp_colors("navy", "cerulean", "gray_2", "green", "dark_green"),
   "bg_6" = tntp_colors("navy", "cerulean", "sky", "moss", "green", "dark_green"),
   "bg_7" = tntp_colors("navy", "cerulean", "sky", "gray_2", "moss", "green", "dark_green"),
+  "top2b_4" = tntp_colors("gray_2", "gray", "cerulean", "navy"),
+  "top2b_5" = tntp_colors("medium_gray", "gray_2", "gray", "cerulean", "navy"),
+  "top2b_6" = tntp_colors("gray_4", "medium_gray", "gray_2", "gray", "cerulean", "navy"),
+  "top2b_7" = tntp_colors("charcoal", "gray_4", "medium_gray", "gray_2", "gray", "cerulean", "navy"),
   "greens" = tntp_colors("green", "green_4", "medium_green", "green_2", "light_green"),
   "reds" = tntp_colors("red", "red_4", "medium_red", "red_2", "light_red"),
   "blues" = tntp_colors("blue", "blue_4", "medium_blue", "blue_2", "light_blue"),
