@@ -1,7 +1,7 @@
 Type: Package
 Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
-Version: 1.0.3
+Version: 1.1.0
 Authors@R: c(
       person("Dustin", "Pashouwer", role = c("aut", "cre"), 
              email = "dustin.pashouwer@tntp.org"),
@@ -21,10 +21,11 @@ Depends:
     R (>= 3.2)
 Imports: 
     cli,
+    colorspace,
     dplyr (>= 0.8.3),
     extrafont,
     formattable,
-    ggplot2 (>= 3.2.1),
+    ggplot2 (>= 3.5.0),
     grDevices,
     grid,
     janitor,

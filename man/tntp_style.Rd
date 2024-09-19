@@ -92,7 +92,7 @@ frpl_experience |>
   ) +
   scale_y_continuous(breaks = seq(0, 20, 4)) +
   tntp_style(
-    family = 'sans',
+    family = "sans",
     base_size = 20,
     show_axis_titles = "x"
   )
