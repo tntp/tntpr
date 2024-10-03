@@ -1,3 +1,7 @@
+# Re-submission
+
+* Fixed ggplot2 link note in tntp_style.Rd and theme_tntp_2018.Rd
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 notes

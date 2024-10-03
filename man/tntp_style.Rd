@@ -2,7 +2,7 @@
 % Please edit documentation in R/tntp_style.R
 \name{tntp_style}
 \alias{tntp_style}
-\title{Create TNTP themed \link{ggplot2} charts}
+\title{Create TNTP themed ggplot2 charts}
 \usage{
 tntp_style(
   family = "Halyard Display",

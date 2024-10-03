@@ -46,7 +46,7 @@ get_usable_family <- function(family, silent = FALSE, default_family = "sans") {
 }
 
 
-#' Create TNTP themed [ggplot2] charts
+#' Create TNTP themed ggplot2 charts
 #'
 #' A custom theme including TNTP fonts and other defaults for styling ggplot2 charts.
 #'
