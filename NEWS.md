@@ -1,3 +1,7 @@
+# tntpr ??
+
+* Fixed tntp_colors() to return supplied names if given
+
 # tntpr 1.1.0
 
 * Added choose_text_color() function.
