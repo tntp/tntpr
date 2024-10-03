@@ -30,10 +30,16 @@ test_that("tntp_colors returns colors in the correct order", {
   expect_equal(tntp_colors("navy", "mint"), rev(tntp_colors("mint", "navy")))
 })
 
-test_that("tntp_colors and tntp_palette return an unnamed vector when run with arguments", {
+test_that("tntp_colors and tntp_palette use inputted names when run with arguments", {
+  # No names if names aren't provided
   expect_equal(tntp_colors("navy"), tntp_colors("navy") |> unname())
   expect_equal(tntp_colors("navy", "mint"), tntp_colors("navy", "mint") |> unname())
   expect_equal(tntp_palette("likert_4"), tntp_palette("likert_4") |> unname())
+
+  # Uses provided names if given
+  expect_equal(tntp_colors(a = "gold"), tntp_colors("gold") |> rlang::set_names("a"))
+  expect_equal(tntp_colors("y" = "navy", "n" = "gold"),
+               tntp_colors("navy", "gold") |> rlang::set_names("y", "n"))
 })
 
 test_that("tntp_colors returns named vector when run empty", {

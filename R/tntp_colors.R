@@ -110,6 +110,7 @@ tntp_colors <- function(...) {
   )
 
   supplied_colors <- c(...)
+  supplied_names <- names(supplied_colors)
 
   # Return full color list with names if run with no arguments
   if(is.null(supplied_colors)) {
@@ -135,8 +136,10 @@ tntp_colors <- function(...) {
                      "i" = "Run {.run tntpr::show_tntp_colors()} to see available colors"))
   }
 
-  # Return supplied colors. Unname for use in scale_color_manual and other functions.
-  tntp_color_list[supplied_colors] |> unname()
+  # Return supplied colors, with names if provided (for use in scale_*_manual)
+  colors <- tntp_color_list[supplied_colors]
+  names(colors) <- supplied_names
+  colors
 }
 
 #' Validate color inputs
