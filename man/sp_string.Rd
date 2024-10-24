@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_.R
 \name{sp_string}
 \alias{sp_string}
-\title{Internal function. Create cli-friendly site/drive/path string}
+\title{Internal function to create cli-friendly site/drive/path string}
 \usage{
 sp_string(
   site = NULL,
@@ -22,6 +22,9 @@ sp_string(
 \item{drive_name}{drive name}
 
 \item{path}{path}
+}
+\value{
+a cli-formatted string
 }
 \description{
 Can use either a site_name or site object, a drive_name or drive_object

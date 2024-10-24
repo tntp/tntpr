@@ -21,12 +21,12 @@ sp_write(x, path, site = NULL, drive = NULL, type = NULL)
 \item{x}{The object to be written}
 }
 \value{
-`sp_read()` returns an R object as specified by type
-`sp_write()` returns x, invisibly
+\code{sp_read()} returns an R object as specified by type
+\code{sp_write()} returns x, invisibly
 }
 \description{
 Read or write data to/from a Sharepoint drive. If site and/or drive aren't
-specified, uses the currently saved default from `sp_defaults()` if it exists.
+specified, uses the currently saved default from \code{sp_defaults()} if it exists.
 }
 \details{
 These functions will attempt to use the appropriate read/write function based

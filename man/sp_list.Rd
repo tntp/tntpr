@@ -3,6 +3,7 @@
 \name{sp_list}
 \alias{sp_list}
 \alias{sp_list_drives}
+\alias{sp_list_sites}
 \title{List Sharepoint Contents}
 \usage{
 sp_list(
@@ -16,6 +17,8 @@ sp_list(
 )
 
 sp_list_drives(site = NULL, pattern = NULL)
+
+sp_list_sites(pattern = NULL)
 }
 \arguments{
 \item{folder}{Path to the folder. By default, lists the top-level contents of the drive.}
@@ -36,10 +39,11 @@ sp_list_drives(site = NULL, pattern = NULL)
 A tibble with name and additional information on the relevant drives/files
 }
 \description{
-`sp_list()` lists the contents of a Sharepoint Drive or a folder.
-}
-\details{
-`sp_list_drives()` lists the drives contained in a Sharepoint site.
+\code{sp_list()} lists the contents of a Sharepoint Drive or a folder.
+
+\code{sp_list_drives()} lists the drives contained in a Sharepoint site.
+
+\code{sp_list_sites()} lists the sites you have access to. These are the sites you are following in Sharepoint
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

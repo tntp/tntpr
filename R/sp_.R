@@ -13,6 +13,7 @@
 #' No return value
 #'
 #' @export
+#' @md
 #'
 #' @examplesIf interactive()
 #' # Set default site
@@ -40,6 +41,7 @@ sp_defaults <- function(site = NULL, drive = NULL) {
 #' @return
 #' A Microsoft365R site object or drive object
 #' @export
+#' @md
 #'
 #' @examplesIf interactive()
 #'
@@ -125,9 +127,12 @@ sp_string <- function(site = NULL, site_name = NULL,
 
 #' List Sharepoint Contents
 #'
+#' @description
 #' `sp_list()` lists the contents of a Sharepoint Drive or a folder.
 #'
 #' `sp_list_drives()` lists the drives contained in a Sharepoint site.
+#'
+#' `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
 #'
 #' @param folder Path to the folder. By default, lists the top-level contents of the drive.
 #' @param site Site identifier. Can be the site_name, site_url or site_id. If not provided, uses the stored default site if it exists.
@@ -141,6 +146,7 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' A tibble with name and additional information on the relevant drives/files
 #'
 #' @export
+#' @md
 #'
 #' @examplesIf interactive()
 #'
@@ -198,6 +204,21 @@ sp_list_drives <- function(site = NULL, pattern = NULL) {
   if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
 }
 
+#' List Drives in a Sharepoint Site
+#' @rdname sp_list
+#' @export
+sp_list_sites <- function(pattern = NULL) {
+
+  tbl <- Microsoft365R::list_sharepoint_sites() |>
+    purrr::map("properties") |>
+    purrr::map(\(p) tibble::tibble(name = p$displayName,
+                                   url = p$webUrl,
+                                   id = p$id)) |>
+    purrr::list_rbind()
+
+  if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
+}
+
 
 
 #' Read/Write from Sharepoint
@@ -219,6 +240,7 @@ sp_list_drives <- function(site = NULL, pattern = NULL) {
 #' `sp_write()` returns x, invisibly
 #'
 #' @export
+#' @md
 #'
 #' @examplesIf interactive()
 #'

@@ -15,7 +15,7 @@ sp_defaults(site = NULL, drive = NULL)
 No return value
 }
 \description{
-Sets default site and drive for using the other `sp_*()` functions.
+Sets default site and drive for using the other \verb{sp_*()} functions.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
