@@ -79,7 +79,7 @@ sp_site <- function(site) {
           cli::cli_abort(c(
             "x" = "Could not find site with name {.val {site}}",
             "i" = "To find a site by name, you must be following the site.",
-            "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} to see a list of sites you are following."
+            "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} or run {.run tntpr::sp_list_sites()} to see a list of sites you are following."
           ), parent = NA)
         }
       )
