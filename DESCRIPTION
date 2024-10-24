@@ -33,6 +33,7 @@ Imports:
     labelled,
     lubridate (>= 1.7.4),
     magrittr (>= 1.5),
+    Microsoft365R,
     purrr (>= 0.3.3),
     readr,
     rlang,
