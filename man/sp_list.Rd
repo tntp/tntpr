@@ -23,9 +23,9 @@ sp_list_sites(pattern = NULL)
 \arguments{
 \item{folder}{Path to the folder. By default, lists the top-level contents of the drive.}
 
-\item{site}{Site identifier. Can be the site_name, site_url or site_id. If not provided, uses the stored default site if it exists.}
+\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.}
 
-\item{drive}{Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
+\item{drive}{Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 
 \item{pattern}{Optional regular expression. Only names which match the regular expression will be returned.}
 

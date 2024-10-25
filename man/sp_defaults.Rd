@@ -7,9 +7,9 @@
 sp_defaults(site = NULL, drive = NULL)
 }
 \arguments{
-\item{site}{Site identifier. Can be the site_name, site_url or site_id}
+\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the current stored default site if it exists.}
 
-\item{drive}{Optional. Name of the drive. If no site is specified, will use the currently stored site (if it exists).}
+\item{drive}{Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 }
 \value{
 No return value

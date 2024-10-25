@@ -5,28 +5,36 @@
 \alias{sp_drive}
 \title{Return Microsoft365R site or drive object}
 \usage{
-sp_site(site)
+sp_site(site = NULL)
 
-sp_drive(site, drive)
+sp_drive(drive = NULL, site = NULL)
 }
 \arguments{
-\item{site}{Site identifier. Can be the site_name, site_url or site_id. If not provided, returns the stored default site if it exists.}
+\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, returns the stored default site if it exists.}
 
-\item{drive}{Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
+\item{drive}{Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 }
 \value{
 A Microsoft365R site object or drive object
 }
 \description{
-Pulls the site or drive (if given) or returns the stored default
+Pulls the site or drive (if given) or returns the stored default. Useful if
+you need to use methods that aren't currently wrapped by tntpr
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-# Get current default site
+# Get current default site or drive
 x <- sp_site()
+y <- sp_drive()
 
-# Get specified site
+# Get specified site or drive
 x <- sp_site("Data Analytics")
+y <- sp_drive("Documents") # Uses stored default site
+y <- sp_drive("Documents", site = "Data Analytics") # Use provided site
+
+# Use additional methods in the site/drive objects
+x$get_lists()
+y$get_item_properties("Analysis Tools.docx")
 \dontshow{\}) # examplesIf}
 }

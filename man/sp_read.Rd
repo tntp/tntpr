@@ -5,18 +5,20 @@
 \alias{sp_write}
 \title{Read/Write from Sharepoint}
 \usage{
-sp_read(path, site = NULL, drive = NULL, type = NULL)
+sp_read(path, site = NULL, drive = NULL, type = NULL, ...)
 
-sp_write(x, path, site = NULL, drive = NULL, type = NULL)
+sp_write(x, path, site = NULL, drive = NULL, type = NULL, ...)
 }
 \arguments{
 \item{path}{The location in the Sharepoint drive}
 
-\item{site}{Site identifier. Can be the site_name, site_url or site_id. If not provided, uses the stored default site if it exists.}
+\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.}
 
-\item{drive}{Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
+\item{drive}{Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 
-\item{type}{Optional. One of "rdata", "rds", or "dataframe". Uses the file extension to determine type if not provided.}
+\item{type}{Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.}
+
+\item{...}{Additional arguments passed on to the reading/writing function.}
 
 \item{x}{The object to be written}
 }
@@ -27,11 +29,46 @@ sp_write(x, path, site = NULL, drive = NULL, type = NULL)
 \description{
 Read or write data to/from a Sharepoint drive. If site and/or drive aren't
 specified, uses the currently saved default from \code{sp_defaults()} if it exists.
-}
-\details{
+
 These functions will attempt to use the appropriate read/write function based
 on the file extension, however this can be overridden by specifying type
+
+The \code{...} parameter is passed on to the appropriate reading or writing
+function. See the details section for more information.
+
+These functions don't currently support reading/writing to \code{.rdata} files,
+however you can use the \verb{$load_rdata()} and \verb{$save_rdata()} methods from
+the ms_drive object directly (see example below)
 }
+\section{Details}{
+\subsection{Reading Functions}{
+\itemize{
+\item ".csv", ".csv2", ".tsv" are read using the \verb{$load_dataframe()} method,
+which uses \code{readr::read_delim()}.
+\item ".rds" is read using the \verb{$load_rds()} method which accepts no additional
+arguments.
+\item ".xls" and ".xlsx" are read using \code{readxl::read_excel()} (if installed).
+The function will download the excel file temporarily, then import it and
+delete the temporary copy
+}
+}
+
+\subsection{Writing Functions}{
+\itemize{
+\item ".csv", ".csv2", ".tsv" are written using the \verb{$save_dataframe()} method
+and uses \code{readr::write_delim()}. Delimiter will be assumed by the extension
+unless provided in a \code{delim} argument
+\item ".rds" is written using the \verb{$save_rds()} method, which accepts no
+additional arguments
+\item ".xls" and ".xlsx" are written using \code{writexl::write_xlsx()} (if
+installed) and then uploaded using the \verb{$upload_file()} method. For writing,
+files with extension ".xls" are automatically coerced to "xlsx". NOTE:
+\verb{$upload_file()} WILL create new folders if needed (the \verb{$save_*} methods
+will not).
+}
+}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
