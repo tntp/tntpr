@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_tntp_2018.R
 \name{theme_tntp_2018}
 \alias{theme_tntp_2018}
-\title{A precise & pristine ggplot2 theme with opinionated defaults and an emphasis on typography}
+\title{A precise & pristine \link{ggplot2} theme with opinionated defaults and an emphasis on typography}
 \usage{
 theme_tntp_2018(
   base_family = "Segoe UI",
@@ -110,7 +110,7 @@ ggplot(mtcars, aes(mpg, wt)) +
   tntp_style(family = 'sans')
 
 # seminal bar chart
-count(mpg, class) \%>\%
+count(mpg, class) |>
   ggplot(aes(class, n)) +
   geom_col() +
   geom_text(aes(label = n), nudge_y = 3) +

@@ -97,19 +97,18 @@ convert_to_top_2_agree <- function(x, custom_vals = NULL) {
 #'   q1_3 = c(NA, NA, "c", NA, NA),
 #'   q1_other = c(NA, "something else", NA, NA, "not any of these")
 #' )
-#' library(dplyr) # for the %>% pipe
-#' x %>%
+#' x |>
 #'   check_all_recode(q1_1:q1_other)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
-#' x %>%
+#' x |>
 #'   check_all_recode(contains("q1"))
 #'
 check_all_recode <- function(dat, ..., set_labels = TRUE) {
   dat <- tibble::as_tibble(dat) # so that single bracket subsetting behaves as expected later and returns a data.frame
   original_order <- names(dat)
-  cols_of_interest <- dat %>%
-    dplyr::select(...) %>%
+  cols_of_interest <- dat |>
+    dplyr::select(...) |>
     as.data.frame()
   if (ncol(cols_of_interest) == 0) {
     stop("no columns selected; check your variable name specification")
@@ -128,7 +127,7 @@ check_all_recode <- function(dat, ..., set_labels = TRUE) {
   cols_of_interest[responded, ][!is.na(cols_of_interest[responded, ])] <- 1
   cols_of_interest[responded, ][is.na(cols_of_interest[responded, ])] <- 0
   # convert columns to numeric
-  cols_of_interest <- lapply(cols_of_interest, as.numeric) %>% as.data.frame()
+  cols_of_interest <- lapply(cols_of_interest, as.numeric) |> as.data.frame()
 
   # restore labels
   if (set_labels) {
@@ -165,14 +164,14 @@ check_all_recode <- function(dat, ..., set_labels = TRUE) {
 #'   q1_3 = c(NA, NA, "c", NA, NA),
 #'   q1_other = c(NA, "something else", NA, NA, "not any of these")
 #' )
-#' library(dplyr) # for the %>% pipe
-#' x %>%
-#'   check_all_recode(q1_1:q1_other) %>%
+#'
+#' x |>
+#'   check_all_recode(q1_1:q1_other) |>
 #'   check_all_count(q1_1:q1_other)
 #'
 #' # You can use any of the dplyr::select() helpers to identify the columns:
-#' x %>%
-#'   check_all_recode(contains("q1")) %>%
+#' x |>
+#'   check_all_recode(contains("q1")) |>
 #'   check_all_count(contains("q1"))
 # Returns a janitor::tabyl object so can use the adorn_ functions
 check_all_count <- function(dat, ...) {
@@ -183,8 +182,8 @@ check_all_count <- function(dat, ...) {
     warning("there are no values of \"0\" in these columns.  Either you need to first call check_all_recode(), or every respondent selected every possible answer.")
   }
 
-  cols_of_interest <- dat %>%
-    dplyr::select(...) %>%
+  cols_of_interest <- dat |>
+    dplyr::select(...) |>
     as.data.frame()
   result <- dplyr::bind_rows(
     lapply(
@@ -200,7 +199,7 @@ check_all_count <- function(dat, ...) {
   )
 
 
-  result %>%
+  result |>
     janitor::as_tabyl(1) # set attributes to be a one-way tabyl as then adorn_pct_formatting works
 }
 

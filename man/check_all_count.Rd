@@ -29,13 +29,13 @@ x <- data.frame( # 4th person didn't respond at all
   q1_3 = c(NA, NA, "c", NA, NA),
   q1_other = c(NA, "something else", NA, NA, "not any of these")
 )
-library(dplyr) # for the \%>\% pipe
-x \%>\%
-  check_all_recode(q1_1:q1_other) \%>\%
+
+x |>
+  check_all_recode(q1_1:q1_other) |>
   check_all_count(q1_1:q1_other)
 
 # You can use any of the dplyr::select() helpers to identify the columns:
-x \%>\%
-  check_all_recode(contains("q1")) \%>\%
+x |>
+  check_all_recode(contains("q1")) |>
   check_all_count(contains("q1"))
 }
