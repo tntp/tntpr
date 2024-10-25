@@ -39,11 +39,13 @@ sp_list_sites(pattern = NULL)
 A tibble with name and additional information on the relevant drives/files
 }
 \description{
-\code{sp_list()} lists the contents of a Sharepoint Drive or a folder.
-
-\code{sp_list_drives()} lists the drives contained in a Sharepoint site.
-
-\code{sp_list_sites()} lists the sites you have access to. These are the sites you are following in Sharepoint
+Lists site/drive/folder contents. Can be used with default site/drive set by
+\code{\link[=sp_defaults]{sp_defaults()}} or with a specified site/drive.
+\itemize{
+\item \code{sp_list()} lists the contents of a Sharepoint Drive or a folder.
+\item \code{sp_list_drives()} lists the drives contained in a Sharepoint site.
+\item \code{sp_list_sites()} lists the sites you have access to. These are the sites you are following in Sharepoint
+}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

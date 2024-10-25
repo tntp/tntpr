@@ -15,6 +15,8 @@
 #' @export
 #' @md
 #'
+#' @seealso [sp_list()], [sp_read()], [sp_write()], [sp_site()], [sp_drive()]
+#'
 #' @examplesIf interactive()
 #' # Set default site
 #' sp_defaults(site = "Data Analytics")
@@ -54,6 +56,8 @@ sp_defaults <- function(site = NULL, drive = NULL) {
 #' A Microsoft365R site object or drive object
 #' @export
 #' @md
+#'
+#' @seealso [ms_site], [ms_drive]
 #'
 #' @examplesIf interactive()
 #'
@@ -178,11 +182,12 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' List Sharepoint Contents
 #'
 #' @description
-#' `sp_list()` lists the contents of a Sharepoint Drive or a folder.
+#' Lists site/drive/folder contents. Can be used with default site/drive set by
+#' [sp_defaults()] or with a specified site/drive.
 #'
-#' `sp_list_drives()` lists the drives contained in a Sharepoint site.
-#'
-#' `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
+#' *  `sp_list()` lists the contents of a Sharepoint Drive or a folder.
+#' *  `sp_list_drives()` lists the drives contained in a Sharepoint site.
+#' *  `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
 #'
 #' @param folder Path to the folder. By default, lists the top-level contents of the drive.
 #' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.
@@ -278,37 +283,40 @@ sp_list_sites <- function(pattern = NULL) {
 #' Read/Write from Sharepoint
 #'
 #' @description
-#' Read or write data to/from a Sharepoint drive. If site and/or drive aren't
-#' specified, uses the currently saved default from `sp_defaults()` if it exists.
+#' Read or write data to/from a Sharepoint drive. Can be used with default
+#' site/drive set by [sp_defaults()] or with a specified site/drive.
+#'
+#' Currently supported file types include: `.csv`, `.csv2`, `.tsv`, `.xls`,
+#' `.xlsx`, `.rds`
 #'
 #' These functions will attempt to use the appropriate read/write function based
-#' on the file extension, however this can be overridden by specifying type
+#' on the file extension, however this can be overridden by specifying type.
 #'
 #' The `...` parameter is passed on to the appropriate reading or writing
-#' function. See the details section for more information.
+#' function. See the details section for more information on these functions
+#' by type.
 #'
-#' These functions don't currently support reading/writing to `.rdata` files,
-#' however you can use the `$load_rdata()` and `$save_rdata()` methods from
-#' the ms_drive object directly (see example below)
 #'
 #' @details
 #' # Details
+#' For more information on methods (shown as `$__()` below) see documentation
+#' on [ms_drive].
 #' ## Reading Functions
 #' *  ".csv", ".csv2", ".tsv" are read using the `$load_dataframe()` method,
-#' which uses `readr::read_delim()`.
+#' which uses [`readr::read_delim()`].
 #' *  ".rds" is read using the `$load_rds()` method which accepts no additional
 #' arguments.
-#' *  ".xls" and ".xlsx" are read using `readxl::read_excel()` (if installed).
+#' *  ".xls" and ".xlsx" are read using [`readxl::read_excel()`] (if installed).
 #' The function will download the excel file temporarily, then import it and
 #' delete the temporary copy
 #'
 #' ## Writing Functions
 #' *  ".csv", ".csv2", ".tsv" are written using the `$save_dataframe()` method
-#' and uses `readr::write_delim()`. Delimiter will be assumed by the extension
+#' and uses [`readr::write_delim()`]. Delimiter will be assumed by the extension
 #' unless provided in a `delim` argument
 #' *  ".rds" is written using the `$save_rds()` method, which accepts no
 #' additional arguments
-#' *  ".xls" and ".xlsx" are written using `writexl::write_xlsx()` (if
+#' *  ".xls" and ".xlsx" are written using [`writexl::write_xlsx()`] (if
 #' installed) and then uploaded using the `$upload_file()` method. For writing,
 #' files with extension ".xls" are automatically coerced to "xlsx". NOTE:
 #' `$upload_file()` WILL create new folders if needed (the `$save_*` methods
@@ -321,10 +329,10 @@ sp_list_sites <- function(pattern = NULL) {
 #' @param type Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.
 #' @param ... Additional arguments passed on to the reading/writing function.
 #'
+#' @seealso `$upload_file()`, `$download_file()`, `$save_rdata()`, `$load_rdata()` from [ms_drive]
 #'
-#' @return
-#' `sp_read()` returns an R object as specified by type
-#' `sp_write()` returns x, invisibly
+#' @return `sp_read()` returns an R object as specified by type. `sp_write()`
+#' returns x, invisibly
 #'
 #' @export
 #' @md
@@ -333,6 +341,21 @@ sp_list_sites <- function(pattern = NULL) {
 #'
 #' # Set site defaults
 #' sp_defaults(site = "Data Analytics")
+#'
+#' # Write a file
+#' sp_write(mtcars, "mtcars.csv")
+#'
+#' # Write a file, specifying type and adding additional parameters
+#' sp_write(mtcars, "mtcars.txt", type = "dataframe", delim = "|")
+#'
+#' # Read a file
+#' x <- sp_read("mtcars.csv")
+#' y <- sp_read("mtcars.txt", type = "dataframe", delim = "|")
+#'
+#' # Save / load an .rdata file using ms_drive methods
+#' dr <- sp_drive() # Get stored default ms_drive object
+#' dr$save_rdata(x, y, file = "data.rdata")
+#' dr$load_rdata("data.rdata")
 #'
 #'
 sp_read <- function(path, site = NULL, drive = NULL, type = NULL, ...) {

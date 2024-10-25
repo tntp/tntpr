@@ -30,3 +30,6 @@ sp_list_drives()
 sp_list()
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+\code{\link[=sp_list]{sp_list()}}, \code{\link[=sp_read]{sp_read()}}, \code{\link[=sp_write]{sp_write()}}, \code{\link[=sp_site]{sp_site()}}, \code{\link[=sp_drive]{sp_drive()}}
+}

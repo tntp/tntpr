@@ -23,31 +23,33 @@ sp_write(x, path, site = NULL, drive = NULL, type = NULL, ...)
 \item{x}{The object to be written}
 }
 \value{
-\code{sp_read()} returns an R object as specified by type
-\code{sp_write()} returns x, invisibly
+\code{sp_read()} returns an R object as specified by type. \code{sp_write()}
+returns x, invisibly
 }
 \description{
-Read or write data to/from a Sharepoint drive. If site and/or drive aren't
-specified, uses the currently saved default from \code{sp_defaults()} if it exists.
+Read or write data to/from a Sharepoint drive. Can be used with default
+site/drive set by \code{\link[=sp_defaults]{sp_defaults()}} or with a specified site/drive.
+
+Currently supported file types include: \code{.csv}, \code{.csv2}, \code{.tsv}, \code{.xls},
+\code{.xlsx}, \code{.rds}
 
 These functions will attempt to use the appropriate read/write function based
-on the file extension, however this can be overridden by specifying type
+on the file extension, however this can be overridden by specifying type.
 
 The \code{...} parameter is passed on to the appropriate reading or writing
-function. See the details section for more information.
-
-These functions don't currently support reading/writing to \code{.rdata} files,
-however you can use the \verb{$load_rdata()} and \verb{$save_rdata()} methods from
-the ms_drive object directly (see example below)
+function. See the details section for more information on these functions
+by type.
 }
 \section{Details}{
+For more information on methods (shown as \verb{$__()} below) see documentation
+on \link{ms_drive}.
 \subsection{Reading Functions}{
 \itemize{
 \item ".csv", ".csv2", ".tsv" are read using the \verb{$load_dataframe()} method,
-which uses \code{readr::read_delim()}.
+which uses \code{\link[readr:read_delim]{readr::read_delim()}}.
 \item ".rds" is read using the \verb{$load_rds()} method which accepts no additional
 arguments.
-\item ".xls" and ".xlsx" are read using \code{readxl::read_excel()} (if installed).
+\item ".xls" and ".xlsx" are read using \code{\link[readxl:read_excel]{readxl::read_excel()}} (if installed).
 The function will download the excel file temporarily, then import it and
 delete the temporary copy
 }
@@ -56,11 +58,11 @@ delete the temporary copy
 \subsection{Writing Functions}{
 \itemize{
 \item ".csv", ".csv2", ".tsv" are written using the \verb{$save_dataframe()} method
-and uses \code{readr::write_delim()}. Delimiter will be assumed by the extension
+and uses \code{\link[readr:write_delim]{readr::write_delim()}}. Delimiter will be assumed by the extension
 unless provided in a \code{delim} argument
 \item ".rds" is written using the \verb{$save_rds()} method, which accepts no
 additional arguments
-\item ".xls" and ".xlsx" are written using \code{writexl::write_xlsx()} (if
+\item ".xls" and ".xlsx" are written using \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}} (if
 installed) and then uploaded using the \verb{$upload_file()} method. For writing,
 files with extension ".xls" are automatically coerced to "xlsx". NOTE:
 \verb{$upload_file()} WILL create new folders if needed (the \verb{$save_*} methods
@@ -75,5 +77,23 @@ will not).
 # Set site defaults
 sp_defaults(site = "Data Analytics")
 
+# Write a file
+sp_write(mtcars, "mtcars.csv")
+
+# Write a file, specifying type and adding additional parameters
+sp_write(mtcars, "mtcars.txt", type = "dataframe", delim = "|")
+
+# Read a file
+x <- sp_read("mtcars.csv")
+y <- sp_read("mtcars.txt", type = "dataframe", delim = "|")
+
+# Save / load an .rdata file using ms_drive methods
+dr <- sp_drive() # Get stored default ms_drive object
+dr$save_rdata(x, y, file = "data.rdata")
+dr$load_rdata("data.rdata")
+
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\verb{$upload_file()}, \verb{$download_file()}, \verb{$save_rdata()}, \verb{$load_rdata()} from \link{ms_drive}
 }

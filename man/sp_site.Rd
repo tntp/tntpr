@@ -38,3 +38,6 @@ x$get_lists()
 y$get_item_properties("Analysis Tools.docx")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+\link{ms_site}, \link{ms_drive}
+}
