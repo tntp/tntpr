@@ -6,8 +6,8 @@
 #'
 #' Sets default site and drive for using the other `sp_*()` functions.
 #'
-#' @param site Site identifier. Can be the site_name, site_url or site_id
-#' @param drive Optional. Name of the drive. If no site is specified, will use the currently stored site (if it exists).
+#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the current stored default site if it exists.
+#' @param drive Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #'
 #' @return
 #' No return value
@@ -27,16 +27,23 @@
 #' sp_list()
 #'
 sp_defaults <- function(site = NULL, drive = NULL) {
+
+  if ("ms_drive" %in% class(drive)) {
+    cli::cli_abort(c(
+      "x" = "Cannot provide drive object to {.code sp_defaults()}",
+      "i" = "Provide a drive name instead"
+    ))
+  }
   .sp_env$site <- sp_site(site)
-  .sp_env$drive <- sp_drive(NULL, drive) # NULL pulls from stored site
+  .sp_env$drive <- sp_drive(drive, NULL) # NULL pulls from stored site
 }
 
 #' Return Microsoft365R site or drive object
 #'
-#' Pulls the site or drive (if given) or returns the stored default
+#' Pulls the site or drive (if given) or returns the stored default.
 #'
-#' @param site Site identifier. Can be the site_name, site_url or site_id. If not provided, returns the stored default site if it exists.
-#' @param drive Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, returns the stored default site if it exists.
+#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #'
 #' @return
 #' A Microsoft365R site object or drive object
@@ -50,9 +57,11 @@ sp_defaults <- function(site = NULL, drive = NULL) {
 #'
 #' # Get specified site
 #' x <- sp_site("Data Analytics")
-sp_site <- function(site) {
+sp_site <- function(site = NULL) {
   if (!is.null(site)) {
-    if (grepl("^https://", site)) { # Site URL
+    if ("ms_site" %in% class(site)) {
+      site
+    } else if (grepl("^https://", site)) { # Site URL
       tryCatch(
         Microsoft365R::get_sharepoint_site(site_url = site),
         error = \(cnd) {
@@ -94,12 +103,26 @@ sp_site <- function(site) {
 #' Return Microsoft365R drive object
 #' @export
 #' @rdname sp_site
-sp_drive <- function(site, drive) {
+sp_drive <- function(drive = NULL, site = NULL) {
+
+  # If a drive item is provided, use that
+  if ("ms_drive" %in% class(drive)) return(drive)
+
+  # Otherwise look for the site and drive
   site <- sp_site(site)
   if (is.null(drive) && !is.null(.sp_env$drive)) {
     .sp_env$drive
   } else {
-    site$get_drive(drive)
+    tryCatch(
+      site$get_drive(drive),
+      error = \(cnd) {
+        site_name <- site$properties$displayName
+        cli::cli_abort(c(
+          "x" = "Could not find a drive with name {.val {drive}} in site {.val {site_name}}",
+          "i" = "Run {.run tntpr::sp_list_drives(site = '{site_name}')} to see available drives"
+        ))
+      }
+    )
   }
 }
 
@@ -135,8 +158,8 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
 #'
 #' @param folder Path to the folder. By default, lists the top-level contents of the drive.
-#' @param site Site identifier. Can be the site_name, site_url or site_id. If not provided, uses the stored default site if it exists.
-#' @param drive Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.
+#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #' @param pattern Optional regular expression. Only names which match the regular expression will be returned.
 #' @param full_names logical. If TRUE, the directory path is prepended to the file names to give a relative file path. If FALSE, the file names (rather than paths) are returned.
 #' @param recursive logical. Should the listing recurse into directories? If TRUE, full_names is also set to TRUE.
@@ -158,19 +181,21 @@ sp_string <- function(site = NULL, site_name = NULL,
 #'
 sp_list <- function(folder = "", site = NULL, drive = NULL, pattern = NULL,
                     full_names = FALSE, recursive = FALSE, include_dirs = FALSE) {
-  dr <- sp_drive(site, drive)
+  drive <- sp_drive(drive = drive, site = site)
 
   if (recursive) full_names <- TRUE
 
-  path_string <- sp_string(site_name = site, drive = dr, path = folder)
+  path_string <- sp_string(site_name = site, drive = drive, path = folder)
   cli::cli_inform("Fetching from {path_string}")
 
-  tbl <- dr$list_files(folder, full_names = full_names) |>
+  tbl <- drive$list_files(folder, full_names = full_names) |>
     tibble::as_tibble()
 
   # Remove leading "/" for drive-level names
   tbl$name <- gsub("^/", "", tbl$name)
 
+  # As far as I can tell there is no way to do a recursive search directly
+  # through $list_files(), so this manually recurses.
   if (recursive) {
     folders <- tbl[tbl$isdir, ]
     if (nrow(folders) > 0) {
@@ -231,8 +256,8 @@ sp_list_sites <- function(pattern = NULL) {
 #'
 #' @param x The object to be written
 #' @param path The location in the Sharepoint drive
-#' @param site Site identifier. Can be the site_name, site_url or site_id. If not provided, uses the stored default site if it exists.
-#' @param drive Name of the drive within the site. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.
+#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #' @param type Optional. One of "rdata", "rds", or "dataframe". Uses the file extension to determine type if not provided.
 #'
 #' @return
