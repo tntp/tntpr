@@ -12,9 +12,9 @@ sp_write(x, path, site = NULL, drive = NULL, type = NULL, ...)
 \arguments{
 \item{path}{The location in the Sharepoint drive}
 
-\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.}
+\item{site}{Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.}
 
-\item{drive}{Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
+\item{drive}{Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 
 \item{type}{Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.}
 
@@ -62,9 +62,8 @@ and uses \code{\link[readr:write_delim]{readr::write_delim()}}. Delimiter will b
 unless provided in a \code{delim} argument
 \item ".rds" is written using the \verb{$save_rds()} method, which accepts no
 additional arguments
-\item ".xls" and ".xlsx" are written using \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}} (if
-installed) and then uploaded using the \verb{$upload_file()} method. For writing,
-files with extension ".xls" are automatically coerced to "xlsx". NOTE:
+\item ".xlsx" is written using \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}} (if
+installed) and then uploaded using the \verb{$upload_file()} method. NOTE:
 \verb{$upload_file()} WILL create new folders if needed (the \verb{$save_*} methods
 will not).
 }

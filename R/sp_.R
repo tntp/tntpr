@@ -44,13 +44,37 @@ sp_defaults <- function(site = NULL, drive = NULL) {
   cli::cli_inform("Set default Sharepoint Site to {path}")
 }
 
+#' Test if a string is formatted like a Sharepoint site id
+#'
+#' @param x string to test
+#' @return TRUE or FALSE
+is_site_id <- function(x) {
+  isTRUE(grepl("^.*\\.sharepoint\\.com,[a-z0-9-]*,[a-z0-9-]*$", x))
+}
+
+#' Test if a string is formatted like a Sharepoint drive id
+#'
+#' @param x string to test
+#' @return TRUE or FALSE
+is_drive_id <- function(x) {
+  isTRUE(grepl("^b![a-zA-Z0-9_-]*$", x))
+}
+
+#' Test if a string is formatted like a Sharepoint site url
+#'
+#' @param x string to test
+#' @return TRUE or FALSE
+is_site_url <- function(x) {
+  isTRUE(grepl("^https://", x))
+}
+
 #' Return Microsoft365R site or drive object
 #'
 #' Pulls the site or drive (if given) or returns the stored default. Useful if
 #' you need to use methods that aren't currently wrapped by tntpr
 #'
-#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, returns the stored default site if it exists.
-#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
+#' @param drive Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #'
 #' @return
 #' A Microsoft365R site object or drive object
@@ -75,51 +99,53 @@ sp_defaults <- function(site = NULL, drive = NULL) {
 #' y$get_item_properties("Analysis Tools.docx")
 #'
 sp_site <- function(site = NULL) {
-  if (!is.null(site)) {
-    if (!"ms_site" %in% class(site) && !"character" %in% class(site)) {
-      cli::cli_abort(c(
-        "x" = "Unidentified site value",
-        "i" = "Provide a site name, url, id, or ms_site object"
-      ))
-    } else if ("ms_site" %in% class(site)) {
-      site
-    } else if (grepl("^https://", site)) { # Site URL
-      tryCatch(
-        Microsoft365R::get_sharepoint_site(site_url = site),
-        error = \(cnd) {
-          cli::cli_abort(c(
-            "x" = "Could not find site with url {.url {site}}",
-            "i" = "Check that the site URL is correct."
-            ), parent = NA)
-        }
-      )
-    } else if (grepl("^tntp.sharepoint.com,", site)) { # Site ID
-      tryCatch(
-        Microsoft365R::get_sharepoint_site(site_id = site),
-        error = \(cnd) {
-          cli::cli_abort(c(
-            "x" = "Could not find site with id {.val {site}}",
-            "i" = "Try using the site URL or name instead."
-          ), parent = NA)
-        }
-      )
-    } else { # Site Name
-      tryCatch(
-        Microsoft365R::get_sharepoint_site(site_name = site),
-        error = \(cnd) {
-          cli::cli_abort(c(
-            "x" = "Could not find site with name {.val {site}}",
-            "i" = "To find a site by name, you must be following the site.",
-            "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} or run {.run tntpr::sp_list_sites()} to see a list of sites you are following."
-          ), parent = NA)
-        }
-      )
+
+  # No provided site
+  if (is.null(site)) {
+    if (!is.null(.sp_env$site)) {
+      .sp_env$site
+    } else {
+      cli::cli_abort(c("x" = "No site provided and no default site exists."))
     }
-  } else if (!is.null(.sp_env$site)) {
-    .sp_env$site
+  # Site object
+  } else if ("ms_site" %in% class(site)) {
+    site
+  # Site URL
+  } else if (is_site_url(site)) {
+    tryCatch(
+      Microsoft365R::get_sharepoint_site(site_url = site),
+      error = \(cnd) {
+        cli::cli_abort(c(
+          "x" = "Could not find site with url {.url {site}}",
+          "i" = "Check that the site URL is correct."
+          ), parent = NA)
+      }
+    )
+  # Site ID
+  } else if (is_site_id(site)) {
+    tryCatch(
+      Microsoft365R::get_sharepoint_site(site_id = site),
+      error = \(cnd) {
+        cli::cli_abort(c(
+          "x" = "Could not find site with id {.val {site}}",
+          "i" = "Try using the site URL or name instead."
+        ), parent = NA)
+      }
+    )
+  # Site Name
   } else {
-    cli::cli_abort(c("x" = "No site provided and no default site exists."))
+    tryCatch(
+      Microsoft365R::get_sharepoint_site(site_name = site),
+      error = \(cnd) {
+        cli::cli_abort(c(
+          "x" = "Could not find site with name {.val {site}}",
+          "i" = "To find a site by name, you must be following the site.",
+          "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} or run {.run tntpr::sp_list_sites()} to see a list of sites you are following."
+        ), parent = NA)
+      }
+    )
   }
+
 }
 
 #' Return Microsoft365R drive object
@@ -138,13 +164,33 @@ sp_drive <- function(drive = NULL, site = NULL) {
     ))
   }
 
-  # Look for the site and drive
+  # Pull site
   site <- sp_site(site)
-  if (is.null(drive) && !is.null(.sp_env$drive)) {
-    .sp_env$drive
+
+  # No drive provided: Use the default drive (if site matches), or use the first drive
+  if (is.null(drive)) {
+    if (all.equal(site, .sp_env$site) && !is.null(.sp_env$drive)) {
+      .sp_env$drive
+    } else {
+      site$get_drive()
+    }
+  # Drive ID
+  } else if (is_drive_id(drive)) {
+    tryCatch(
+      site$get_drive(drive_id = drive),
+      error = \(cnd) {
+        site_name <- site$properties$displayName
+        cli::cli_abort(c(
+          "x" = "Could not find a drive with id {.val {drive}} in site {.val {site_name}}",
+          "i" = "Run {.run tntpr::sp_list_drives(site = '{site_name}')} to see available drives",
+          "i" = "For sites with multiple drives with the same name, use drive ID"
+        ), parent = NA)
+      }
+    )
+  # Drive Name
   } else {
     tryCatch(
-      site$get_drive(drive),
+      site$get_drive(drive_name = drive),
       error = \(cnd) {
         site_name <- site$properties$displayName
         cli::cli_abort(c(
@@ -190,8 +236,8 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' *  `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
 #'
 #' @param folder Path to the folder. By default, lists the top-level contents of the drive.
-#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.
-#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
+#' @param drive Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #' @param pattern Optional regular expression. Only names which match the regular expression will be returned.
 #' @param full_names logical. If TRUE, the directory path is prepended to the file names to give a relative file path. If FALSE, the file names (rather than paths) are returned.
 #' @param recursive logical. Should the listing recurse into directories? If TRUE, full_names is also set to TRUE.
@@ -257,7 +303,7 @@ sp_list_drives <- function(site = NULL, pattern = NULL) {
 
   tbl <- site$list_drives() |>
     purrr::map("properties") |>
-    purrr::map(\(p) tibble::tibble(name = p$name, url = p$webUrl)) |>
+    purrr::map(\(p) tibble::tibble(name = p$name, url = p$webUrl, id = p$id)) |>
     purrr::list_rbind()
 
   if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
@@ -274,6 +320,10 @@ sp_list_sites <- function(pattern = NULL) {
                                    url = p$webUrl,
                                    id = p$id)) |>
     purrr::list_rbind()
+
+  cli::cli_inform(c(
+    "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} to follow additional sites"
+  ))
 
   if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
 }
@@ -316,16 +366,15 @@ sp_list_sites <- function(pattern = NULL) {
 #' unless provided in a `delim` argument
 #' *  ".rds" is written using the `$save_rds()` method, which accepts no
 #' additional arguments
-#' *  ".xls" and ".xlsx" are written using [`writexl::write_xlsx()`] (if
-#' installed) and then uploaded using the `$upload_file()` method. For writing,
-#' files with extension ".xls" are automatically coerced to "xlsx". NOTE:
+#' *  ".xlsx" is written using [`writexl::write_xlsx()`] (if
+#' installed) and then uploaded using the `$upload_file()` method. NOTE:
 #' `$upload_file()` WILL create new folders if needed (the `$save_*` methods
 #' will not).
 #'
 #' @param x The object to be written
 #' @param path The location in the Sharepoint drive
-#' @param site Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, uses the stored default site if it exists.
-#' @param drive Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
+#' @param drive Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
 #' @param type Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.
 #' @param ... Additional arguments passed on to the reading/writing function.
 #'
@@ -406,8 +455,8 @@ sp_read_xlsx <- function(path, drive, ...) {
     readxl::read_excel(tf, ...)
   } else {
     cli::cli_abort(c(
-      "x" = "Package `openxlsx` required to read/write xlsx files",
-      "i" = "Run {.code install.packages('openxlsx')} to install"
+      "x" = "Package `readxl` required to read .xls/.xlsx files",
+      "i" = "Run {.code install.packages('readxl')} to install"
     ))
   }
 }
@@ -425,7 +474,6 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
 
   cli::cli_inform("Writing data to {path_string}")
 
-  # Still need to add in error handling
   if (type == "rds") {
     tryCatch(
       drive$save_rds(object = x, file = path),
@@ -441,6 +489,9 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
       error = \(cnd) sp_error(cnd, path)
     )
   } else if (type == "xlsx") {
+    if (ext != ".xlsx") cli::cli_abort(c(
+      "{.code sp_write()} can only write Excel documents to {.val .xlsx} files"
+    ))
     sp_write_xlsx(x, path, drive, ...) # Creates folders -- no error catching needed
   }
 
@@ -457,16 +508,14 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
 #' @return nothing
 sp_write_xlsx <- function(x, path, drive, ...) {
   if (rlang::is_installed("writexl")) {
-    # writexl only writes xlsx files
-    path <- sub("\\.xls$", "\\.xlsx$", path, ignore.case = TRUE)
     tf <- tempfile(fileext = "xlsx")
     writexl::write_xlsx(x = x, path = tf, ...)
     on.exit(file.remove(tf)) # Error-safe cleanup
     drive$upload_file(src = tf, dest = path)
   } else {
     cli::cli_abort(c(
-      "x" = "Package `openxlsx` required to read/write xlsx files",
-      "i" = "Run {.code install.packages('openxlsx')} to install"
+      "x" = "Package `writexl` required to write .xlsx files",
+      "i" = "Run {.code install.packages('writexl')} to install"
     ))
   }
 }
@@ -535,3 +584,4 @@ process_type <- function(ext, type) {
 
 # sp_upload
 # sp_download
+# sp_list_subsites

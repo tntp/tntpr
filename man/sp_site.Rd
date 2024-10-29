@@ -10,9 +10,9 @@ sp_site(site = NULL)
 sp_drive(drive = NULL, site = NULL)
 }
 \arguments{
-\item{site}{Site identifier. Can be the site_name, site_url, site_id, or an ms_site object. If not provided, returns the stored default site if it exists.}
+\item{site}{Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.}
 
-\item{drive}{Name of the drive within the site (or an ms_drive object). If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
+\item{drive}{Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.}
 }
 \value{
 A Microsoft365R site object or drive object
