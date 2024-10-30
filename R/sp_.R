@@ -35,7 +35,7 @@ sp_defaults <- function(site = NULL, drive = NULL) {
   if ("ms_drive" %in% class(drive)) {
     cli::cli_abort(c(
       "x" = "Cannot provide drive object to {.code sp_defaults()}",
-      "i" = "Provide a drive name instead"
+      "i" = "Provide a drive name or id instead"
     ))
   }
   .sp_env$site <- sp_site(site)
