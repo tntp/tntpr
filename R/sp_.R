@@ -39,7 +39,13 @@ sp_defaults <- function(site = NULL, drive = NULL) {
     ))
   }
   .sp_env$site <- sp_site(site)
+
+  # If a site is provided, clear the current drive (prevents the situation where
+  # the stored drive is NOT part of the stored site)
+  if (!is.null(site)) .sp_env$drive <- NULL
+
   .sp_env$drive <- sp_drive(drive) # Uses stored site from previous line
+
   path <- sp_string(site = .sp_env$site, drive = .sp_env$drive)
   cli::cli_inform("Set default Sharepoint Site to {path}")
 }
@@ -167,7 +173,7 @@ sp_drive <- function(drive = NULL, site = NULL) {
   # Pull site
   site <- sp_site(site)
 
-  # No drive provided: Use the default drive (if site matches), or use the first drive
+  # No drive provided: Use the default drive (if site matches and it exists), or use the first drive
   if (is.null(drive)) {
     if (all.equal(site, .sp_env$site) && !is.null(.sp_env$drive)) {
       .sp_env$drive
