@@ -4,10 +4,12 @@
 \alias{sp_read_xlsx}
 \title{Internal function for reading excel files from Sharepoint}
 \usage{
-sp_read_xlsx(path, drive, ...)
+sp_read_xlsx(path, site, drive, ...)
 }
 \arguments{
 \item{path}{path}
+
+\item{site}{ms_site object}
 
 \item{drive}{ms_drive object}
 

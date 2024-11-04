@@ -4,12 +4,14 @@
 \alias{sp_write_xlsx}
 \title{Function for uploading an xls / xlsx file}
 \usage{
-sp_write_xlsx(x, path, drive, ...)
+sp_write_xlsx(x, path, site, drive, ...)
 }
 \arguments{
 \item{x}{R object}
 
 \item{path}{path on the Sharepoint drive}
+
+\item{site}{ms_site object}
 
 \item{drive}{ms_drive object}
 

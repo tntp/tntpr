@@ -39,6 +39,9 @@ on the file extension, however this can be overridden by specifying type.
 The \code{...} parameter is passed on to the appropriate reading or writing
 function. See the details section for more information on these functions
 by type.
+
+If the folder in \code{path} does not yet exist, the user will be prompted if they
+would like to create it.
 }
 \section{Details}{
 For more information on methods (shown as \verb{$__()} below) see documentation
@@ -63,9 +66,7 @@ unless provided in a \code{delim} argument
 \item ".rds" is written using the \verb{$save_rds()} method, which accepts no
 additional arguments
 \item ".xlsx" is written using \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}} (if
-installed) and then uploaded using the \verb{$upload_file()} method. NOTE:
-\verb{$upload_file()} WILL create new folders if needed (the \verb{$save_*} methods
-will not).
+installed) and then uploaded using the \verb{$upload_file()} method.
 }
 }
 }
@@ -94,5 +95,5 @@ dr$load_rdata("data.rdata")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\verb{$upload_file()}, \verb{$download_file()}, \verb{$save_rdata()}, \verb{$load_rdata()} from \link{ms_drive}
+\code{\link[=sp_upload]{sp_upload()}}, \code{\link[=sp_download]{sp_download()}}; \verb{$upload_file()}, \verb{$download_file()}, \verb{$save_rdata()}, \verb{$load_rdata()} from \link{ms_drive}
 }

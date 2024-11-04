@@ -4,12 +4,12 @@
 \alias{sp_error}
 \title{For parsing sharepoint errors (right now just path errors)}
 \usage{
-sp_error(cnd, path)
+sp_error(cnd, path_string)
 }
 \arguments{
 \item{cnd}{condition}
 
-\item{path}{path}
+\item{path_string}{path string (from sp_string())}
 }
 \value{
 nothing

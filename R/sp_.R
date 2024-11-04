@@ -352,6 +352,8 @@ sp_list_sites <- function(pattern = NULL) {
 #' function. See the details section for more information on these functions
 #' by type.
 #'
+#' If the folder in `path` does not yet exist, the user will be prompted if they
+#' would like to create it.
 #'
 #' @details
 #' # Details
@@ -373,9 +375,7 @@ sp_list_sites <- function(pattern = NULL) {
 #' *  ".rds" is written using the `$save_rds()` method, which accepts no
 #' additional arguments
 #' *  ".xlsx" is written using [`writexl::write_xlsx()`] (if
-#' installed) and then uploaded using the `$upload_file()` method. NOTE:
-#' `$upload_file()` WILL create new folders if needed (the `$save_*` methods
-#' will not).
+#' installed) and then uploaded using the `$upload_file()` method.
 #'
 #' @param x The object to be written
 #' @param path The location in the Sharepoint drive
@@ -384,7 +384,7 @@ sp_list_sites <- function(pattern = NULL) {
 #' @param type Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.
 #' @param ... Additional arguments passed on to the reading/writing function.
 #'
-#' @seealso `$upload_file()`, `$download_file()`, `$save_rdata()`, `$load_rdata()` from [ms_drive]
+#' @seealso [sp_upload()], [sp_download()]; `$upload_file()`, `$download_file()`, `$save_rdata()`, `$load_rdata()` from [ms_drive]
 #'
 #' @return `sp_read()` returns an R object as specified by type. `sp_write()`
 #' returns x, invisibly
@@ -427,15 +427,15 @@ sp_read <- function(path, site = NULL, drive = NULL, type = NULL, ...) {
   if (type == "rds") {
     tryCatch(
       drive$load_rds(path = path),
-      error = \(cnd) sp_error(cnd, path)
+      error = \(cnd) sp_error(cnd, path_string)
     )
   } else if (type == "dataframe") {
     tryCatch(
       drive$load_dataframe(path = path, ...),
-      error = \(cnd) sp_error(cnd, path)
+      error = \(cnd) sp_error(cnd, path_string)
     )
   } else if (type == "xlsx") {
-    sp_read_xlsx(path, drive, ...) # Error catching in this function
+    sp_read_xlsx(path, site, drive, ...) # Error catching in this function
   }
 
 }
@@ -443,18 +443,19 @@ sp_read <- function(path, site = NULL, drive = NULL, type = NULL, ...) {
 #' Internal function for reading excel files from Sharepoint
 #'
 #' @param path path
+#' @param site ms_site object
 #' @param drive ms_drive object
 #' @param ... additional arguments from sp_read()
 #'
 #' @return data read by readxl::read_excel()
-sp_read_xlsx <- function(path, drive, ...) {
+sp_read_xlsx <- function(path, site, drive, ...) {
   if (rlang::is_installed("readxl")) {
     ext <- get_ext(path)
     tf <- tempfile(fileext = ext)
+    path_string <- sp_string(site = site, drive = drive, path = path)
 
-    tryCatch(
-      drive$download_file(src = path, dest = tf),
-      error = \(cnd) sp_error(cnd, path)
+    suppressMessages( # To block the cli_inform() with the tempfile
+      sp_download(src = path, dest = tf, site = site, drive = drive)
     )
     on.exit(file.remove(tf)) # Error-safe cleanup
 
@@ -478,12 +479,15 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
   args <- rlang::list2(...)
   path_string <- sp_string(site = site, drive = drive, path = path)
 
+  # Check for existing folder in Sharepoint
+  sp_check_folder(site, drive, folder_path = dirname(path))
+
   cli::cli_inform("Writing data to {path_string}")
 
   if (type == "rds") {
     tryCatch(
       drive$save_rds(object = x, file = path),
-      error = \(cnd) sp_error(cnd, path)
+      error = \(cnd) sp_error(cnd, path_string)
     )
   } else if (type == "dataframe") {
     if (!"delim" %in% names(args)) {
@@ -492,13 +496,13 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
     args <- c(list(df = x, file = path), args)
     tryCatch(
       rlang::exec(drive$save_dataframe, !!!args),
-      error = \(cnd) sp_error(cnd, path)
+      error = \(cnd) sp_error(cnd, path_string)
     )
   } else if (type == "xlsx") {
     if (ext != ".xlsx") cli::cli_abort(c(
       "{.code sp_write()} can only write Excel documents to {.val .xlsx} files"
     ))
-    sp_write_xlsx(x, path, drive, ...) # Creates folders -- no error catching needed
+    sp_write_xlsx(x, path, site, drive, ...) # Creates folders -- no error catching needed
   }
 
   invisible(x)
@@ -508,16 +512,19 @@ sp_write <- function(x, path, site = NULL, drive = NULL, type = NULL, ...) {
 #'
 #' @param x R object
 #' @param path path on the Sharepoint drive
+#' @param site ms_site object
 #' @param drive ms_drive object
 #' @param ... additional arguments passed on from sp_write()
 #'
 #' @return nothing
-sp_write_xlsx <- function(x, path, drive, ...) {
+sp_write_xlsx <- function(x, path, site, drive, ...) {
   if (rlang::is_installed("writexl")) {
     tf <- tempfile(fileext = "xlsx")
     writexl::write_xlsx(x = x, path = tf, ...)
     on.exit(file.remove(tf)) # Error-safe cleanup
-    drive$upload_file(src = tf, dest = path)
+    suppressMessages( # To block the cli_inform() with the tempfile
+      sp_upload(src = tf, dest = path, site = site, drive = drive)
+    )
   } else {
     cli::cli_abort(c(
       "x" = "Package `writexl` required to write .xlsx files",
@@ -526,19 +533,174 @@ sp_write_xlsx <- function(x, path, drive, ...) {
   }
 }
 
+#' Sharepoint upload/download
+#'
+#' `sp_upload()` and `sp_download()` wrap the `$upload_file()` and `$download_file()`
+#' methods from the [ms_drive] object. In addition, `sp_upload()` checks for the
+#' existence of the destination folder and will prompt the user to create it if
+#' it doesn't exist.
+#'
+#' @param src Location of source file. Either a local path (for `sp_upload`), or a Sharepoint path (for `sp_download`)
+#' @param dest Location of destination file. If not provided, uses the same file name as `src`
+#' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
+#' @param drive Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#' @param overwrite Should the destination file be overwritten if it exists?
+#'
+#' @md
+#'
+#' @seealso [sp_read()], [sp_write()]; `$upload_file()` and `$download_file()` from [ms_drive]
+#'
+#' @return Returns `dest` invisibly
+#' @export
+#'
+#' @examplesIf interactive()
+#'
+#' # Set site defaults
+#' sp_defaults("Data Analytics")
+#'
+#' # List files
+#' sp_list()
+#'
+#' # Download a document locally
+#' sp_download("Analysis Tools.docx", "Documents/AT.docx")
+#'
+#' # Upload a document
+#' sp_upload("Documents/AT.docx", "Analysis Tools.docx")
+#'
+sp_upload <- function(src, dest, site = NULL, drive = NULL) {
+
+  site <- sp_site(site)
+  drive <- sp_drive(drive = drive, site = site)
+  path_string <- sp_string(site = site, drive = drive, path = dest)
+
+  # Check for existing file
+  if (!file.exists(src)) {
+    cli::cli_abort(c(
+      "x" = "Could not find source file {.val {src}}"
+    ))
+  }
+
+  # Check for existing folder in Sharepoint
+  sp_check_folder(site, drive, folder_path = dirname(dest))
+
+  cli::cli_inform("Uploading {.val {src}} to {path_string}")
+
+  tryCatch(
+    drive$upload_file(src = src, dest = dest),
+    error = \(cnd) sp_error(cnd, path_string)
+  )
+
+  invisible(dest)
+}
+
+#' @export
+#' @rdname sp_upload
+sp_download <- function(src, dest, site = NULL, drive = NULL, overwrite = FALSE) {
+
+  site <- sp_site(site)
+  drive <- sp_drive(drive = drive, site = site)
+  path_string <- sp_string(site = site, drive = drive, path = src)
+
+  # Check for existing destination file
+  if (file.exists(dest) && !overwrite) {
+    cli::cli_abort(c(
+      "x" = "Destination path {.val {dest}} exists, and {.var overwrite} is set to {.val FALSE}"
+    ))
+  }
+
+  cli::cli_inform("Downloading {path_string} to {.val {dest}}")
+
+  tryCatch(
+    drive$download_file(src = src, dest = dest, overwrite = overwrite),
+    error = \(cnd) sp_error(cnd, path_string)
+  )
+
+  invisible(dest)
+}
+
+#' Create Sharepoint Folder
+#'
+#' Wrapper around the `$create_folder()` method from [ms_drive]
+#'
+#' @param folder_path Path to the new folder
+#' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
+#' @param drive Drive identifier. Can be the drive name, id, or an ms_drive object. If site is provided but drive is not, uses the first drive of the provided site. If neither is provided, uses the stored default drive if it exists.
+#'
+#' @return returns `folder_path` invisibly
+#' @export
+#'
+#' @md
+#'
+#' @examplesIf interactive()
+#'
+#' # Set site/drive defaults
+#' sp_defaults("Data Analytics")
+#'
+#' # Create a folder
+#' sp_create_folder("new/folder")
+#'
+sp_create_folder <- function(folder_path, site = NULL, drive = NULL) {
+
+  site <- sp_site(site)
+  drive <- sp_drive(drive = drive, site = site)
+  path_string <- sp_string(site = site, drive = drive, path = folder_path)
+
+  cli::cli_inform("Creating {path_string}")
+
+  tryCatch(
+    drive$create_folder(folder_path),
+    error = \(cnd) sp_error(cnd, path_string)
+  )
+
+  invisible(folder_path)
+}
+
+#' Check for existence of a Sharepoint folder and offer to create it if it
+#' doesn't exist
+#'
+#' @param site ms_site object
+#' @param drive ms_drive object
+#' @param folder_path path to an item
+#'
+#' @return nothing
+sp_check_folder <- function(site, drive, folder_path) {
+
+  # If no path is provided, return (dirname() returns "." for root)
+  if (folder_path %in% c(".", NA)) return()
+
+  tryCatch(
+    drive$get_item(folder_path),
+
+    # If it doesn't exist, ask if it should be created
+    error = \(cnd) {
+      path_string <- sp_string(site = site, drive = drive, path = folder_path)
+      cli::cli_inform(c(
+        "i" = "Destination folder {path_string} does not exist.",
+        "Would you like to create this folder?"
+      ))
+      if (utils::select.list(c("No", "Yes")) == "Yes") {
+        sp_create_folder(folder_path, site = site, drive = drive)
+      } else {
+        cli::cli_abort(c("x" = "Folder not created. Script Halted"),
+                       parent = NA)
+      }
+    }
+  )
+}
+
 
 #' For parsing sharepoint errors (right now just path errors)
 #'
 #' @param cnd condition
-#' @param path path
+#' @param path_string path string (from sp_string())
 #'
 #' @return nothing
-sp_error <- function(cnd, path) {
+sp_error <- function(cnd, path_string) {
   if (grepl("HTTP 404", cnd$message)) {
-    cli::cli_abort(c("X" = "File {.val {path}} not found"))
+    cli::cli_abort(c("X" = "File {path_string} not found"), parent = NA)
   } else {
     cli::cli_abort(c("X" = "Unexpected Error",
-                     "i" = "{cnd$message}"))
+                     "i" = "{cnd$message}"), parent = NA)
   }
 }
 
