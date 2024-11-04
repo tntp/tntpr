@@ -1,6 +1,6 @@
 
 # Package-specific environment for storing site and drive
-.sp_env <- new.env()
+.sp_env <- new.env(parent = emptyenv())
 
 #' Set default Sharepoint settings for a session
 #'
@@ -568,7 +568,7 @@ process_type <- function(ext, type) {
     if (type == "error") {
       cli::cli_abort(c(
         "x" = "Cannot determine file type",
-        "i" = "Extension {.val {ext}} is not associated with a known read function",
+        "i" = "Extension {.val {ext}} is not associated with a known read/write function",
         "i" = "Fix the extension, or manually provide a {.var type} ({.val dataframe}, {.val rds}, or {.val xlsx})",
         "i" = "Known extensions are {.val {names(file_types)}}"
       ))
