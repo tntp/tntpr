@@ -4,6 +4,7 @@
 \alias{sp_list}
 \alias{sp_list_drives}
 \alias{sp_list_sites}
+\alias{sp_list_subsites}
 \title{List Sharepoint Contents}
 \usage{
 sp_list(
@@ -19,6 +20,8 @@ sp_list(
 sp_list_drives(site = NULL, pattern = NULL)
 
 sp_list_sites(pattern = NULL)
+
+sp_list_subsites(site = NULL, pattern = NULL)
 }
 \arguments{
 \item{folder}{Path to the folder. By default, lists the top-level contents of the drive.}
@@ -36,14 +39,15 @@ sp_list_sites(pattern = NULL)
 \item{include_dirs}{logical. Should subdirectory names be included in recursive listings? (They always are in non-recursive ones)}
 }
 \value{
-A tibble with name and additional information on the relevant drives/files
+A tibble with name and additional information on the relevant sites/drives/files
 }
 \description{
-Lists site/drive/folder contents. Can be used with default site/drive set by
+Lists site/subsite/drive/folder contents. Can be used with default site/drive set by
 \code{\link[=sp_defaults]{sp_defaults()}} or with a specified site/drive.
 \itemize{
 \item \code{sp_list()} lists the contents of a Sharepoint Drive or a folder.
 \item \code{sp_list_drives()} lists the drives contained in a Sharepoint site.
+\item \code{sp_list_subsites()} lists any subsites of the specified Sharepoint site.
 \item \code{sp_list_sites()} lists the sites you have access to. These are the sites you are following in Sharepoint
 }
 }

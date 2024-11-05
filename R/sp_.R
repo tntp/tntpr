@@ -178,7 +178,8 @@ sp_drive <- function(drive = NULL, site = NULL) {
     if (all.equal(site, .sp_env$site) && !is.null(.sp_env$drive)) {
       .sp_env$drive
     } else {
-      site$get_drive()
+      # If there is no default drive, get_drive() produces an error, so use the first listed drive
+      tryCatch(site$get_drive(), error = \(cnd) site$list_drives()[[1]])
     }
   # Drive ID
   } else if (is_drive_id(drive)) {
@@ -234,11 +235,12 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' List Sharepoint Contents
 #'
 #' @description
-#' Lists site/drive/folder contents. Can be used with default site/drive set by
+#' Lists site/subsite/drive/folder contents. Can be used with default site/drive set by
 #' [sp_defaults()] or with a specified site/drive.
 #'
 #' *  `sp_list()` lists the contents of a Sharepoint Drive or a folder.
 #' *  `sp_list_drives()` lists the drives contained in a Sharepoint site.
+#' *  `sp_list_subsites()` lists any subsites of the specified Sharepoint site.
 #' *  `sp_list_sites()` lists the sites you have access to. These are the sites you are following in Sharepoint
 #'
 #' @param folder Path to the folder. By default, lists the top-level contents of the drive.
@@ -250,7 +252,7 @@ sp_string <- function(site = NULL, site_name = NULL,
 #' @param include_dirs logical. Should subdirectory names be included in recursive listings? (They always are in non-recursive ones)
 #'
 #' @return
-#' A tibble with name and additional information on the relevant drives/files
+#' A tibble with name and additional information on the relevant sites/drives/files
 #'
 #' @export
 #' @md
@@ -330,6 +332,23 @@ sp_list_sites <- function(pattern = NULL) {
   cli::cli_inform(c(
     "i" = "Go to {.url https://tntp.sharepoint.com/_layouts/15/sharepoint.aspx} to follow additional sites"
   ))
+
+  if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
+}
+
+#' List subsites
+#' @rdname sp_list
+#' @export
+sp_list_subsites <- function(site = NULL, pattern = NULL) {
+  site <- sp_site(site)
+
+  path_string <- sp_string(site = site)
+  cli::cli_inform("Listing subsites in {path_string}")
+
+  tbl <- site$list_subsites() |>
+    purrr::map("properties") |>
+    purrr::map(\(p) tibble::tibble(name = p$displayName, url = p$webUrl, id = p$id)) |>
+    purrr::list_rbind()
 
   if (is.null(pattern)) tbl else tbl[grep(pattern, tbl$name), ]
 }
