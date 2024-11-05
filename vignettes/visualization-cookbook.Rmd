@@ -27,7 +27,7 @@ We'll get to how you can put together the various elements of these graphics, bu
 You can install `tntpr` from CRAN as follows:
 
 ```{r eval=FALSE}
-install.packages('tntpr')
+install.packages("tntpr")
 ```
 
 ## Load all the libraries you need
@@ -68,11 +68,11 @@ Here is a quick example on using the `tntp_style()` theme.
 plt <- ggplot(ggplot2::mpg, aes(displ, hwy)) +
   geom_point() +
   labs(
-    title = 'Cars with higher displacement\nhave a lower MPG',
-    subtitle = 'Displacement vs. MPG',
+    title = "Cars with higher displacement\nhave a lower MPG",
+    subtitle = "Displacement vs. MPG",
     caption = "Data from ggplot's mpg dataset",
-    x = 'Engine Displ.',
-    y = 'MPG'
+    x = "Engine Displ.",
+    y = "MPG"
   )
 
 plt +
@@ -91,8 +91,8 @@ You will need to manually import additional fonts, including the Halyard fonts, 
 
 1. Download the Halyard Display Fonts in .ttf forms from the Data Analytics Sharepoint Document Library under the "Fonts" category.
 2. Open the fonts folder on your laptop (Settings -> Personalization -> Fonts) and drag and drop the Halyard Fonts there to install them on your computer.
-3. In RStudio, install the `extrafont` package with `install.packages('extrafont)`.
-4. Import fonts into the extrafont database with `extrafont::font_import()`. This only needs to be done once. The process is long, and can be significantly shortened by only importing the Halyard fonts using `extrafont::font_import(pattern = 'Halyard')`.
+3. In RStudio, install the `extrafont` package with `install.packages("extrafont")`.
+4. Import fonts into the extrafont database with `extrafont::font_import()`. This only needs to be done once. The process is long, and can be significantly shortened by only importing the Halyard fonts using `extrafont::font_import(pattern = "Halyard")`.
 5. Register the extra fonts with R using `extrafont::loadfonts()`. This needs to be done once each R session, but will be done automatically when loading the `tntpr` library.
 
 You can check to see which fonts are available to R with `windowsFonts()` on Windows or `quartzFonts()` on Mac.
@@ -115,8 +115,8 @@ Below are the font sizes when `base_size` is set to the default of 28:
 
 ```{r}
 plt +
-  tntp_style(show_axis_titles = TRUE, family = 'sans', base_size = 20) +
-  theme(plot.subtitle = ggplot2::element_text(family = 'serif', size = 25))
+  tntp_style(show_axis_titles = TRUE, family = "sans", base_size = 20) +
+  theme(plot.subtitle = ggplot2::element_text(family = "serif", size = 25))
 ```
 
 You can also add theme elements that do not coincide with a parameter of `tntp_style()`. For example, here we add a border around the plot with a theme element.
@@ -142,7 +142,7 @@ tntp_colors("green", "mint")
 ```
 A companion function is `show_tntp_colors()`, which will make a quick display of the given colors in the plot window. 
 ```{r}
-show_tntp_colors('green', 'moss', 'mint')
+show_tntp_colors("green", "moss", "mint")
 ```
 
 You can also use `show_tntp_colors()` with no color arguments to display all available colors and names:
@@ -255,7 +255,7 @@ bar_df <- school_salary |>
 ggplot(bar_df, aes(x = school_name, y = avg_salary)) +
   geom_bar(stat="identity", 
            position="identity", 
-           fill= tntp_colors('gold')) +
+           fill= tntp_colors("gold")) +
   scale_y_continuous(labels = scales::dollar, limits = c(0, 5000)) +
   labs(
     title="Acacia had higher average salaries in 2015",
@@ -325,7 +325,7 @@ Note the use of the named vector `colors_to_use` to expressly map colors to valu
 earnings_to_keep <- levels(stacked_df$t_salary_cut)[c(4,1)]
 
 # map bar colors to values
-colors_to_use <- tntp_colors('yellow', 'green') |> 
+colors_to_use <- tntp_colors("yellow", "green") |> 
   set_names(earnings_to_keep)
 
 dodged_df <- stacked_df |> 
@@ -353,7 +353,7 @@ scores_salary <- county_data |>
     avg_test_score = mean(sch_ela_avg + sch_math_avg, na.rm=FALSE),
     avg_salary = mean(t_salary, na.rm = FALSE),
     enrollment = mean(sch_enroll_2015, na.rm = TRUE),
-    .groups = 'drop'
+    .groups = "drop"
   ) |> 
   mutate(perc_rank_test_score = percent_rank(avg_test_score)) |> 
   drop_na()
@@ -361,12 +361,12 @@ scores_salary <- county_data |>
 
 ```{r}
 ggplot(scores_salary, aes(avg_salary, perc_rank_test_score)) +
-  geom_point(color = tntp_colors('tangerine'), alpha = 0.9, size = 3) +
+  geom_point(color = tntp_colors("tangerine"), alpha = 0.9, size = 3) +
   labs(
-    title = 'Schools with higher salaries do not have higher test scores',
-    subtitle = 'Relationship between school test scores and salaries',
-    x = 'Average school salary',
-    y = 'Percentile rank test score'
+    title = "Schools with higher salaries do not have higher test scores",
+    subtitle = "Relationship between school test scores and salaries",
+    x = "Average school salary",
+    y = "Percentile rank test score"
   ) +
   scale_x_continuous(labels = scales::dollar) +
   scale_y_continuous(labels = scales::percent) +
@@ -380,15 +380,15 @@ Another way of showing difference is a dumbbell chart. Note that `geom_dumbell()
 
 ```{r}
 dumbbell_df <- dodged_df |> 
-  pivot_wider(id_cols = 'school_name', names_from = 't_salary_cut', values_from = 'n_cut_school') |> 
+  pivot_wider(id_cols = "school_name", names_from = "t_salary_cut", values_from = "n_cut_school") |> 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 ggplot(dumbbell_df, aes(x = `under $2.5k`, xend = `$4.5k+`, y = fct_reorder(school_name, `under $2.5k`)), group = school_names) + 
   geom_dumbbell(
     color = tntp_colors("light_grey"),
     size = 3,
-    colour_x = tntp_colors('gold'),
-    colour_xend = tntp_colors('green'),
+    colour_x = tntp_colors("gold"),
+    colour_xend = tntp_colors("green"),
     show.legend = TRUE
   ) +
   labs(title = "More teachers earn over $4.5k than under $2.5k",
@@ -409,8 +409,8 @@ ggplot(number_teachers_school, aes(n)) +
   labs(
     title = "Schools have a wide distribution in the number of teachers",
     subtitle = "Total number of teachers per school",
-    x = 'Number of teacher in school',
-    y = 'Count'
+    x = "Number of teacher in school",
+    y = "Count"
   ) +
   tntp_style(base_size = base_font_size)
 ```
@@ -427,7 +427,7 @@ ggplot(county_data, aes(x = t_salary, y = school_year, group = school_year, fill
        subtitle = "Income distrubution and quantiles for teachers") +
   tntp_style(base_size = base_font_size) + 
   theme(legend.position = "none") + 
-  scale_fill_manual(values = tntp_palette('colorful'))
+  scale_fill_manual(values = tntp_palette("colorful"))
 ```
 
 ------------------------------------------------------------------------
@@ -449,13 +449,13 @@ agree_disagree_scale <- rev(c("Strongly Agree", "Agree", "Somewhat Agree", "Some
 # put survey into long form and clean up question names
 teacher_survey_he <- teacher_survey |> 
   select(-timing) |> 
-  pivot_longer(cols = everything(), names_to = 'question', values_to = 'response')
+  pivot_longer(cols = everything(), names_to = "question", values_to = "response")
 
 # calculate percentage of responses to each high expectations question
 teacher_survey_he_perc <- teacher_survey_he |> 
   drop_na("response") |>
   # calculate the number of responses for each response option
-  count(question, response, name = 'n_response') |>
+  count(question, response, name = "n_response") |>
   # calculate the number of responses for each question
   group_by(question) |>
   mutate(n_question = sum(n_response)) |>
@@ -470,12 +470,12 @@ teacher_survey_he_perc <- teacher_survey_he |>
 
 # calculate percentage of strongly agree and agree
 teacher_survey_he_perc <- teacher_survey_he_perc |> 
-  mutate(scale_strength = ifelse(response %in% !!agree_disagree_scale[c(5,6)], 'Strong response', 'Weak response')) |>
+  mutate(scale_strength = ifelse(response %in% !!agree_disagree_scale[c(5,6)], "Strong response", "Weak response")) |>
   group_by(question, scale_strength) |>
   mutate(strong_response_percent = sum(percent)) |>
   ungroup() |> 
   mutate(
-    strong_response_percent = ifelse(response == 'Agree', strong_response_percent, NA),
+    strong_response_percent = ifelse(response == "Agree", strong_response_percent, NA),
     # create line breaks for questions ,which will make plots look better
     question = str_wrap(question, axis_line_breaks),
     response = factor(response, levels = agree_disagree_scale)
@@ -484,14 +484,14 @@ teacher_survey_he_perc <- teacher_survey_he_perc |>
 
 ## Plot likert items - highlights top two
 
-The first plot calls out the two highest response values, 'Strongly Agree' and 'Agree'. Note that the `tntp_style()` function does not alter the font size or family of the text within `geom_text()` so we set it manually.
+The first plot calls out the two highest response values, "Strongly Agree" and "Agree". Note that the `tntp_style()` function does not alter the font size or family of the text within `geom_text()` so we set it manually.
 
 ```{r}
 ggplot(teacher_survey_he_perc, aes(percent, question, fill = response)) +
   geom_col() +
   geom_text(
     aes(label = scales::percent(strong_response_percent, accuracy = 1), x = strong_response_percent),
-    color = 'white', fontface='bold', family = "Halyard Display", size = 5, hjust = 1.05
+    color = "white", fontface = "bold", family = "Halyard Display", size = 5, hjust = 1.05
   ) +
   scale_x_continuous(labels = scales::percent, limits = c(0,1)) +
   scale_fill_manual(values = tntp_palette("top2_6"), drop = FALSE) +
