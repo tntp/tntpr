@@ -39,10 +39,10 @@ sp_defaults("Data Analytics")
 sp_list()
 
 # Download a document locally
-sp_download("Analysis Tools.docx", "Documents/AT.docx")
+sp_download("Analysis Tools.docx", "AT.docx")
 
 # Upload a document
-sp_upload("Documents/AT.docx", "Analysis Tools.docx")
+sp_upload("AT.docx", "Analysis Tools.docx")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

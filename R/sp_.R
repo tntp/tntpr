@@ -581,10 +581,10 @@ sp_write_xlsx <- function(x, path, site, drive, ...) {
 #' sp_list()
 #'
 #' # Download a document locally
-#' sp_download("Analysis Tools.docx", "Documents/AT.docx")
+#' sp_download("Analysis Tools.docx", "AT.docx")
 #'
 #' # Upload a document
-#' sp_upload("Documents/AT.docx", "Analysis Tools.docx")
+#' sp_upload("AT.docx", "Analysis Tools.docx")
 #'
 sp_upload <- function(src, dest, site = NULL, drive = NULL) {
 
