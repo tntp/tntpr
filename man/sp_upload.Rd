@@ -5,9 +5,15 @@
 \alias{sp_download}
 \title{Sharepoint upload/download}
 \usage{
-sp_upload(src, dest, site = NULL, drive = NULL)
+sp_upload(src, dest = basename(src), site = NULL, drive = NULL)
 
-sp_download(src, dest, site = NULL, drive = NULL, overwrite = FALSE)
+sp_download(
+  src,
+  dest = basename(src),
+  site = NULL,
+  drive = NULL,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{src}{Location of source file. Either a local path (for \code{sp_upload}), or a Sharepoint path (for \code{sp_download})}

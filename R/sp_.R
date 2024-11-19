@@ -586,7 +586,7 @@ sp_write_xlsx <- function(x, path, site, drive, ...) {
 #' # Upload a document
 #' sp_upload("AT.docx", "Analysis Tools.docx")
 #'
-sp_upload <- function(src, dest, site = NULL, drive = NULL) {
+sp_upload <- function(src, dest = basename(src), site = NULL, drive = NULL) {
 
   site <- sp_site(site)
   drive <- sp_drive(drive = drive, site = site)
@@ -614,7 +614,7 @@ sp_upload <- function(src, dest, site = NULL, drive = NULL) {
 
 #' @export
 #' @rdname sp_upload
-sp_download <- function(src, dest, site = NULL, drive = NULL, overwrite = FALSE) {
+sp_download <- function(src, dest = basename(src), site = NULL, drive = NULL, overwrite = FALSE) {
 
   site <- sp_site(site)
   drive <- sp_drive(drive = drive, site = site)
@@ -700,7 +700,7 @@ sp_check_folder <- function(site, drive, folder_path) {
       if (utils::select.list(c("No", "Yes")) == "Yes") {
         sp_create_folder(folder_path, site = site, drive = drive)
       } else {
-        cli::cli_abort(c("x" = "Folder not created. Script Halted"),
+        cli::cli_abort(c("x" = "Folder not created. Script halted"),
                        parent = NA)
       }
     }
