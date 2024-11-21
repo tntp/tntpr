@@ -1,7 +1,7 @@
 Type: Package
 Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: c(
       person("Dustin", "Pashouwer", role = c("aut", "cre"), 
              email = "dustin.pashouwer@tntp.org"),
@@ -32,7 +32,7 @@ Imports:
     keyring,
     labelled,
     lubridate (>= 1.7.4),
-    magrittr (>= 1.5),
+    Microsoft365R,
     purrr (>= 0.3.3),
     readr,
     rlang,
@@ -52,7 +52,9 @@ Suggests:
     ggalt,
     forcats,
     qualtRics,
-    haven
+    haven,
+    readxl,
+    writexl
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
