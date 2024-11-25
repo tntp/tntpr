@@ -254,8 +254,8 @@ palette_tntp_scales <- function(palette = palette_names) {
 #' library(ggplot2)
 #' library(dplyr)
 #'
-#' x <- mtcars %>%
-#'   count(cyl, am) %>%
+#' x <- mtcars |>
+#'   count(cyl, am) |>
 #'   mutate(am = as.factor(am))
 #'
 #' ggplot(x, aes(x = cyl, y = n, fill = am)) + # you need a fill aesthetic

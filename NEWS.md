@@ -1,3 +1,8 @@
+# tntpr 1.2.0
+
+* Added sp_*() family of functions for reading from / writing to Sharepoint.
+
+* Fixed tntp_colors() to return supplied names if given
 
 # tntpr 1.1.0
 

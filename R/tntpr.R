@@ -5,6 +5,5 @@
 #' By and for TNTP data-using staff, though available to the broader public.
 #' @aliases tntpr tntpr-package
 #' @importFrom ggplot2 theme_minimal
-#' @importFrom magrittr %>%
 #' @importFrom formattable percent
 "_PACKAGE"

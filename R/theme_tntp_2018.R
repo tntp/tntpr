@@ -1,4 +1,4 @@
-#' A precise & pristine ggplot2 theme with opinionated defaults and an emphasis on typography
+#' A precise & pristine [ggplot2] theme with opinionated defaults and an emphasis on typography
 #'
 #' This theme is superseded by [tntp_style()].
 #'
@@ -55,7 +55,7 @@
 #'   tntp_style(family = 'sans')
 #'
 #' # seminal bar chart
-#' count(mpg, class) %>%
+#' count(mpg, class) |>
 #'   ggplot(aes(class, n)) +
 #'   geom_col() +
 #'   geom_text(aes(label = n), nudge_y = 3) +
