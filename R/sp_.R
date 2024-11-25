@@ -768,7 +768,3 @@ process_type <- function(ext, type) {
   }
   type
 }
-
-# sp_upload
-# sp_download
-# sp_list_subsites
