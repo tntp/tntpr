@@ -39,5 +39,5 @@ y$get_item_properties("Analysis Tools.docx")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\link{ms_site}, \link{ms_drive}
+\link[Microsoft365R:ms_site]{Microsoft365R::ms_site}, \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}
 }

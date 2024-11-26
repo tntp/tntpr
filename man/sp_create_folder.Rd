@@ -17,7 +17,7 @@ sp_create_folder(folder_path, site = NULL, drive = NULL)
 returns \code{folder_path} invisibly
 }
 \description{
-Wrapper around the \verb{$create_folder()} method from \link{ms_drive}
+Wrapper around the \verb{$create_folder()} method from \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
