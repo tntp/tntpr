@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_tntp_2018.R
 \name{theme_tntp_2018}
 \alias{theme_tntp_2018}
-\title{A precise & pristine \link{ggplot2} theme with opinionated defaults and an emphasis on typography}
+\title{A precise & pristine \code{ggplot2} theme with opinionated defaults and an emphasis on typography}
 \usage{
 theme_tntp_2018(
   base_family = "Segoe UI",

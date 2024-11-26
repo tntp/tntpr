@@ -45,7 +45,7 @@ would like to create it.
 }
 \section{Details}{
 For more information on methods (shown as \verb{$__()} below) see documentation
-on \link{ms_drive}.
+on \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}.
 \subsection{Reading Functions}{
 \itemize{
 \item ".csv", ".csv2", ".tsv" are read using the \verb{$load_dataframe()} method,
@@ -95,5 +95,5 @@ dr$load_rdata("data.rdata")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=sp_upload]{sp_upload()}}, \code{\link[=sp_download]{sp_download()}}; \verb{$upload_file()}, \verb{$download_file()}, \verb{$save_rdata()}, \verb{$load_rdata()} from \link{ms_drive}
+\code{\link[=sp_upload]{sp_upload()}}, \code{\link[=sp_download]{sp_download()}}; \verb{$upload_file()}, \verb{$download_file()}, \verb{$save_rdata()}, \verb{$load_rdata()} from \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}
 }

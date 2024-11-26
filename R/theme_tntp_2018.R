@@ -1,4 +1,4 @@
-#' A precise & pristine [ggplot2] theme with opinionated defaults and an emphasis on typography
+#' A precise & pristine `ggplot2` theme with opinionated defaults and an emphasis on typography
 #'
 #' This theme is superseded by [tntp_style()].
 #'

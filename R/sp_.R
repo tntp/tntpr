@@ -87,7 +87,7 @@ is_site_url <- function(x) {
 #' @export
 #' @md
 #'
-#' @seealso [ms_site], [ms_drive]
+#' @seealso [Microsoft365R::ms_site], [Microsoft365R::ms_drive]
 #'
 #' @examplesIf interactive()
 #'
@@ -377,7 +377,7 @@ sp_list_subsites <- function(site = NULL, pattern = NULL) {
 #' @details
 #' # Details
 #' For more information on methods (shown as `$__()` below) see documentation
-#' on [ms_drive].
+#' on [Microsoft365R::ms_drive].
 #' ## Reading Functions
 #' *  ".csv", ".csv2", ".tsv" are read using the `$load_dataframe()` method,
 #' which uses [`readr::read_delim()`].
@@ -403,7 +403,7 @@ sp_list_subsites <- function(site = NULL, pattern = NULL) {
 #' @param type Optional. One of "dataframe" (for delimited files), "xlsx", or "rds". Uses the file extension to determine type if not provided.
 #' @param ... Additional arguments passed on to the reading/writing function.
 #'
-#' @seealso [sp_upload()], [sp_download()]; `$upload_file()`, `$download_file()`, `$save_rdata()`, `$load_rdata()` from [ms_drive]
+#' @seealso [sp_upload()], [sp_download()]; `$upload_file()`, `$download_file()`, `$save_rdata()`, `$load_rdata()` from [Microsoft365R::ms_drive]
 #'
 #' @return `sp_read()` returns an R object as specified by type. `sp_write()`
 #' returns x, invisibly
@@ -555,7 +555,7 @@ sp_write_xlsx <- function(x, path, site, drive, ...) {
 #' Sharepoint upload/download
 #'
 #' `sp_upload()` and `sp_download()` wrap the `$upload_file()` and `$download_file()`
-#' methods from the [ms_drive] object. In addition, `sp_upload()` checks for the
+#' methods from the [Microsoft365R::ms_drive] object. In addition, `sp_upload()` checks for the
 #' existence of the destination folder and will prompt the user to create it if
 #' it doesn't exist.
 #'
@@ -567,7 +567,7 @@ sp_write_xlsx <- function(x, path, site, drive, ...) {
 #'
 #' @md
 #'
-#' @seealso [sp_read()], [sp_write()]; `$upload_file()` and `$download_file()` from [ms_drive]
+#' @seealso [sp_read()], [sp_write()]; `$upload_file()` and `$download_file()` from [Microsoft365R::ms_drive]
 #'
 #' @return Returns `dest` invisibly
 #' @export
@@ -639,7 +639,7 @@ sp_download <- function(src, dest = basename(src), site = NULL, drive = NULL, ov
 
 #' Create Sharepoint Folder
 #'
-#' Wrapper around the `$create_folder()` method from [ms_drive]
+#' Wrapper around the `$create_folder()` method from [Microsoft365R::ms_drive]
 #'
 #' @param folder_path Path to the new folder
 #' @param site Site identifier. Can be the site name, id, URL, or an ms_site object. If no site identifier is provided, uses the stored default site if it exists.
@@ -768,7 +768,3 @@ process_type <- function(ext, type) {
   }
   type
 }
-
-# sp_upload
-# sp_download
-# sp_list_subsites

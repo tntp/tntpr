@@ -28,6 +28,7 @@ Some of the highlights of the package include:
 - A TNTP ggplot2 theme using brand fonts (`tntp_style()`)
 - The `tntp_cred()` functions for securely managing credentials
   (passwords, API keys, etc.).
+- The `sp_*()` functions for interacting with Sharepoint through R.
 - TNTP-themed RMarkdown templates, for starting a new analysis with a
   shell that can already generate a TNTP-themed .docx report
 - Functions for initializing a new repository or project folder with

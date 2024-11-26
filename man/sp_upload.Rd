@@ -31,7 +31,7 @@ Returns \code{dest} invisibly
 }
 \description{
 \code{sp_upload()} and \code{sp_download()} wrap the \verb{$upload_file()} and \verb{$download_file()}
-methods from the \link{ms_drive} object. In addition, \code{sp_upload()} checks for the
+methods from the \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive} object. In addition, \code{sp_upload()} checks for the
 existence of the destination folder and will prompt the user to create it if
 it doesn't exist.
 }
@@ -52,5 +52,5 @@ sp_upload("AT.docx", "Analysis Tools.docx")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=sp_read]{sp_read()}}, \code{\link[=sp_write]{sp_write()}}; \verb{$upload_file()} and \verb{$download_file()} from \link{ms_drive}
+\code{\link[=sp_read]{sp_read()}}, \code{\link[=sp_write]{sp_write()}}; \verb{$upload_file()} and \verb{$download_file()} from \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}
 }
