@@ -1,3 +1,8 @@
+# tntpr 1.2.1
+
+* Fixed bug in `sp_drive()` when providing a site that didn't match the current
+  default.
+
 # tntpr 1.2.0
 
 * Added sp_*() family of functions for reading from / writing to Sharepoint.

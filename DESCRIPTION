@@ -1,7 +1,7 @@
 Type: Package
 Package: tntpr
 Title: Data Analysis Tools Customized for TNTP
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: c(
       person("Dustin", "Pashouwer", role = c("aut", "cre"), 
              email = "dustin.pashouwer@tntp.org"),
