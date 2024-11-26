@@ -175,7 +175,7 @@ sp_drive <- function(drive = NULL, site = NULL) {
 
   # No drive provided: Use the default drive (if site matches and it exists), or use the first drive
   if (is.null(drive)) {
-    if (all.equal(site, .sp_env$site) && !is.null(.sp_env$drive)) {
+    if (isTRUE(all.equal(site, .sp_env$site)) && !is.null(.sp_env$drive)) {
       .sp_env$drive
     } else {
       # If there is no default drive, get_drive() produces an error, so use the first listed drive
