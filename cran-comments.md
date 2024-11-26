@@ -1,3 +1,7 @@
+# Resubmission
+
+This is a quick resubmission to fix a bug found in 1.2.0
+
 # R CMD check results
 
 0 errors | 0 warnings | 1 notes
