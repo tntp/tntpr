@@ -75,6 +75,12 @@ tntp_cred_set <- function(service = NULL, username = NULL, keyring = NULL, promp
 
   if(is.null(prompt)) prompt <- paste0("Enter credential for '", service, "': ")
 
+  # Fix casing bug in keyring / Windows Credentials. As of 12/14/24,
+  # key_set() is case sensitive but key_get() is not, so setting to a
+  # differently-cased service means the credential is not retrievable
+  # See https://github.com/r-lib/keyring/issues/155
+  service <- standardize_case(service, keyring::key_list()$service)
+
   # If overwrite is not TRUE, check for existing credential first
   if(!isTRUE(overwrite)) {
 
