@@ -14,7 +14,7 @@ internal function that calls standard formatting options for the Data Memo RMark
 moved here to keep the actual memo template cleaner and easier to use
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 set_data_memo_formatting()
 \dontshow{\}) # examplesIf}
 }

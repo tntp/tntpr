@@ -14,7 +14,7 @@ Call this function from inside a .R file in RStudio to insert the standard
 TNTP header into your active script.
 }
 \examples{
-\dontshow{if (rstudioapi::isAvailable()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rstudioapi::isAvailable()) withAutoprint(\{ # examplesIf}
 header_tntp()
 \dontshow{\}) # examplesIf}
 }

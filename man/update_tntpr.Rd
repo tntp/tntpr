@@ -13,7 +13,7 @@ nothing
 Re-install the tntpr package from GitHub.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Run without loading tntpr first
 tntpr::update_tntpr()
 \dontshow{\}) # examplesIf}

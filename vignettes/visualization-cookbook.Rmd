@@ -45,7 +45,6 @@ library(tidyr)
 library(purrr)
 library(stringr)
 library(forcats)
-library(ggalt)
 library(ggridges)
 ```
 
@@ -378,7 +377,11 @@ ggplot(scores_salary, aes(avg_salary, perc_rank_test_score)) +
 
 Another way of showing difference is a dumbbell chart. Note that `geom_dumbell()` comes from the [`ggalt`](https://yonicd.github.io/ggalt/index.html) package.
 
-```{r}
+This package has not been updated for R 4.4.3 so this section is no longer run.
+
+```{r eval = FALSE}
+library(ggalt)
+
 dumbbell_df <- dodged_df |> 
   pivot_wider(id_cols = "school_name", names_from = "t_salary_cut", values_from = "n_cut_school") |> 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))

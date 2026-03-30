@@ -49,7 +49,7 @@ overwriting any current credentials.
 and username.
 }
 \examples{
-\dontshow{if (interactive() && rlang::is_installed("qualtRics")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && rlang::is_installed("qualtRics")) withAutoprint(\{ # examplesIf}
 # Using tntp_cred() with qualtRics
 library(qualtRics)
 

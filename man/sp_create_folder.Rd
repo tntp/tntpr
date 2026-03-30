@@ -20,7 +20,7 @@ returns \code{folder_path} invisibly
 Wrapper around the \verb{$create_folder()} method from \link[Microsoft365R:ms_drive]{Microsoft365R::ms_drive}
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # Set site/drive defaults
 sp_defaults("Data Analytics")

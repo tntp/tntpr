@@ -52,7 +52,7 @@ Lists site/subsite/drive/folder contents. Can be used with default site/drive se
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # List drives from the default site
 sp_list_drives()

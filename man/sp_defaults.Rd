@@ -18,7 +18,7 @@ No return value
 Sets default site and drive for using the other \verb{sp_*()} functions.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Set default site
 sp_defaults(site = "Data Analytics")
 

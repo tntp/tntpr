@@ -22,7 +22,7 @@ Pulls the site or drive (if given) or returns the stored default. Useful if
 you need to use methods that aren't currently wrapped by tntpr
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # Get current default site or drive
 x <- sp_site()
