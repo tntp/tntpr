@@ -1,3 +1,7 @@
+# tntpr 1.2.2
+
+* Updated to R 4.4.3 and Roxygen 7.3.3
+
 # tntpr 1.2.1
 
 * Fixed bug in `sp_drive()` when providing a site that didn't match the current
