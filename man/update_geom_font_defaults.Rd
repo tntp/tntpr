@@ -21,7 +21,7 @@ nothing
 Updates [ggplot2::geom_label] and [ggplot2::geom_text] font defaults
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Update text geoms to use Arial font
 update_geom_font_defaults(family = 'Arial')
 \dontshow{\}) # examplesIf}

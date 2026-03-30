@@ -14,7 +14,7 @@ This function will check if Segoe UI is already accessible in R and if not
 it will attempt to import it using the \code{extrafont} package
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 import_segoe_ui()
 \dontshow{\}) # examplesIf}
 }

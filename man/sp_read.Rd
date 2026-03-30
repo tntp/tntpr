@@ -72,7 +72,7 @@ installed) and then uploaded using the \verb{$upload_file()} method.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # Set site defaults
 sp_defaults(site = "Data Analytics")
